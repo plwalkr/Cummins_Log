@@ -2863,7 +2863,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
 
-/* ==================== v1.0.170 - FINAL COMMAND VIEW POLISH ====================
+/* ==================== v1.0.171 - STABILITY HARDENING ====================
    Visual hardening only: no data mutation, no operator workflow changes.
    Tightens the Engineer command view so it reads closer to the approved 2026 mockup. */
 .engineer-testcell-command .engineer-2026-shell::after{content:"";position:absolute;inset:18px;border-radius:28px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(125,211,252,.07),transparent) 0 0/280px 100% no-repeat;opacity:.42;mix-blend-mode:screen}
@@ -2916,7 +2916,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.170-final-command-view-polish</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.171-stability-hardening</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -2924,7 +2924,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.170-final-command-view-polish</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.171-stability-hardening</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -3319,7 +3319,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.170-final-command-view-polish</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.171-stability-hardening</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -3437,7 +3437,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
                   <div class="engineer-2026-kicker">Prototype Graphical Overview</div>
                   <h3 class="engineer-2026-title">2026 Test Cell Command View</h3>
                   <div id="engineer-command-subtitle" class="engineer-command-subtitle">
-                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.170 adds final command-view polish and tighter map/timeline/alert cues.
+                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.171 adds runtime self-checks, command-view guardrails, and stability hardening after the final visual polish pass.
                   </div>
                 </div>
 
@@ -3859,7 +3859,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.170-final-command-view-polish</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.171-stability-hardening</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -3917,7 +3917,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.170-final-command-view-polish</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.171-stability-hardening</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -4123,7 +4123,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.170-final-command-view-polish</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.171-stability-hardening</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -4202,8 +4202,8 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.170-final-command-view-polish";
-    const VERSION_DESCRIPTION = "Adds a polished top intelligence KPI band to the Engineer command center using the existing Cell Intelligence Layer: cell state mix, health score, downtime pressure, help pressure, data confidence, and last updated age, while preserving operator workflows and all existing logic.";
+    const VERSION = "v1.0.171-stability-hardening";
+    const VERSION_DESCRIPTION = "Adds a stability-hardening pass after the 2026 command-center work: runtime self-checks, safer command-view guardrails, CTC Pulse health reporting, and post-boot binding verification while preserving operator workflows and existing logic.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -6326,6 +6326,8 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
     window.toggleEngineerLiveSimulation = toggleEngineerLiveSimulation;
     window.exportEngineerSnapshot = exportEngineerSnapshot;
     window.openHoursBreakdownFromEngineer = openHoursBreakdownFromEngineer;
+    window.createRuntimeHealthReport = createRuntimeHealthReport;
+    window.runPostBootHealthCheck = runPostBootHealthCheck;
 
 function initSettings(){
       renderDisplayModeButtons();
@@ -10207,10 +10209,117 @@ function renderHours(){
       return lines.length ? lines : ["No change from the last scan."];
     }
 
+    // v1.0.171 - Runtime self-check layer.
+    // Read-only guardrail: scans the command-center wiring and core operators without mutating saved data.
+    function createRuntimeHealthReport(){
+      const requiredFunctions = [
+        "switchTab",
+        "renderEntries",
+        "renderHours",
+        "renderWeekendBoard",
+        "aggregateManagerData",
+        "renderEngineerPremiumDashboard",
+        "buildCellIntelligenceSnapshot",
+        "deriveEngineerPremiumMetrics",
+        "renderEngineerOpsMap",
+        "renderEngineerShiftTimeline",
+        "renderEngineerAttentionEngine",
+        "renderSelectedEngineerCellPanel",
+        "renderPilotReadinessScorecard",
+        "buildCtcPulseReport"
+      ];
+
+      const requiredElements = [
+        "ctc-pulse-fab",
+        "ctc-pulse-panel",
+        "tab-logbook",
+        "tab-hours",
+        "tab-weekend",
+        "tab-manager",
+        "tab-engineer",
+        "engineer-graphics-section",
+        "engineer-ops-map",
+        "engineer-shift-timeline",
+        "engineer-attention-list",
+        "engineer-selected-cell-card",
+        "pilot-readiness-panel"
+      ];
+
+      const commandButtons = [
+        "engineer-graphics-collapse-btn",
+        "engineer-live-toggle-btn",
+        "engineer-export-snapshot-btn",
+        "engineer-view-hours-btn",
+        "engineer-selected-cell-filter-btn",
+        "engineer-selected-cell-export-btn",
+        "engineer-selected-cell-clear-btn"
+      ];
+
+      const failures = [];
+      const warnings = [];
+
+      requiredFunctions.forEach((name) => {
+        if (typeof window[name] !== "function" && typeof globalThis[name] !== "function") {
+          failures.push(`Missing function: ${name}`);
+        }
+      });
+
+      requiredElements.forEach((id) => {
+        const matches = document.querySelectorAll(`[id="${id}"]`);
+        if (!matches.length) failures.push(`Missing element: #${id}`);
+        if (matches.length > 1) warnings.push(`Duplicate id: #${id} (${matches.length})`);
+      });
+
+      commandButtons.forEach((id) => {
+        const node = document.getElementById(id);
+        if (!node) warnings.push(`Command button not present: #${id}`);
+        else if (node.disabled) warnings.push(`Command button disabled: #${id}`);
+      });
+
+      const graphicsSection = document.getElementById("engineer-graphics-section");
+      if (graphicsSection && !graphicsSection.hidden) {
+        const body = document.getElementById("engineer-graphics-body");
+        if (!body) failures.push("Engineer graphics body missing while command view is enabled");
+      }
+
+      return {
+        ok: failures.length === 0,
+        warningCount: warnings.length,
+        failureCount: failures.length,
+        failures,
+        warnings,
+        checkedAt: new Date().toLocaleString()
+      };
+    }
+
+    function formatRuntimeHealthLine(report){
+      if (!report) return "Runtime self-check: Not run";
+      if (report.ok && !report.warningCount) return "Runtime self-check: OK";
+      if (report.ok) return `Runtime self-check: OK with ${report.warningCount} warning(s)`;
+      return `Runtime self-check: Review (${report.failureCount} issue(s), ${report.warningCount} warning(s))`;
+    }
+
+    function runPostBootHealthCheck(){
+      const report = createRuntimeHealthReport();
+      window.culRuntimeHealthReport = report;
+      document.body.dataset.runtimeHealth = report.ok ? "ok" : "review";
+      document.body.dataset.runtimeHealthWarnings = String(report.warningCount || 0);
+      if (!report.ok) {
+        console.warn("[Cummins Unified Logbook runtime health] review", report);
+      } else if (report.warningCount) {
+        console.info("[Cummins Unified Logbook runtime health] ok with warnings", report);
+      }
+      return report;
+    }
+
     function buildPulseGuardrailLines(activeTab){
       const lines = [];
       lines.push(`Debug panel open: OK`);
       lines.push(`Copy report action: Ready`);
+      const runtimeReport = window.culRuntimeHealthReport || createRuntimeHealthReport();
+      lines.push(formatRuntimeHealthLine(runtimeReport));
+      if (!runtimeReport.ok && runtimeReport.failures.length) lines.push(`Runtime first issue: ${runtimeReport.failures[0]}`);
+      if (runtimeReport.ok && runtimeReport.warningCount && runtimeReport.warnings.length) lines.push(`Runtime first warning: ${runtimeReport.warnings[0]}`);
       if (typeof filteredEntries === "function" || typeof getFilteredEntries === "function" || (typeof entries !== "undefined" && Array.isArray(entries))) {
         lines.push(`Logbook source: OK`);
       } else {
@@ -10769,6 +10878,9 @@ Reason: ${error?.stack || error?.message || error}`;
     runStartupStep("resetForm", resetForm);
     runStartupStep("renderEntries", renderEntries);
     runStartupStep("renderPilotReadinessScorecard", renderPilotReadinessScorecard);
+    runStartupStep("bindEngineerDashboardButtons", bindEngineerDashboardButtons);
+    runStartupStep("bindEngineerDashboardDelegation", bindEngineerDashboardDelegation);
+    runStartupStep("runPostBootHealthCheck", runPostBootHealthCheck);
     runStartupStep("switchTab:logbook", () => switchTab("logbook"));
   </script>
 </body>
