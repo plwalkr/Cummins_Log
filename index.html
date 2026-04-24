@@ -508,6 +508,29 @@
     .pilot-readiness-check.watch .dot{background:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.12)}
     .pilot-readiness-check.blocked .dot{background:#dc2626;box-shadow:0 0 0 3px rgba(220,38,38,.12)}
     .pilot-readiness-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    /* v1.0.167 - pilot executive brief
+       Converts the intelligence/readiness signals into a leadership-ready, copyable
+       demo brief. Read-only: no operator data or workflow is mutated. */
+    .pilot-executive-brief{display:none;margin-top:10px;border:1px solid #cbd5e1;border-radius:16px;background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);padding:12px;color:#334155;box-shadow:0 8px 20px rgba(15,23,42,.04)}
+    .pilot-executive-brief.active{display:flex;flex-direction:column;gap:12px}
+    .pilot-brief-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
+    .pilot-brief-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#64748b;font-weight:900;margin-bottom:4px}
+    .pilot-brief-head h3{font-size:17px;margin:0;color:#0f172a}
+    .pilot-brief-head p{margin:5px 0 0 0;font-size:12px;line-height:1.55;color:#475569;max-width:82ch}
+    .pilot-brief-badge{display:inline-flex;align-items:center;justify-content:center;min-width:108px;padding:8px 12px;border-radius:999px;border:1px solid #dbe3ed;background:#fff;font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#334155}
+    .pilot-brief-badge.ready{border-color:#bbf7d0;background:#f0fdf4;color:#166534}
+    .pilot-brief-badge.watch{border-color:#fde68a;background:#fffbeb;color:#92400e}
+    .pilot-brief-badge.blocked{border-color:#fecaca;background:#fef2f2;color:#991b1b}
+    .pilot-brief-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .pilot-brief-card{border:1px solid #e2e8f0;border-radius:14px;background:#fff;padding:12px;min-height:116px}
+    .pilot-brief-card strong{display:block;font-size:12px;color:#0f172a;margin-bottom:6px}
+    .pilot-brief-card p{margin:0;font-size:12px;color:#475569;line-height:1.55}
+    .pilot-brief-list{display:flex;flex-direction:column;gap:7px;margin-top:8px}
+    .pilot-brief-list div{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#334155;line-height:1.45}
+    .pilot-brief-list div:before{content:"";width:8px;height:8px;border-radius:999px;background:#2563eb;margin-top:5px;flex:0 0 auto}
+    .pilot-brief-list .warn:before{background:#f59e0b}.pilot-brief-list .bad:before{background:#dc2626}.pilot-brief-list .good:before{background:#16a34a}
+    .pilot-brief-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    @media (max-width:900px){.pilot-brief-grid{grid-template-columns:1fr}}
     @media (max-width:1100px){.pilot-readiness-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pilot-readiness-checks{grid-template-columns:1fr}}
     @media (max-width:700px){.pilot-readiness-grid{grid-template-columns:1fr}.pilot-readiness-score{justify-content:flex-start}}
     body[data-theme="clarity"] .temp-test-bar{background:#f7faff;border-color:#9aa7bd}
@@ -3242,7 +3265,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.166-pilot-readiness-scorecard</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.167-pilot-executive-brief</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -3320,6 +3343,44 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
             <div class="pilot-readiness-actions">
               <button type="button" class="secondary" onclick="renderPilotReadinessScorecard()">Refresh Scorecard</button>
               <button type="button" class="secondary" onclick="copyPilotReadinessSummary(this)">Copy Readiness Summary</button>
+            </div>
+          </div>
+
+
+          <!-- v1.0.167 - Pilot executive brief
+               Read-only leadership story panel. Uses the same intelligence/readiness
+               signals and gives a copyable summary for pilot/demo discussion. -->
+          <div id="pilot-executive-brief" class="pilot-executive-brief" aria-live="polite">
+            <div class="pilot-brief-head">
+              <div>
+                <div class="pilot-brief-kicker">Executive brief</div>
+                <h3>Pilot story summary</h3>
+                <p id="pilot-brief-summary">Waiting for command-center data.</p>
+              </div>
+              <span id="pilot-brief-badge" class="pilot-brief-badge watch">Draft</span>
+            </div>
+            <div class="pilot-brief-grid">
+              <div class="pilot-brief-card">
+                <strong>Why it matters</strong>
+                <p id="pilot-brief-why">Shows where the tool reduces handoff friction, surfaces attention faster, and turns scattered updates into a shared operating picture.</p>
+              </div>
+              <div class="pilot-brief-card">
+                <strong>Current operating story</strong>
+                <div id="pilot-brief-story" class="pilot-brief-list"></div>
+              </div>
+              <div class="pilot-brief-card">
+                <strong>Top risks to discuss</strong>
+                <div id="pilot-brief-risks" class="pilot-brief-list"></div>
+              </div>
+              <div class="pilot-brief-card">
+                <strong>Suggested ask</strong>
+                <p id="pilot-brief-ask">Run a small pilot with a limited cell group, compare handoff clarity, downtime explanation quality, and report usefulness before expanding scope.</p>
+              </div>
+            </div>
+            <div class="pilot-brief-actions">
+              <button type="button" class="secondary" onclick="renderPilotExecutiveBrief()">Refresh Brief</button>
+              <button type="button" class="secondary" onclick="copyPilotExecutiveBrief(this)">Copy Executive Brief</button>
+              <button type="button" class="secondary" onclick="downloadPilotExecutiveBrief()">Download Brief</button>
             </div>
           </div>
 
@@ -3699,7 +3760,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.166-pilot-readiness-scorecard</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.167-pilot-executive-brief</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -3757,7 +3818,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.166-pilot-readiness-scorecard</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.167-pilot-executive-brief</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -3963,7 +4024,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.166-pilot-readiness-scorecard</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.167-pilot-executive-brief</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -4042,8 +4103,8 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.166-pilot-readiness-scorecard";
-    const VERSION_DESCRIPTION = "Adds a read-only Pilot Readiness Scorecard that checks demo health, data confidence, attention clarity, command-view status, and pilot scenario readiness while preserving operator workflows and all existing logic.";
+    const VERSION = "v1.0.167-pilot-executive-brief";
+    const VERSION_DESCRIPTION = "Adds a read-only Pilot Executive Brief that converts the Cell Intelligence Layer, Attention Engine, and readiness scorecard into a leadership-ready demo summary while preserving operator workflows and all existing logic.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -8279,6 +8340,7 @@ function renderManagerTab(){
       if (bannerCopy) bannerCopy.textContent = copy || 'Presentation-safe command-center data is ready for Engineer review.';
       if (active) updatePilotWalkthroughStats();
       if (typeof renderPilotReadinessScorecard === 'function') renderPilotReadinessScorecard();
+      if (typeof renderPilotExecutiveBrief === 'function') renderPilotExecutiveBrief();
     }
 
     function updatePilotWalkthroughStats(){
@@ -8291,6 +8353,7 @@ function renderManagerTab(){
       setText(document.getElementById('pilot-walkthrough-risk-count'), cells.length ? String(riskCells) : '--');
       setText(document.getElementById('pilot-walkthrough-alert-count'), String(alerts.length || 0));
       if (typeof renderPilotReadinessScorecard === 'function') renderPilotReadinessScorecard();
+      if (typeof renderPilotExecutiveBrief === 'function') renderPilotExecutiveBrief();
     }
 
     function scrollEngineerPilotTarget(selector){
@@ -8530,6 +8593,117 @@ function renderManagerTab(){
       if (typeof copyPlainTextReport === 'function') await copyPlainTextReport(lines.join('\n'), button);
       else { try { await navigator.clipboard.writeText(lines.join('\n')); } catch {} }
     }
+    // v1.0.167 - Pilot executive brief.
+    // Read-only leadership summary that uses the same intelligence/readiness signals.
+    // Do not mutate saved operator data from this section.
+    function pilotBriefTone(score){
+      const n = Number(score) || 0;
+      if (n >= 85) return 'ready';
+      if (n >= 68) return 'watch';
+      return 'blocked';
+    }
+
+    function buildPilotExecutiveBrief(){
+      const readiness = typeof derivePilotReadinessScorecard === 'function' ? derivePilotReadinessScorecard() : {overall:0, alerts:[], cells:[]};
+      const layer = typeof deriveCellIntelligenceLayer === 'function' ? deriveCellIntelligenceLayer() : {cells:[]};
+      const cells = Array.isArray(layer?.cells) ? layer.cells : [];
+      const alerts = Array.isArray(readiness.alerts) ? readiness.alerts : [];
+      const riskCells = cells
+        .filter(cell => ['Attention','Blocked','Watch'].includes(String(cell.state || '')))
+        .sort((a,b) => (Number(a.healthScore) || 0) - (Number(b.healthScore) || 0))
+        .slice(0,5);
+      const topRisk = riskCells[0];
+      const blocked = cells.filter(cell => String(cell.state || '') === 'Blocked').length;
+      const help = cells.filter(cell => !!cell.helpNeeded).length;
+      const stale = cells.filter(cell => Number(cell.staleMinutes || 999) >= 120).length;
+      const tone = pilotBriefTone(readiness.overall);
+      const headline = tone === 'ready'
+        ? 'Pilot story is ready for a leadership walkthrough.'
+        : tone === 'watch'
+          ? 'Pilot story is strong, with a few cleanup notes to call out honestly.'
+          : 'Pilot story needs cleanup before being treated as ready.';
+      const summary = `${headline} Readiness is ${readiness.overall || 0}/100 with ${alerts.length} active attention signal(s), ${blocked} blocked cell(s), ${help} help-needed cell(s), and ${stale} stale-data cell(s).`;
+      const story = [
+        `${readiness.avgHealth || 0}/100 average cell health across the current intelligence layer.`,
+        `${readiness.avgConfidence || 0}% data confidence from stale/incomplete row checks.`,
+        `${alerts.length} alert(s) explain what needs attention instead of leaving managers to hunt manually.`,
+        `Pilot examples matched ${readiness.demoHits || 0}/4 expected staged cells.`
+      ];
+      const risks = riskCells.length
+        ? riskCells.map(cell => `Cell ${cell.cell}: ${cell.state || 'Unknown'} — ${cell.topReason || 'No reason captured yet.'}`)
+        : ['No major risk cells are currently standing out.'];
+      const ask = tone === 'ready'
+        ? 'Ask for a limited pilot using a small cell group and compare handoff clarity, downtime explanation quality, and report usefulness before expanding scope.'
+        : tone === 'watch'
+          ? 'Ask for a short pilot review after cleaning the visible gaps, then use this brief as the demo storyline.'
+          : 'Ask to clean the data/demo setup first, then re-run the readiness scorecard before presenting wider.';
+      return {readiness, cells, alerts, riskCells, topRisk, blocked, help, stale, tone, headline, summary, story, risks, ask};
+    }
+
+    function renderPilotExecutiveBrief(){
+      const panel = document.getElementById('pilot-executive-brief');
+      if (!panel) return;
+      const active = document.body.classList.contains('pilot-walkthrough-active') || (typeof getEngineeringGraphicsEnabled === 'function' && getEngineeringGraphicsEnabled());
+      panel.classList.toggle('active', !!active);
+      if (!active) return;
+      const brief = buildPilotExecutiveBrief();
+      const badge = document.getElementById('pilot-brief-badge');
+      if (badge) {
+        badge.classList.remove('ready','watch','blocked');
+        badge.classList.add(brief.tone);
+        badge.textContent = brief.tone === 'ready' ? 'Ready' : brief.tone === 'watch' ? 'Review' : 'Clean up';
+      }
+      setText(document.getElementById('pilot-brief-summary'), brief.summary);
+      setText(document.getElementById('pilot-brief-why'), 'This gives leadership a single operating story: which cells need attention, why they matter, how confident the data is, and what action the pilot should prove.');
+      setText(document.getElementById('pilot-brief-ask'), brief.ask);
+      const storyTarget = document.getElementById('pilot-brief-story');
+      if (storyTarget) storyTarget.innerHTML = brief.story.map((line, index) => `<div class="${index < 2 ? 'good' : 'warn'}"><span>${escapeHtml(line)}</span></div>`).join('');
+      const riskTarget = document.getElementById('pilot-brief-risks');
+      if (riskTarget) riskTarget.innerHTML = brief.risks.map((line, index) => `<div class="${index === 0 && brief.riskCells.length ? 'bad' : 'warn'}"><span>${escapeHtml(line)}</span></div>`).join('');
+    }
+
+    function getPilotExecutiveBriefText(){
+      const brief = buildPilotExecutiveBrief();
+      const lines = [
+        'Cummins Unified Logbook - Pilot Executive Brief',
+        `Version: ${VERSION}`,
+        '',
+        'SUMMARY',
+        brief.summary,
+        '',
+        'WHY IT MATTERS',
+        'Creates a shared operating picture across test cells by combining cell state, health, attention signals, data confidence, timeline context, and report-ready takeaways.',
+        '',
+        'CURRENT OPERATING STORY',
+        ...brief.story.map(line => `- ${line}`),
+        '',
+        'TOP RISKS TO DISCUSS',
+        ...brief.risks.map(line => `- ${line}`),
+        '',
+        'SUGGESTED ASK',
+        brief.ask
+      ];
+      return lines.join('\n');
+    }
+
+    async function copyPilotExecutiveBrief(button){
+      const text = getPilotExecutiveBriefText();
+      if (typeof copyPlainTextReport === 'function') await copyPlainTextReport(text, button);
+      else { try { await navigator.clipboard.writeText(text); } catch {} }
+    }
+
+    function downloadPilotExecutiveBrief(){
+      const text = getPilotExecutiveBriefText();
+      const blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'cummins_unified_logbook_pilot_executive_brief.txt';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(link.href), 0);
+    }
+
 
 
     function finalizeTempScenario(activeTabName){
@@ -10474,6 +10648,7 @@ Reason: ${error?.stack || error?.message || error}`;
     runStartupStep("resetForm", resetForm);
     runStartupStep("renderEntries", renderEntries);
     runStartupStep("renderPilotReadinessScorecard", renderPilotReadinessScorecard);
+    runStartupStep("renderPilotExecutiveBrief", renderPilotExecutiveBrief);
     runStartupStep("switchTab:logbook", () => switchTab("logbook"));
   </script>
 </body>
