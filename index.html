@@ -2067,7 +2067,212 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
       margin-top:10px;
     }
 
-    @keyframes engineerCommandIn{
+    
+    /* v1.0.158 - Test Cell Ops Map
+       Uses the existing 2026 Engineer card language and stays inside the optional graphics shell. */
+    .engineer-ops-map-card{
+      border:1px solid var(--eng-card-line);
+      background:var(--eng-card-bg);
+      backdrop-filter:var(--eng-card-blur);
+      -webkit-backdrop-filter:var(--eng-card-blur);
+      border-radius:22px;
+      box-shadow:0 10px 24px rgba(2,6,23,.12);
+      padding:18px;
+      overflow:hidden;
+    }
+
+    .engineer-ops-map-head{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+
+    .engineer-ops-map-legend{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px 12px;
+      align-items:center;
+      color:var(--eng-copy);
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .engineer-ops-map-legend span{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      white-space:nowrap;
+    }
+
+    .state-dot{
+      width:9px;
+      height:9px;
+      border-radius:999px;
+      display:inline-block;
+      box-shadow:0 0 10px rgba(255,255,255,.08);
+    }
+
+    .state-dot.running{background:#4ADE80}
+    .state-dot.watch{background:#FACC15}
+    .state-dot.attention{background:#FB923C}
+    .state-dot.blocked{background:#F87171}
+    .state-dot.stale{background:#94A3B8}
+    .state-dot.unknown{background:#64748B}
+
+    .engineer-ops-map{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      border:1px solid rgba(148,163,184,.16);
+      border-radius:18px;
+      padding:14px;
+      background:
+        linear-gradient(rgba(148,163,184,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148,163,184,.045) 1px, transparent 1px),
+        rgba(2,6,23,.18);
+      background-size:28px 28px;
+    }
+
+    .engineer-dashboard--lightcards .engineer-ops-map{
+      background:
+        linear-gradient(rgba(15,23,42,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,23,42,.035) 1px, transparent 1px),
+        rgba(248,250,252,.88);
+    }
+
+    .engineer-map-row{
+      display:grid;
+      grid-template-columns:54px minmax(0,1fr);
+      gap:10px;
+      align-items:stretch;
+    }
+
+    .engineer-map-row-label{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#7DD3FC;
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:-.03em;
+    }
+
+    .engineer-map-row-grid{
+      display:grid;
+      grid-template-columns:repeat(16,minmax(48px,1fr));
+      gap:7px;
+      min-width:0;
+    }
+
+    .engineer-cell-tile{
+      appearance:none;
+      border:1px solid rgba(148,163,184,.20);
+      border-radius:11px;
+      min-height:58px;
+      padding:8px 6px;
+      cursor:pointer;
+      color:#E2E8F0;
+      background:rgba(15,23,42,.56);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.025);
+      transition:transform .16s ease, border-color .16s ease, box-shadow .16s ease, background .16s ease;
+      text-align:left;
+    }
+
+    .engineer-cell-tile:hover,
+    .engineer-cell-tile:focus-visible{
+      transform:translateY(-1px);
+      outline:none;
+      border-color:rgba(125,211,252,.58);
+      box-shadow:0 0 0 2px rgba(14,165,233,.12), 0 10px 22px rgba(2,6,23,.18);
+    }
+
+    .engineer-cell-tile.selected{
+      border-color:#38BDF8;
+      box-shadow:0 0 0 2px rgba(56,189,248,.20), 0 0 22px rgba(56,189,248,.18);
+    }
+
+    .engineer-cell-number{
+      display:block;
+      font-size:15px;
+      font-weight:950;
+      line-height:1;
+      margin-bottom:7px;
+      letter-spacing:-.03em;
+    }
+
+    .engineer-cell-status{
+      display:flex;
+      align-items:center;
+      gap:5px;
+      font-size:10px;
+      font-weight:900;
+      line-height:1.15;
+    }
+
+    .engineer-cell-meta{
+      display:block;
+      margin-top:4px;
+      color:var(--eng-muted);
+      font-size:9px;
+      font-weight:800;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .engineer-cell-tile.state-running{background:rgba(22,101,52,.34);border-color:rgba(74,222,128,.28)}
+    .engineer-cell-tile.state-running .engineer-cell-number,
+    .engineer-cell-tile.state-running .engineer-cell-status{color:#86EFAC}
+
+    .engineer-cell-tile.state-watch{background:rgba(113,63,18,.34);border-color:rgba(250,204,21,.34)}
+    .engineer-cell-tile.state-watch .engineer-cell-number,
+    .engineer-cell-tile.state-watch .engineer-cell-status{color:#FDE047}
+
+    .engineer-cell-tile.state-attention{background:rgba(124,45,18,.38);border-color:rgba(251,146,60,.44)}
+    .engineer-cell-tile.state-attention .engineer-cell-number,
+    .engineer-cell-tile.state-attention .engineer-cell-status{color:#FDBA74}
+
+    .engineer-cell-tile.state-blocked{background:rgba(127,29,29,.42);border-color:rgba(248,113,113,.48)}
+    .engineer-cell-tile.state-blocked .engineer-cell-number,
+    .engineer-cell-tile.state-blocked .engineer-cell-status{color:#FCA5A5}
+
+    .engineer-cell-tile.state-stale{background:rgba(51,65,85,.46);border-color:rgba(148,163,184,.34)}
+    .engineer-cell-tile.state-stale .engineer-cell-number,
+    .engineer-cell-tile.state-stale .engineer-cell-status{color:#CBD5E1}
+
+    .engineer-cell-tile.state-unknown{background:rgba(15,23,42,.42);border-color:rgba(100,116,139,.26)}
+    .engineer-cell-tile.state-unknown .engineer-cell-number,
+    .engineer-cell-tile.state-unknown .engineer-cell-status{color:#94A3B8}
+
+    .engineer-map-empty{
+      color:var(--eng-muted);
+      font-size:13px;
+      padding:10px;
+      text-align:center;
+    }
+
+    @media (max-width: 1100px){
+      .engineer-map-row-grid{
+        grid-template-columns:repeat(8,minmax(56px,1fr));
+      }
+    }
+
+    @media (max-width: 720px){
+      .engineer-map-row{
+        grid-template-columns:1fr;
+      }
+      .engineer-map-row-label{
+        justify-content:flex-start;
+      }
+      .engineer-map-row-grid{
+        grid-template-columns:repeat(4,minmax(58px,1fr));
+      }
+    }
+
+@keyframes engineerCommandIn{
       from{opacity:0;transform:translateY(8px);}
       to{opacity:1;transform:translateY(0);}
     }
@@ -2102,7 +2307,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.157-cell-intelligence-layer</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.158-test-cell-ops-map</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -2110,7 +2315,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.157-cell-intelligence-layer</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.158-test-cell-ops-map</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -2505,7 +2710,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.157-cell-intelligence-layer</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.158-test-cell-ops-map</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -2687,6 +2892,34 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
                   </article>
                 </div>
 
+                <!-- v1.0.158 - Test Cell Ops Map
+                     Engineer-only visual command map powered by the read-only Cell Intelligence Layer.
+                     Keep this inside the optional/collapsible Graphical Overview body so operators are not affected. -->
+                <article class="engineer-ops-map-card">
+                  <div class="engineer-ops-map-head">
+                    <div>
+                      <div class="engineer-command-label">Test Cell Ops Map</div>
+                      <div class="engineer-command-title">Cell-by-cell readiness view</div>
+                    </div>
+                    <div class="engineer-ops-map-legend" aria-label="Cell state legend">
+                      <span><i class="state-dot running"></i>Running</span>
+                      <span><i class="state-dot watch"></i>Watch</span>
+                      <span><i class="state-dot attention"></i>Attention</span>
+                      <span><i class="state-dot blocked"></i>Blocked</span>
+                      <span><i class="state-dot stale"></i>Stale</span>
+                      <span><i class="state-dot unknown"></i>Unknown</span>
+                    </div>
+                  </div>
+
+                  <div id="engineer-ops-map" class="engineer-ops-map" aria-live="polite">
+                    <div class="engineer-map-empty">Cell map will populate from current demo data and saved shift context.</div>
+                  </div>
+
+                  <div id="engineer-ops-map-note" class="engineer-command-caption">
+                    Tiles are read-only. Click a cell to filter the Engineer view.
+                  </div>
+                </article>
+
                 <div class="engineer-2026-footer">
                   <button id="engineer-live-toggle-btn" class="secondary" type="button" onclick="toggleEngineerLiveSimulation()">
                     Simulate Live Shift
@@ -2763,7 +2996,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.157-cell-intelligence-layer</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.158-test-cell-ops-map</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -2821,7 +3054,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.157-cell-intelligence-layer</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.158-test-cell-ops-map</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -3026,7 +3259,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.157-cell-intelligence-layer</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.158-test-cell-ops-map</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -3107,8 +3340,8 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
        - improved spacing and hierarchy
        - stronger controls and focus treatment
        - Cummins-ready presentation polish without deleting or renaming working logic */
-    const VERSION = "v1.0.157-cell-intelligence-layer";
-    const VERSION_DESCRIPTION = "Read-only cell intelligence layer powering Engineer health scoring, state classification, data confidence, stale-data detection, and top-reason summaries.";
+    const VERSION = "v1.0.158-test-cell-ops-map";
+    const VERSION_DESCRIPTION = "Adds an optional Engineer Test Cell Ops Map powered by the read-only cell intelligence layer, with clickable cell tiles and practical 2026 command-view status graphics.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -4260,6 +4493,108 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       `).join("");
     }
 
+    function getEngineerMapCellGroups(){
+      return [
+        { label: "200s", cells: Array.from({ length: 16 }, (_, index) => String(201 + index)) },
+        { label: "300s", cells: Array.from({ length: 16 }, (_, index) => String(301 + index)) },
+        { label: "400s", cells: ["417"] }
+      ];
+    }
+
+    function getEngineerMapStatusClass(state){
+      const normalized = String(state || "Unknown").toLowerCase();
+      if (normalized.includes("block")) return "blocked";
+      if (normalized.includes("attention")) return "attention";
+      if (normalized.includes("watch")) return "watch";
+      if (normalized.includes("stale")) return "stale";
+      if (normalized.includes("running")) return "running";
+      return "unknown";
+    }
+
+    function getEngineerMapStatusLabel(cell){
+      if (!cell) return "Unknown";
+      if (cell.helpNeeded && cell.state !== "Blocked") return cell.state === "Running" ? "Help" : cell.state;
+      return cell.state || "Unknown";
+    }
+
+    function getEngineerMapMeta(cell){
+      if (!cell) return "No data";
+      if (cell.state === "Blocked") return cell.topReason || "Blocked";
+      if (cell.helpNeeded) return "Help open";
+      if (Number(cell.downtimeHours || 0) > 0) return `${Number(cell.downtimeHours || 0).toFixed(1)}h down`;
+      if (Number(cell.staleMinutes || 999) >= 120) return "Stale";
+      if (Number(cell.healthScore || 0)) return `${cell.healthScore}/100`;
+      return "No data";
+    }
+
+    function filterEngineerToCell(cell){
+      const normalized = safeCellNumber(cell);
+      if (!normalized) return;
+      if (engineerCellFilter) {
+        const hasOption = Array.from(engineerCellFilter.options || []).some((option) => String(option.value) === String(normalized));
+        if (!hasOption) {
+          const option = document.createElement("option");
+          option.value = normalized;
+          option.textContent = normalized;
+          engineerCellFilter.appendChild(option);
+        }
+        engineerCellFilter.value = normalized;
+      }
+      renderEngineerView();
+      renderEngineerPremiumDashboard();
+      if (typeof showToast === "function") showToast(`Engineer view filtered to Cell ${normalized}`);
+    }
+
+    function renderEngineerOpsMap(metrics){
+      const target = document.getElementById("engineer-ops-map");
+      const note = document.getElementById("engineer-ops-map-note");
+      if (!target) return;
+
+      const layer = window.cellIntelligenceSnapshot || deriveCellIntelligenceLayer();
+      const byCell = new Map((layer.cells || []).map((cell) => [String(cell.cell), cell]));
+      const selected = String(metrics?.selectedCell || (engineerCellFilter && engineerCellFilter.value) || "All");
+      const groups = getEngineerMapCellGroups();
+
+      target.innerHTML = groups.map((group) => {
+        const tiles = group.cells.map((cellNumber) => {
+          const cell = byCell.get(String(cellNumber)) || {
+            cell: cellNumber,
+            state: "Unknown",
+            healthScore: 0,
+            topReason: "No current intelligence data for this cell"
+          };
+          const statusClass = getEngineerMapStatusClass(cell.state);
+          const label = getEngineerMapStatusLabel(cell);
+          const selectedClass = selected !== "All" && String(selected) === String(cellNumber) ? " selected" : "";
+          return `
+            <button
+              type="button"
+              class="engineer-cell-tile state-${statusClass}${selectedClass}"
+              data-engineer-map-cell="${escapeHtml(cellNumber)}"
+              title="Cell ${escapeHtml(cellNumber)} — ${escapeHtml(cell.topReason || label)}"
+              onclick="filterEngineerToCell('${escapeHtml(cellNumber)}')"
+            >
+              <span class="engineer-cell-number">${escapeHtml(cellNumber)}</span>
+              <span class="engineer-cell-status"><i class="state-dot ${statusClass}"></i>${escapeHtml(label)}</span>
+              <span class="engineer-cell-meta">${escapeHtml(getEngineerMapMeta(cell))}</span>
+            </button>
+          `;
+        }).join("");
+
+        return `
+          <div class="engineer-map-row">
+            <div class="engineer-map-row-label">${escapeHtml(group.label)}</div>
+            <div class="engineer-map-row-grid">${tiles}</div>
+          </div>
+        `;
+      }).join("");
+
+      if (note) {
+        const summary = layer.summary || {};
+        note.textContent = `${summary.running || 0} running · ${summary.watch || 0} watch · ${summary.attention || 0} attention · ${summary.blocked || 0} blocked · ${summary.stale || 0} stale. Click a tile to filter Engineer review.`;
+      }
+    }
+
     function renderEngineerHelpList(items){
       const target = document.getElementById("engineer-help-list");
       if (!target) return;
@@ -4376,6 +4711,7 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       renderEngineerDowntimeBreakdown(metrics.downtimeBreakdown);
       renderEngineerHelpList(metrics.helpList);
       drawEngineerPremiumSparkline("sparkline-utilization", metrics.utilizationSeries, "#2DD4BF", "#22D3EE");
+      renderEngineerOpsMap(metrics);
 
       const collapsed = getEngineeringGraphicsCollapsed();
       const body = document.getElementById("engineer-graphics-body");
