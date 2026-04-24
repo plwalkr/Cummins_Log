@@ -2579,6 +2579,161 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     @media (max-width: 1050px){.engineer-selected-cell-main{grid-template-columns:1fr}.engineer-selected-cell-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media (max-width: 720px){.engineer-selected-cell-detail-grid{grid-template-columns:1fr}.engineer-selected-cell-actions{justify-content:stretch}.engineer-selected-cell-actions button{flex:1 1 180px}}
 
+
+    /* ==================== v1.0.162 - COMMAND CENTER LAYOUT POLISH ====================
+       Visual-only Engineer polish pass.
+       This does not change saved data, operator forms, tab logic, Pulse, demos, or startup guard.
+       It arranges the existing intelligence cards, ops map, attention engine, timeline, and selected-cell detail
+       into one calmer 2026 command-center composition similar to the approved first visual direction. */
+    .engineer-testcell-command .engineer-2026-shell{
+      position:relative;
+      padding:18px;
+    }
+    .engineer-testcell-command .engineer-2026-topbar{
+      position:relative;
+      z-index:1;
+      margin-bottom:16px;
+      padding:18px;
+      border:1px solid rgba(148,163,184,.16);
+      border-radius:24px;
+      background:linear-gradient(135deg,rgba(15,23,42,.68),rgba(15,23,42,.36));
+      box-shadow:0 14px 34px rgba(2,6,23,.16);
+    }
+    .engineer-dashboard--lightcards .engineer-2026-topbar{
+      background:linear-gradient(135deg,rgba(255,255,255,.92),rgba(248,250,252,.82));
+    }
+    .engineer-testcell-command [data-engineer-graphics-body]{
+      display:grid;
+      grid-template-columns:minmax(0,1.38fr) minmax(320px,.82fr);
+      gap:16px;
+      align-items:start;
+    }
+    .engineer-testcell-command .engineer-command-layout,
+    .engineer-testcell-command .engineer-modern-grid,
+    .engineer-testcell-command .engineer-2026-footer{
+      grid-column:1 / -1;
+    }
+    .engineer-testcell-command .engineer-command-layout{
+      grid-template-columns:minmax(360px,.72fr) minmax(0,1.28fr);
+    }
+    .engineer-testcell-command .engineer-command-health{
+      position:relative;
+      overflow:hidden;
+    }
+    .engineer-testcell-command .engineer-command-health:after{
+      content:"";
+      position:absolute;
+      inset:auto -70px -95px auto;
+      width:260px;
+      height:260px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(34,211,238,.16),transparent 62%);
+      pointer-events:none;
+    }
+    .engineer-testcell-command .engineer-modern-grid{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+    .engineer-testcell-command .engineer-command-tile,
+    .engineer-testcell-command .engineer-ops-map-card,
+    .engineer-testcell-command .engineer-shift-timeline-card,
+    .engineer-testcell-command .engineer-attention-engine-card,
+    .engineer-testcell-command .engineer-selected-cell-card{
+      transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+    }
+    .engineer-testcell-command .engineer-command-tile:hover,
+    .engineer-testcell-command .engineer-ops-map-card:hover,
+    .engineer-testcell-command .engineer-shift-timeline-card:hover,
+    .engineer-testcell-command .engineer-attention-engine-card:hover,
+    .engineer-testcell-command .engineer-selected-cell-card:hover{
+      transform:translateY(-1px);
+      border-color:rgba(34,211,238,.28);
+      box-shadow:0 14px 34px rgba(2,6,23,.18);
+    }
+    .engineer-testcell-command .engineer-ops-map-card{
+      grid-column:1;
+      min-height:100%;
+    }
+    .engineer-testcell-command .engineer-attention-engine-card{
+      grid-column:2;
+    }
+    .engineer-testcell-command .engineer-shift-timeline-card{
+      grid-column:1;
+    }
+    .engineer-testcell-command .engineer-selected-cell-card{
+      grid-column:2;
+    }
+    .engineer-testcell-command .engineer-ops-map{
+      min-height:430px;
+      align-content:start;
+    }
+    .engineer-testcell-command .engineer-cell-tile{
+      min-height:78px;
+    }
+    .engineer-testcell-command .engineer-attention-engine-card,
+    .engineer-testcell-command .engineer-selected-cell-card{
+      position:sticky;
+      top:12px;
+    }
+    .engineer-testcell-command .engineer-attention-engine-card{
+      max-height:440px;
+      overflow:auto;
+    }
+    .engineer-testcell-command .engineer-selected-cell-card{
+      margin-top:-6px;
+    }
+    .engineer-testcell-command .engineer-2026-footer{
+      margin-top:0;
+      justify-content:flex-end;
+      padding:12px;
+      border:1px solid rgba(148,163,184,.16);
+      border-radius:18px;
+      background:rgba(15,23,42,.24);
+    }
+    .engineer-dashboard--lightcards .engineer-2026-footer{
+      background:rgba(248,250,252,.78);
+    }
+    .engineer-testcell-command .engineer-2026-footer:before{
+      content:"Engineer command view · read-only intelligence layer";
+      margin-right:auto;
+      color:var(--eng-copy);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.02em;
+      align-self:center;
+    }
+    .engineer-testcell-command .engineer-alert-row:first-child,
+    .engineer-testcell-command .engineer-cell-tile.is-selected{
+      box-shadow:0 0 0 1px rgba(34,211,238,.34),0 16px 36px rgba(2,6,23,.20);
+    }
+    .engineer-testcell-command .engineer-timeline-shell{
+      min-height:122px;
+    }
+    .engineer-testcell-command .engineer-selected-cell-detail-grid{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    @media (max-width: 1280px){
+      .engineer-testcell-command [data-engineer-graphics-body]{
+        grid-template-columns:1fr;
+      }
+      .engineer-testcell-command .engineer-ops-map-card,
+      .engineer-testcell-command .engineer-attention-engine-card,
+      .engineer-testcell-command .engineer-shift-timeline-card,
+      .engineer-testcell-command .engineer-selected-cell-card{
+        grid-column:1 / -1;
+        position:relative;
+        top:auto;
+        max-height:none;
+      }
+      .engineer-testcell-command .engineer-selected-cell-card{margin-top:0}
+    }
+    @media (max-width: 980px){
+      .engineer-testcell-command .engineer-command-layout,
+      .engineer-testcell-command .engineer-modern-grid{
+        grid-template-columns:1fr;
+      }
+      .engineer-testcell-command .engineer-2026-footer:before{display:none}
+    }
+
 @keyframes engineerCommandIn{
       from{opacity:0;transform:translateY(8px);}
       to{opacity:1;transform:translateY(0);}
@@ -2614,7 +2769,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.161-selected-cell-detail-panel</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.162-command-center-layout-polish</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -2622,7 +2777,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.161-selected-cell-detail-panel</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.162-command-center-layout-polish</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -3017,7 +3172,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.161-selected-cell-detail-panel</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.162-command-center-layout-polish</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -3403,7 +3558,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.161-selected-cell-detail-panel</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.162-command-center-layout-polish</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -3461,7 +3616,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.161-selected-cell-detail-panel</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.162-command-center-layout-polish</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -3666,7 +3821,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.161-selected-cell-detail-panel</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.162-command-center-layout-polish</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -3740,15 +3895,15 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
   </section>
 
   <script>
-    /* v1.0.148 - forward token refinement layer
-       Built from the current live branch instead of reverting to older files.
+    /* v1.0.162 - command-center layout polish
+       Built forward from v1.0.161 without resetting to older files.
        This pass safely applies the stronger external prompt ideas:
        - broader semantic token usage
        - improved spacing and hierarchy
        - stronger controls and focus treatment
        - Cummins-ready presentation polish without deleting or renaming working logic */
-    const VERSION = "v1.0.161-selected-cell-detail-panel";
-    const VERSION_DESCRIPTION = "Adds an Engineer Attention Engine powered by the read-only cell intelligence layer, surfacing practical alert cards for help-needed, downtime, stale data, confidence gaps, and cell-state mismatches without changing saved data.";
+    const VERSION = "v1.0.162-command-center-layout-polish";
+    const VERSION_DESCRIPTION = "Polishes the optional Engineer Graphical Overview into a more unified command-center layout: intelligence cards, test-cell ops map, attention engine, shift timeline, and selected-cell detail now read as one 2026-style view while preserving the read-only logic layer and existing operator workflows.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
