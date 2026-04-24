@@ -2272,6 +2272,163 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
       }
     }
 
+    /* v1.0.159 - Shift Timeline Ribbon
+       Pure CSS timeline fed by existing hours/weekend/logbook state. */
+    .engineer-shift-timeline-card{
+      border:1px solid var(--eng-card-line);
+      background:var(--eng-card-bg);
+      backdrop-filter:var(--eng-card-blur);
+      -webkit-backdrop-filter:var(--eng-card-blur);
+      border-radius:22px;
+      box-shadow:0 10px 24px rgba(2,6,23,.12);
+      padding:18px;
+      overflow:hidden;
+    }
+
+    .engineer-shift-timeline-head{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+
+    .engineer-timeline-window{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:7px 11px;
+      border:1px solid rgba(148,163,184,.20);
+      border-radius:999px;
+      color:#BAE6FD;
+      background:rgba(14,165,233,.10);
+      font-size:12px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .engineer-timeline-legend{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px 14px;
+      align-items:center;
+      margin-bottom:14px;
+      color:var(--eng-copy);
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .engineer-timeline-legend span{display:inline-flex;align-items:center;gap:6px}
+
+    .timeline-dot{
+      width:9px;
+      height:9px;
+      border-radius:999px;
+      display:inline-block;
+      box-shadow:0 0 10px rgba(255,255,255,.08);
+    }
+    .timeline-dot.running{background:#4ADE80}
+    .timeline-dot.downtime{background:#FB923C}
+    .timeline-dot.help{background:#C084FC}
+    .timeline-dot.gap{background:#94A3B8}
+
+    .engineer-timeline-shell{
+      position:relative;
+      border:1px solid rgba(148,163,184,.16);
+      border-radius:18px;
+      padding:24px 14px 12px;
+      background:
+        linear-gradient(rgba(148,163,184,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148,163,184,.045) 1px, transparent 1px),
+        rgba(2,6,23,.18);
+      background-size:28px 28px;
+    }
+
+    .engineer-dashboard--lightcards .engineer-timeline-shell{
+      background:
+        linear-gradient(rgba(15,23,42,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,23,42,.035) 1px, transparent 1px),
+        rgba(248,250,252,.88);
+    }
+
+    .engineer-shift-timeline{
+      position:relative;
+      display:flex;
+      width:100%;
+      min-height:34px;
+      border-radius:999px;
+      overflow:hidden;
+      background:rgba(148,163,184,.18);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
+    }
+
+    .engineer-timeline-segment{
+      position:relative;
+      min-width:2%;
+      transition:width .35s ease, filter .2s ease;
+    }
+
+    .engineer-timeline-segment.running{background:linear-gradient(90deg,#16A34A,#4ADE80)}
+    .engineer-timeline-segment.downtime{background:linear-gradient(90deg,#EA580C,#FB923C)}
+    .engineer-timeline-segment.help{background:linear-gradient(90deg,#7C3AED,#C084FC)}
+    .engineer-timeline-segment.gap{
+      background:
+        repeating-linear-gradient(45deg,rgba(148,163,184,.48) 0 6px,rgba(100,116,139,.38) 6px 12px);
+    }
+
+    .engineer-timeline-segment:hover{filter:brightness(1.12)}
+
+    .engineer-timeline-now{
+      position:absolute;
+      top:8px;
+      bottom:31px;
+      width:0;
+      z-index:4;
+      pointer-events:none;
+      border-left:2px dashed rgba(125,211,252,.92);
+      filter:drop-shadow(0 0 8px rgba(56,189,248,.32));
+    }
+
+    .engineer-timeline-now span{
+      position:absolute;
+      top:-20px;
+      left:50%;
+      transform:translateX(-50%);
+      padding:3px 7px;
+      border-radius:999px;
+      background:rgba(14,165,233,.18);
+      border:1px solid rgba(125,211,252,.28);
+      color:#BAE6FD;
+      font-size:10px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .engineer-timeline-axis{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:8px;
+      margin-top:9px;
+      color:var(--eng-muted);
+      font-size:10px;
+      font-weight:900;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .engineer-timeline-axis span:nth-child(1){text-align:left}
+    .engineer-timeline-axis span{text-align:center}
+    .engineer-timeline-axis span:nth-child(5){text-align:right}
+
+    .engineer-timeline-summary{
+      margin-top:12px;
+      color:var(--eng-copy);
+      font-size:13px;
+      line-height:1.5;
+    }
+
 @keyframes engineerCommandIn{
       from{opacity:0;transform:translateY(8px);}
       to{opacity:1;transform:translateY(0);}
@@ -2307,7 +2464,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.158-test-cell-ops-map</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.159-shift-timeline-ribbon</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -2315,7 +2472,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.158-test-cell-ops-map</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.159-shift-timeline-ribbon</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -2710,7 +2867,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.158-test-cell-ops-map</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.159-shift-timeline-ribbon</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -2920,6 +3077,42 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
                   </div>
                 </article>
 
+                <!-- v1.0.159 - Shift Timeline Ribbon
+                     Engineer-only visual timeline derived from current hours/weekend/logbook shape.
+                     Read-only and nested in the optional/collapsible Graphical Overview body. -->
+                <article class="engineer-shift-timeline-card">
+                  <div class="engineer-shift-timeline-head">
+                    <div>
+                      <div class="engineer-command-label">Shift Timeline Ribbon</div>
+                      <div class="engineer-command-title">Current shift operating shape</div>
+                    </div>
+                    <div id="engineer-timeline-window" class="engineer-timeline-window">7 AM – 3 PM</div>
+                  </div>
+
+                  <div class="engineer-timeline-legend" aria-label="Timeline legend">
+                    <span><i class="timeline-dot running"></i>Running</span>
+                    <span><i class="timeline-dot downtime"></i>Downtime</span>
+                    <span><i class="timeline-dot help"></i>Help</span>
+                    <span><i class="timeline-dot gap"></i>Data Gap</span>
+                  </div>
+
+                  <div class="engineer-timeline-shell">
+                    <div class="engineer-timeline-now" id="engineer-timeline-now" style="left:42%;">
+                      <span>Now</span>
+                    </div>
+                    <div id="engineer-shift-timeline" class="engineer-shift-timeline" aria-live="polite">
+                      <div class="engineer-timeline-segment gap" style="width:100%"></div>
+                    </div>
+                    <div id="engineer-timeline-axis" class="engineer-timeline-axis">
+                      <span>7 AM</span><span>9 AM</span><span>11 AM</span><span>1 PM</span><span>3 PM</span>
+                    </div>
+                  </div>
+
+                  <div id="engineer-timeline-summary" class="engineer-timeline-summary">
+                    Timeline will populate from current shift hours, help-needed rows, and data confidence.
+                  </div>
+                </article>
+
                 <div class="engineer-2026-footer">
                   <button id="engineer-live-toggle-btn" class="secondary" type="button" onclick="toggleEngineerLiveSimulation()">
                     Simulate Live Shift
@@ -2996,7 +3189,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.158-test-cell-ops-map</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.159-shift-timeline-ribbon</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -3054,7 +3247,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.158-test-cell-ops-map</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.159-shift-timeline-ribbon</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -3259,7 +3452,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.158-test-cell-ops-map</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.159-shift-timeline-ribbon</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -3340,8 +3533,8 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
        - improved spacing and hierarchy
        - stronger controls and focus treatment
        - Cummins-ready presentation polish without deleting or renaming working logic */
-    const VERSION = "v1.0.158-test-cell-ops-map";
-    const VERSION_DESCRIPTION = "Adds an optional Engineer Test Cell Ops Map powered by the read-only cell intelligence layer, with clickable cell tiles and practical 2026 command-view status graphics.";
+    const VERSION = "v1.0.159-shift-timeline-ribbon";
+    const VERSION_DESCRIPTION = "Adds an optional Engineer Shift Timeline Ribbon powered by the read-only cell intelligence layer, showing running, downtime, help, and data-gap shape for the current shift without changing saved data.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -4595,6 +4788,133 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       }
     }
 
+    function getEngineerShiftWindow(){
+      const label = String(bannerFields?.shift || "").toLowerCase();
+      const now = new Date();
+      const start = new Date(now);
+      const end = new Date(now);
+      if (label.includes("night")) {
+        start.setHours(19, 0, 0, 0);
+        end.setDate(end.getDate() + (now.getHours() >= 19 ? 1 : 0));
+        end.setHours(7, 0, 0, 0);
+        if (now.getHours() < 7) start.setDate(start.getDate() - 1);
+        return { start, end, label: "7 PM – 7 AM", axis: ["7 PM", "10 PM", "1 AM", "4 AM", "7 AM"] };
+      }
+      if (label.includes("weekend")) {
+        start.setHours(7, 0, 0, 0);
+        end.setHours(19, 0, 0, 0);
+        return { start, end, label: "7 AM – 7 PM", axis: ["7 AM", "10 AM", "1 PM", "4 PM", "7 PM"] };
+      }
+      start.setHours(7, 0, 0, 0);
+      end.setHours(15, 0, 0, 0);
+      return { start, end, label: "7 AM – 3 PM", axis: ["7 AM", "9 AM", "11 AM", "1 PM", "3 PM"] };
+    }
+
+    function getEngineerTimelineType(row){
+      if (!row) return "gap";
+      if (row.__timelineType) return row.__timelineType;
+      const blob = `${row.status || ""} ${row.detail || ""} ${row.comment || ""}`.toLowerCase();
+      if (blob.includes("help")) return "help";
+      if (isDowntimeEngineerRow(row)) return "downtime";
+      if (String(row.status || "").toLowerCase().includes("running")) return "running";
+      return "gap";
+    }
+
+    function mergeEngineerTimelineSegments(segments){
+      const merged = [];
+      segments.forEach((segment) => {
+        const last = merged[merged.length - 1];
+        if (last && last.type === segment.type) {
+          last.hours += segment.hours;
+          last.label = `${last.label} / ${segment.label}`;
+        } else {
+          merged.push(Object.assign({}, segment));
+        }
+      });
+      return merged;
+    }
+
+    function buildEngineerShiftTimeline(metrics){
+      const scope = getEngineerDashboardScope();
+      const windowInfo = getEngineerShiftWindow();
+      const totalWindowHours = Math.max(1, (windowInfo.end.getTime() - windowInfo.start.getTime()) / 3600000);
+      const rows = Array.isArray(scope.hoursSheet) ? scope.hoursSheet.filter((row) => Number(row?.hours ?? row?.loggedHours ?? 0) > 0) : [];
+      const helpRows = Array.isArray(metrics?.helpList) ? metrics.helpList : [];
+      const segments = [];
+      let usedHours = 0;
+
+      rows.slice(0, 14).forEach((row) => {
+        const hours = clampNumber(Number(row?.hours ?? row?.loggedHours ?? 0) || 0, 0, totalWindowHours);
+        if (!hours) return;
+        usedHours += hours;
+        segments.push({
+          type: getEngineerTimelineType(row),
+          hours,
+          label: String(row?.detail || row?.status || "Shift row")
+        });
+      });
+
+      if (!segments.length) {
+        const runningShare = clampNumber(Number(metrics?.uptimePct || 0) / 100, 0, 1);
+        const helpShare = helpRows.length ? .08 : 0;
+        const downtimeShare = clampNumber(Number(metrics?.downtimeHours || 0) / totalWindowHours, 0, .45);
+        const runningHours = clampNumber(totalWindowHours * runningShare, 0, totalWindowHours);
+        if (runningHours > .2) segments.push({ type:"running", hours:runningHours, label:"Estimated running window" });
+        if (downtimeShare > 0) segments.push({ type:"downtime", hours:totalWindowHours * downtimeShare, label:"Estimated downtime pressure" });
+        if (helpShare > 0) segments.push({ type:"help", hours:totalWindowHours * helpShare, label:"Help-needed event" });
+        usedHours = segments.reduce((sum, segment) => sum + segment.hours, 0);
+      }
+
+      if (helpRows.length && !segments.some((segment) => segment.type === "help")) {
+        const helpHours = Math.min(.55, totalWindowHours * .08);
+        segments.push({ type:"help", hours:helpHours, label:"Help-needed event" });
+        usedHours += helpHours;
+      }
+
+      const gapHours = clampNumber(totalWindowHours - usedHours, 0, totalWindowHours);
+      if (gapHours > .15) segments.push({ type:"gap", hours:gapHours, label:"Unlogged / data gap" });
+
+      const totalSegmentHours = Math.max(.1, segments.reduce((sum, segment) => sum + segment.hours, 0));
+      return {
+        windowInfo,
+        totalWindowHours,
+        nowPct: clampNumber(((Date.now() - windowInfo.start.getTime()) / Math.max(1, windowInfo.end.getTime() - windowInfo.start.getTime())) * 100, 0, 100),
+        segments: mergeEngineerTimelineSegments(segments).map((segment) => Object.assign({}, segment, {
+          pct: clampNumber((segment.hours / totalSegmentHours) * 100, 2, 100)
+        }))
+      };
+    }
+
+    function renderEngineerShiftTimeline(metrics){
+      const target = document.getElementById("engineer-shift-timeline");
+      const axis = document.getElementById("engineer-timeline-axis");
+      const summary = document.getElementById("engineer-timeline-summary");
+      const windowNode = document.getElementById("engineer-timeline-window");
+      const nowNode = document.getElementById("engineer-timeline-now");
+      if (!target) return;
+
+      const timeline = buildEngineerShiftTimeline(metrics || deriveEngineerPremiumMetrics());
+      target.innerHTML = timeline.segments.map((segment) => `
+        <div
+          class="engineer-timeline-segment ${escapeHtml(segment.type)}"
+          style="width:${segment.pct.toFixed(2)}%"
+          title="${escapeHtml(segment.label)} · ${Number(segment.hours || 0).toFixed(1)}h"
+        ></div>
+      `).join("");
+
+      if (axis) axis.innerHTML = timeline.windowInfo.axis.map((label) => `<span>${escapeHtml(label)}</span>`).join("");
+      if (windowNode) windowNode.textContent = timeline.windowInfo.label;
+      if (nowNode) nowNode.style.left = `${timeline.nowPct}%`;
+
+      if (summary) {
+        const totals = timeline.segments.reduce((acc, segment) => {
+          acc[segment.type] = (acc[segment.type] || 0) + Number(segment.pct || 0);
+          return acc;
+        }, {});
+        summary.textContent = `Shift shape: ${Math.round(totals.running || 0)}% running · ${Math.round(totals.downtime || 0)}% downtime · ${Math.round(totals.help || 0)}% help · ${Math.round(totals.gap || 0)}% data gap. Read-only view from current saved rows.`;
+      }
+    }
+
     function renderEngineerHelpList(items){
       const target = document.getElementById("engineer-help-list");
       if (!target) return;
@@ -4712,6 +5032,7 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       renderEngineerHelpList(metrics.helpList);
       drawEngineerPremiumSparkline("sparkline-utilization", metrics.utilizationSeries, "#2DD4BF", "#22D3EE");
       renderEngineerOpsMap(metrics);
+      renderEngineerShiftTimeline(metrics);
 
       const collapsed = getEngineeringGraphicsCollapsed();
       const body = document.getElementById("engineer-graphics-body");
