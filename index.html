@@ -456,6 +456,11 @@
     .temp-test-btn{border:1px solid var(--line);background:#fff;color:var(--text);border-radius:10px;padding:9px 12px;font-size:12px;font-weight:800;cursor:pointer}
     .temp-test-btn.reset{border-style:dashed}
     .temp-test-btn:hover{transform:translateY(-1px)}
+    .temp-test-btn.pilot{background:#0f172a;color:#fff;border-color:#0f172a}
+    .pilot-mode-banner{display:none;margin-top:10px;border:1px solid #cbd5e1;border-radius:14px;background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);padding:10px 12px;color:#334155;font-size:12px;line-height:1.5}
+    .pilot-mode-banner.active{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}
+    .pilot-mode-banner strong{display:block;color:#0f172a;font-size:11px;text-transform:uppercase;letter-spacing:.14em;margin-bottom:4px}
+    .pilot-mode-pill{display:inline-flex;align-items:center;padding:5px 10px;border-radius:999px;border:1px solid #bfdbfe;background:#eff6ff;color:#1d4ed8;font-weight:900;font-size:11px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
     body[data-theme="clarity"] .temp-test-bar{background:#f7faff;border-color:#9aa7bd}
     body[data-theme="clarity"] .temp-test-btn{border-color:#8ea2bf;background:#fff;color:#10233d}
     body[data-theme="clarity"] .manager-hero-card,
@@ -3188,15 +3193,20 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.162-command-center-layout-polish</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.164-demo-pilot-mode</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
             <div class="temp-test-copy"><strong>Test tools</strong>Load sample review data, then reset when you are done checking the engineer view.</div>
             <div class="temp-test-actions">
               <button class="temp-test-btn" type="button" data-temp-fill="engineer">Fill This Tab</button>
+              <button class="temp-test-btn pilot" type="button" data-pilot-demo="true">Launch Pilot Demo</button>
               <button class="temp-test-btn reset" type="button" data-temp-reset="true">Reset Test Data</button>
             </div>
+          </div>
+          <div id="pilot-mode-banner" class="pilot-mode-banner" aria-live="polite">
+            <div><strong>Pilot demo mode</strong><span id="pilot-mode-banner-copy">Presentation-safe command-center data is ready for Engineer review.</span></div>
+            <span class="pilot-mode-pill">Demo only</span>
           </div>
 
           <div class="engineer-shell">
@@ -3575,7 +3585,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.162-command-center-layout-polish</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.164-demo-pilot-mode</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -3633,7 +3643,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.162-command-center-layout-polish</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.164-demo-pilot-mode</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -3839,7 +3849,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.162-command-center-layout-polish</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.164-demo-pilot-mode</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -3913,15 +3923,15 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
   </section>
 
   <script>
-    /* v1.0.162 - command-center layout polish
+    /* v1.0.164 - demo pilot mode
        Built forward from v1.0.161 without resetting to older files.
        This pass safely applies the stronger external prompt ideas:
        - broader semantic token usage
        - improved spacing and hierarchy
        - stronger controls and focus treatment
        - Cummins-ready presentation polish without deleting or renaming working logic */
-    const VERSION = "v1.0.163-intelligence-report-upgrade";
-    const VERSION_DESCRIPTION = "Upgrades Manager and Engineer generated reports with Cell Intelligence Layer signals, attention alerts, top risk cells, leadership takeaways, downloadable report files, and compact insight cards while preserving the existing command-center layout and operator workflows.";
+    const VERSION = "v1.0.164-demo-pilot-mode";
+    const VERSION_DESCRIPTION = "Adds an Engineer pilot/demo mode that safely seeds realistic command-center data, focuses Cell 205, enables hidden graphics for presentation review, and preserves operator workflows, startup guard, Pulse, demo tools, and all existing logic.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -8142,6 +8152,117 @@ function renderManagerTab(){
       resetEngineerReviewFilters({ cell: nextCell, query: '' });
     }
 
+    // v1.0.164 - Pilot demo mode.
+    // Seeds presentation-safe, realistic command-center data without introducing
+    // a second storage model. It reuses the existing demo/reset baseline so the
+    // operator workflows remain untouched and recoverable.
+    function setPilotModeBanner(active, copy){
+      const banner = document.getElementById('pilot-mode-banner');
+      const bannerCopy = document.getElementById('pilot-mode-banner-copy');
+      if (!banner) return;
+      banner.classList.toggle('active', !!active);
+      if (bannerCopy) bannerCopy.textContent = copy || 'Presentation-safe command-center data is ready for Engineer review.';
+    }
+
+    function getPilotScenarioRows(kind){
+      const rows = {
+        attention:[
+          {status:'Running', detail:'Running Per Plan', comment:'', hours:'3.0'},
+          {status:'Downtime', detail:'Material / Parts', comment:'Waiting on valve cover assembly before the next clean pull can be released.', hours:'1.7'},
+          {status:'Running', detail:'Data Review (Engineer)', comment:'Engineer is holding the last comparison until the material note is closed.', hours:'1.8'},
+          {status:'Downtime', detail:'Other (please note)', comment:'Help-needed condition remained open while the cell waited on confirmation from support.', hours:'0.8'}
+        ],
+        blocked:[
+          {status:'Downtime', detail:'Parts', comment:'Replacement fitting is not available yet and the cell should be treated as blocked for planning.', hours:'4.5'},
+          {status:'Downtime', detail:'Facility Down', comment:'Support is verifying the utility condition before install work can restart safely.', hours:'2.0'},
+          {status:'Running', detail:'Data Review (Engineer)', comment:'Only review time is active while the physical cell remains blocked.', hours:'1.0'}
+        ],
+        watch:[
+          {status:'Running', detail:'Running Per Plan', comment:'', hours:'5.0'},
+          {status:'Downtime', detail:'Emissions Cart', comment:'Cart reconnect was needed once during the shift and should be watched for repeat behavior.', hours:'1.0'},
+          {status:'Running', detail:'Calibration (Engineer)', comment:'Engineer requested a quick calibration check after the reconnect.', hours:'2.0'}
+        ],
+        running:[
+          {status:'Running', detail:'Running Per Plan', comment:'', hours:'7.5'},
+          {status:'Running', detail:'Data Review (Engineer)', comment:'Review is current and no blocking action is visible.', hours:'1.5'}
+        ]
+      };
+      return materializeScenarioRows(rows[kind] || rows.running, 8500 + Math.floor(Math.random() * 200));
+    }
+
+    function addPilotHoursRecord(cell, kind, shiftKey, dateOffset, note){
+      const baseIso = shiftDateISO(getTodayISO(), dateOffset || 0);
+      const preset = TECH_SHIFT_OPTIONS[shiftKey] || TECH_SHIFT_OPTIONS['weekday-day'];
+      const expected = Number(preset.techHours || 10);
+      const fields = {
+        engineModel:'X15 Pilot',
+        engineSN:`PILOT-${cell}`,
+        engineer: cell === '205' ? 'A. McCalment' : cell === '417' ? 'Facilities Support' : 'Engineer Review',
+        pph:'E6640',
+        testCell:String(cell),
+        testPlanId:`PILOT-${cell}-${baseIso.replace(/-/g,'')}`,
+        technician: cell === '205' ? 'Joey Poppe' : 'Weekend Crew',
+        shift:preset.label,
+        date:baseIso,
+        startTime:preset.startTime,
+        endTime:preset.endTime,
+        cellHourMeter:String(120 + Number(cell) % 60)
+      };
+      const sheet = {
+        expectedHours:String(expected),
+        shiftNote:note,
+        workPattern:preset.workPattern,
+        viewMode:'trade',
+        techShift:shiftKey
+      };
+      const rows = getPilotScenarioRows(kind);
+      const record = buildHoursRecord(fields, sheet, rows);
+      hoursCellSheets[record.key] = record.value;
+      return record;
+    }
+
+    function seedPilotWeekendRows(boardIso){
+      const rows = createWeekendUpdateRows();
+      const fill = {
+        '205': {tcStatus:'Parts', helpNeeded:'Yes', comments:'Pilot signal: help-needed status is open and material timing needs a fresh update before release.', lastUpdate:'07:42 AM', wwid:randomWWID()},
+        '212': {tcStatus:'Running', helpNeeded:'No', comments:'Pilot signal: clean running state with recent operator confidence and no visible support request.', lastUpdate:'10:18 AM', wwid:randomWWID()},
+        '309': {tcStatus:'Cold Soak', helpNeeded:'No', comments:'Pilot signal: watch state only; timing is on plan but not ready to call fully running yet.', lastUpdate:'09:36 AM', wwid:randomWWID()},
+        '304': {tcStatus:'Emission Carts', helpNeeded:'Yes', comments:'Pilot signal: cart reconnect needs support acknowledgement before the next stable block.', lastUpdate:'08:54 AM', wwid:randomWWID()},
+        '311': {tcStatus:'Data Review', helpNeeded:'No', comments:'Pilot signal: review row is active and should stay visible in the attention engine.', lastUpdate:'09:10 AM', wwid:randomWWID()},
+        '417': {tcStatus:'Down, Not Running', helpNeeded:'Yes', comments:'Pilot signal: replacement fitting is still open; treat this as blocked until support clears the action.', lastUpdate:'06:58 AM', wwid:randomWWID()}
+      };
+      rows.forEach(row => {
+        if (fill[row.testCell]) Object.assign(row, fill[row.testCell]);
+      });
+      weekendUpdateStore = {...weekendUpdateStore, [boardIso]: rows};
+      saveWeekendUpdateStore(weekendUpdateStore);
+      if (weekendDateInput) weekendDateInput.value = boardIso;
+    }
+
+    function seedDemoPilotMode(){
+      rememberTempTestBaseline();
+      applyPrototypeSnapshot(deepClone(tempTestBaseline));
+      const boardIso = getTodayISO();
+      seedDemoLogbookState();
+      seedDemoHoursState({date:boardIso, techShift:'weekday-day', viewMode:'trade', testCell:'205'});
+      seedPilotWeekendRows(boardIso);
+      addPilotHoursRecord('205','attention','weekday-day',0,'Pilot demo: Cell 205 is intentionally staged as the primary attention example.');
+      addPilotHoursRecord('212','running','weekday-day',0,'Pilot demo: Cell 212 stays healthy so the map has a clean green reference point.');
+      addPilotHoursRecord('309','watch','weekday-night',0,'Pilot demo: Cell 309 creates a watch state for the command map.');
+      addPilotHoursRecord('417','blocked','weekend-day',0,'Pilot demo: Cell 417 is intentionally staged as blocked for leadership review.');
+      bannerFields = {...bannerFields, testCell:'205', date:boardIso, shift:'Weekday', startTime:'07:00 AM', endTime:'05:00 PM'};
+      loadHoursSheetForCurrentContext();
+      setEngineeringGraphicsEnabled(true);
+      setEngineeringGraphicsCollapsed(false);
+      resetEngineerReviewFilters({ cell:'205', query:'' });
+      window.engineerSelectedOpsCell = '205';
+      setPilotModeBanner(true, 'Pilot scenario loaded: Cell 205 attention, Cell 212 running, Cell 309 watch, Cell 417 blocked. Reset Test Data returns to the saved baseline.');
+      finalizeTempScenario('engineer');
+      renderEngineerPremiumDashboard();
+      bindEngineerDashboardButtons();
+      if (typeof showToast === 'function') showToast('Pilot demo loaded for Engineer command view');
+    }
+
 
     function finalizeTempScenario(activeTabName){
       renderHeaderFields();
@@ -8185,6 +8306,8 @@ function renderManagerTab(){
       if (!tempTestBaseline) return;
       applyPrototypeSnapshot(deepClone(tempTestBaseline));
       resetEngineerReviewFilters({ cell:'', query:'' });
+      setPilotModeBanner(false);
+      window.engineerSelectedOpsCell = '';
       tempTestBaseline = null;
     }
 
@@ -9252,6 +9375,9 @@ function renderHours(){
       });
       document.querySelectorAll('[data-temp-reset]').forEach(btn => {
         btn.addEventListener('click', resetTempTestData);
+      });
+      document.querySelectorAll('[data-pilot-demo]').forEach(btn => {
+        btn.addEventListener('click', seedDemoPilotMode);
       });
     }
 
