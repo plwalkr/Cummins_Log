@@ -2543,6 +2543,42 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
       background:rgba(148,163,184,.08);
     }
 
+    /* ==================== v1.0.161 - SELECTED CELL DETAIL PANEL ====================
+       Focused readout for the clicked ops-map cell. Read-only; does not mutate source data. */
+    .engineer-selected-cell-card{
+      border:1px solid var(--eng-card-line);
+      background:var(--eng-card-bg);
+      backdrop-filter:var(--eng-card-blur);
+      -webkit-backdrop-filter:var(--eng-card-blur);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 10px 24px rgba(2,6,23,.12);
+    }
+    .engineer-selected-cell-card.is-empty{opacity:.92}
+    .engineer-selected-cell-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}
+    .engineer-selected-cell-title{color:#F8FAFC;font-size:18px;font-weight:950;letter-spacing:-.03em;line-height:1.15}
+    .engineer-dashboard--lightcards .engineer-selected-cell-title{color:#0F172A}
+    .engineer-selected-cell-main{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:16px;align-items:stretch;margin-bottom:14px}
+    .engineer-selected-cell-reason,.engineer-selected-cell-scorebox{border:1px solid rgba(148,163,184,.18);border-radius:18px;padding:14px;background:rgba(15,23,42,.28)}
+    .engineer-dashboard--lightcards .engineer-selected-cell-reason,.engineer-dashboard--lightcards .engineer-selected-cell-scorebox{background:rgba(248,250,252,.84)}
+    .engineer-selected-cell-mini-label{color:var(--eng-muted);font-size:10px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;margin-bottom:6px}
+    .engineer-selected-cell-reason-text{color:#F8FAFC;font-size:18px;font-weight:900;line-height:1.25}
+    .engineer-dashboard--lightcards .engineer-selected-cell-reason-text{color:#0F172A}
+    .engineer-selected-cell-note{margin-top:8px;color:var(--eng-copy);font-size:12px;line-height:1.5}
+    .engineer-selected-cell-score{display:flex;align-items:flex-end;justify-content:center;gap:4px;color:#F8FAFC;font-size:42px;line-height:.95;font-weight:950;letter-spacing:-.05em;margin:10px 0 12px}
+    .engineer-selected-cell-score span:last-child{color:var(--eng-muted);font-size:16px;font-weight:800;letter-spacing:-.01em}
+    .engineer-dashboard--lightcards .engineer-selected-cell-score{color:#0F172A}
+    .engineer-health-track.compact{height:10px}
+    .engineer-selected-cell-detail-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
+    .engineer-selected-cell-detail{border:1px solid rgba(148,163,184,.18);border-radius:14px;padding:11px 12px;background:rgba(15,23,42,.24);min-height:76px}
+    .engineer-dashboard--lightcards .engineer-selected-cell-detail{background:rgba(248,250,252,.84)}
+    .engineer-selected-cell-detail strong{display:block;color:var(--eng-muted);font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+    .engineer-selected-cell-detail span{display:block;color:#F8FAFC;font-size:13px;font-weight:850;line-height:1.35}
+    .engineer-dashboard--lightcards .engineer-selected-cell-detail span{color:#0F172A}
+    .engineer-selected-cell-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;padding-top:12px;border-top:1px solid rgba(148,163,184,.16)}
+    @media (max-width: 1050px){.engineer-selected-cell-main{grid-template-columns:1fr}.engineer-selected-cell-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width: 720px){.engineer-selected-cell-detail-grid{grid-template-columns:1fr}.engineer-selected-cell-actions{justify-content:stretch}.engineer-selected-cell-actions button{flex:1 1 180px}}
+
 @keyframes engineerCommandIn{
       from{opacity:0;transform:translateY(8px);}
       to{opacity:1;transform:translateY(0);}
@@ -2578,7 +2614,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.160-attention-engine</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.161-selected-cell-detail-panel</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -2586,7 +2622,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.160-attention-engine</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.161-selected-cell-detail-panel</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -2981,7 +3017,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.160-attention-engine</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.161-selected-cell-detail-panel</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -3244,6 +3280,53 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
                   </div>
                 </article>
 
+                <!-- v1.0.161 - Selected Cell Detail Panel
+                     Gives the ops map a focused readout without changing saved data.
+                     Clicking a cell filters Engineer and updates this card. -->
+                <article id="engineer-selected-cell-card" class="engineer-selected-cell-card is-empty">
+                  <div class="engineer-selected-cell-head">
+                    <div>
+                      <div class="engineer-command-label">Selected Cell</div>
+                      <div id="engineer-selected-cell-title" class="engineer-selected-cell-title">No cell selected</div>
+                    </div>
+                    <span id="engineer-selected-cell-state" class="engineer-command-pill warn">Select</span>
+                  </div>
+
+                  <div class="engineer-selected-cell-main">
+                    <div class="engineer-selected-cell-reason">
+                      <div class="engineer-selected-cell-mini-label">Top Reason</div>
+                      <div id="engineer-selected-cell-reason" class="engineer-selected-cell-reason-text">
+                        Click a tile in the Test Cell Ops Map to focus this panel.
+                      </div>
+                      <div id="engineer-selected-cell-note" class="engineer-selected-cell-note">
+                        This panel stays read-only and only summarizes existing logbook, weekend, hours, and intelligence-layer signals.
+                      </div>
+                    </div>
+
+                    <div class="engineer-selected-cell-scorebox">
+                      <div class="engineer-selected-cell-mini-label">Health Score</div>
+                      <div class="engineer-selected-cell-score"><span id="engineer-selected-cell-health">—</span><span>/100</span></div>
+                      <div class="engineer-health-track compact">
+                        <div id="engineer-selected-cell-health-fill" class="engineer-health-fill" style="width:0%;"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="engineer-selected-cell-detail-grid">
+                    <div class="engineer-selected-cell-detail"><strong>Last Update</strong><span id="engineer-selected-cell-update">—</span></div>
+                    <div class="engineer-selected-cell-detail"><strong>Help Status</strong><span id="engineer-selected-cell-help">—</span></div>
+                    <div class="engineer-selected-cell-detail"><strong>Downtime</strong><span id="engineer-selected-cell-downtime">—</span></div>
+                    <div class="engineer-selected-cell-detail"><strong>Data Confidence</strong><span id="engineer-selected-cell-confidence">—</span></div>
+                  </div>
+
+                  <div class="engineer-selected-cell-actions">
+                    <button id="engineer-selected-cell-filter-btn" class="secondary" type="button" onclick="filterSelectedEngineerCell()">Filter to Cell</button>
+                    <button id="engineer-selected-cell-export-btn" class="secondary" type="button" onclick="exportSelectedEngineerCellSnapshot()">Export Cell Snapshot</button>
+                    <button class="secondary" type="button" onclick="openHoursBreakdownFromEngineer()">View Hours Breakdown</button>
+                    <button id="engineer-selected-cell-clear-btn" class="secondary" type="button" onclick="clearSelectedEngineerCell()">Clear</button>
+                  </div>
+                </article>
+
                 <div class="engineer-2026-footer">
                   <button id="engineer-live-toggle-btn" class="secondary" type="button" onclick="toggleEngineerLiveSimulation()">
                     Simulate Live Shift
@@ -3320,7 +3403,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.160-attention-engine</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.161-selected-cell-detail-panel</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -3378,7 +3461,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.160-attention-engine</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.161-selected-cell-detail-panel</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -3583,7 +3666,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.160-attention-engine</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.161-selected-cell-detail-panel</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -3664,7 +3747,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
        - improved spacing and hierarchy
        - stronger controls and focus treatment
        - Cummins-ready presentation polish without deleting or renaming working logic */
-    const VERSION = "v1.0.160-attention-engine";
+    const VERSION = "v1.0.161-selected-cell-detail-panel";
     const VERSION_DESCRIPTION = "Adds an Engineer Attention Engine powered by the read-only cell intelligence layer, surfacing practical alert cards for help-needed, downtime, stale data, confidence gaps, and cell-state mismatches without changing saved data.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
@@ -4854,6 +4937,7 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
     function filterEngineerToCell(cell){
       const normalized = safeCellNumber(cell);
       if (!normalized) return;
+      window.engineerSelectedOpsCell = normalized;
       if (engineerCellFilter) {
         const hasOption = Array.from(engineerCellFilter.options || []).some((option) => String(option.value) === String(normalized));
         if (!hasOption) {
@@ -5175,6 +5259,153 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       }).join("");
     }
 
+    function getEngineerSelectedCellIntel(metrics){
+      const layer = metrics?.intelligenceLayer || window.cellIntelligenceSnapshot || deriveCellIntelligenceLayer();
+      const selectedFromFilter = metrics?.selectedCell || (engineerCellFilter && engineerCellFilter.value !== "All" ? engineerCellFilter.value : "");
+      const selectedCell = safeCellNumber(window.engineerSelectedOpsCell || selectedFromFilter || "");
+      if (!selectedCell) return { layer, cell:null, selectedCell:"" };
+      return {
+        layer,
+        selectedCell,
+        cell:(layer.cells || []).find((item) => String(item.cell) === String(selectedCell)) || null
+      };
+    }
+
+    function findEngineerSelectedCellNote(cellNumber){
+      const targetCell = safeCellNumber(cellNumber);
+      if (!targetCell) return "No recent note found for this cell in the current scope.";
+      const scope = getEngineerDashboardScope();
+      const candidates = [];
+
+      (scope.entries || []).forEach((entry) => {
+        if (safeCellNumber(getEngineerCellValue(entry)) !== targetCell) return;
+        const note = String(entry?.note || entry?.comment || entry?.comments || entry?.text || entry?.description || "").replace(/<[^>]+>/g, " ").trim();
+        if (note) candidates.push(note);
+      });
+
+      (scope.hoursSheet || []).forEach((row) => {
+        if (safeCellNumber(getEngineerCellValue(row)) !== targetCell) return;
+        const note = String(row?.comment || row?.comments || row?.detail || "").replace(/<[^>]+>/g, " ").trim();
+        if (note) candidates.push(note);
+      });
+
+      (scope.weekendBoard || []).forEach((row) => {
+        if (safeCellNumber(getEngineerCellValue(row)) !== targetCell) return;
+        const note = String(row?.comments || row?.note || row?.tcStatus || "").replace(/<[^>]+>/g, " ").trim();
+        if (note) candidates.push(note);
+      });
+
+      return candidates[0] || "No recent note found for this cell in the current scope.";
+    }
+
+    function setSelectedCellDetailText(id, value){
+      const node = document.getElementById(id);
+      if (node) node.textContent = value;
+    }
+
+    function renderEngineerSelectedCellPanel(metrics){
+      const card = document.getElementById("engineer-selected-cell-card");
+      if (!card) return;
+
+      const { cell, selectedCell } = getEngineerSelectedCellIntel(metrics || deriveEngineerPremiumMetrics());
+      const statePill = document.getElementById("engineer-selected-cell-state");
+      const healthFill = document.getElementById("engineer-selected-cell-health-fill");
+
+      if (!selectedCell || !cell) {
+        card.classList.add("is-empty");
+        setSelectedCellDetailText("engineer-selected-cell-title", selectedCell ? `Cell ${selectedCell}` : "No cell selected");
+        setSelectedCellDetailText("engineer-selected-cell-reason", selectedCell ? "No intelligence data found for this cell yet." : "Click a tile in the Test Cell Ops Map to focus this panel.");
+        setSelectedCellDetailText("engineer-selected-cell-note", "This readout is generated from existing hours, weekend, running sheet, and intelligence-layer data only.");
+        setSelectedCellDetailText("engineer-selected-cell-health", "—");
+        setSelectedCellDetailText("engineer-selected-cell-update", "—");
+        setSelectedCellDetailText("engineer-selected-cell-help", "—");
+        setSelectedCellDetailText("engineer-selected-cell-downtime", "—");
+        setSelectedCellDetailText("engineer-selected-cell-confidence", "—");
+        if (healthFill) {
+          healthFill.style.width = "0%";
+          healthFill.classList.remove("warn", "attn");
+        }
+        if (statePill) {
+          statePill.textContent = selectedCell ? "No Data" : "Select";
+          applyEngineerTone(statePill, "warn");
+        }
+        return;
+      }
+
+      card.classList.remove("is-empty");
+      const stateClass = getEngineerMapStatusClass(cell.state);
+      const tone = stateClass === "attention" || stateClass === "blocked" ? "attn" : stateClass === "watch" || stateClass === "stale" ? "warn" : "good";
+      const healthTone = toneClassForScore(cell.healthScore, 90, 76);
+      const staleText = Number(cell.staleMinutes || 999) >= 999 ? "unknown" : formatEngineerAlertAge(cell.staleMinutes);
+      const helpText = cell.helpNeeded ? "Yes — help is open" : "No open help request";
+      const downtimeText = Number(cell.downtimeHours || 0) > 0 ? `${Number(cell.downtimeHours || 0).toFixed(1)}h logged` : "No downtime logged";
+
+      setSelectedCellDetailText("engineer-selected-cell-title", `Cell ${selectedCell}`);
+      setSelectedCellDetailText("engineer-selected-cell-reason", cell.topReason || "No top reason available.");
+      setSelectedCellDetailText("engineer-selected-cell-note", findEngineerSelectedCellNote(selectedCell));
+      setSelectedCellDetailText("engineer-selected-cell-health", String(cell.healthScore ?? 0));
+      setSelectedCellDetailText("engineer-selected-cell-update", staleText);
+      setSelectedCellDetailText("engineer-selected-cell-help", helpText);
+      setSelectedCellDetailText("engineer-selected-cell-downtime", downtimeText);
+      setSelectedCellDetailText("engineer-selected-cell-confidence", `${cell.dataConfidence ?? 0}%`);
+
+      if (statePill) {
+        statePill.textContent = cell.state || "Unknown";
+        applyEngineerTone(statePill, tone);
+      }
+      if (healthFill) {
+        healthFill.style.width = `${clampNumber(Number(cell.healthScore || 0), 0, 100)}%`;
+        healthFill.classList.remove("warn", "attn");
+        if (healthTone === "warn") healthFill.classList.add("warn");
+        if (healthTone === "attn") healthFill.classList.add("attn");
+      }
+    }
+
+    function filterSelectedEngineerCell(){
+      const { selectedCell } = getEngineerSelectedCellIntel(deriveEngineerPremiumMetrics());
+      if (!selectedCell) {
+        if (typeof showToast === "function") showToast("Select a cell tile first.");
+        return;
+      }
+      filterEngineerToCell(selectedCell);
+    }
+
+    function clearSelectedEngineerCell(){
+      window.engineerSelectedOpsCell = "";
+      if (engineerCellFilter) engineerCellFilter.value = "All";
+      renderEngineerView();
+      renderEngineerPremiumDashboard();
+      if (typeof showToast === "function") showToast("Engineer cell focus cleared.");
+    }
+
+    function exportSelectedEngineerCellSnapshot(){
+      const metrics = deriveEngineerPremiumMetrics();
+      const { cell, selectedCell } = getEngineerSelectedCellIntel(metrics);
+      if (!selectedCell || !cell) {
+        if (typeof showToast === "function") showToast("Select a cell tile first.");
+        return;
+      }
+      const lines = [
+        `Cummins Unified Logbook • Cell ${selectedCell} Snapshot`,
+        `State: ${cell.state || "Unknown"}`,
+        `Health Score: ${cell.healthScore ?? 0}/100`,
+        `Top Reason: ${cell.topReason || "No top reason available"}`,
+        `Last Update Age: ${formatEngineerAlertAge(cell.staleMinutes)}`,
+        `Help Needed: ${cell.helpNeeded ? "Yes" : "No"}`,
+        `Downtime Hours: ${Number(cell.downtimeHours || 0).toFixed(1)}`,
+        `Data Confidence: ${cell.dataConfidence ?? 0}%`,
+        `Recent Note: ${findEngineerSelectedCellNote(selectedCell)}`
+      ];
+      const blob = new Blob([lines.join("\n")], { type:"text/plain;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `cell_${selectedCell}_snapshot.txt`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(link.href);
+    }
+
     function renderEngineerHelpList(items){
       const target = document.getElementById("engineer-help-list");
       if (!target) return;
@@ -5294,6 +5525,7 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       renderEngineerOpsMap(metrics);
       renderEngineerShiftTimeline(metrics);
       renderEngineerAttentionEngine(metrics);
+      renderEngineerSelectedCellPanel(metrics);
 
       const collapsed = getEngineeringGraphicsCollapsed();
       const body = document.getElementById("engineer-graphics-body");
