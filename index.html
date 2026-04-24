@@ -2429,6 +2429,120 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
       line-height:1.5;
     }
 
+    /* ==================== v1.0.160 - ATTENTION ENGINE ====================
+       Engineer-only smart alert panel powered by the read-only cell intelligence layer.
+       This layer surfaces likely follow-up items without mutating saved data. */
+    .engineer-attention-engine-card{
+      border:1px solid var(--eng-card-line);
+      background:var(--eng-card-bg);
+      backdrop-filter:var(--eng-card-blur);
+      -webkit-backdrop-filter:var(--eng-card-blur);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 10px 24px rgba(2,6,23,.12);
+    }
+    .engineer-attention-engine-head{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+      margin-bottom:14px;
+    }
+    .engineer-alert-count-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:82px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      border:1px solid rgba(148,163,184,.22);
+      color:var(--eng-copy);
+      background:rgba(148,163,184,.10);
+      white-space:nowrap;
+    }
+    .engineer-alert-count-pill.hot{
+      color:#FCA5A5;
+      border-color:rgba(248,113,113,.28);
+      background:rgba(248,113,113,.14);
+    }
+    .engineer-alert-list{display:flex;flex-direction:column;gap:10px}
+    .engineer-alert-row{
+      display:grid;
+      grid-template-columns:auto minmax(0,1fr) auto;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px;
+      border:1px solid rgba(148,163,184,.18);
+      border-radius:16px;
+      background:rgba(15,23,42,.30);
+      transition:transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .engineer-alert-row:hover{transform:translateY(-1px);border-color:rgba(34,211,238,.25);background:rgba(15,23,42,.42)}
+    .engineer-dashboard--lightcards .engineer-alert-row{background:rgba(248,250,252,.82);border-color:rgba(148,163,184,.22)}
+    .engineer-alert-icon{
+      width:28px;
+      height:28px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:14px;
+      font-weight:900;
+      color:#fff;
+      box-shadow:0 0 18px rgba(15,23,42,.18);
+    }
+    .engineer-alert-icon.high{background:linear-gradient(135deg,#DC2626,#F97316)}
+    .engineer-alert-icon.medium{background:linear-gradient(135deg,#D97706,#FBBF24)}
+    .engineer-alert-icon.low{background:linear-gradient(135deg,#475569,#94A3B8)}
+    .engineer-alert-main{min-width:0}
+    .engineer-alert-title{color:#F8FAFC;font-size:13px;font-weight:900;line-height:1.35}
+    .engineer-dashboard--lightcards .engineer-alert-title{color:#0F172A}
+    .engineer-alert-copy{margin-top:4px;color:var(--eng-copy);font-size:12px;line-height:1.45}
+    .engineer-alert-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+    .engineer-alert-chip{
+      display:inline-flex;
+      align-items:center;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.22);
+      color:var(--eng-muted);
+      background:rgba(148,163,184,.08);
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+    .engineer-alert-chip.high{color:#FCA5A5;border-color:rgba(248,113,113,.26);background:rgba(248,113,113,.12)}
+    .engineer-alert-chip.medium{color:#FCD34D;border-color:rgba(251,191,36,.26);background:rgba(245,158,11,.12)}
+    .engineer-alert-side{display:flex;flex-direction:column;align-items:flex-end;gap:8px;min-width:86px}
+    .engineer-alert-time{color:var(--eng-muted);font-size:11px;font-weight:800;white-space:nowrap}
+    .engineer-alert-action{
+      border:1px solid rgba(34,211,238,.22);
+      background:rgba(34,211,238,.10);
+      color:#67E8F9;
+      border-radius:999px;
+      padding:5px 9px;
+      font-size:10px;
+      font-weight:900;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .engineer-alert-action:hover{filter:brightness(1.08)}
+    .engineer-alert-empty{
+      border:1px dashed rgba(148,163,184,.28);
+      border-radius:16px;
+      padding:16px;
+      color:var(--eng-copy);
+      font-size:13px;
+      line-height:1.5;
+      background:rgba(148,163,184,.08);
+    }
+
 @keyframes engineerCommandIn{
       from{opacity:0;transform:translateY(8px);}
       to{opacity:1;transform:translateY(0);}
@@ -2464,7 +2578,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.159-shift-timeline-ribbon</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.160-attention-engine</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -2472,7 +2586,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.159-shift-timeline-ribbon</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.160-attention-engine</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -2867,7 +2981,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.159-shift-timeline-ribbon</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.160-attention-engine</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -3113,6 +3227,23 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
                   </div>
                 </article>
 
+                <!-- v1.0.160 - Attention Engine
+                     Smart, read-only operational alert list powered by the Cell Intelligence Layer.
+                     Stays inside optional Graphical Overview so operator workflows remain untouched. -->
+                <article class="engineer-attention-engine-card">
+                  <div class="engineer-attention-engine-head">
+                    <div>
+                      <div class="engineer-command-label">Attention Engine</div>
+                      <div class="engineer-command-title">Smart follow-up queue</div>
+                    </div>
+                    <span id="engineer-alert-count" class="engineer-alert-count-pill">0 active</span>
+                  </div>
+
+                  <div id="engineer-attention-list" class="engineer-alert-list" aria-live="polite">
+                    <div class="engineer-alert-empty">No active intelligence alerts in the current Engineer scope.</div>
+                  </div>
+                </article>
+
                 <div class="engineer-2026-footer">
                   <button id="engineer-live-toggle-btn" class="secondary" type="button" onclick="toggleEngineerLiveSimulation()">
                     Simulate Live Shift
@@ -3189,7 +3320,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.159-shift-timeline-ribbon</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.160-attention-engine</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -3247,7 +3378,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.159-shift-timeline-ribbon</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.160-attention-engine</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -3452,7 +3583,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.159-shift-timeline-ribbon</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.160-attention-engine</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -3533,8 +3664,8 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
        - improved spacing and hierarchy
        - stronger controls and focus treatment
        - Cummins-ready presentation polish without deleting or renaming working logic */
-    const VERSION = "v1.0.159-shift-timeline-ribbon";
-    const VERSION_DESCRIPTION = "Adds an optional Engineer Shift Timeline Ribbon powered by the read-only cell intelligence layer, showing running, downtime, help, and data-gap shape for the current shift without changing saved data.";
+    const VERSION = "v1.0.160-attention-engine";
+    const VERSION_DESCRIPTION = "Adds an Engineer Attention Engine powered by the read-only cell intelligence layer, surfacing practical alert cards for help-needed, downtime, stale data, confidence gaps, and cell-state mismatches without changing saved data.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -4915,6 +5046,135 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       }
     }
 
+    function formatEngineerAlertAge(minutes){
+      const n = Number(minutes);
+      if (!Number.isFinite(n) || n >= 999) return "unknown";
+      if (n < 1) return "now";
+      if (n < 60) return `${Math.round(n)}m ago`;
+      return `${Math.round(n / 60)}h ago`;
+    }
+
+    function pushEngineerAlert(alerts, alert){
+      if (!alert || !alert.title) return;
+      const key = `${alert.cell || "all"}|${alert.title}|${alert.reason || ""}`;
+      if (alerts.some((item) => item.__key === key)) return;
+      alerts.push(Object.assign({ __key:key, severity:"low", cell:"—", ageMinutes:999 }, alert));
+    }
+
+    function deriveEngineerAttentionAlerts(metrics){
+      const alerts = [];
+      const layer = metrics?.intelligenceLayer || deriveCellIntelligenceLayer();
+      const selectedCell = metrics?.selectedCell ? String(metrics.selectedCell) : "";
+      const cells = Array.isArray(layer?.cells) ? layer.cells : [];
+      const scopedCells = selectedCell ? cells.filter((cell) => String(cell.cell) === selectedCell) : cells;
+
+      scopedCells.forEach((cell) => {
+        if (!cell) return;
+        const cellLabel = String(cell.cell || "—");
+        const staleMinutes = Number(cell.staleMinutes || 999);
+
+        if (cell.blocked || cell.state === "Blocked") {
+          pushEngineerAlert(alerts, {
+            severity:"high", cell:cellLabel, title:`Cell ${cellLabel} is blocked`,
+            reason:cell.topReason || "Blocked status or cell-down condition present.", tag:"Blocked", ageMinutes:staleMinutes
+          });
+        }
+        if (cell.helpNeeded) {
+          pushEngineerAlert(alerts, {
+            severity:staleMinutes >= 45 ? "high" : "medium", cell:cellLabel, title:`Cell ${cellLabel} has help-needed status`,
+            reason:staleMinutes >= 45 ? "Help is open and the last update is aging." : "Help is open in the current weekend/status data.", tag:"Help", ageMinutes:staleMinutes
+          });
+        }
+        if (Number(cell.downtimeHours || 0) >= 4) {
+          pushEngineerAlert(alerts, {
+            severity:"high", cell:cellLabel, title:`Cell ${cellLabel} downtime pressure is high`,
+            reason:`${Number(cell.downtimeHours || 0).toFixed(1)} downtime hour(s) are shaping the health score.`, tag:"Downtime", ageMinutes:staleMinutes
+          });
+        } else if (Number(cell.downtimeHours || 0) > 0 && cell.weekendState === "Running") {
+          pushEngineerAlert(alerts, {
+            severity:"medium", cell:cellLabel, title:`Cell ${cellLabel} has a status mismatch`,
+            reason:"Weekend board says Running, but hours show downtime.", tag:"Mismatch", ageMinutes:staleMinutes
+          });
+        }
+        if (Number(cell.incompleteRows || 0) > 0) {
+          pushEngineerAlert(alerts, {
+            severity:Number(cell.incompleteRows || 0) >= 3 ? "high" : "medium", cell:cellLabel, title:`Cell ${cellLabel} has incomplete review data`,
+            reason:`${cell.incompleteRows} row(s) may be missing detail, hours, or downtime comment.`, tag:"Data Gap", ageMinutes:staleMinutes
+          });
+        }
+        if (Number(cell.dataConfidence || 100) < 75) {
+          pushEngineerAlert(alerts, {
+            severity:Number(cell.dataConfidence || 100) < 55 ? "high" : "medium", cell:cellLabel, title:`Cell ${cellLabel} data confidence is low`,
+            reason:`Confidence is ${cell.dataConfidence}% based on staleness and incomplete rows.`, tag:"Confidence", ageMinutes:staleMinutes
+          });
+        }
+        if (staleMinutes >= 120) {
+          pushEngineerAlert(alerts, {
+            severity:"low", cell:cellLabel, title:`Cell ${cellLabel} data is stale`,
+            reason:"No recent update found for this cell in the current scope.", tag:"Stale", ageMinutes:staleMinutes
+          });
+        }
+      });
+
+      if (!alerts.length && metrics?.helpList?.length) {
+        metrics.helpList.slice(0,3).forEach((item) => {
+          pushEngineerAlert(alerts, {
+            severity:"medium", cell:String(item.cell || "—"), title:`Cell ${item.cell || "—"} help item is open`,
+            reason:String(item.note || item.status || "Help item is present."), tag:"Help", ageMinutes:minutesSinceLooseTimestamp(item.time)
+          });
+        });
+      }
+
+      const severityWeight = { high:3, medium:2, low:1 };
+      return alerts
+        .sort((a,b) => (severityWeight[b.severity] || 0) - (severityWeight[a.severity] || 0) || (a.ageMinutes || 999) - (b.ageMinutes || 999))
+        .slice(0,6)
+        .map(({__key, ...alert}) => alert);
+    }
+
+    function renderEngineerAttentionEngine(metrics){
+      const list = document.getElementById("engineer-attention-list");
+      const count = document.getElementById("engineer-alert-count");
+      if (!list) return;
+
+      const alerts = deriveEngineerAttentionAlerts(metrics || deriveEngineerPremiumMetrics());
+      if (count) {
+        count.textContent = `${alerts.length} active`;
+        count.classList.toggle("hot", alerts.some((alert) => alert.severity === "high"));
+      }
+
+      if (!alerts.length) {
+        list.innerHTML = `<div class="engineer-alert-empty">No active intelligence alerts in the current Engineer scope. Cells are either running clean or do not have enough data to raise a focused alert.</div>`;
+        return;
+      }
+
+      list.innerHTML = alerts.map((alert) => {
+        const sev = alert.severity === "high" ? "high" : alert.severity === "medium" ? "medium" : "low";
+        const icon = sev === "high" ? "!" : sev === "medium" ? "?" : "i";
+        const action = alert.cell && alert.cell !== "—"
+          ? `<button type="button" class="engineer-alert-action" onclick="filterEngineerToCell('${escapeHtml(String(alert.cell))}')">Filter</button>`
+          : "";
+        return `
+          <div class="engineer-alert-row severity-${escapeHtml(sev)}">
+            <span class="engineer-alert-icon ${escapeHtml(sev)}">${escapeHtml(icon)}</span>
+            <div class="engineer-alert-main">
+              <div class="engineer-alert-title">${escapeHtml(alert.title)}</div>
+              <div class="engineer-alert-copy">${escapeHtml(alert.reason || "Review this cell before handoff.")}</div>
+              <div class="engineer-alert-meta">
+                <span class="engineer-alert-chip ${escapeHtml(sev)}">${escapeHtml(sev)}</span>
+                <span class="engineer-alert-chip">${escapeHtml(alert.tag || "Signal")}</span>
+                <span class="engineer-alert-chip">Cell ${escapeHtml(alert.cell || "—")}</span>
+              </div>
+            </div>
+            <div class="engineer-alert-side">
+              <span class="engineer-alert-time">${escapeHtml(formatEngineerAlertAge(alert.ageMinutes))}</span>
+              ${action}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
     function renderEngineerHelpList(items){
       const target = document.getElementById("engineer-help-list");
       if (!target) return;
@@ -5033,6 +5293,7 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       drawEngineerPremiumSparkline("sparkline-utilization", metrics.utilizationSeries, "#2DD4BF", "#22D3EE");
       renderEngineerOpsMap(metrics);
       renderEngineerShiftTimeline(metrics);
+      renderEngineerAttentionEngine(metrics);
 
       const collapsed = getEngineeringGraphicsCollapsed();
       const body = document.getElementById("engineer-graphics-body");
@@ -5136,6 +5397,9 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
         `Cell Intelligence Running/Watch/Attention/Blocked/Stale: ${metrics.intelligenceSummary.running}/${metrics.intelligenceSummary.watch}/${metrics.intelligenceSummary.attention}/${metrics.intelligenceSummary.blocked}/${metrics.intelligenceSummary.stale}`,
         `Average Data Confidence: ${metrics.intelligenceSummary.avgDataConfidence}%`,
         ...(metrics.selectedCellIntel ? [`Selected Cell State: ${metrics.selectedCellIntel.state}`, `Selected Cell Top Reason: ${metrics.selectedCellIntel.topReason}`] : []),
+        "",
+        "Attention Engine:",
+        ...(deriveEngineerAttentionAlerts(metrics).length ? deriveEngineerAttentionAlerts(metrics).map(alert => `- ${alert.severity.toUpperCase()} | Cell ${alert.cell}: ${alert.title} — ${alert.reason}`) : ["- No active intelligence alerts in scope"]),
         "",
         "Downtime Breakdown:",
         ...(metrics.downtimeBreakdown.length ? metrics.downtimeBreakdown.map(item => `- ${item.label}: ${item.hours.toFixed(1)}h`) : ["- No downtime rows in scope"]),
