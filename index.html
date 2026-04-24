@@ -3127,6 +3127,171 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
   }
 }
 
+
+
+/* ==================== v1.0.173 - OPS MAP PREMIUM PASS ====================
+   Visual-only premium treatment for the Engineer Test Cell Ops Map.
+   Read-only: does not change hours, weekend board, manager data, reports, or operator flows. */
+.engineer-testcell-command .engineer-ops-map-card{
+  position:relative;
+  isolation:isolate;
+  border-color:rgba(125,211,252,.20);
+  background:
+    radial-gradient(circle at 22% 0%, rgba(34,211,238,.13), transparent 34%),
+    radial-gradient(circle at 88% 12%, rgba(96,165,250,.10), transparent 36%),
+    var(--eng-card-bg);
+}
+.engineer-testcell-command .engineer-ops-map-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background:linear-gradient(135deg,rgba(255,255,255,.10),transparent 22%,transparent 72%,rgba(34,211,238,.07));
+  opacity:.72;
+  z-index:-1;
+}
+.engineer-testcell-command .engineer-ops-map-head{
+  align-items:center;
+  padding-bottom:12px;
+  border-bottom:1px solid rgba(148,163,184,.14);
+}
+.engineer-ops-map-summary{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:7px;
+  flex:1 1 100%;
+  color:var(--eng-copy);
+  font-size:11px;
+  font-weight:900;
+}
+.engineer-ops-map-summary span{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 9px;
+  border:1px solid rgba(148,163,184,.15);
+  border-radius:999px;
+  background:rgba(15,23,42,.26);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+}
+.engineer-dashboard--lightcards .engineer-ops-map-summary span{background:rgba(248,250,252,.82)}
+.engineer-testcell-command .engineer-ops-map{
+  gap:16px;
+  padding:16px;
+  border-color:rgba(125,211,252,.18);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025), inset 0 16px 44px rgba(2,6,23,.12);
+}
+.engineer-map-row{
+  position:relative;
+  padding:10px;
+  border:1px solid rgba(148,163,184,.11);
+  border-radius:18px;
+  background:rgba(2,6,23,.12);
+}
+.engineer-dashboard--lightcards .engineer-map-row{background:rgba(255,255,255,.52)}
+.engineer-map-row-label{
+  border-radius:14px;
+  background:linear-gradient(180deg,rgba(14,165,233,.16),rgba(14,165,233,.035));
+  border:1px solid rgba(125,211,252,.14);
+  text-shadow:0 0 18px rgba(56,189,248,.18);
+}
+.engineer-map-row-grid{gap:8px}
+.engineer-map-row:has(.engineer-cell-tile.selected){
+  border-color:rgba(56,189,248,.25);
+  box-shadow:0 0 0 1px rgba(56,189,248,.08), 0 0 30px rgba(14,165,233,.08);
+}
+.engineer-cell-tile{
+  min-height:68px;
+  padding:9px 8px;
+  border-radius:14px;
+  transform:translateZ(0);
+}
+.engineer-cell-tile:hover{
+  transform:translateY(-2px) scale(1.015);
+}
+.engineer-cell-tile.selected{
+  border-color:rgba(125,211,252,.90);
+  transform:translateY(-2px) scale(1.02);
+  box-shadow:0 0 0 2px rgba(56,189,248,.28),0 0 0 7px rgba(56,189,248,.07),0 20px 36px rgba(2,6,23,.36),0 0 28px rgba(34,211,238,.20);
+}
+.engineer-cell-tile.selected .engineer-cell-number{color:#E0F2FE}
+.engineer-cell-topline{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:6px;
+  margin-bottom:7px;
+}
+.engineer-cell-number{
+  margin:0;
+  font-size:16px;
+}
+.engineer-cell-score{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:28px;
+  padding:2px 5px;
+  border-radius:999px;
+  background:rgba(15,23,42,.28);
+  border:1px solid rgba(148,163,184,.14);
+  color:var(--eng-copy);
+  font-size:9px;
+  font-weight:950;
+}
+.engineer-cell-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:4px;
+  margin-top:6px;
+}
+.engineer-cell-badge{
+  display:inline-flex;
+  align-items:center;
+  padding:2px 5px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,.16);
+  background:rgba(15,23,42,.22);
+  color:var(--eng-muted);
+  font-size:8px;
+  font-weight:950;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.engineer-cell-badge.help{color:#E9D5FF;border-color:rgba(192,132,252,.24);background:rgba(88,28,135,.22)}
+.engineer-cell-badge.stale{color:#CBD5E1;border-color:rgba(148,163,184,.24);background:rgba(51,65,85,.30)}
+.engineer-cell-badge.down{color:#FDBA74;border-color:rgba(251,146,60,.25);background:rgba(124,45,18,.22)}
+.engineer-cell-badge.blocked{color:#FCA5A5;border-color:rgba(248,113,113,.28);background:rgba(127,29,29,.26)}
+.engineer-cell-badge.clean{color:#86EFAC;border-color:rgba(74,222,128,.22);background:rgba(22,101,52,.20)}
+.engineer-cell-tile.state-running{box-shadow:inset 0 0 0 1px rgba(74,222,128,.045),0 0 16px rgba(34,197,94,.045)}
+.engineer-cell-tile.state-watch{box-shadow:inset 0 0 0 1px rgba(250,204,21,.055),0 0 16px rgba(250,204,21,.045)}
+.engineer-cell-tile.state-attention{box-shadow:inset 0 0 0 1px rgba(251,146,60,.07),0 0 18px rgba(251,146,60,.07)}
+.engineer-cell-tile.state-help{box-shadow:inset 0 0 0 1px rgba(192,132,252,.08),0 0 18px rgba(168,85,247,.07)}
+.engineer-cell-tile.state-blocked{box-shadow:inset 0 0 0 1px rgba(248,113,113,.08),0 0 20px rgba(239,68,68,.08)}
+.engineer-cell-tile.state-blocked.selected{box-shadow:0 0 0 2px rgba(248,113,113,.32),0 0 0 7px rgba(248,113,113,.07),0 20px 36px rgba(2,6,23,.36),0 0 30px rgba(248,113,113,.20)}
+.engineer-cell-tile.state-help.selected{box-shadow:0 0 0 2px rgba(192,132,252,.32),0 0 0 7px rgba(192,132,252,.07),0 20px 36px rgba(2,6,23,.36),0 0 30px rgba(192,132,252,.20)}
+.engineer-cell-tile[data-engineer-health="low"] .engineer-cell-score{color:#FCA5A5;border-color:rgba(248,113,113,.24)}
+.engineer-cell-tile[data-engineer-health="mid"] .engineer-cell-score{color:#FCD34D;border-color:rgba(251,191,36,.24)}
+.engineer-cell-tile[data-engineer-health="high"] .engineer-cell-score{color:#86EFAC;border-color:rgba(74,222,128,.22)}
+.engineer-ops-map-card .engineer-command-caption{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding-top:10px;
+  border-top:1px solid rgba(148,163,184,.12);
+}
+@media (max-width: 1100px){
+  .engineer-ops-map-summary{justify-content:flex-start}
+  .engineer-cell-tile{min-height:72px}
+}
+@media (max-width: 720px){
+  .engineer-map-row{padding:9px}
+  .engineer-map-row-label{min-height:42px}
+  .engineer-cell-tile.selected::after{display:none}
+}
 </style>
 </head>
 <body data-theme="standard">
@@ -3660,7 +3825,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
                   <div class="engineer-2026-kicker">Prototype Graphical Overview</div>
                   <h3 class="engineer-2026-title">2026 Test Cell Command View</h3>
                   <div id="engineer-command-subtitle" class="engineer-command-subtitle">
-                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.172 tightens alignment, spacing, and command-center hierarchy while keeping the view read-only and operator-safe.
+                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.173 adds a premium ops-map pass with clearer cell grouping, stronger status badges, selected-cell glow, and map-to-detail feedback while keeping the view read-only and operator-safe.
                   </div>
                 </div>
 
@@ -3893,6 +4058,9 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
                       <span><i class="state-dot help"></i>Help</span>
                       <span><i class="state-dot stale"></i>Stale</span>
                       <span><i class="state-dot unknown"></i>Unknown</span>
+                    </div>
+                    <div id="engineer-ops-map-summary" class="engineer-ops-map-summary" aria-label="Ops map summary">
+                      <span>Map loading…</span>
                     </div>
                   </div>
 
@@ -4425,7 +4593,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.172-visual-alignment-pass";
+    const VERSION = "v1.0.173-ops-map-premium-pass";
     const VERSION_DESCRIPTION = "Adds a visual-alignment pass for the 2026 Engineer command center: tighter spacing, cleaner panel hierarchy, better card alignment, improved action-row rhythm, and more cohesive map/timeline/attention/detail layout while preserving all operator workflows and stability guardrails.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
@@ -5632,9 +5800,34 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       if (typeof showToast === "function") showToast(`Engineer view filtered to Cell ${normalized}`);
     }
 
+    function getEngineerMapHealthBand(cell){
+      const score = Number(cell?.healthScore || 0);
+      if (score >= 85) return "high";
+      if (score >= 65) return "mid";
+      return "low";
+    }
+
+    function getEngineerMapBadges(cell){
+      const badges = [];
+      const stateClass = getEngineerMapStatusClass(cell?.state, cell);
+      if (stateClass === "blocked") badges.push({ label: "Blocked", tone: "blocked" });
+      if (cell?.helpNeeded && stateClass !== "blocked") badges.push({ label: "Help", tone: "help" });
+      if (Number(cell?.downtimeHours || 0) > 0) badges.push({ label: "Down", tone: "down" });
+      if (Number(cell?.staleMinutes || 0) >= 120 || stateClass === "stale") badges.push({ label: "Stale", tone: "stale" });
+      if (!badges.length && stateClass === "running") badges.push({ label: "Clean", tone: "clean" });
+      return badges.slice(0, 3);
+    }
+
+    function renderEngineerMapBadges(cell){
+      const badges = getEngineerMapBadges(cell);
+      if (!badges.length) return "";
+      return `<span class="engineer-cell-badges">${badges.map((badge) => `<span class="engineer-cell-badge ${escapeHtml(badge.tone)}">${escapeHtml(badge.label)}</span>`).join("")}</span>`;
+    }
+
     function renderEngineerOpsMap(metrics){
       const target = document.getElementById("engineer-ops-map");
       const note = document.getElementById("engineer-ops-map-note");
+      const summaryTarget = document.getElementById("engineer-ops-map-summary");
       if (!target) return;
 
       const layer = window.cellIntelligenceSnapshot || deriveCellIntelligenceLayer();
@@ -5658,13 +5851,19 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
               type="button"
               class="engineer-cell-tile state-${statusClass}${selectedClass}"
               data-engineer-map-cell="${escapeHtml(cellNumber)}"
+              data-engineer-state="${escapeHtml(statusClass)}"
+              data-engineer-health="${escapeHtml(getEngineerMapHealthBand(cell))}"
               aria-label="Cell ${escapeHtml(cellNumber)} ${escapeHtml(label)}. ${escapeHtml(cell.topReason || getEngineerMapMeta(cell))}"
               title="Cell ${escapeHtml(cellNumber)} — ${escapeHtml(cell.topReason || label)}"
               onclick="filterEngineerToCell('${escapeHtml(cellNumber)}')"
             >
-              <span class="engineer-cell-number">${escapeHtml(cellNumber)}</span>
+              <span class="engineer-cell-topline">
+                <span class="engineer-cell-number">${escapeHtml(cellNumber)}</span>
+                <span class="engineer-cell-score">${Number(cell.healthScore || 0) ? escapeHtml(String(cell.healthScore)) : "—"}</span>
+              </span>
               <span class="engineer-cell-status"><i class="state-dot ${statusClass}"></i>${escapeHtml(label)}</span>
               <span class="engineer-cell-meta">${escapeHtml(getEngineerMapMeta(cell))}</span>
+              ${renderEngineerMapBadges(cell)}
             </button>
           `;
         }).join("");
@@ -5677,9 +5876,20 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
         `;
       }).join("");
 
+      const summary = layer.summary || {};
+      if (summaryTarget) {
+        summaryTarget.innerHTML = [
+          `<span><i class="state-dot running"></i>${summary.running || 0} Running</span>`,
+          `<span><i class="state-dot watch"></i>${summary.watch || 0} Watch</span>`,
+          `<span><i class="state-dot attention"></i>${summary.attention || 0} Attention</span>`,
+          `<span><i class="state-dot blocked"></i>${summary.blocked || 0} Blocked</span>`,
+          `<span><i class="state-dot stale"></i>${summary.stale || 0} Stale</span>`
+        ].join("");
+      }
+
       if (note) {
-        const summary = layer.summary || {};
-        note.textContent = `${summary.running || 0} running · ${summary.watch || 0} watch · ${summary.attention || 0} attention · ${summary.blocked || 0} blocked · ${summary.stale || 0} stale. Click a tile to filter Engineer review.`;
+        const selectedNote = selected !== "All" ? ` Cell ${selected} is selected and linked to the detail panel.` : " Click a tile to focus the selected-cell detail panel.";
+        note.textContent = `${summary.running || 0} running · ${summary.watch || 0} watch · ${summary.attention || 0} attention · ${summary.blocked || 0} blocked · ${summary.stale || 0} stale.${selectedNote}`;
       }
     }
 
