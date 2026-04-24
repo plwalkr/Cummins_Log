@@ -2861,6 +2861,49 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
       }
     }
 
+
+
+/* ==================== v1.0.170 - FINAL COMMAND VIEW POLISH ====================
+   Visual hardening only: no data mutation, no operator workflow changes.
+   Tightens the Engineer command view so it reads closer to the approved 2026 mockup. */
+.engineer-testcell-command .engineer-2026-shell::after{content:"";position:absolute;inset:18px;border-radius:28px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(125,211,252,.07),transparent) 0 0/280px 100% no-repeat;opacity:.42;mix-blend-mode:screen}
+.engineer-testcell-command .engineer-2026-topbar::after{content:"";position:absolute;left:18px;right:18px;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(45,212,191,.58),rgba(96,165,250,.38),transparent)}
+.engineer-testcell-command .engineer-2026-title{letter-spacing:-.045em;text-shadow:0 0 28px rgba(34,211,238,.10)}
+.engineer-testcell-command .engineer-command-subtitle{max-width:82ch}
+.engineer-testcell-command .engineer-intel-card{min-height:156px;box-shadow:0 16px 34px rgba(2,6,23,.18), inset 0 1px 0 rgba(255,255,255,.04)}
+.engineer-testcell-command .engineer-intel-card:hover{transform:translateY(-1px);border-color:rgba(34,211,238,.28)}
+.engineer-testcell-command .engineer-command-pill{box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.state-dot.help{background:#C084FC;box-shadow:0 0 12px rgba(192,132,252,.26)}
+.engineer-cell-tile{position:relative;overflow:hidden}
+.engineer-cell-tile::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;opacity:.9;background:rgba(148,163,184,.38)}
+.engineer-cell-tile.state-running::before{background:#4ADE80}
+.engineer-cell-tile.state-watch::before{background:#FACC15}
+.engineer-cell-tile.state-attention::before{background:#FB923C}
+.engineer-cell-tile.state-blocked::before{background:#F87171}
+.engineer-cell-tile.state-help::before{background:#C084FC}
+.engineer-cell-tile.state-stale::before{background:#94A3B8}
+.engineer-cell-tile.state-help{background:rgba(88,28,135,.38);border-color:rgba(192,132,252,.44)}
+.engineer-cell-tile.state-help .engineer-cell-number,.engineer-cell-tile.state-help .engineer-cell-status{color:#E9D5FF}
+.engineer-cell-tile.selected{transform:translateY(-1px);box-shadow:0 0 0 2px rgba(56,189,248,.22),0 0 0 6px rgba(56,189,248,.055),0 16px 30px rgba(2,6,23,.28)}
+.engineer-cell-tile.selected::after{content:"Selected";position:absolute;top:6px;right:6px;padding:2px 5px;border-radius:999px;background:rgba(14,165,233,.16);border:1px solid rgba(56,189,248,.24);color:#BAE6FD;font-size:8px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}
+.engineer-cell-meta{padding-left:1px}
+.engineer-testcell-command .engineer-ops-map-legend{padding:7px 9px;border:1px solid rgba(148,163,184,.13);border-radius:999px;background:rgba(15,23,42,.22)}
+.engineer-dashboard--lightcards .engineer-testcell-command .engineer-ops-map-legend{background:rgba(248,250,252,.78)}
+.engineer-timeline-segment{position:relative}
+.engineer-timeline-segment::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 56%,rgba(2,6,23,.10));pointer-events:none}
+.engineer-timeline-now{filter:drop-shadow(0 0 10px rgba(56,189,248,.32))}
+.engineer-alert-row{position:relative;overflow:hidden}
+.engineer-alert-row::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:rgba(148,163,184,.34)}
+.engineer-alert-row.severity-high::before{background:#F87171}
+.engineer-alert-row.severity-medium::before{background:#FB923C}
+.engineer-alert-row.severity-low::before{background:#94A3B8}
+.engineer-alert-action,.engineer-selected-cell-actions button,.engineer-2026-footer button{transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease,background .16s ease}
+.engineer-alert-action:hover,.engineer-selected-cell-actions button:hover,.engineer-2026-footer button:hover{transform:translateY(-1px);border-color:rgba(34,211,238,.38);box-shadow:0 10px 20px rgba(2,6,23,.14)}
+.engineer-selected-cell-card:not(.is-empty){border-color:rgba(56,189,248,.24)}
+.engineer-selected-cell-card:not(.is-empty) .engineer-selected-cell-title{text-shadow:0 0 24px rgba(56,189,248,.12)}
+.engineer-testcell-command .engineer-2026-footer{padding-top:14px;border-top:1px solid rgba(148,163,184,.14)}
+@media (max-width: 900px){.engineer-cell-tile.selected::after{display:none}.engineer-testcell-command .engineer-ops-map-legend{border-radius:16px}}
+
 </style>
 </head>
 <body data-theme="standard">
@@ -2873,7 +2916,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.169-top-intelligence-kpi-band</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.170-final-command-view-polish</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -2881,7 +2924,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.169-top-intelligence-kpi-band</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.170-final-command-view-polish</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -3276,7 +3319,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.169-top-intelligence-kpi-band</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.170-final-command-view-polish</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -3394,7 +3437,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
                   <div class="engineer-2026-kicker">Prototype Graphical Overview</div>
                   <h3 class="engineer-2026-title">2026 Test Cell Command View</h3>
                   <div id="engineer-command-subtitle" class="engineer-command-subtitle">
-                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope.
+                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.170 adds final command-view polish and tighter map/timeline/alert cues.
                   </div>
                 </div>
 
@@ -3624,6 +3667,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
                       <span><i class="state-dot watch"></i>Watch</span>
                       <span><i class="state-dot attention"></i>Attention</span>
                       <span><i class="state-dot blocked"></i>Blocked</span>
+                      <span><i class="state-dot help"></i>Help</span>
                       <span><i class="state-dot stale"></i>Stale</span>
                       <span><i class="state-dot unknown"></i>Unknown</span>
                     </div>
@@ -3815,7 +3859,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.169-top-intelligence-kpi-band</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.170-final-command-view-polish</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -3873,7 +3917,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.169-top-intelligence-kpi-band</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.170-final-command-view-polish</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -4079,7 +4123,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.169-top-intelligence-kpi-band</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.170-final-command-view-polish</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -4158,7 +4202,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.169-top-intelligence-kpi-band";
+    const VERSION = "v1.0.170-final-command-view-polish";
     const VERSION_DESCRIPTION = "Adds a polished top intelligence KPI band to the Engineer command center using the existing Cell Intelligence Layer: cell state mix, health score, downtime pressure, help pressure, data confidence, and last updated age, while preserving operator workflows and all existing logic.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
@@ -5319,8 +5363,9 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       ];
     }
 
-    function getEngineerMapStatusClass(state){
+    function getEngineerMapStatusClass(state, cell){
       const normalized = String(state || "Unknown").toLowerCase();
+      if (cell && cell.helpNeeded && !normalized.includes("block")) return "help";
       if (normalized.includes("block")) return "blocked";
       if (normalized.includes("attention")) return "attention";
       if (normalized.includes("watch")) return "watch";
@@ -5382,7 +5427,7 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
             healthScore: 0,
             topReason: "No current intelligence data for this cell"
           };
-          const statusClass = getEngineerMapStatusClass(cell.state);
+          const statusClass = getEngineerMapStatusClass(cell.state, cell);
           const label = getEngineerMapStatusLabel(cell);
           const selectedClass = selected !== "All" && String(selected) === String(cellNumber) ? " selected" : "";
           return `
@@ -5390,6 +5435,7 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
               type="button"
               class="engineer-cell-tile state-${statusClass}${selectedClass}"
               data-engineer-map-cell="${escapeHtml(cellNumber)}"
+              aria-label="Cell ${escapeHtml(cellNumber)} ${escapeHtml(label)}. ${escapeHtml(cell.topReason || getEngineerMapMeta(cell))}"
               title="Cell ${escapeHtml(cellNumber)} — ${escapeHtml(cell.topReason || label)}"
               onclick="filterEngineerToCell('${escapeHtml(cellNumber)}')"
             >
