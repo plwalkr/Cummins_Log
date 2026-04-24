@@ -2650,7 +2650,41 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     @media (max-width: 720px){.engineer-selected-cell-detail-grid{grid-template-columns:1fr}.engineer-selected-cell-actions{justify-content:stretch}.engineer-selected-cell-actions button{flex:1 1 180px}}
 
 
-    /* ==================== v1.0.168 - COMMAND CENTER VISUAL SHELL ====================
+    
+/* ==================== v1.0.169 - TOP INTELLIGENCE KPI BAND ====================
+   Six-card command strip inspired by the approved mockup.
+   Read-only: pulls from cell intelligence and current Engineer metrics only. */
+.engineer-intel-band{display:grid;grid-template-columns:1.22fr repeat(5,minmax(0,1fr));gap:14px;align-items:stretch}
+.engineer-intel-card{position:relative;overflow:hidden;min-height:166px;border:1px solid var(--eng-card-line);background:linear-gradient(180deg,rgba(15,23,42,.78),rgba(15,23,42,.52));border-radius:22px;padding:16px;box-shadow:0 12px 28px rgba(2,6,23,.16)}
+.engineer-dashboard--lightcards .engineer-intel-card{background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(248,250,252,.88))}
+.engineer-intel-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 0%,rgba(45,212,191,.14),transparent 34%),radial-gradient(circle at 100% 100%,rgba(59,130,246,.10),transparent 32%);opacity:.86;pointer-events:none}
+.engineer-intel-card>*{position:relative;z-index:1}
+.engineer-intel-card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:12px}
+.engineer-intel-title{color:#F8FAFC;font-size:22px;font-weight:950;letter-spacing:-.05em;line-height:1.05}
+.engineer-dashboard--lightcards .engineer-intel-title{color:#0F172A}
+.engineer-intel-unit{font-size:13px;color:var(--eng-muted);font-weight:850;margin-left:2px;letter-spacing:-.02em}
+.engineer-intel-note{margin-top:10px;color:var(--eng-copy);font-size:11.5px;line-height:1.45}
+.engineer-intel-donut{--running:55;--watch:18;--attention:14;--blocked:6;--stale:7;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;flex:0 0 auto;background:conic-gradient(#22c55e 0 calc(var(--running)*1%),#f59e0b 0 calc((var(--running) + var(--watch))*1%),#f97316 0 calc((var(--running) + var(--watch) + var(--attention))*1%),#ef4444 0 calc((var(--running) + var(--watch) + var(--attention) + var(--blocked))*1%),#94a3b8 0 100%);box-shadow:0 0 18px rgba(34,197,94,.16)}
+.engineer-intel-donut::before{content:"";position:absolute;width:34px;height:34px;border-radius:50%;background:#0f172a;border:1px solid rgba(255,255,255,.07)}
+.engineer-dashboard--lightcards .engineer-intel-donut::before{background:#fff;border-color:rgba(148,163,184,.18)}
+.engineer-intel-donut span{position:relative;z-index:1;color:#F8FAFC;font-size:11px;font-weight:950}
+.engineer-dashboard--lightcards .engineer-intel-donut span{color:#0F172A}
+.engineer-intel-state-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 10px;margin-top:12px;color:var(--eng-copy);font-size:11px;line-height:1.2}
+.engineer-intel-state-legend span{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.engineer-intel-arc{--meter-pct:80;--meter-fill:var(--eng-good-a);--meter-fill-2:var(--eng-good-b);height:12px;border-radius:999px;margin-top:28px;overflow:hidden;background:linear-gradient(90deg,var(--meter-fill),var(--meter-fill-2)) left/calc(var(--meter-pct)*1%) 100% no-repeat,rgba(148,163,184,.20);border:1px solid rgba(148,163,184,.14);transition:background .35s ease}
+.engineer-intel-sparkline{width:100%;height:56px;display:block;margin-top:14px;border-radius:14px;background:rgba(15,23,42,.22);border:1px solid rgba(148,163,184,.10)}
+.engineer-dashboard--lightcards .engineer-intel-sparkline{background:rgba(248,250,252,.86)}
+.engineer-intel-segment-meter{--marker:100%;position:relative;height:14px;border-radius:999px;margin-top:30px;background:linear-gradient(90deg,#ef4444 0 20%,#f97316 20% 42%,#f59e0b 42% 68%,#22c55e 68% 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.engineer-intel-segment-meter span{position:absolute;top:50%;left:var(--marker);width:4px;height:24px;border-radius:999px;background:#F8FAFC;transform:translate(-50%,-50%);box-shadow:0 0 0 4px rgba(255,255,255,.10)}
+.engineer-intel-age-ring{--meter-pct:100;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;margin-top:12px;background:conic-gradient(var(--eng-good-b) 0 calc(var(--meter-pct)*1%),rgba(148,163,184,.18) 0 100%);box-shadow:0 0 18px rgba(34,211,238,.12)}
+.engineer-intel-age-ring::before{content:"";position:absolute;width:38px;height:38px;border-radius:50%;background:#0f172a;border:1px solid rgba(255,255,255,.07)}
+.engineer-dashboard--lightcards .engineer-intel-age-ring::before{background:#fff;border-color:rgba(148,163,184,.18)}
+.engineer-intel-age-ring span{position:relative;z-index:1;color:#F8FAFC;font-size:12px;font-weight:950}
+.engineer-dashboard--lightcards .engineer-intel-age-ring span{color:#0F172A}
+@media (max-width:1320px){.engineer-intel-band{grid-template-columns:repeat(3,minmax(0,1fr))}.engineer-intel-card-state{grid-column:span 2}}
+@media (max-width:900px){.engineer-intel-band{grid-template-columns:1fr}.engineer-intel-card-state{grid-column:auto}.engineer-intel-state-legend{grid-template-columns:1fr 1fr}}
+
+/* ==================== v1.0.168 - COMMAND CENTER VISUAL SHELL ====================
        Visual-only Engineer polish pass.
        This does not change saved data, operator forms, tab logic, Pulse, demos, or startup guard.
        It arranges the existing intelligence cards, ops map, attention engine, timeline, and selected-cell detail
@@ -2839,7 +2873,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.168-command-center-visual-shell</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.169-top-intelligence-kpi-band</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -2847,7 +2881,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.168-command-center-visual-shell</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.169-top-intelligence-kpi-band</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -3242,7 +3276,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.168-command-center-visual-shell</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.169-top-intelligence-kpi-band</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -3377,6 +3411,88 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
               </div>
 
               <div id="engineer-graphics-body" data-engineer-graphics-body>
+                <!-- v1.0.169 - Top Intelligence KPI Band
+                     Mockup-aligned command cards powered by the existing read-only Cell Intelligence Layer.
+                     This is display-only and does not mutate hours, weekend, logbook, or manager data. -->
+                <div class="engineer-intel-band" id="engineer-intel-band" aria-live="polite">
+                  <article class="engineer-intel-card engineer-intel-card-state">
+                    <div class="engineer-intel-card-head">
+                      <div>
+                        <div class="engineer-command-label">Cell State</div>
+                        <div class="engineer-intel-title"><span id="kpi-cell-total">0</span> total cells</div>
+                      </div>
+                      <div class="engineer-intel-donut" id="kpi-cell-state-donut" style="--running:55;--watch:18;--attention:14;--blocked:6;--stale:7;"><span id="kpi-cell-running-pct">0%</span></div>
+                    </div>
+                    <div id="kpi-cell-state-legend" class="engineer-intel-state-legend">
+                      <span><i class="state-dot running"></i>Running 0</span>
+                      <span><i class="state-dot watch"></i>Watch 0</span>
+                      <span><i class="state-dot attention"></i>Attention 0</span>
+                      <span><i class="state-dot blocked"></i>Blocked 0</span>
+                      <span><i class="state-dot stale"></i>Stale 0</span>
+                    </div>
+                  </article>
+
+                  <article class="engineer-intel-card">
+                    <div class="engineer-intel-card-head">
+                      <div>
+                        <div class="engineer-command-label">Health Score</div>
+                        <div class="engineer-intel-title"><span id="kpi-health-score">--</span><span class="engineer-intel-unit">/100</span></div>
+                      </div>
+                      <span id="kpi-health-pill" class="engineer-command-pill good">Good</span>
+                    </div>
+                    <div class="engineer-intel-arc meter-good" id="kpi-health-arc" style="--meter-pct:0;"></div>
+                    <div id="kpi-health-note" class="engineer-intel-note">Average health across visible test cells.</div>
+                  </article>
+
+                  <article class="engineer-intel-card">
+                    <div class="engineer-intel-card-head">
+                      <div>
+                        <div class="engineer-command-label">Downtime Pressure</div>
+                        <div class="engineer-intel-title"><span id="kpi-downtime-pressure">Low</span></div>
+                      </div>
+                      <span id="kpi-downtime-pill" class="engineer-command-pill good">Low</span>
+                    </div>
+                    <svg id="kpi-downtime-spark" class="engineer-intel-sparkline" viewBox="0 0 180 52" preserveAspectRatio="none"></svg>
+                    <div id="kpi-downtime-note" class="engineer-intel-note">0 cells with downtime pressure.</div>
+                  </article>
+
+                  <article class="engineer-intel-card">
+                    <div class="engineer-intel-card-head">
+                      <div>
+                        <div class="engineer-command-label">Help Pressure</div>
+                        <div class="engineer-intel-title"><span id="kpi-help-pressure">Clear</span></div>
+                      </div>
+                      <span id="kpi-help-pill" class="engineer-command-pill good">Clear</span>
+                    </div>
+                    <svg id="kpi-help-spark" class="engineer-intel-sparkline" viewBox="0 0 180 52" preserveAspectRatio="none"></svg>
+                    <div id="kpi-help-note" class="engineer-intel-note">No open help pressure.</div>
+                  </article>
+
+                  <article class="engineer-intel-card">
+                    <div class="engineer-intel-card-head">
+                      <div>
+                        <div class="engineer-command-label">Data Confidence</div>
+                        <div class="engineer-intel-title"><span id="kpi-data-confidence">--</span><span class="engineer-intel-unit">%</span></div>
+                      </div>
+                      <span id="kpi-data-pill" class="engineer-command-pill good">Clean</span>
+                    </div>
+                    <div class="engineer-intel-segment-meter" id="kpi-data-meter" style="--marker:100%;"><span></span></div>
+                    <div id="kpi-data-note" class="engineer-intel-note">Confidence from stale and incomplete rows.</div>
+                  </article>
+
+                  <article class="engineer-intel-card">
+                    <div class="engineer-intel-card-head">
+                      <div>
+                        <div class="engineer-command-label">Last Updated Age</div>
+                        <div class="engineer-intel-title"><span id="kpi-last-age">--</span></div>
+                      </div>
+                      <span id="kpi-age-pill" class="engineer-command-pill good">Fresh</span>
+                    </div>
+                    <div class="engineer-intel-age-ring" id="kpi-age-ring" style="--meter-pct:100;"><span id="kpi-age-short">0m</span></div>
+                    <div id="kpi-age-note" class="engineer-intel-note">Median update age across known cells.</div>
+                  </article>
+                </div>
+
                 <div class="engineer-command-layout">
                   <article class="engineer-command-hero">
                     <div class="engineer-command-card-head">
@@ -3699,7 +3815,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.168-command-center-visual-shell</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.169-top-intelligence-kpi-band</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -3757,7 +3873,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.168-command-center-visual-shell</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.169-top-intelligence-kpi-band</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -3963,7 +4079,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.168-command-center-visual-shell</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.169-top-intelligence-kpi-band</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -4042,8 +4158,8 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.168-command-center-visual-shell";
-    const VERSION_DESCRIPTION = "Refreshes the Engineer command center visual shell so the existing intelligence layer, ops map, timeline, attention engine, selected cell panel, pilot tools, and readiness scorecard read as one unified 2026 test-cell command view while preserving operator workflows and all existing logic.";
+    const VERSION = "v1.0.169-top-intelligence-kpi-band";
+    const VERSION_DESCRIPTION = "Adds a polished top intelligence KPI band to the Engineer command center using the existing Cell Intelligence Layer: cell state mix, health score, downtime pressure, help pressure, data confidence, and last updated age, while preserving operator workflows and all existing logic.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -5721,6 +5837,138 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       `).join("");
     }
 
+
+    // v1.0.169 - top intelligence KPI band rendering.
+    // This is intentionally read-only and derived from existing cell intelligence outputs.
+    function getEngineerAgeStatsFromCells(cells){
+      const ages = (cells || [])
+        .map(cell => Number(cell?.staleMinutes))
+        .filter(value => Number.isFinite(value) && value < 999)
+        .sort((a,b) => a-b);
+      if (!ages.length) return { median:999, freshCount:0, staleCount:0 };
+      const mid = Math.floor(ages.length / 2);
+      const median = ages.length % 2 ? ages[mid] : Math.round((ages[mid - 1] + ages[mid]) / 2);
+      return { median, freshCount: ages.filter(value => value <= 30).length, staleCount: ages.filter(value => value >= 120).length };
+    }
+
+    function formatEngineerAgeShort(minutes){
+      const n = Number(minutes);
+      if (!Number.isFinite(n) || n >= 999) return "—";
+      if (n < 60) return `${Math.max(0, Math.round(n))}m`;
+      return `${Math.round(n / 60)}h`;
+    }
+
+    function drawEngineerMiniSparkline(svgId, values, tone){
+      const color = tone === "attn" ? "#F87171" : tone === "warn" ? "#FBBF24" : "#22D3EE";
+      const glow = tone === "attn" ? "#EF4444" : tone === "warn" ? "#F59E0B" : "#14B8A6";
+      drawEngineerPremiumSparkline(svgId, values, color, glow);
+    }
+
+    function buildKpiSparkSeries(primary, secondary){
+      const base = clampNumber(Number(primary) || 0, 0, 100);
+      const bump = clampNumber(Number(secondary) || 0, 0, 40);
+      return [
+        clampNumber(base * .42 + bump, 0, 100),
+        clampNumber(base * .55 + bump * .72, 0, 100),
+        clampNumber(base * .46 + bump * .88, 0, 100),
+        clampNumber(base * .68 + bump * .55, 0, 100),
+        clampNumber(base * .74 + bump * .36, 0, 100),
+        clampNumber(base * .82 + bump * .22, 0, 100),
+        clampNumber(base, 0, 100)
+      ];
+    }
+
+    function renderEngineerTopKpiBand(metrics){
+      const layer = metrics?.cellIntelligence || window.cellIntelligenceSnapshot || deriveCellIntelligenceLayer();
+      const cells = Array.isArray(layer?.cells) ? layer.cells : [];
+      const summary = layer?.summary || {};
+      const total = Math.max(Number(summary.totalCells || cells.length || 0), 1);
+      const running = Number(summary.running || 0);
+      const watch = Number(summary.watch || 0);
+      const attention = Number(summary.attention || 0);
+      const blocked = Number(summary.blocked || 0);
+      const stale = Number(summary.stale || 0);
+      const helpNeeded = Number(summary.helpNeeded || 0);
+      const downtimeCells = cells.filter(cell => Number(cell?.downtimeHours || 0) > 0).length;
+      const highDowntimeCells = cells.filter(cell => Number(cell?.downtimeHours || 0) >= 4).length;
+      const avgHealth = Number(summary.avgHealth ?? metrics?.healthScore ?? 100);
+      const avgConfidence = Number(summary.avgDataConfidence ?? metrics?.completenessPct ?? 100);
+      const age = getEngineerAgeStatsFromCells(cells);
+      const alerts = typeof deriveEngineerAttentionAlerts === "function" ? deriveEngineerAttentionAlerts(metrics) : [];
+
+      setEngineerText("kpi-cell-total", String(total));
+      setEngineerText("kpi-cell-running-pct", `${Math.round((running / total) * 100)}%`);
+      setEngineerText("kpi-health-score", String(Math.round(avgHealth)));
+      setEngineerText("kpi-data-confidence", String(Math.round(avgConfidence)));
+      setEngineerText("kpi-last-age", formatEngineerAgeShort(age.median));
+      setEngineerText("kpi-age-short", formatEngineerAgeShort(age.median));
+
+      const legend = document.getElementById("kpi-cell-state-legend");
+      if (legend) {
+        legend.innerHTML = `
+          <span><i class="state-dot running"></i>Running ${running}</span>
+          <span><i class="state-dot watch"></i>Watch ${watch}</span>
+          <span><i class="state-dot attention"></i>Attention ${attention}</span>
+          <span><i class="state-dot blocked"></i>Blocked ${blocked}</span>
+          <span><i class="state-dot stale"></i>Stale ${stale}</span>
+        `;
+      }
+
+      const donut = document.getElementById("kpi-cell-state-donut");
+      if (donut) {
+        donut.style.setProperty("--running", String((running / total) * 100));
+        donut.style.setProperty("--watch", String((watch / total) * 100));
+        donut.style.setProperty("--attention", String((attention / total) * 100));
+        donut.style.setProperty("--blocked", String((blocked / total) * 100));
+        donut.style.setProperty("--stale", String((stale / total) * 100));
+      }
+
+      const healthTone = toneClassForScore(avgHealth, 88, 72);
+      const dataTone = toneClassForScore(avgConfidence, 90, 75);
+      const downtimeTone = highDowntimeCells >= 2 || Number(metrics?.downtimeHours || 0) >= 7 ? "attn" : downtimeCells > 0 ? "warn" : "good";
+      const helpTone = helpNeeded >= 3 ? "attn" : helpNeeded >= 1 ? "warn" : "good";
+      const ageTone = age.median >= 120 ? "attn" : age.median >= 45 ? "warn" : "good";
+
+      const healthPill = document.getElementById("kpi-health-pill");
+      const downtimePill = document.getElementById("kpi-downtime-pill");
+      const helpPill = document.getElementById("kpi-help-pill");
+      const dataPill = document.getElementById("kpi-data-pill");
+      const agePill = document.getElementById("kpi-age-pill");
+      [[healthPill, healthTone], [downtimePill, downtimeTone], [helpPill, helpTone], [dataPill, dataTone], [agePill, ageTone]].forEach(([node, tone]) => applyEngineerTone(node, tone));
+
+      if (healthPill) healthPill.textContent = healthTone === "good" ? "Good" : healthTone === "warn" ? "Watch" : "Risk";
+      if (downtimePill) downtimePill.textContent = downtimeTone === "good" ? "Low" : downtimeTone === "warn" ? "Watch" : "High";
+      if (helpPill) helpPill.textContent = helpTone === "good" ? "Clear" : helpTone === "warn" ? "Open" : "Elevated";
+      if (dataPill) dataPill.textContent = dataTone === "good" ? "Clean" : dataTone === "warn" ? "Review" : "Low";
+      if (agePill) agePill.textContent = ageTone === "good" ? "Fresh" : ageTone === "warn" ? "Aging" : "Stale";
+
+      setEngineerText("kpi-downtime-pressure", downtimeTone === "good" ? "Low" : downtimeTone === "warn" ? "Watch" : "High");
+      setEngineerText("kpi-help-pressure", helpTone === "good" ? "Clear" : helpTone === "warn" ? "Open" : "Elevated");
+      setEngineerText("kpi-health-note", `${attention + blocked + watch} cell(s) outside clean running state.`);
+      setEngineerText("kpi-downtime-note", `${downtimeCells} cell(s) with downtime; ${highDowntimeCells} high-pressure.`);
+      setEngineerText("kpi-help-note", helpNeeded ? `${helpNeeded} help-needed cell(s); ${alerts.length} active alert(s).` : "No open help pressure in the current scope.");
+      setEngineerText("kpi-data-note", `${cells.filter(cell => Number(cell?.dataConfidence || 100) < 75).length} cell(s) below 75% confidence.`);
+      setEngineerText("kpi-age-note", age.median >= 999 ? "No valid recent update ages found." : `${age.freshCount} fresh cell(s), ${age.staleCount} stale cell(s).`);
+
+      const healthArc = document.getElementById("kpi-health-arc");
+      if (healthArc) {
+        healthArc.style.setProperty("--meter-pct", String(clampNumber(avgHealth, 0, 100)));
+        applyEngineerMeterTone(healthArc, healthTone);
+      }
+
+      const dataMeter = document.getElementById("kpi-data-meter");
+      if (dataMeter) dataMeter.style.setProperty("--marker", `${clampNumber(avgConfidence, 0, 100)}%`);
+
+      const ageRing = document.getElementById("kpi-age-ring");
+      if (ageRing) {
+        const freshnessPct = age.median >= 999 ? 0 : clampNumber(100 - (age.median / 180) * 100, 0, 100);
+        ageRing.style.setProperty("--meter-pct", String(freshnessPct));
+      }
+
+      drawEngineerMiniSparkline("kpi-downtime-spark", buildKpiSparkSeries(downtimeCells * 10, highDowntimeCells * 12), downtimeTone);
+      drawEngineerMiniSparkline("kpi-help-spark", buildKpiSparkSeries(helpNeeded * 15, alerts.length * 6), helpTone);
+    }
+
     function renderEngineerPremiumDashboard() {
       const enabled = getEngineeringGraphicsEnabled();
       const section = document.getElementById("engineer-graphics-section");
@@ -5730,6 +5978,7 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       if (!enabled) return;
 
       const metrics = deriveEngineerPremiumMetrics();
+      renderEngineerTopKpiBand(metrics);
 
       setEngineerText("engineer-cell-uptime", metrics.uptimePct.toFixed(1));
       setEngineerText("metric-downtime-hours", metrics.downtimeHours.toFixed(1));
