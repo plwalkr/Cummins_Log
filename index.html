@@ -2904,6 +2904,229 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 .engineer-testcell-command .engineer-2026-footer{padding-top:14px;border-top:1px solid rgba(148,163,184,.14)}
 @media (max-width: 900px){.engineer-cell-tile.selected::after{display:none}.engineer-testcell-command .engineer-ops-map-legend{border-radius:16px}}
 
+
+
+/* ==================== v1.0.172 - VISUAL ALIGNMENT PASS ====================
+   Visual-only command-center alignment refinement.
+   Purpose: make the Engineer command area read as one designed cockpit, not separate stacked add-ons.
+   Safety: no workflow changes, no external dependencies, no saved-data mutation. */
+.engineer-testcell-command .engineer-2026-shell{
+  padding:20px;
+}
+.engineer-testcell-command .engineer-2026-topbar{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:18px;
+  margin-bottom:18px;
+}
+.engineer-testcell-command .engineer-2026-kicker{
+  margin-bottom:7px;
+}
+.engineer-testcell-command .engineer-2026-title{
+  letter-spacing:-.045em;
+}
+.engineer-testcell-command .engineer-command-subtitle{
+  max-width:82ch;
+}
+.engineer-testcell-command .engineer-2026-topbar-actions{
+  align-self:center;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.engineer-testcell-command [data-engineer-graphics-body]{
+  grid-template-columns:minmax(0,1.42fr) minmax(340px,.78fr);
+  gap:18px;
+}
+.engineer-testcell-command .engineer-intel-band{
+  grid-column:1 / -1;
+  gap:12px;
+  align-items:stretch;
+}
+.engineer-testcell-command .engineer-intel-card{
+  min-height:154px;
+  padding:15px;
+  border-radius:20px;
+}
+.engineer-testcell-command .engineer-intel-card-head{
+  min-height:50px;
+}
+.engineer-testcell-command .engineer-intel-title{
+  font-size:20px;
+}
+.engineer-testcell-command .engineer-command-layout{
+  grid-column:1 / -1;
+  grid-template-columns:minmax(300px,.58fr) minmax(0,1fr);
+  gap:18px;
+}
+.engineer-testcell-command .engineer-modern-grid{
+  grid-column:1 / -1;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+}
+.engineer-testcell-command .engineer-command-hero,
+.engineer-testcell-command .engineer-command-health,
+.engineer-testcell-command .engineer-command-tile,
+.engineer-testcell-command .engineer-ops-map-card,
+.engineer-testcell-command .engineer-shift-timeline-card,
+.engineer-testcell-command .engineer-attention-engine-card,
+.engineer-testcell-command .engineer-selected-cell-card{
+  border-radius:20px;
+}
+.engineer-testcell-command .engineer-command-hero,
+.engineer-testcell-command .engineer-command-health{
+  min-height:270px;
+}
+.engineer-testcell-command .engineer-command-tile{
+  min-height:210px;
+}
+.engineer-testcell-command .engineer-command-card-head,
+.engineer-testcell-command .engineer-ops-map-head,
+.engineer-testcell-command .engineer-shift-timeline-head,
+.engineer-testcell-command .engineer-attention-engine-head,
+.engineer-testcell-command .engineer-selected-cell-head{
+  min-height:52px;
+  align-items:flex-start;
+}
+.engineer-testcell-command .engineer-ops-map-card{
+  grid-column:1;
+  grid-row:auto / span 2;
+  display:flex;
+  flex-direction:column;
+  min-height:620px;
+}
+.engineer-testcell-command .engineer-ops-map{
+  flex:1 1 auto;
+  min-height:480px;
+  display:grid;
+  align-content:start;
+}
+.engineer-testcell-command .engineer-ops-map-note{
+  margin-top:auto;
+  padding-top:12px;
+}
+.engineer-testcell-command .engineer-attention-engine-card{
+  grid-column:2;
+  min-height:300px;
+  max-height:420px;
+}
+.engineer-testcell-command .engineer-selected-cell-card{
+  grid-column:2;
+  min-height:300px;
+  margin-top:0;
+}
+.engineer-testcell-command .engineer-shift-timeline-card{
+  grid-column:1 / -1;
+  min-height:230px;
+}
+.engineer-testcell-command .engineer-timeline-shell{
+  margin-top:12px;
+}
+.engineer-testcell-command .engineer-timeline-summary{
+  margin-top:12px;
+}
+.engineer-testcell-command .engineer-alert-row,
+.engineer-testcell-command .engineer-breakdown-row,
+.engineer-testcell-command .engineer-help-row{
+  border-radius:12px;
+}
+.engineer-testcell-command .engineer-alert-row{
+  margin-bottom:8px;
+}
+.engineer-testcell-command .engineer-alert-row:last-child{
+  margin-bottom:0;
+}
+.engineer-testcell-command .engineer-selected-cell-main{
+  grid-template-columns:minmax(0,1fr) 200px;
+  gap:14px;
+}
+.engineer-testcell-command .engineer-selected-cell-detail-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+}
+.engineer-testcell-command .engineer-selected-cell-actions{
+  align-items:center;
+  justify-content:flex-end;
+}
+.engineer-testcell-command .engineer-2026-footer{
+  grid-column:1 / -1;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:0;
+}
+.engineer-testcell-command .engineer-2026-footer button{
+  min-height:38px;
+}
+.engineer-testcell-command .engineer-cell-tile{
+  min-height:74px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.engineer-testcell-command .engineer-cell-tile strong{
+  letter-spacing:-.02em;
+}
+.engineer-testcell-command .engineer-ops-map-legend,
+.engineer-testcell-command .engineer-timeline-legend{
+  row-gap:6px;
+}
+.engineer-testcell-command .engineer-ops-map-legend span,
+.engineer-testcell-command .engineer-timeline-legend span{
+  min-height:24px;
+}
+.engineer-testcell-command .engineer-command-pill,
+.engineer-testcell-command .engineer-alert-count-pill{
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
+}
+@media (max-width: 1420px){
+  .engineer-testcell-command .engineer-modern-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .engineer-testcell-command .engineer-command-layout{
+    grid-template-columns:minmax(280px,.72fr) minmax(0,1fr);
+  }
+}
+@media (max-width: 1280px){
+  .engineer-testcell-command [data-engineer-graphics-body]{
+    grid-template-columns:1fr;
+  }
+  .engineer-testcell-command .engineer-ops-map-card,
+  .engineer-testcell-command .engineer-attention-engine-card,
+  .engineer-testcell-command .engineer-selected-cell-card,
+  .engineer-testcell-command .engineer-shift-timeline-card{
+    grid-column:1 / -1;
+    grid-row:auto;
+    min-height:auto;
+  }
+  .engineer-testcell-command .engineer-attention-engine-card{
+    max-height:none;
+  }
+  .engineer-testcell-command .engineer-ops-map{
+    min-height:420px;
+  }
+}
+@media (max-width: 980px){
+  .engineer-testcell-command .engineer-2026-topbar{
+    grid-template-columns:1fr;
+  }
+  .engineer-testcell-command .engineer-command-layout,
+  .engineer-testcell-command .engineer-modern-grid{
+    grid-template-columns:1fr;
+  }
+  .engineer-testcell-command .engineer-selected-cell-main{
+    grid-template-columns:1fr;
+  }
+  .engineer-testcell-command .engineer-2026-footer{
+    justify-content:stretch;
+    flex-wrap:wrap;
+  }
+  .engineer-testcell-command .engineer-2026-footer button{
+    flex:1 1 190px;
+  }
+}
+
 </style>
 </head>
 <body data-theme="standard">
@@ -3437,7 +3660,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
                   <div class="engineer-2026-kicker">Prototype Graphical Overview</div>
                   <h3 class="engineer-2026-title">2026 Test Cell Command View</h3>
                   <div id="engineer-command-subtitle" class="engineer-command-subtitle">
-                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.171 adds runtime self-checks, command-view guardrails, and stability hardening after the final visual polish pass.
+                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.172 tightens alignment, spacing, and command-center hierarchy while keeping the view read-only and operator-safe.
                   </div>
                 </div>
 
@@ -4202,8 +4425,8 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.171-stability-hardening";
-    const VERSION_DESCRIPTION = "Adds a stability-hardening pass after the 2026 command-center work: runtime self-checks, safer command-view guardrails, CTC Pulse health reporting, and post-boot binding verification while preserving operator workflows and existing logic.";
+    const VERSION = "v1.0.172-visual-alignment-pass";
+    const VERSION_DESCRIPTION = "Adds a visual-alignment pass for the 2026 Engineer command center: tighter spacing, cleaner panel hierarchy, better card alignment, improved action-row rhythm, and more cohesive map/timeline/attention/detail layout while preserving all operator workflows and stability guardrails.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
