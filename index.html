@@ -478,6 +478,38 @@
     body.pilot-walkthrough-active #tab-engineer .engineer-2026-dashboard{box-shadow:0 0 0 1px rgba(34,211,238,.16),0 20px 46px rgba(15,23,42,.18)}
     @media (max-width:1100px){.pilot-walkthrough-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media (max-width:700px){.pilot-walkthrough-steps{grid-template-columns:1fr}.pilot-walkthrough-stats{justify-content:flex-start}}
+
+    /* v1.0.166 - pilot readiness scorecard
+       Read-only leadership/demo readiness layer. Uses existing intelligence data only. */
+    .pilot-readiness-panel{display:none;margin-top:10px;border:1px solid #cbd5e1;border-radius:16px;background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);padding:12px;color:#334155;box-shadow:0 8px 20px rgba(15,23,42,.04)}
+    .pilot-readiness-panel.active{display:flex;flex-direction:column;gap:12px}
+    .pilot-readiness-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
+    .pilot-readiness-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#64748b;font-weight:900;margin-bottom:4px}
+    .pilot-readiness-head h3{font-size:17px;margin:0;color:#0f172a}
+    .pilot-readiness-head p{margin:5px 0 0 0;font-size:12px;line-height:1.55;color:#475569;max-width:78ch}
+    .pilot-readiness-score{display:flex;align-items:center;gap:10px;justify-content:flex-end;min-width:180px}
+    .pilot-readiness-score strong{display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:18px;border:1px solid #dbe3ed;background:#fff;font-size:26px;font-weight:950;color:#0f172a;box-shadow:0 6px 14px rgba(15,23,42,.06)}
+    .pilot-readiness-score span{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#64748b;font-weight:900;line-height:1.35}
+    .pilot-readiness-score.ready strong{border-color:#bbf7d0;background:#f0fdf4;color:#166534}
+    .pilot-readiness-score.watch strong{border-color:#fde68a;background:#fffbeb;color:#92400e}
+    .pilot-readiness-score.blocked strong{border-color:#fecaca;background:#fef2f2;color:#991b1b}
+    .pilot-readiness-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+    .pilot-readiness-card{border:1px solid #e2e8f0;border-radius:14px;background:#fff;padding:11px 12px;min-height:112px;display:flex;flex-direction:column;gap:7px}
+    .pilot-readiness-card strong{font-size:12px;color:#0f172a;line-height:1.35}
+    .pilot-readiness-value{font-size:22px;font-weight:950;color:#0f172a;letter-spacing:-.04em}
+    .pilot-readiness-note{font-size:11px;color:#64748b;line-height:1.45}
+    .pilot-readiness-card.ready{border-color:#bbf7d0;background:#f0fdf4}
+    .pilot-readiness-card.watch{border-color:#fde68a;background:#fffbeb}
+    .pilot-readiness-card.blocked{border-color:#fecaca;background:#fef2f2}
+    .pilot-readiness-checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .pilot-readiness-check{display:flex;align-items:flex-start;gap:8px;border:1px solid #e2e8f0;border-radius:12px;background:#fff;padding:9px 10px;font-size:12px;color:#334155;line-height:1.45}
+    .pilot-readiness-check .dot{flex:0 0 auto;width:10px;height:10px;border-radius:999px;margin-top:4px;background:#94a3b8}
+    .pilot-readiness-check.ready .dot{background:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.12)}
+    .pilot-readiness-check.watch .dot{background:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.12)}
+    .pilot-readiness-check.blocked .dot{background:#dc2626;box-shadow:0 0 0 3px rgba(220,38,38,.12)}
+    .pilot-readiness-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    @media (max-width:1100px){.pilot-readiness-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pilot-readiness-checks{grid-template-columns:1fr}}
+    @media (max-width:700px){.pilot-readiness-grid{grid-template-columns:1fr}.pilot-readiness-score{justify-content:flex-start}}
     body[data-theme="clarity"] .temp-test-bar{background:#f7faff;border-color:#9aa7bd}
     body[data-theme="clarity"] .temp-test-btn{border-color:#8ea2bf;background:#fff;color:#10233d}
     body[data-theme="clarity"] .manager-hero-card,
@@ -3210,7 +3242,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.165-pilot-walkthrough-mode</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.166-pilot-readiness-scorecard</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -3259,6 +3291,35 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
                 <strong>4. Report payoff</strong>
                 <span>Jump to the report section and export-ready story.</span>
               </button>
+            </div>
+          </div>
+
+          <!-- v1.0.166 - Pilot readiness scorecard
+               Read-only scorecard for presentation/pilot confidence. It consumes
+               the existing Cell Intelligence Layer and does not mutate saved data. -->
+          <div id="pilot-readiness-panel" class="pilot-readiness-panel" aria-live="polite">
+            <div class="pilot-readiness-head">
+              <div>
+                <div class="pilot-readiness-kicker">Pilot readiness</div>
+                <h3>Demo confidence scorecard</h3>
+                <p>Quickly confirms whether the command-center story is ready to show: data health, risk clarity, alerts, and staged pilot examples.</p>
+              </div>
+              <div id="pilot-readiness-score-box" class="pilot-readiness-score watch">
+                <strong id="pilot-readiness-score">--</strong>
+                <span id="pilot-readiness-label">Waiting for pilot data</span>
+              </div>
+            </div>
+            <div class="pilot-readiness-grid">
+              <div id="readiness-card-health" class="pilot-readiness-card watch"><strong>Average Health</strong><div id="readiness-health-value" class="pilot-readiness-value">--</div><div id="readiness-health-note" class="pilot-readiness-note">Waiting for cell intelligence.</div></div>
+              <div id="readiness-card-confidence" class="pilot-readiness-card watch"><strong>Data Confidence</strong><div id="readiness-confidence-value" class="pilot-readiness-value">--</div><div id="readiness-confidence-note" class="pilot-readiness-note">Checks stale/incomplete rows.</div></div>
+              <div id="readiness-card-alerts" class="pilot-readiness-card watch"><strong>Attention Clarity</strong><div id="readiness-alerts-value" class="pilot-readiness-value">--</div><div id="readiness-alerts-note" class="pilot-readiness-note">Looks for explainable alerts.</div></div>
+              <div id="readiness-card-demo" class="pilot-readiness-card watch"><strong>Pilot Scenario</strong><div id="readiness-demo-value" class="pilot-readiness-value">--</div><div id="readiness-demo-note" class="pilot-readiness-note">Checks key staged cells.</div></div>
+              <div id="readiness-card-command" class="pilot-readiness-card watch"><strong>Command View</strong><div id="readiness-command-value" class="pilot-readiness-value">--</div><div id="readiness-command-note" class="pilot-readiness-note">Checks graphics visibility.</div></div>
+            </div>
+            <div id="pilot-readiness-checks" class="pilot-readiness-checks"></div>
+            <div class="pilot-readiness-actions">
+              <button type="button" class="secondary" onclick="renderPilotReadinessScorecard()">Refresh Scorecard</button>
+              <button type="button" class="secondary" onclick="copyPilotReadinessSummary(this)">Copy Readiness Summary</button>
             </div>
           </div>
 
@@ -3638,7 +3699,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.165-pilot-walkthrough-mode</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.166-pilot-readiness-scorecard</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -3696,7 +3757,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.165-pilot-walkthrough-mode</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.166-pilot-readiness-scorecard</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -3902,7 +3963,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.165-pilot-walkthrough-mode</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.166-pilot-readiness-scorecard</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -3976,13 +4037,13 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
   </section>
 
   <script>
-    /* v1.0.165 - pilot walkthrough mode
-       Built forward from v1.0.164 without resetting to older files.
-       Adds a presentation-safe guided walkthrough layer for the Engineer
-       command center while preserving all operator workflows, startup guard,
-       CTC Pulse, demo tools, and existing data paths. */
-    const VERSION = "v1.0.165-pilot-walkthrough-mode";
-    const VERSION_DESCRIPTION = "Adds an Engineer pilot walkthrough panel with story steps, scenario stats, guided focus buttons, and a safer leadership demo flow while preserving operator workflows, startup guard, Pulse, demo tools, and all existing logic.";
+    /* v1.0.166 - pilot readiness scorecard
+       Built forward from v1.0.165 without resetting to older files.
+       Adds a read-only pilot readiness scorecard for leadership/demo review
+       while preserving all operator workflows, startup guard, CTC Pulse, demo
+       tools, and existing data paths. */
+    const VERSION = "v1.0.166-pilot-readiness-scorecard";
+    const VERSION_DESCRIPTION = "Adds a read-only Pilot Readiness Scorecard that checks demo health, data confidence, attention clarity, command-view status, and pilot scenario readiness while preserving operator workflows and all existing logic.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -8217,6 +8278,7 @@ function renderManagerTab(){
       document.body.classList.toggle('pilot-walkthrough-active', !!active);
       if (bannerCopy) bannerCopy.textContent = copy || 'Presentation-safe command-center data is ready for Engineer review.';
       if (active) updatePilotWalkthroughStats();
+      if (typeof renderPilotReadinessScorecard === 'function') renderPilotReadinessScorecard();
     }
 
     function updatePilotWalkthroughStats(){
@@ -8228,6 +8290,7 @@ function renderManagerTab(){
       setText(document.getElementById('pilot-walkthrough-health'), cells.length ? String(avgHealth) : '--');
       setText(document.getElementById('pilot-walkthrough-risk-count'), cells.length ? String(riskCells) : '--');
       setText(document.getElementById('pilot-walkthrough-alert-count'), String(alerts.length || 0));
+      if (typeof renderPilotReadinessScorecard === 'function') renderPilotReadinessScorecard();
     }
 
     function scrollEngineerPilotTarget(selector){
@@ -8362,6 +8425,110 @@ function renderManagerTab(){
       updatePilotWalkthroughStats();
       bindEngineerDashboardButtons();
       if (typeof showToast === 'function') showToast('Pilot demo loaded for Engineer command view');
+    }
+
+
+    // v1.0.166 - Pilot readiness scorecard.
+    // This is intentionally read-only. It consumes the current Cell Intelligence
+    // Layer, Engineer graphics setting, and attention alerts; it does not create
+    // a new storage model or alter the operator workflow.
+    function readinessTone(score){
+      const n = Number(score) || 0;
+      if (n >= 85) return 'ready';
+      if (n >= 68) return 'watch';
+      return 'blocked';
+    }
+
+    function setReadinessCard(id, valueId, noteId, score, value, note){
+      const card = document.getElementById(id);
+      if (card) {
+        card.classList.remove('ready','watch','blocked');
+        card.classList.add(readinessTone(score));
+      }
+      setText(document.getElementById(valueId), value);
+      setText(document.getElementById(noteId), note);
+    }
+
+    function getCellByNumber(cells, number){
+      return (Array.isArray(cells) ? cells : []).find(cell => String(cell.cell || '') === String(number));
+    }
+
+    function derivePilotReadinessScorecard(){
+      const layer = typeof deriveCellIntelligenceLayer === 'function' ? deriveCellIntelligenceLayer() : {cells:[]};
+      const cells = Array.isArray(layer?.cells) ? layer.cells : [];
+      const metrics = typeof deriveEngineerPremiumMetrics === 'function' ? deriveEngineerPremiumMetrics() : {};
+      const alerts = typeof deriveEngineerAttentionAlerts === 'function' ? deriveEngineerAttentionAlerts(metrics) : [];
+      const visibleCells = cells.filter(cell => String(cell.state || '') !== 'Unknown' || Number(cell.loggedHours || 0) > 0 || cell.helpNeeded || cell.blocked);
+      const scoredCells = visibleCells.length ? visibleCells : cells;
+      const avgHealth = scoredCells.length ? Math.round(scoredCells.reduce((sum, cell) => sum + (Number(cell.healthScore) || 0), 0) / scoredCells.length) : 0;
+      const avgConfidence = scoredCells.length ? Math.round(scoredCells.reduce((sum, cell) => sum + (Number(cell.dataConfidence) || 0), 0) / scoredCells.length) : 0;
+      const riskCells = cells.filter(cell => ['Attention','Blocked','Watch'].includes(String(cell.state || ''))).length;
+      const blockedCells = cells.filter(cell => String(cell.state || '') === 'Blocked').length;
+      const helpCells = cells.filter(cell => !!cell.helpNeeded).length;
+      const staleCells = cells.filter(cell => Number(cell.staleMinutes || 999) >= 120).length;
+      const graphicsReady = typeof getEngineeringGraphicsEnabled === 'function' && getEngineeringGraphicsEnabled();
+      const graphicsOpen = graphicsReady && !(typeof getEngineeringGraphicsCollapsed === 'function' && getEngineeringGraphicsCollapsed());
+      const attentionScore = alerts.length ? Math.max(72, Math.min(100, 100 - Math.max(0, alerts.length - 6) * 6)) : 64;
+      const commandScore = graphicsOpen ? 100 : graphicsReady ? 82 : 55;
+      const expected = {'205':['Attention','Watch'], '212':['Running','Watch'], '309':['Watch','Running','Attention'], '417':['Blocked','Attention']};
+      const demoHits = Object.entries(expected).reduce((sum, [cell, allowed]) => {
+        const found = getCellByNumber(cells, cell);
+        return sum + (found && allowed.includes(String(found.state || '')) ? 1 : 0);
+      }, 0);
+      const demoScore = Math.round((demoHits / Object.keys(expected).length) * 100);
+      const overall = Math.round((avgHealth * .26) + (avgConfidence * .22) + (attentionScore * .18) + (demoScore * .18) + (commandScore * .16));
+      return {overall, avgHealth, avgConfidence, alerts, riskCells, blockedCells, helpCells, staleCells, graphicsReady, graphicsOpen, attentionScore, commandScore, demoScore, demoHits, cells};
+    }
+
+    function renderPilotReadinessScorecard(){
+      const panel = document.getElementById('pilot-readiness-panel');
+      if (!panel) return;
+      const active = document.body.classList.contains('pilot-walkthrough-active') || (typeof getEngineeringGraphicsEnabled === 'function' && getEngineeringGraphicsEnabled());
+      panel.classList.toggle('active', !!active);
+      if (!active) return;
+      const score = derivePilotReadinessScorecard();
+      const tone = readinessTone(score.overall);
+      const scoreBox = document.getElementById('pilot-readiness-score-box');
+      if (scoreBox) {
+        scoreBox.classList.remove('ready','watch','blocked');
+        scoreBox.classList.add(tone);
+      }
+      setText(document.getElementById('pilot-readiness-score'), score.cells.length ? String(score.overall) : '--');
+      setText(document.getElementById('pilot-readiness-label'), tone === 'ready' ? 'Ready to demo' : tone === 'watch' ? 'Good with notes' : 'Needs cleanup');
+      setReadinessCard('readiness-card-health','readiness-health-value','readiness-health-note',score.avgHealth, score.cells.length ? `${score.avgHealth}/100` : '--', `${score.riskCells} risk cell(s), ${score.blockedCells} blocked.`);
+      setReadinessCard('readiness-card-confidence','readiness-confidence-value','readiness-confidence-note',score.avgConfidence, score.cells.length ? `${score.avgConfidence}%` : '--', `${score.staleCells} stale cell(s) and current row completeness included.`);
+      setReadinessCard('readiness-card-alerts','readiness-alerts-value','readiness-alerts-note',score.attentionScore, `${score.alerts.length}`, score.alerts.length ? 'Alert story is visible and explainable.' : 'No alerts yet; demo story may feel flat.');
+      setReadinessCard('readiness-card-demo','readiness-demo-value','readiness-demo-note',score.demoScore, `${score.demoHits}/4`, 'Checks 205, 212, 309, and 417 staged pilot examples.');
+      setReadinessCard('readiness-card-command','readiness-command-value','readiness-command-note',score.commandScore, score.graphicsOpen ? 'Open' : score.graphicsReady ? 'Hidden' : 'Off', score.graphicsOpen ? 'Command view is visible for review.' : 'Open the Engineer graphics before presenting.');
+      const checks = [
+        {tone:score.avgHealth >= 75 ? 'ready' : 'watch', text:`Average cell health is ${score.avgHealth || 0}/100.`},
+        {tone:score.avgConfidence >= 80 ? 'ready' : score.avgConfidence >= 65 ? 'watch' : 'blocked', text:`Data confidence is ${score.avgConfidence || 0}%.`},
+        {tone:score.alerts.length ? 'ready' : 'watch', text:`Attention Engine has ${score.alerts.length} active alert(s) to explain the operating story.`},
+        {tone:score.demoScore >= 100 ? 'ready' : score.demoScore >= 50 ? 'watch' : 'blocked', text:`Pilot scenario examples matched ${score.demoHits}/4 expected cell states.`},
+        {tone:score.graphicsOpen ? 'ready' : 'watch', text:score.graphicsOpen ? 'Engineer command graphics are open.' : 'Engineer command graphics are not open yet.'},
+        {tone:score.helpCells <= 4 ? 'ready' : 'watch', text:`${score.helpCells} help-needed cell(s) are visible in the current intelligence layer.`}
+      ];
+      const target = document.getElementById('pilot-readiness-checks');
+      if (target) target.innerHTML = checks.map(item => `<div class="pilot-readiness-check ${escapeHtml(item.tone)}"><span class="dot"></span><span>${escapeHtml(item.text)}</span></div>`).join('');
+    }
+
+    async function copyPilotReadinessSummary(button){
+      const score = derivePilotReadinessScorecard();
+      const lines = [
+        'Cummins Unified Logbook - Pilot Readiness Scorecard',
+        `Version: ${VERSION}`,
+        `Overall readiness: ${score.overall}/100`,
+        `Average health: ${score.avgHealth}/100`,
+        `Data confidence: ${score.avgConfidence}%`,
+        `Attention alerts: ${score.alerts.length}`,
+        `Risk cells: ${score.riskCells}`,
+        `Blocked cells: ${score.blockedCells}`,
+        `Help-needed cells: ${score.helpCells}`,
+        `Pilot examples matched: ${score.demoHits}/4`,
+        `Command view: ${score.graphicsOpen ? 'Open' : score.graphicsReady ? 'Enabled but collapsed/hidden' : 'Off'}`
+      ];
+      if (typeof copyPlainTextReport === 'function') await copyPlainTextReport(lines.join('\n'), button);
+      else { try { await navigator.clipboard.writeText(lines.join('\n')); } catch {} }
     }
 
 
@@ -10306,6 +10473,7 @@ Reason: ${error?.stack || error?.message || error}`;
     runStartupStep("initReportTools", initReportTools);
     runStartupStep("resetForm", resetForm);
     runStartupStep("renderEntries", renderEntries);
+    runStartupStep("renderPilotReadinessScorecard", renderPilotReadinessScorecard);
     runStartupStep("switchTab:logbook", () => switchTab("logbook"));
   </script>
 </body>
