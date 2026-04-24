@@ -1068,6 +1068,22 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     .scroll-top-fab:focus-visible{outline:none;box-shadow:0 14px 28px rgba(15,23,42,.18),0 0 0 4px rgba(59,130,246,.20)}
     body[data-theme="clarity"] .scroll-top-fab{background:rgba(255,255,255,.98);border-color:rgba(22,59,105,.18);color:#163b69}
     .report-mini-note{font-size:12px;color:#64748b;line-height:1.5}
+    /* v1.0.163 - Intelligence report upgrade
+       These cards are generated from the same read-only intelligence layer as the Engineer command view.
+       They keep the report lane leadership-friendly without changing source data or operator workflows. */
+    .report-insight-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:2px 0 0 0}
+    .report-insight-card{border:1px solid #e2e8f0;border-radius:14px;background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);padding:11px 12px;min-height:82px}
+    .report-insight-label{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:#64748b;font-weight:800;margin-bottom:5px}
+    .report-insight-value{font-size:22px;font-weight:900;color:#0f172a;line-height:1.1}
+    .report-insight-note{font-size:11px;color:#475569;line-height:1.35;margin-top:4px}
+    .report-insight-card.good{border-color:#bbf7d0;background:linear-gradient(180deg,#ffffff 0%,#f0fdf4 100%)}
+    .report-insight-card.warn{border-color:#fde68a;background:linear-gradient(180deg,#ffffff 0%,#fffbeb 100%)}
+    .report-insight-card.attn{border-color:#fecaca;background:linear-gradient(180deg,#ffffff 0%,#fef2f2 100%)}
+    .report-insight-card.good .report-insight-value{color:#166534}
+    .report-insight-card.warn .report-insight-value{color:#92400e}
+    .report-insight-card.attn .report-insight-value{color:#b91c1c}
+    @media (max-width: 1100px){.report-insight-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width: 720px){.report-insight-grid{grid-template-columns:1fr}}
     body[data-theme="clarity"] .report-lane-intro h3{color:#10233d}
     body[data-theme="clarity"] .report-lane-copy{color:#44566f}
     body[data-theme="clarity"] .report-card{background:#f7faff;border-color:#9aa7bd}
@@ -3545,6 +3561,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
                   </div>
                   <div class="report-actions">
                     <button class="report-btn" type="button" data-report-copy="engineer">Copy report</button>
+                    <button class="report-btn" type="button" data-report-download="engineer">Download .txt</button>
                   </div>
                 </div>
                 <div class="report-meta" id="engineer-report-meta"></div>
@@ -3808,6 +3825,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
                 </div>
                 <div class="report-actions">
                   <button class="report-btn" type="button" data-report-copy="manager">Copy report</button>
+                  <button class="report-btn" type="button" data-report-download="manager">Download .txt</button>
                 </div>
               </div>
               <div class="report-meta" id="manager-report-meta"></div>
@@ -3902,8 +3920,8 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
        - improved spacing and hierarchy
        - stronger controls and focus treatment
        - Cummins-ready presentation polish without deleting or renaming working logic */
-    const VERSION = "v1.0.162-command-center-layout-polish";
-    const VERSION_DESCRIPTION = "Polishes the optional Engineer Graphical Overview into a more unified command-center layout: intelligence cards, test-cell ops map, attention engine, shift timeline, and selected-cell detail now read as one 2026-style view while preserving the read-only logic layer and existing operator workflows.";
+    const VERSION = "v1.0.163-intelligence-report-upgrade";
+    const VERSION_DESCRIPTION = "Upgrades Manager and Engineer generated reports with Cell Intelligence Layer signals, attention alerts, top risk cells, leadership takeaways, downloadable report files, and compact insight cards while preserving the existing command-center layout and operator workflows.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -6829,10 +6847,98 @@ async function copyPlainTextReport(text, button){
   return copied;
 }
 
+function toneForReportValue(value, goodAt, warnAt){
+  const n = Number(value) || 0;
+  if (n >= goodAt) return 'good';
+  if (n >= warnAt) return 'warn';
+  return 'attn';
+}
+
+function toneForReportPressure(value, warnAt, attentionAt){
+  const n = Number(value) || 0;
+  if (n >= attentionAt) return 'attn';
+  if (n >= warnAt) return 'warn';
+  return 'good';
+}
+
+function getReportCellIntelligence(){
+  try {
+    return typeof deriveCellIntelligenceLayer === 'function'
+      ? deriveCellIntelligenceLayer()
+      : (window.cellIntelligenceSnapshot || { cells:[], summary:{} });
+  } catch (error) {
+    console.warn('Cell intelligence unavailable for report', error);
+    return { cells:[], summary:{} };
+  }
+}
+
+function getReportAttentionAlerts(){
+  try {
+    const metrics = typeof deriveEngineerPremiumMetrics === 'function' ? deriveEngineerPremiumMetrics() : null;
+    return typeof deriveEngineerAttentionAlerts === 'function' ? deriveEngineerAttentionAlerts(metrics) : [];
+  } catch (error) {
+    console.warn('Attention alerts unavailable for report', error);
+    return [];
+  }
+}
+
+function getTopRiskCellsForReport(layer, limit = 5){
+  const cells = Array.isArray(layer?.cells) ? layer.cells : [];
+  const stateWeight = { Blocked:500, Attention:400, Watch:250, Stale:150, Unknown:60, Running:0 };
+  return cells.slice().sort((a,b) => {
+    const aScore = (stateWeight[a.state] || 0) + (100 - Number(a.healthScore || 0)) + (Number(a.downtimeHours || 0) * 7) + (a.helpNeeded ? 50 : 0) + (Number(a.incompleteRows || 0) * 12);
+    const bScore = (stateWeight[b.state] || 0) + (100 - Number(b.healthScore || 0)) + (Number(b.downtimeHours || 0) * 7) + (b.helpNeeded ? 50 : 0) + (Number(b.incompleteRows || 0) * 12);
+    return bScore - aScore || Number(a.cell || 0) - Number(b.cell || 0);
+  }).slice(0, limit);
+}
+
+function renderReportInsightCards(target, cards){
+  if (!target || !target.parentNode) return;
+  let wrap = target.parentNode.querySelector('[data-report-insights]');
+  if (!wrap) {
+    wrap = document.createElement('div');
+    wrap.className = 'report-insight-grid';
+    wrap.setAttribute('data-report-insights', 'true');
+    target.parentNode.insertBefore(wrap, target.nextSibling);
+  }
+  wrap.innerHTML = (cards || []).map(card => `
+    <div class="report-insight-card ${escapeHtml(card.tone || '')}">
+      <div class="report-insight-label">${escapeHtml(card.label || '')}</div>
+      <div class="report-insight-value">${escapeHtml(card.value || '—')}</div>
+      <div class="report-insight-note">${escapeHtml(card.note || '')}</div>
+    </div>
+  `).join('');
+}
+
+function downloadPlainTextReport(text, filename, button){
+  const report = String(text || '').trim();
+  if (!report) return false;
+  try {
+    const blob = new Blob([report], { type:'text/plain;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename || 'cummins_unified_logbook_report.txt';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(link.href);
+    pulseButtonFeedback(button, 'ok');
+    return true;
+  } catch (error) {
+    console.warn('Report download failed', error);
+    pulseButtonFeedback(button, 'warn');
+    return false;
+  }
+}
+
 function buildManagerReport(summary, pulseState, dashboard){
+  const intelligence = getReportCellIntelligence();
+  const intelSummary = intelligence.summary || {};
+  const riskCells = getTopRiskCellsForReport(intelligence, 6);
+  const alerts = getReportAttentionAlerts();
   const lines = [
     'Cummins Unified Logbook',
-    'Manager / Coaches Generated Report',
+    'Manager / Coaches Intelligence Report',
     `Version: ${VERSION}`,
     `Generated: ${new Date().toLocaleString()}`,
     `Board date: ${displayDate(weekendDateInput?.value || bannerFields?.date || '')}`,
@@ -6841,6 +6947,13 @@ function buildManagerReport(summary, pulseState, dashboard){
     `- Posture: ${pulseState.postureLabel}`,
     `- Focus: ${pulseState.focusHeadline}`,
     `- Why it matters: ${pulseState.focusCopy}`,
+    '',
+    'Cell intelligence summary',
+    `- Average health score: ${intelSummary.avgHealth ?? '—'}/100`,
+    `- Average data confidence: ${intelSummary.avgDataConfidence ?? '—'}%`,
+    `- Running / Watch / Attention / Blocked / Stale: ${intelSummary.running ?? 0} / ${intelSummary.watch ?? 0} / ${intelSummary.attention ?? 0} / ${intelSummary.blocked ?? 0} / ${intelSummary.stale ?? 0}`,
+    `- Help-needed cells: ${intelSummary.helpNeeded ?? 0}`,
+    `- Active intelligence alerts: ${alerts.length}`,
     '',
     'Coverage snapshot',
     `- Active cells: ${summary.activeCells}`,
@@ -6896,6 +7009,22 @@ function buildManagerReport(summary, pulseState, dashboard){
     lines.push('1. No saved cell ranking is available yet.');
   }
 
+  lines.push('', 'Top intelligence risk cells');
+  if (riskCells.length) {
+    riskCells.slice(0, 5).forEach((cell, index) => {
+      lines.push(`${index + 1}. Cell ${cell.cell} · ${cell.state} · health ${cell.healthScore}/100 · confidence ${cell.dataConfidence}% · ${cell.topReason}`);
+    });
+  } else {
+    lines.push('1. No intelligence risk cells are available yet.');
+  }
+
+  lines.push('', 'Attention engine');
+  if (alerts.length) {
+    alerts.slice(0, 5).forEach((alert, index) => lines.push(`${index + 1}. ${alert.title} · ${alert.severity} · ${alert.reason}`));
+  } else {
+    lines.push('1. No active attention-engine alerts in the current scope.');
+  }
+
   lines.push('', 'Recent downtime notes');
   if (summary.recentNotes.length) {
     summary.recentNotes.slice(0, 4).forEach((item, index) => lines.push(`${index + 1}. Cell ${item.cell} · ${item.detail} · ${item.hours.toFixed(1)}h · ${item.comment}`));
@@ -6908,9 +7037,16 @@ function buildManagerReport(summary, pulseState, dashboard){
 
 function buildEngineerReport(data){
   const leadCard = typeof getEngineerLeadCard === 'function' ? getEngineerLeadCard(data.cards) : (data.cards[0] || null);
+  const intelligence = getReportCellIntelligence();
+  const intelSummary = intelligence.summary || {};
+  const scopedCells = data.selectedCell
+    ? (intelligence.cells || []).filter(cell => String(cell.cell) === String(data.selectedCell))
+    : (intelligence.cells || []);
+  const riskCells = getTopRiskCellsForReport({ cells: scopedCells.length ? scopedCells : intelligence.cells }, 6);
+  const alerts = getReportAttentionAlerts().filter(alert => !data.selectedCell || String(alert.cell) === String(data.selectedCell));
   const lines = [
     'Cummins Unified Logbook',
-    'Engineer Review Generated Report',
+    'Engineer Intelligence Review Report',
     `Version: ${VERSION}`,
     `Generated: ${new Date().toLocaleString()}`,
     `Scope: ${data.selectedCell ? `Cell ${data.selectedCell}` : 'All cells'}`,
@@ -6920,7 +7056,13 @@ function buildEngineerReport(data){
     `- Visible cells: ${data.cards.length}`,
     `- Matching running-sheet rows: ${data.filteredLogs.length}`,
     `- Saved shift chunks: ${data.totalShiftChunks}`,
-    `- Downtime hours in scope: ${data.totalDowntime.toFixed(1)}`
+    `- Downtime hours in scope: ${data.totalDowntime.toFixed(1)}`,
+    '',
+    'Command-view intelligence',
+    `- Average health score: ${intelSummary.avgHealth ?? '—'}/100`,
+    `- Average data confidence: ${intelSummary.avgDataConfidence ?? '—'}%`,
+    `- Running / Watch / Attention / Blocked / Stale: ${intelSummary.running ?? 0} / ${intelSummary.watch ?? 0} / ${intelSummary.attention ?? 0} / ${intelSummary.blocked ?? 0} / ${intelSummary.stale ?? 0}`,
+    `- Scoped attention alerts: ${alerts.length}`
   ];
 
   if (leadCard) {
@@ -6946,6 +7088,22 @@ function buildEngineerReport(data){
     lines.push('1. No engineer review cards match the current scope.');
   }
 
+  lines.push('', 'Top intelligence risk cells');
+  if (riskCells.length) {
+    riskCells.slice(0, 5).forEach((cell, index) => {
+      lines.push(`${index + 1}. Cell ${cell.cell} · ${cell.state} · health ${cell.healthScore}/100 · confidence ${cell.dataConfidence}% · ${cell.topReason}`);
+    });
+  } else {
+    lines.push('1. No intelligence risk cells are available for this Engineer scope.');
+  }
+
+  lines.push('', 'Attention engine');
+  if (alerts.length) {
+    alerts.slice(0, 5).forEach((alert, index) => lines.push(`${index + 1}. ${alert.title} · ${alert.severity} · ${alert.reason}`));
+  } else {
+    lines.push('1. No active attention-engine alerts in this Engineer scope.');
+  }
+
   lines.push('', 'Highlighted text');
   const spotlightNotes = data.cards.flatMap(card => getEngineerCardNotes(card).map(note => ({ cell: card.cell, note }))).sort((a, b) => b.note.rank - a.note.rank).slice(0, 5);
   if (spotlightNotes.length) {
@@ -6967,23 +7125,44 @@ function buildEngineerReport(data){
 
 function renderManagerReport(summary, pulseState, dashboard){
   if (!managerReportOutput) return;
+  const intelligence = getReportCellIntelligence();
+  const intelSummary = intelligence.summary || {};
+  const alerts = getReportAttentionAlerts();
   managerReportOutput.textContent = buildManagerReport(summary, pulseState, dashboard);
   setReportMeta(managerReportMeta, [
     `Posture: ${pulseState.postureLabel}`,
     `Board date: ${displayDate(weekendDateInput?.value || bannerFields?.date || '')}`,
     summary.helpNeededCount > 0 ? `${summary.helpNeededCount} help-needed row(s)` : 'No help-needed rows',
-    `${summary.savedShiftCount} saved shift record(s)`
+    `${summary.savedShiftCount} saved shift record(s)`,
+    `${alerts.length} intelligence alert(s)`
+  ]);
+  renderReportInsightCards(managerReportMeta, [
+    { label:'Health', value:`${intelSummary.avgHealth ?? '—'}/100`, note:'Average cell intelligence score', tone:toneForReportValue(intelSummary.avgHealth, 88, 72) },
+    { label:'Data Confidence', value:`${intelSummary.avgDataConfidence ?? '—'}%`, note:'Staleness + missing-field pressure', tone:toneForReportValue(intelSummary.avgDataConfidence, 90, 76) },
+    { label:'Attention', value:String((intelSummary.attention || 0) + (intelSummary.blocked || 0)), note:'Attention + blocked cells', tone:toneForReportPressure((intelSummary.attention || 0) + (intelSummary.blocked || 0), 1, 3) },
+    { label:'Alerts', value:String(alerts.length), note:'Current attention-engine findings', tone:toneForReportPressure(alerts.length, 1, 4) }
   ]);
 }
 
 function renderEngineerReport(data){
   if (!engineerReportOutput) return;
+  const intelligence = getReportCellIntelligence();
+  const intelSummary = intelligence.summary || {};
+  const alerts = getReportAttentionAlerts().filter(alert => !data.selectedCell || String(alert.cell) === String(data.selectedCell));
+  const riskCells = getTopRiskCellsForReport({ cells: data.selectedCell ? (intelligence.cells || []).filter(cell => String(cell.cell) === String(data.selectedCell)) : intelligence.cells }, 4);
   engineerReportOutput.textContent = buildEngineerReport(data);
   setReportMeta(engineerReportMeta, [
     data.selectedCell ? `Scope: Cell ${data.selectedCell}` : 'Scope: All cells',
     data.query ? `Search: "${data.query}"` : 'Search: none',
     `${data.cards.length} visible cell(s)`,
-    `${data.totalShiftChunks} saved shift chunk(s)`
+    `${data.totalShiftChunks} saved shift chunk(s)`,
+    `${alerts.length} intelligence alert(s)`
+  ]);
+  renderReportInsightCards(engineerReportMeta, [
+    { label:'Health', value:`${intelSummary.avgHealth ?? '—'}/100`, note:data.selectedCell ? 'Focused cell intelligence score' : 'Average cell intelligence score', tone:toneForReportValue(intelSummary.avgHealth, 88, 72) },
+    { label:'Confidence', value:`${intelSummary.avgDataConfidence ?? '—'}%`, note:'Current data confidence signal', tone:toneForReportValue(intelSummary.avgDataConfidence, 90, 76) },
+    { label:'Risk Cells', value:String(riskCells.length), note:'Ranked by state, health, help, downtime', tone:toneForReportPressure(riskCells.length, 1, 3) },
+    { label:'Alerts', value:String(alerts.length), note:'Scoped attention-engine findings', tone:toneForReportPressure(alerts.length, 1, 4) }
   ]);
 }
 
@@ -9849,13 +10028,20 @@ Reason: ${error?.stack || error?.message || error}`;
 
     function initReportTools(){
       document.addEventListener('click', async (event) => {
-        const button = event.target.closest('[data-report-copy]');
+        const copyButton = event.target.closest('[data-report-copy]');
+        const downloadButton = event.target.closest('[data-report-download]');
+        const button = copyButton || downloadButton;
         if (!button) return;
-        const scope = button.dataset.reportCopy;
+        const scope = copyButton ? copyButton.dataset.reportCopy : downloadButton.dataset.reportDownload;
         const reportText = scope === 'manager'
           ? (managerReportOutput ? managerReportOutput.textContent : '')
           : (engineerReportOutput ? engineerReportOutput.textContent : '');
-        await copyPlainTextReport(reportText, button);
+        if (copyButton) {
+          await copyPlainTextReport(reportText, button);
+        } else {
+          const stamp = new Date().toISOString().slice(0,10);
+          downloadPlainTextReport(reportText, `cummins_${scope}_intelligence_report_${stamp}.txt`, button);
+        }
       });
     }
 
