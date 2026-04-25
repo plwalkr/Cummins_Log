@@ -4159,6 +4159,42 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
   .engineer-testcell-command .engineer-2026-title{font-size:28px;}
 }
 
+
+/* ==================== v1.0.184 - SUPPORTING DETAILS COLLAPSE ====================
+   Keeps the 2026 command center as the primary Engineer view while preserving
+   raw evidence below in a clean collapsed audit/support area. */
+.engineer-supporting-details-shell{
+  margin-top:18px;
+  border:1px solid rgba(148,163,184,.28);
+  border-radius:22px;
+  background:linear-gradient(180deg,rgba(255,255,255,.86) 0%,rgba(248,250,252,.94) 100%);
+  box-shadow:0 10px 24px rgba(15,23,42,.06);
+  overflow:hidden;
+}
+.engineer-supporting-details-shell > summary{list-style:none;cursor:pointer;user-select:none}
+.engineer-supporting-details-shell > summary::-webkit-details-marker{display:none}
+.engineer-supporting-details-divider{
+  margin:0;border:0;border-radius:0;
+  background:linear-gradient(135deg,rgba(15,23,42,.94),rgba(30,41,59,.92));
+  color:#e2e8f0;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;
+}
+.engineer-supporting-details-divider span{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:#93c5fd}
+.engineer-supporting-details-divider strong{display:block;margin-top:3px;font-size:16px;color:#f8fafc}
+.engineer-supporting-details-divider em{color:#cbd5e1;font-size:12px;font-style:normal;text-align:right;max-width:42ch}
+.engineer-supporting-details-divider:after{
+  content:'Show';flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;min-width:70px;padding:7px 10px;border-radius:999px;
+  border:1px solid rgba(147,197,253,.28);background:rgba(15,23,42,.34);color:#bfdbfe;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;
+}
+.engineer-supporting-details-shell[open] .engineer-supporting-details-divider:after{content:'Hide'}
+.engineer-supporting-details-body{display:flex;flex-direction:column;gap:14px;padding:16px;background:linear-gradient(180deg,#f8fafc 0%,#ffffff 100%)}
+.engineer-supporting-details-note{border:1px dashed rgba(148,163,184,.42);border-radius:16px;padding:12px 14px;background:#fff;color:#475569;font-size:13px;line-height:1.55}
+.engineer-supporting-details-note strong{color:#0f172a}
+.engineer-supporting-details-body .engineer-summary-strip,
+.engineer-supporting-details-body .engineer-overview-grid,
+.engineer-supporting-details-body .engineer-collection,
+.engineer-supporting-details-body .report-shell{margin-top:0}
+@media (max-width:900px){.engineer-supporting-details-divider{align-items:flex-start;flex-direction:column}.engineer-supporting-details-divider em{text-align:left;max-width:none}.engineer-supporting-details-divider:after{align-self:flex-start}}
+
 </style>
 </head>
 <body data-theme="standard">
@@ -4171,7 +4207,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.183-visual-hierarchy-pass</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.184-supporting-details-collapse</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -4179,7 +4215,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.183-visual-hierarchy-pass</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.184-supporting-details-collapse</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -4574,7 +4610,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.183-visual-hierarchy-pass</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.184-supporting-details-collapse</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -4728,7 +4764,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
                   <div class="engineer-2026-kicker">Prototype Graphical Overview</div>
                   <h3 class="engineer-2026-title">2026 Test Cell Command View</h3>
                   <div id="engineer-command-subtitle" class="engineer-command-subtitle">
-                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.183 improves visual hierarchy so the Ops Map leads, alerts support, and evidence stays available below.
+                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.184 keeps the command center first while collapsing raw supporting evidence below for cleaner review flow.
                   </div>
                 </div>
 
@@ -5091,15 +5127,18 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
             </div>
           </section>
 
-            <!-- v1.0.182 - Supporting details divider
-                 Layout-only marker. The command center stays first; original Engineer evidence remains below for audit/troubleshooting. -->
-            <div class="engineer-supporting-details-divider" aria-label="Supporting Engineer details">
-              <div>
-                <span>Supporting Details</span>
-                <strong>Raw evidence stays below the command view</strong>
-              </div>
-              <em>Visible cell readout · recent notes · detailed rows · reports</em>
-            </div>
+            <!-- v1.0.184 - Supporting details collapse
+                 The command center stays first; raw Engineer evidence remains available below as a collapsed audit/support area. -->
+            <details class="engineer-supporting-details-shell" id="engineer-supporting-details-shell">
+              <summary class="engineer-supporting-details-divider" aria-label="Show or hide supporting Engineer details">
+                <div>
+                  <span>Supporting Details</span>
+                  <strong>Raw evidence stays available below the command view</strong>
+                </div>
+                <em>Visible cell readout · recent notes · detailed rows · generated reports</em>
+              </summary>
+              <div class="engineer-supporting-details-body">
+                <div class="engineer-supporting-details-note"><strong>Audit trail preserved.</strong> These details are collapsed by default so the 2026 command center leads, but the raw review evidence remains one click away for troubleshooting and validation.</div>
 
                 <div class="engineer-summary-strip">
               <div class="engineer-summary-card" id="engineer-summary-cells-card">
@@ -5157,13 +5196,15 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
                 <div class="report-mini-note">Foundation pass: on-screen generated report first. Print/PDF styling can layer on later without changing the core summary logic.</div>
               </div>
             </div>
+              </div>
+            </details>
           </div>
         </div>
       </section>
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.183-visual-hierarchy-pass</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.184-supporting-details-collapse</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -5221,7 +5262,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.183-visual-hierarchy-pass</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.184-supporting-details-collapse</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -5427,7 +5468,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.183-visual-hierarchy-pass</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.184-supporting-details-collapse</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -5506,7 +5547,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.183-visual-hierarchy-pass";
+    const VERSION = "v1.0.184-supporting-details-collapse";
     const VERSION_DESCRIPTION = "Refines Engineer command-center visual hierarchy so the Ops Map reads as the hero, KPI/health signals scan first, Attention and Selected Cell panels support the story, timeline remains quieter, and demo/QA controls are visually toned down while preserving all core workflows.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
