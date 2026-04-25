@@ -3537,7 +3537,7 @@ body.command-capture-mode .panel:not(#engineer-graphics-section) .panel-head{
 
 
 
-/* ==================== v1.0.177 - COMMAND CENTER QA PASS ====================
+/* ==================== v1.0.178 - RUNTIME SELF-CHECK FIX ====================
    QA tooling is intentionally non-destructive. It scans existing DOM/state and
    reports readiness without mutating operator, hours, weekend, manager, or demo data. */
 .qa-pass-panel{border:1px solid rgba(148,163,184,.28);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(248,250,252,.96));padding:14px;box-shadow:0 8px 24px rgba(15,23,42,.06);display:none;gap:12px;flex-direction:column}
@@ -3580,7 +3580,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.177-command-center-qa-pass</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.178-runtime-self-check-fix</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -3588,7 +3588,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.177-command-center-qa-pass</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.178-runtime-self-check-fix</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -3983,7 +3983,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.177-command-center-qa-pass</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.178-runtime-self-check-fix</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -4562,7 +4562,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.177-command-center-qa-pass</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.178-runtime-self-check-fix</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -4620,7 +4620,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.177-command-center-qa-pass</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.178-runtime-self-check-fix</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -4826,7 +4826,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.177-command-center-qa-pass</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.178-runtime-self-check-fix</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -4905,8 +4905,8 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.177-command-center-qa-pass";
-    const VERSION_DESCRIPTION = "Adds a command-center QA pass with non-destructive runtime checks, a copyable QA report, and guarded verification for tabs, CTC Pulse, Engineer graphics, pilot/presentation/screenshot modes, map selection, exports, and core operator workflows.";
+    const VERSION = "v1.0.178-runtime-self-check-fix";
+    const VERSION_DESCRIPTION = "Fixes the runtime self-check required-function list to match the current forward-only app function names, preventing false missing-function warnings for Weekend, Cell Intelligence, and Selected Cell rendering while preserving QA guardrails.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -10968,19 +10968,21 @@ function renderHours(){
     // v1.0.171 - Runtime self-check layer.
     // Read-only guardrail: scans the command-center wiring and core operators without mutating saved data.
     function createRuntimeHealthReport(){
+      // v1.0.178 - keep these names aligned with the actual forward-only function names.
+      // The previous QA pass still checked older/placeholder names and created false runtime failures.
       const requiredFunctions = [
         "switchTab",
         "renderEntries",
         "renderHours",
-        "renderWeekendBoard",
+        "renderWeekendDailyUpdate",
         "aggregateManagerData",
         "renderEngineerPremiumDashboard",
-        "buildCellIntelligenceSnapshot",
+        "deriveCellIntelligenceLayer",
         "deriveEngineerPremiumMetrics",
         "renderEngineerOpsMap",
         "renderEngineerShiftTimeline",
         "renderEngineerAttentionEngine",
-        "renderSelectedEngineerCellPanel",
+        "renderEngineerSelectedCellPanel",
         "renderPilotReadinessScorecard",
         "buildCtcPulseReport"
       ];
