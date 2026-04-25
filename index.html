@@ -3294,6 +3294,37 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 }
 
 
+
+/* v1.0.175 - presentation mode
+   Demo-only visual focus layer. It does not mutate operator data; it simply
+   brings the Engineer command center forward for screenshot/leadership review. */
+.presentation-mode-panel{display:none;margin-top:10px;border:1px solid #bae6fd;border-radius:18px;background:linear-gradient(135deg,#0f172a 0%,#111827 54%,#0b1220 100%);color:#e5f3ff;padding:14px;box-shadow:0 16px 34px rgba(15,23,42,.20);overflow:hidden;position:relative}
+.presentation-mode-panel:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 18% 10%,rgba(34,211,238,.18),transparent 32%),radial-gradient(circle at 88% 0%,rgba(96,165,250,.14),transparent 28%);pointer-events:none}
+.presentation-mode-panel.active{display:flex;flex-direction:column;gap:12px}
+.presentation-mode-panel > *{position:relative;z-index:1}
+.presentation-mode-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.presentation-mode-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.18em;color:#93c5fd;font-weight:950;margin-bottom:5px}
+.presentation-mode-head h3{font-size:18px;margin:0;color:#f8fafc;letter-spacing:-.02em}
+.presentation-mode-head p{margin:5px 0 0 0;font-size:12px;line-height:1.55;color:#cbd5e1;max-width:84ch}
+.presentation-mode-status{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.presentation-mode-status span{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(148,163,184,.24);background:rgba(255,255,255,.06);border-radius:999px;padding:7px 10px;font-size:11px;font-weight:900;color:#dbeafe;white-space:nowrap}
+.presentation-mode-status strong{color:#67e8f9;font-size:13px}
+.presentation-mode-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:10px;align-items:stretch}
+.presentation-story-card,.presentation-action-card{border:1px solid rgba(148,163,184,.20);border-radius:15px;background:rgba(255,255,255,.06);padding:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.presentation-story-card strong,.presentation-action-card strong{display:block;color:#f8fafc;font-size:12px;margin-bottom:6px}
+.presentation-story-card div,.presentation-action-card div{font-size:12px;color:#cbd5e1;line-height:1.55}
+.presentation-action-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.presentation-action-row button{border:1px solid rgba(191,219,254,.34);background:rgba(15,23,42,.54);color:#e0f2fe;border-radius:999px;padding:8px 11px;font-size:11px;font-weight:900;cursor:pointer}
+.presentation-action-row button:hover{border-color:#67e8f9;box-shadow:0 0 0 3px rgba(34,211,238,.10)}
+body.presentation-mode-active #tab-engineer .engineer-hero{display:none}
+body.presentation-mode-active #tab-engineer .temp-test-bar{position:sticky;top:8px;z-index:8;box-shadow:0 12px 28px rgba(15,23,42,.12)}
+body.presentation-mode-active #tab-engineer .pilot-mode-banner,
+body.presentation-mode-active #tab-engineer .pilot-walkthrough-panel,
+body.presentation-mode-active #tab-engineer .pilot-readiness-panel{display:none !important}
+body.presentation-mode-active #tab-engineer .engineer-2026-dashboard{box-shadow:0 0 0 1px rgba(34,211,238,.20),0 28px 62px rgba(2,6,23,.28);margin-top:4px}
+body.presentation-mode-active #tab-engineer .engineer-collection{margin-top:10px}
+@media (max-width:900px){.presentation-mode-grid{grid-template-columns:1fr}.presentation-mode-status{justify-content:flex-start}}
+
 /* ==================== v1.0.174 - TIMELINE / ATTENTION / DETAIL POLISH ====================
    Visual-only hardening for the lower command-center zone.
    No external libraries, no saved-data mutation, no operator workflow changes. */
@@ -3761,7 +3792,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.171-stability-hardening</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.175-presentation-mode</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -3769,6 +3800,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
             <div class="temp-test-actions">
               <button class="temp-test-btn" type="button" data-temp-fill="engineer">Fill This Tab</button>
               <button class="temp-test-btn pilot" type="button" data-pilot-demo="true">Launch Pilot Demo</button>
+              <button class="temp-test-btn" type="button" onclick="togglePresentationMode()">Presentation Mode</button>
               <button class="temp-test-btn reset" type="button" data-temp-reset="true">Reset Test Data</button>
             </div>
           </div>
@@ -3842,6 +3874,41 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
             </div>
           </div>
 
+          <!-- v1.0.175 - Presentation Mode
+               Screenshot/demo helper only. It focuses the Engineer command center
+               without changing operator workflow data or adding external assets. -->
+          <div id="presentation-mode-panel" class="presentation-mode-panel" aria-live="polite">
+            <div class="presentation-mode-head">
+              <div>
+                <div class="presentation-mode-kicker">Presentation mode</div>
+                <h3>Leadership command-center view</h3>
+                <p id="presentation-mode-copy">A clean review surface for showing the 2026 Engineer command center: intelligence, map, timeline, attention queue, and selected-cell story.</p>
+              </div>
+              <div class="presentation-mode-status">
+                <span><strong id="presentation-health-value">--</strong> avg health</span>
+                <span><strong id="presentation-risk-value">--</strong> risk cells</span>
+                <span><strong id="presentation-alert-value">--</strong> alerts</span>
+              </div>
+            </div>
+            <div class="presentation-mode-grid">
+              <div class="presentation-story-card">
+                <strong>Demo story</strong>
+                <div id="presentation-story-text">Launch Pilot Demo, then use Presentation Mode to show how the command view turns scattered entries into an operational story.</div>
+              </div>
+              <div class="presentation-action-card">
+                <strong>Presentation controls</strong>
+                <div>Use these to center the command view, focus the staged risk cells, or copy a clean speaking summary.</div>
+                <div class="presentation-action-row">
+                  <button type="button" onclick="startPresentationModeFlow('overview')">Center Command View</button>
+                  <button type="button" onclick="startPresentationModeFlow('attention')">Show Cell 205</button>
+                  <button type="button" onclick="startPresentationModeFlow('blocked')">Show Cell 417</button>
+                  <button type="button" onclick="copyPresentationModeSummary(this)">Copy Talking Points</button>
+                  <button type="button" onclick="togglePresentationMode(false)">Exit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="engineer-shell">
             <div class="engineer-hero">
               <div class="engineer-hero-card">
@@ -3879,7 +3946,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
                   <div class="engineer-2026-kicker">Prototype Graphical Overview</div>
                   <h3 class="engineer-2026-title">2026 Test Cell Command View</h3>
                   <div id="engineer-command-subtitle" class="engineer-command-subtitle">
-                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.174 polishes the timeline, attention engine, and selected-cell detail panels so the lower command area feels closer to a 2026 operations cockpit while remaining read-only and operator-safe.
+                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.175 adds Presentation Mode so the command center can be shown cleanly in leadership reviews without changing saved operator workflows.
                   </div>
                 </div>
 
@@ -4304,7 +4371,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.171-stability-hardening</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.175-presentation-mode</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -4362,7 +4429,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.171-stability-hardening</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.175-presentation-mode</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -4568,7 +4635,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.171-stability-hardening</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.175-presentation-mode</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -4647,8 +4714,8 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.174-timeline-attention-detail-polish";
-    const VERSION_DESCRIPTION = "Polishes the lower command-center zone: sharper shift timeline ribbon, clearer now marker and segment labels, richer attention alert cards, and a more focused selected-cell detail panel while preserving all operator workflows and stability guardrails.";
+    const VERSION = "v1.0.175-presentation-mode";
+    const VERSION_DESCRIPTION = "Adds a leadership-ready Presentation Mode for the Engineer command center with a cleaner demo surface, focused storyline, copyable summary, and screenshot-friendly layout while preserving operator workflows and stability guardrails.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -11325,6 +11392,125 @@ Reason: ${error?.stack || error?.message || error}`;
       });
     }
 
+
+
+    // v1.0.175 - Presentation Mode.
+    // Demo-focused view state only. It enables/expands the Engineer command center
+    // and applies a body class so the page reads like a single leadership-ready surface.
+    function getPresentationModeSnapshot(){
+      const layer = window.cellIntelligenceSnapshot || (typeof deriveCellIntelligenceLayer === 'function' ? deriveCellIntelligenceLayer() : null);
+      const cells = Array.isArray(layer?.cells) ? layer.cells : [];
+      const alerts = typeof buildEngineerAttentionAlerts === 'function' ? buildEngineerAttentionAlerts({}) : [];
+      const riskCells = cells.filter(cell => ['Attention','Blocked','Watch','Help'].includes(String(cell.state || ''))).length;
+      const blockedCells = cells.filter(cell => String(cell.state || '') === 'Blocked').length;
+      const avgHealth = cells.length ? Math.round(cells.reduce((sum, cell) => sum + (Number(cell.healthScore) || 0), 0) / cells.length) : 0;
+      const avgConfidence = cells.length ? Math.round(cells.reduce((sum, cell) => sum + (Number(cell.dataConfidence) || 0), 0) / cells.length) : 0;
+      const topRisk = cells.slice().sort((a,b) => {
+        const order = {Blocked:5, Attention:4, Help:3, Watch:2, Stale:1, Running:0, Unknown:0};
+        return (order[String(b.state || '')] || 0) - (order[String(a.state || '')] || 0) || (Number(a.healthScore)||0) - (Number(b.healthScore)||0);
+      }).slice(0,3);
+      return { layer, cells, alerts, riskCells, blockedCells, avgHealth, avgConfidence, topRisk };
+    }
+
+    function renderPresentationModePanel(){
+      const panel = document.getElementById('presentation-mode-panel');
+      if (!panel) return;
+      const active = document.body.classList.contains('presentation-mode-active');
+      panel.classList.toggle('active', active);
+      if (!active) return;
+      const snap = getPresentationModeSnapshot();
+      setText(document.getElementById('presentation-health-value'), snap.cells.length ? String(snap.avgHealth) : '--');
+      setText(document.getElementById('presentation-risk-value'), snap.cells.length ? String(snap.riskCells) : '--');
+      setText(document.getElementById('presentation-alert-value'), String(snap.alerts.length || 0));
+      const story = document.getElementById('presentation-story-text');
+      if (story) {
+        const top = snap.topRisk[0];
+        story.textContent = top
+          ? `Lead with the command view, then drill into Cell ${top.cell}: ${top.state} with ${top.healthScore}/100 health. The dashboard shows the reason, supporting timeline, and next review path without changing operator entry workflows.`
+          : 'Lead with the command view: the Engineer tab now turns hours, weekend status, and logbook signals into a single operational story.';
+      }
+      const copy = document.getElementById('presentation-mode-copy');
+      if (copy) {
+        copy.textContent = `Presentation mode is active: ${snap.cells.length || 0} cells scanned, ${snap.riskCells || 0} risk cells, ${snap.alerts.length || 0} attention alerts, ${snap.avgConfidence || 0}% average confidence.`;
+      }
+    }
+
+    function setPresentationMode(active){
+      const shouldActivate = !!active;
+      document.body.classList.toggle('presentation-mode-active', shouldActivate);
+      if (shouldActivate) {
+        switchTab('engineer');
+        setEngineeringGraphicsEnabled(true);
+        setEngineeringGraphicsCollapsed(false);
+        if (typeof renderEngineerView === 'function') renderEngineerView();
+        if (typeof renderEngineerPremiumDashboard === 'function') renderEngineerPremiumDashboard();
+        window.setTimeout(() => scrollEngineerPilotTarget('#engineer-graphics-section'), 80);
+      }
+      renderPresentationModePanel();
+      if (typeof syncCtcPulseSnapshot === 'function') syncCtcPulseSnapshot();
+      if (typeof showToast === 'function') showToast(shouldActivate ? 'Presentation Mode on' : 'Presentation Mode off');
+    }
+
+    function togglePresentationMode(force){
+      const next = typeof force === 'boolean' ? force : !document.body.classList.contains('presentation-mode-active');
+      setPresentationMode(next);
+    }
+
+    function startPresentationModeFlow(target){
+      setPresentationMode(true);
+      const normalized = String(target || 'overview');
+      if (normalized === 'attention') {
+        filterEngineerToCell('205');
+        window.setTimeout(() => scrollEngineerPilotTarget('#engineer-selected-cell-panel'), 80);
+      } else if (normalized === 'blocked') {
+        filterEngineerToCell('417');
+        window.setTimeout(() => scrollEngineerPilotTarget('#engineer-selected-cell-panel'), 80);
+      } else {
+        resetEngineerReviewFilters({ cell:'', query:'' });
+        window.engineerSelectedOpsCell = '';
+        if (typeof renderEngineerView === 'function') renderEngineerView();
+        if (typeof renderEngineerPremiumDashboard === 'function') renderEngineerPremiumDashboard();
+        window.setTimeout(() => scrollEngineerPilotTarget('#engineer-graphics-section'), 80);
+      }
+      renderPresentationModePanel();
+    }
+
+    function buildPresentationModeSummary(){
+      const snap = getPresentationModeSnapshot();
+      const topRisk = snap.topRisk.length
+        ? snap.topRisk.map(cell => `- Cell ${cell.cell}: ${cell.state} · health ${cell.healthScore}/100 · ${cell.topReason || 'review needed'}`).join('\n')
+        : '- No major risk cells surfaced.';
+      const topAlerts = snap.alerts.length
+        ? snap.alerts.slice(0,5).map(alert => `- ${alert.title || alert.label || 'Attention item'}${alert.cell ? ` · Cell ${alert.cell}` : ''}${alert.note ? ` · ${alert.note}` : ''}`).join('\n')
+        : '- No active attention alerts.';
+      return [
+        'Cummins Unified Logbook — Presentation Mode Talking Points',
+        `Version: ${VERSION}`,
+        '',
+        'Command view status:',
+        `- Cells scanned: ${snap.cells.length}`,
+        `- Average health: ${snap.cells.length ? snap.avgHealth : 0}/100`,
+        `- Average data confidence: ${snap.cells.length ? snap.avgConfidence : 0}%`,
+        `- Risk cells: ${snap.riskCells}`,
+        `- Blocked cells: ${snap.blockedCells}`,
+        `- Attention alerts: ${snap.alerts.length}`,
+        '',
+        'Top risk cells:',
+        topRisk,
+        '',
+        'Top attention alerts:',
+        topAlerts,
+        '',
+        'Story:',
+        'This view converts hours, weekend status, and logbook signals into a fast Engineer command picture: what is running, what needs attention, what is stale, and what leadership can act on next.'
+      ].join('\n');
+    }
+
+    async function copyPresentationModeSummary(button){
+      const text = buildPresentationModeSummary();
+      await copyPlainTextReport(text, button);
+    }
+
     function initReportTools(){
       document.addEventListener('click', async (event) => {
         const copyButton = event.target.closest('[data-report-copy]');
@@ -11376,6 +11562,7 @@ Reason: ${error?.stack || error?.message || error}`;
     runStartupStep("resetForm", resetForm);
     runStartupStep("renderEntries", renderEntries);
     runStartupStep("renderPilotReadinessScorecard", renderPilotReadinessScorecard);
+    runStartupStep("renderPresentationModePanel", renderPresentationModePanel);
     runStartupStep("bindEngineerDashboardButtons", bindEngineerDashboardButtons);
     runStartupStep("bindEngineerDashboardDelegation", bindEngineerDashboardDelegation);
     runStartupStep("runPostBootHealthCheck", runPostBootHealthCheck);
