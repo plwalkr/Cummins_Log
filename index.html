@@ -3589,6 +3589,57 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
 
 
+
+
+/* ==================== v1.0.180 - ENGINEER OPS MAP HOVER CARDS ====================
+   Rich hover cards for cell tiles. Read-only and display-only; no saved data mutation.
+   Uses the existing Cell Intelligence Layer so the hover details match the selected-cell story. */
+.engineer-hover-card{
+  position:fixed;
+  z-index:9999;
+  width:min(340px,calc(100vw - 24px));
+  pointer-events:none;
+  opacity:0;
+  transform:translate3d(0,6px,0) scale(.98);
+  transition:opacity .14s ease, transform .14s ease;
+  border:1px solid rgba(148,163,184,.24);
+  border-radius:18px;
+  background:linear-gradient(180deg,rgba(15,23,42,.96),rgba(2,6,23,.94));
+  box-shadow:0 24px 48px rgba(2,6,23,.42),0 0 0 1px rgba(255,255,255,.045),0 0 34px rgba(34,211,238,.08);
+  color:#F8FAFC;
+  overflow:hidden;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+.engineer-hover-card.is-visible{opacity:1;transform:translate3d(0,0,0) scale(1)}
+.engineer-hover-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 18% 0%,rgba(34,211,238,.16),transparent 36%),linear-gradient(135deg,rgba(255,255,255,.08),transparent 44%)}
+.engineer-hover-card-inner{position:relative;z-index:1;padding:14px}
+.engineer-hover-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.engineer-hover-card-kicker{color:#94A3B8;font-size:10px;font-weight:950;letter-spacing:.15em;text-transform:uppercase;margin-bottom:3px}
+.engineer-hover-card-title{font-size:20px;font-weight:950;letter-spacing:-.04em;line-height:1.1}
+.engineer-hover-card-state{display:inline-flex;align-items:center;justify-content:center;padding:6px 10px;border-radius:999px;border:1px solid rgba(148,163,184,.25);background:rgba(15,23,42,.42);font-size:10px;font-weight:950;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.engineer-hover-card-state.running{color:#86EFAC;border-color:rgba(74,222,128,.28);background:rgba(22,101,52,.22)}
+.engineer-hover-card-state.watch{color:#FDE047;border-color:rgba(250,204,21,.30);background:rgba(113,63,18,.24)}
+.engineer-hover-card-state.attention{color:#FDBA74;border-color:rgba(251,146,60,.32);background:rgba(124,45,18,.25)}
+.engineer-hover-card-state.help{color:#E9D5FF;border-color:rgba(192,132,252,.34);background:rgba(88,28,135,.24)}
+.engineer-hover-card-state.blocked{color:#FCA5A5;border-color:rgba(248,113,113,.36);background:rgba(127,29,29,.28)}
+.engineer-hover-card-state.stale{color:#CBD5E1;border-color:rgba(148,163,184,.28);background:rgba(51,65,85,.30)}
+.engineer-hover-card-reason{border:1px solid rgba(148,163,184,.18);border-radius:14px;background:rgba(15,23,42,.36);padding:11px 12px;margin-bottom:12px}
+.engineer-hover-card-reason strong{display:block;color:#94A3B8;font-size:10px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+.engineer-hover-card-reason span{display:block;color:#F8FAFC;font-size:13px;font-weight:850;line-height:1.35}
+.engineer-hover-card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.engineer-hover-card-metric{border:1px solid rgba(148,163,184,.16);border-radius:13px;background:rgba(15,23,42,.28);padding:9px 10px;min-height:62px}
+.engineer-hover-card-metric strong{display:block;color:#94A3B8;font-size:9px;font-weight:950;letter-spacing:.11em;text-transform:uppercase;margin-bottom:4px}
+.engineer-hover-card-metric span{display:block;color:#E2E8F0;font-size:12.5px;font-weight:850;line-height:1.25}
+.engineer-hover-card-footer{margin-top:11px;padding-top:10px;border-top:1px solid rgba(148,163,184,.16);display:flex;justify-content:space-between;gap:10px;color:#94A3B8;font-size:11px;font-weight:800}
+.engineer-hover-card.light{background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(248,250,252,.96));color:#0F172A;border-color:rgba(148,163,184,.30);box-shadow:0 22px 44px rgba(15,23,42,.18),0 0 0 1px rgba(15,23,42,.04)}
+.engineer-hover-card.light .engineer-hover-card-title,
+.engineer-hover-card.light .engineer-hover-card-reason span{color:#0F172A}
+.engineer-hover-card.light .engineer-hover-card-metric span{color:#334155}
+.engineer-hover-card.light .engineer-hover-card-reason,
+.engineer-hover-card.light .engineer-hover-card-metric{background:rgba(248,250,252,.86)}
+@media (max-width: 720px){.engineer-hover-card{display:none!important}}
+
 /* ==================== v1.0.179 - MOBILE RESPONSIVE COMMAND VIEW ====================
    Narrow-screen hardening only. This keeps all command-center panels, maps, reports,
    demo tools, Pulse, startup guard, and operator workflows intact while improving how
@@ -3665,7 +3716,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.179-mobile-responsive-command-view</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.180-hover-cards</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -3673,7 +3724,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.179-mobile-responsive-command-view</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.180-hover-cards</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -4068,7 +4119,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.179-mobile-responsive-command-view</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.180-hover-cards</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -4647,7 +4698,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.179-mobile-responsive-command-view</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.180-hover-cards</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -4705,7 +4756,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.179-mobile-responsive-command-view</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.180-hover-cards</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -4911,7 +4962,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.179-mobile-responsive-command-view</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.180-hover-cards</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -4990,8 +5041,8 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.179-mobile-responsive-command-view";
-    const VERSION_DESCRIPTION = "Adds mobile and narrow-screen responsive hardening for the Engineer command-center view so the KPI band, ops map, timeline, attention cards, selected-cell panel, presentation mode, screenshot view, and QA controls remain usable without changing core operator workflows.";
+    const VERSION = "v1.0.180-hover-cards";
+    const VERSION_DESCRIPTION = "Adds rich Engineer ops-map hover cards that show cell state, health, top reason, last update age, help status, downtime pressure, and data confidence while preserving the mobile responsive command view and core operator workflows.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -6221,6 +6272,150 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       return `<span class="engineer-cell-badges">${badges.map((badge) => `<span class="engineer-cell-badge ${escapeHtml(badge.tone)}">${escapeHtml(badge.label)}</span>`).join("")}</span>`;
     }
 
+    function getEngineerHoverStateClass(cell){
+      return getEngineerMapStatusClass(cell?.state, cell);
+    }
+
+    function formatEngineerHoverMinutes(value){
+      const n = Number(value || 0);
+      if (!Number.isFinite(n) || n <= 0) return "Fresh";
+      if (n < 60) return `${Math.round(n)}m ago`;
+      const hours = Math.floor(n / 60);
+      const mins = Math.round(n % 60);
+      return mins ? `${hours}h ${mins}m ago` : `${hours}h ago`;
+    }
+
+    function formatEngineerHoverYesNo(value){
+      return value ? "Yes" : "No";
+    }
+
+    function renderEngineerCellHoverCard(cellNumber){
+      const layer = window.cellIntelligenceSnapshot || deriveCellIntelligenceLayer();
+      const byCell = new Map((layer.cells || []).map((cell) => [String(cell.cell), cell]));
+      const cell = byCell.get(String(cellNumber)) || {
+        cell: cellNumber,
+        state: "Unknown",
+        healthScore: 0,
+        topReason: "No current intelligence data for this cell.",
+        dataConfidence: 0,
+        downtimeHours: 0,
+        staleMinutes: 0,
+        helpNeeded: false
+      };
+      const stateClass = getEngineerHoverStateClass(cell);
+      const label = getEngineerMapStatusLabel(cell);
+      const theme = document.getElementById("engineer-graphics-section")?.classList.contains("engineer-dashboard--lightcards") ? " light" : "";
+      const downtime = Number(cell.downtimeHours || 0);
+      const health = Number(cell.healthScore || 0);
+      const confidence = Number(cell.dataConfidence || cell.confidence || 0);
+      const badges = getEngineerMapBadges(cell).map((badge) => escapeHtml(badge.label)).join(" · ") || "No extra badges";
+
+      return `
+        <div class="engineer-hover-card${theme}" id="engineer-hover-card" role="tooltip">
+          <div class="engineer-hover-card-inner">
+            <div class="engineer-hover-card-top">
+              <div>
+                <div class="engineer-hover-card-kicker">Test Cell Hover Card</div>
+                <div class="engineer-hover-card-title">Cell ${escapeHtml(cellNumber)}</div>
+              </div>
+              <span class="engineer-hover-card-state ${escapeHtml(stateClass)}">${escapeHtml(label)}</span>
+            </div>
+            <div class="engineer-hover-card-reason">
+              <strong>Top reason</strong>
+              <span>${escapeHtml(cell.topReason || getEngineerMapMeta(cell) || "No current reason available.")}</span>
+            </div>
+            <div class="engineer-hover-card-grid">
+              <div class="engineer-hover-card-metric"><strong>Health</strong><span>${health ? `${health}/100` : "No score"}</span></div>
+              <div class="engineer-hover-card-metric"><strong>Last update</strong><span>${escapeHtml(formatEngineerHoverMinutes(cell.staleMinutes))}</span></div>
+              <div class="engineer-hover-card-metric"><strong>Help needed</strong><span>${escapeHtml(formatEngineerHoverYesNo(cell.helpNeeded))}</span></div>
+              <div class="engineer-hover-card-metric"><strong>Downtime</strong><span>${downtime.toFixed(1)}h</span></div>
+              <div class="engineer-hover-card-metric"><strong>Confidence</strong><span>${confidence ? `${Math.round(confidence)}%` : "Unknown"}</span></div>
+              <div class="engineer-hover-card-metric"><strong>Badges</strong><span>${escapeHtml(badges)}</span></div>
+            </div>
+            <div class="engineer-hover-card-footer">
+              <span>Click tile to filter</span>
+              <span>Read-only</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function ensureEngineerHoverCard(){
+      let card = document.getElementById("engineer-hover-card");
+      if (!card) {
+        card = document.createElement("div");
+        card.className = "engineer-hover-card";
+        card.id = "engineer-hover-card";
+        card.setAttribute("role", "tooltip");
+        document.body.appendChild(card);
+      }
+      return card;
+    }
+
+    function positionEngineerHoverCard(event){
+      const card = document.getElementById("engineer-hover-card");
+      if (!card || !card.classList.contains("is-visible")) return;
+      const margin = 14;
+      const rect = card.getBoundingClientRect();
+      let left = event.clientX + 16;
+      let top = event.clientY + 16;
+      if (left + rect.width + margin > window.innerWidth) left = event.clientX - rect.width - 16;
+      if (top + rect.height + margin > window.innerHeight) top = window.innerHeight - rect.height - margin;
+      if (top < margin) top = margin;
+      if (left < margin) left = margin;
+      card.style.left = `${left}px`;
+      card.style.top = `${top}px`;
+    }
+
+    function showEngineerHoverCard(cellNumber, event){
+      const card = ensureEngineerHoverCard();
+      const html = renderEngineerCellHoverCard(cellNumber);
+      const temp = document.createElement("div");
+      temp.innerHTML = html;
+      card.className = temp.firstElementChild.className;
+      card.innerHTML = temp.firstElementChild.innerHTML;
+      card.classList.add("is-visible");
+      positionEngineerHoverCard(event);
+    }
+
+    function hideEngineerHoverCard(){
+      const card = document.getElementById("engineer-hover-card");
+      if (card) card.classList.remove("is-visible");
+    }
+
+    function bindEngineerHoverCards(){
+      const map = document.getElementById("engineer-ops-map");
+      if (!map || map.dataset.hoverCardsBound === "true") return;
+      map.dataset.hoverCardsBound = "true";
+
+      map.addEventListener("pointerover", (event) => {
+        const tile = event.target.closest(".engineer-cell-tile[data-engineer-map-cell]");
+        if (!tile || !map.contains(tile)) return;
+        showEngineerHoverCard(tile.dataset.engineerMapCell, event);
+      });
+
+      map.addEventListener("pointermove", positionEngineerHoverCard);
+
+      map.addEventListener("pointerout", (event) => {
+        const tile = event.target.closest(".engineer-cell-tile[data-engineer-map-cell]");
+        if (!tile) return;
+        const next = event.relatedTarget;
+        if (next && tile.contains(next)) return;
+        hideEngineerHoverCard();
+      });
+
+      map.addEventListener("focusin", (event) => {
+        const tile = event.target.closest(".engineer-cell-tile[data-engineer-map-cell]");
+        if (!tile) return;
+        const rect = tile.getBoundingClientRect();
+        showEngineerHoverCard(tile.dataset.engineerMapCell, { clientX: rect.left + rect.width - 20, clientY: rect.top + 20 });
+      });
+
+      map.addEventListener("focusout", hideEngineerHoverCard);
+      map.addEventListener("click", hideEngineerHoverCard);
+    }
+
     function renderEngineerOpsMap(metrics){
       const target = document.getElementById("engineer-ops-map");
       const note = document.getElementById("engineer-ops-map-note");
@@ -6251,6 +6446,7 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
               data-engineer-state="${escapeHtml(statusClass)}"
               data-engineer-health="${escapeHtml(getEngineerMapHealthBand(cell))}"
               aria-label="Cell ${escapeHtml(cellNumber)} ${escapeHtml(label)}. ${escapeHtml(cell.topReason || getEngineerMapMeta(cell))}"
+              aria-describedby="engineer-hover-card"
               title="Cell ${escapeHtml(cellNumber)} — ${escapeHtml(cell.topReason || label)}"
               onclick="filterEngineerToCell('${escapeHtml(cellNumber)}')"
             >
@@ -6272,6 +6468,8 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
           </div>
         `;
       }).join("");
+
+      bindEngineerHoverCards();
 
       const summary = layer.summary || {};
       if (summaryTarget) {
@@ -11065,6 +11263,7 @@ function renderHours(){
         "deriveCellIntelligenceLayer",
         "deriveEngineerPremiumMetrics",
         "renderEngineerOpsMap",
+        "bindEngineerHoverCards",
         "renderEngineerShiftTimeline",
         "renderEngineerAttentionEngine",
         "renderEngineerSelectedCellPanel",
