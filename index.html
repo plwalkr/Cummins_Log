@@ -3377,7 +3377,165 @@ body.presentation-mode-active #tab-engineer .engineer-collection{margin-top:10px
 @media (max-width: 880px){.engineer-testcell-command .engineer-timeline-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.engineer-testcell-command .engineer-alert-row{grid-template-columns:30px minmax(0,1fr)}.engineer-testcell-command .engineer-alert-side{grid-column:2;align-items:flex-start;flex-direction:row}}
 @media (max-width: 560px){.engineer-testcell-command .engineer-timeline-summary{grid-template-columns:1fr}.engineer-testcell-command .engineer-timeline-segment span{display:none}}
 
-  </style>
+  
+/* v1.0.176 - command center screenshot mode
+   Presentation-only polish layer. This does not mutate saved data or change
+   operator workflows; it only adds a temporary capture-focused body class. */
+.command-screenshot-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  border:1px solid rgba(34,211,238,.30);
+  background:linear-gradient(135deg,rgba(14,165,233,.16),rgba(15,23,42,.12));
+  color:#e0f2fe;
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  cursor:pointer;
+  box-shadow:0 10px 22px rgba(2,6,23,.16);
+}
+.command-screenshot-chip:hover{transform:translateY(-1px);box-shadow:0 14px 28px rgba(2,6,23,.22)}
+.command-screenshot-chip.active{
+  background:linear-gradient(135deg,rgba(34,211,238,.25),rgba(20,184,166,.16));
+  border-color:rgba(103,232,249,.46);
+  color:#f0fdfa;
+}
+.command-screenshot-banner{
+  display:none;
+  margin:0 0 12px 0;
+  border:1px solid rgba(34,211,238,.25);
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(34,211,238,.20),transparent 34%),
+    linear-gradient(135deg,#0f172a 0%,#111827 52%,#0b1220 100%);
+  color:#e5f3ff;
+  padding:13px 15px;
+  box-shadow:0 18px 34px rgba(15,23,42,.18);
+  position:relative;
+  overflow:hidden;
+}
+.command-screenshot-banner:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(148,163,184,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148,163,184,.08) 1px, transparent 1px);
+  background-size:24px 24px;
+  mask-image:linear-gradient(90deg,rgba(0,0,0,.85),rgba(0,0,0,.15));
+  pointer-events:none;
+}
+.command-screenshot-banner > *{position:relative;z-index:1}
+.command-screenshot-banner-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.command-screenshot-kicker{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-weight:950;
+  color:#93c5fd;
+  margin-bottom:4px;
+}
+.command-screenshot-banner h3{
+  margin:0;
+  font-size:18px;
+  color:#f8fafc;
+  letter-spacing:-.02em;
+}
+.command-screenshot-banner p{
+  margin:5px 0 0 0;
+  max-width:86ch;
+  color:#cbd5e1;
+  font-size:12px;
+  line-height:1.55;
+}
+.command-screenshot-banner-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.command-screenshot-banner-actions button{
+  border:1px solid rgba(148,163,184,.24);
+  background:rgba(255,255,255,.07);
+  color:#e0f2fe;
+  border-radius:999px;
+  padding:8px 11px;
+  font-size:11px;
+  font-weight:900;
+  cursor:pointer;
+}
+.command-screenshot-banner-actions button:hover{
+  border-color:rgba(103,232,249,.42);
+  background:rgba(34,211,238,.12);
+}
+body.command-capture-mode .command-screenshot-banner{display:block}
+body.command-capture-mode .engineer-testcell-command{
+  box-shadow:0 24px 70px rgba(2,6,23,.22);
+  border-color:rgba(34,211,238,.26);
+}
+body.command-capture-mode .engineer-2026-shell{
+  padding:18px;
+}
+body.command-capture-mode .engineer-2026-title:after{
+  content:" • Capture View";
+  color:#67e8f9;
+  font-weight:800;
+}
+body.command-capture-mode .presentation-mode-panel:not(.active){
+  display:none !important;
+}
+body.command-capture-mode .engineer-command-action-row,
+body.command-capture-mode .engineer-2026-footer{
+  justify-content:center;
+}
+body.command-capture-mode .engineer-command-action-row button,
+body.command-capture-mode .engineer-2026-footer button{
+  min-width:170px;
+}
+body.command-capture-mode .engineer-modern-grid,
+body.command-capture-mode .engineer-kpi-band,
+body.command-capture-mode .engineer-command-grid,
+body.command-capture-mode .engineer-lower-command-grid{
+  gap:14px;
+}
+body.command-capture-mode .engineer-command-tile,
+body.command-capture-mode .engineer-command-hero,
+body.command-capture-mode .engineer-command-health,
+body.command-capture-mode .engineer-ops-map-card,
+body.command-capture-mode .engineer-timeline-card,
+body.command-capture-mode .attention-engine-card,
+body.command-capture-mode .selected-cell-panel{
+  box-shadow:0 18px 34px rgba(2,6,23,.28), inset 0 1px 0 rgba(255,255,255,.05);
+}
+body.command-capture-mode .panel:not(#engineer-graphics-section) .panel-head{
+  background:linear-gradient(180deg,#f8fafc 0%,#eef2f7 100%);
+}
+@media print{
+  body.command-capture-mode .view-tabs,
+  body.command-capture-mode .compact-release-bar,
+  body.command-capture-mode .top-button,
+  body.command-capture-mode #ctc-pulse-panel,
+  body.command-capture-mode #ctc-pulse-button{
+    display:none !important;
+  }
+  body.command-capture-mode{
+    background:#fff !important;
+  }
+  body.command-capture-mode #engineer-graphics-section{
+    break-inside:avoid;
+  }
+}
+
+</style>
 </head>
 <body data-theme="standard">
   <div class="app">
@@ -4714,8 +4872,8 @@ body.presentation-mode-active #tab-engineer .engineer-collection{margin-top:10px
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.175-presentation-mode";
-    const VERSION_DESCRIPTION = "Adds a leadership-ready Presentation Mode for the Engineer command center with a cleaner demo surface, focused storyline, copyable summary, and screenshot-friendly layout while preserving operator workflows and stability guardrails.";
+    const VERSION = "v1.0.176-command-center-screenshot-mode";
+    const VERSION_DESCRIPTION = "Adds a screenshot-ready command-center capture mode for the Engineer view with visual cleanup controls, presentation framing, and non-destructive layout focus while preserving operator workflows and stability guardrails.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -11567,6 +11725,111 @@ Reason: ${error?.stack || error?.message || error}`;
     runStartupStep("bindEngineerDashboardDelegation", bindEngineerDashboardDelegation);
     runStartupStep("runPostBootHealthCheck", runPostBootHealthCheck);
     runStartupStep("switchTab:logbook", () => switchTab("logbook"));
-  </script>
+  
+/* v1.0.176 - command center screenshot mode
+   Adds a reversible presentation/capture class and injects a small control into
+   the Engineer command surface. It deliberately does not alter stored data. */
+(function initCommandCenterScreenshotMode(){
+  const STORAGE_KEY = "cummins-command-center-screenshot-mode";
+
+  function getCaptureEnabled(){
+    try { return localStorage.getItem(STORAGE_KEY) === "true"; } catch { return false; }
+  }
+
+  function setCaptureEnabled(enabled){
+    try { localStorage.setItem(STORAGE_KEY, enabled ? "true" : "false"); } catch {}
+    document.body.classList.toggle("command-capture-mode", !!enabled);
+    document.querySelectorAll("[data-command-screenshot-toggle]").forEach((btn) => {
+      btn.classList.toggle("active", !!enabled);
+      btn.textContent = enabled ? "Exit Screenshot View" : "Screenshot View";
+      btn.setAttribute("aria-pressed", enabled ? "true" : "false");
+    });
+    const banner = document.getElementById("command-screenshot-banner");
+    if (banner) banner.hidden = !enabled;
+  }
+
+  window.toggleCommandCenterScreenshotMode = function toggleCommandCenterScreenshotMode(){
+    setCaptureEnabled(!document.body.classList.contains("command-capture-mode"));
+  };
+
+  window.commandCenterPrintView = function commandCenterPrintView(){
+    setCaptureEnabled(true);
+    window.setTimeout(() => window.print(), 120);
+  };
+
+  window.copyCommandCenterScreenshotNotes = function copyCommandCenterScreenshotNotes(){
+    const text = [
+      "Cummins Unified Logbook — Command Center Screenshot View",
+      "Purpose: show how the Engineer view turns scattered logbook, weekend, hours, and manager signals into a single operational picture.",
+      "Key story: Cell Intelligence Layer, Test Cell Ops Map, Shift Timeline Ribbon, Attention Engine, Selected Cell Detail, and Pilot Readiness tools.",
+      "Demo focus: Cell 205 attention scenario, Cell 417 blocked scenario, and command-center reporting/export readiness."
+    ].join("\n");
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        if (typeof toast === "function") toast("Screenshot talking points copied.");
+      }).catch(() => {});
+    }
+    return text;
+  };
+
+  function ensureScreenshotBanner(){
+    const graphics = document.getElementById("engineer-graphics-section");
+    if (!graphics || document.getElementById("command-screenshot-banner")) return;
+
+    const banner = document.createElement("div");
+    banner.id = "command-screenshot-banner";
+    banner.className = "command-screenshot-banner";
+    banner.hidden = true;
+    banner.innerHTML = `
+      <div class="command-screenshot-banner-head">
+        <div>
+          <div class="command-screenshot-kicker">Screenshot / Leadership View</div>
+          <h3>Command center focus mode</h3>
+          <p>This temporary view tightens the Engineer command center for screenshots, reviews, and pilot storytelling. It does not change saved logbook, hours, weekend, manager, or demo data.</p>
+        </div>
+        <div class="command-screenshot-banner-actions">
+          <button type="button" onclick="copyCommandCenterScreenshotNotes()">Copy talking points</button>
+          <button type="button" onclick="commandCenterPrintView()">Print / Save PDF</button>
+          <button type="button" onclick="toggleCommandCenterScreenshotMode()">Exit</button>
+        </div>
+      </div>
+    `;
+
+    graphics.parentNode.insertBefore(banner, graphics);
+  }
+
+  function ensureScreenshotButton(){
+    const target = document.querySelector(".engineer-2026-topbar-actions")
+      || document.querySelector(".presentation-mode-status")
+      || document.querySelector(".engineer-toolbar");
+
+    if (!target || target.querySelector("[data-command-screenshot-toggle]")) return;
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "command-screenshot-chip";
+    btn.setAttribute("data-command-screenshot-toggle", "true");
+    btn.setAttribute("aria-pressed", "false");
+    btn.textContent = "Screenshot View";
+    btn.addEventListener("click", window.toggleCommandCenterScreenshotMode);
+    target.appendChild(btn);
+  }
+
+  function bootScreenshotMode(){
+    ensureScreenshotBanner();
+    ensureScreenshotButton();
+    setCaptureEnabled(getCaptureEnabled());
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootScreenshotMode);
+  } else {
+    bootScreenshotMode();
+  }
+
+  window.addEventListener("load", bootScreenshotMode);
+})();
+
+</script>
 </body>
 </html>
