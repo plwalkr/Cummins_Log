@@ -3704,6 +3704,36 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
   .engineer-testcell-command .engineer-2026-footer button,.engineer-selected-cell-actions button,.command-screenshot-chip{flex-basis:100%}
 }
 
+
+
+/* ==================== v1.0.181 - GUIDED MICRO-TOOLTIPS ====================
+   Small hover/focus explanations for presentation and training moments.
+   Keep these lightweight: they are display-only, pointer-safe, and do not replace the richer ops-map hover cards. */
+[data-guided-tooltip]{position:relative;}
+[data-guided-tooltip]::after{
+  content:attr(data-guided-tooltip);
+  position:absolute;left:50%;bottom:calc(100% + 10px);transform:translate(-50%,6px);
+  width:max-content;max-width:260px;padding:9px 10px;border:1px solid rgba(148,163,184,.28);border-radius:12px;
+  background:rgba(15,23,42,.96);color:#e2e8f0;box-shadow:0 16px 34px rgba(2,6,23,.32),0 0 0 1px rgba(255,255,255,.03) inset;
+  font-size:11px;font-weight:700;line-height:1.45;letter-spacing:.01em;text-transform:none;text-align:left;
+  opacity:0;visibility:hidden;pointer-events:none;z-index:1200;transition:opacity .14s ease,transform .14s ease,visibility .14s ease;
+}
+[data-guided-tooltip]::before{
+  content:"";position:absolute;left:50%;bottom:calc(100% + 4px);transform:translate(-50%,6px);
+  border:6px solid transparent;border-top-color:rgba(15,23,42,.96);opacity:0;visibility:hidden;pointer-events:none;z-index:1201;
+  transition:opacity .14s ease,transform .14s ease,visibility .14s ease;
+}
+[data-guided-tooltip]:hover::after,[data-guided-tooltip]:focus-visible::after,[data-guided-tooltip]:hover::before,[data-guided-tooltip]:focus-visible::before{opacity:1;visibility:visible;transform:translate(-50%,0);}
+.engineer-testcell-command [data-guided-tooltip]::after{border-color:rgba(34,211,238,.22);background:linear-gradient(180deg,rgba(15,23,42,.98),rgba(30,41,59,.96));}
+.engineer-dashboard--lightcards [data-guided-tooltip]::after{background:#0f172a;color:#f8fafc;}
+.engineer-guided-tooltip-dot{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;margin-left:6px;border-radius:999px;border:1px solid rgba(148,163,184,.38);color:#67e8f9;background:rgba(34,211,238,.08);font-size:11px;font-weight:900;line-height:1;vertical-align:middle;}
+.command-presentation-mode [data-guided-tooltip]::after,.command-capture-mode [data-guided-tooltip]::after{max-width:300px;}
+@media (max-width:700px){
+  [data-guided-tooltip]::after{max-width:min(260px,82vw);left:auto;right:0;transform:translate(0,6px);}
+  [data-guided-tooltip]::before{left:auto;right:18px;transform:translate(0,6px);}
+  [data-guided-tooltip]:hover::after,[data-guided-tooltip]:focus-visible::after,[data-guided-tooltip]:hover::before,[data-guided-tooltip]:focus-visible::before{transform:translate(0,0);}
+}
+
 </style>
 </head>
 <body data-theme="standard">
@@ -3716,7 +3746,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.180-hover-cards</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.181-guided-tooltips</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -3724,7 +3754,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.180-hover-cards</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.181-guided-tooltips</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -4119,7 +4149,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.180-hover-cards</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.181-guided-tooltips</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -4698,7 +4728,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.180-hover-cards</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.181-guided-tooltips</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -4756,7 +4786,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.180-hover-cards</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.181-guided-tooltips</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -4962,7 +4992,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.180-hover-cards</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.181-guided-tooltips</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -5041,8 +5071,8 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.180-hover-cards";
-    const VERSION_DESCRIPTION = "Adds rich Engineer ops-map hover cards that show cell state, health, top reason, last update age, help status, downtime pressure, and data confidence while preserving the mobile responsive command view and core operator workflows.";
+    const VERSION = "v1.0.181-guided-tooltips";
+    const VERSION_DESCRIPTION = "Adds guided micro-tooltips across the Engineer command center and presentation helpers so smaller badges, KPIs, actions, and controls explain themselves while preserving hover cards, mobile responsiveness, and core operator workflows.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -12008,6 +12038,66 @@ Reason: ${error?.stack || error?.message || error}`;
     }
 
 
+
+
+/* v1.0.181 - guided micro-tooltips
+   Adds small explanatory tooltips to compact dashboard controls and status badges.
+   The richer cell hover cards remain the main source for detailed cell-specific context. */
+function addGuidedTooltip(selector, message){
+  document.querySelectorAll(selector).forEach((node) => {
+    if (!node || node.dataset.guidedTooltip) return;
+    node.dataset.guidedTooltip = message;
+    if (!node.hasAttribute('tabindex') && !/^(BUTTON|A|INPUT|SELECT|TEXTAREA)$/i.test(node.tagName)) {
+      node.setAttribute('tabindex','0');
+    }
+    if (!node.hasAttribute('aria-label') && node.textContent.trim().length < 4) {
+      node.setAttribute('aria-label', message);
+    }
+  });
+}
+
+function addGuidedInfoDots(){
+  const targets = [
+    ['.engineer-intel-card .engineer-command-label', 'This card is derived from the Cell Intelligence Layer, not manually entered text.'],
+    ['.engineer-command-hero .engineer-command-label', 'Uptime is estimated from logged running time compared with downtime hours in the current scope.'],
+    ['.engineer-command-health .engineer-command-label', 'Health blends uptime, data completeness, help pressure, downtime pressure, and utilization.'],
+    ['.engineer-ops-map-card .engineer-command-label', 'Each tile is a cell-level intelligence snapshot. Click a tile to focus the detail panel.'],
+    ['.engineer-shift-timeline-card .engineer-command-label', 'The timeline converts shift activity into a quick visual ribbon for presentation and review.'],
+    ['.engineer-attention-engine-card .engineer-command-label', 'The attention engine lists conditions that deserve follow-up before they become handoff noise.'],
+    ['.engineer-selected-cell-card .engineer-command-label', 'The selected cell panel explains why one cell is being marked Running, Watch, Attention, Help, Blocked, or Stale.']
+  ];
+  targets.forEach(([selector,message]) => {
+    document.querySelectorAll(selector).forEach((label) => {
+      if (!label || label.querySelector('.engineer-guided-tooltip-dot')) return;
+      const dot = document.createElement('span');
+      dot.className = 'engineer-guided-tooltip-dot';
+      dot.textContent = '?';
+      dot.dataset.guidedTooltip = message;
+      dot.setAttribute('tabindex','0');
+      dot.setAttribute('aria-label', message);
+      label.appendChild(dot);
+    });
+  });
+}
+
+function initGuidedTooltips(){
+  addGuidedTooltip('#data-quality-header', 'Quick confidence badge for the current data set. Lower scores usually mean missing hours, stale updates, or incomplete comments.');
+  addGuidedTooltip('#engineer-live-toggle-btn', 'Demo-only pulse. It gently moves dashboard numbers without changing saved logbook, hours, weekend, or manager data.');
+  addGuidedTooltip('#engineer-export-snapshot-btn', 'Downloads a plain-text Engineer command snapshot for handoff, review, or presentation notes.');
+  addGuidedTooltip('#engineer-view-hours-btn', 'Jumps to the Hours tab so the visual signal can be reconciled against the source rows.');
+  addGuidedTooltip('[data-pilot-demo="true"]', 'Seeds a presentation-safe scenario so the command center can be demonstrated without manual setup.');
+  addGuidedTooltip('[data-command-screenshot-toggle]', 'Tightens the command center for screenshots or Save-as-PDF without changing stored data.');
+  addGuidedTooltip('.presentation-action-row button', 'Presentation helper. Use these during a walkthrough to focus the story quickly.');
+  addGuidedTooltip('.pilot-readiness-card', 'Readiness cards score whether the current demo/pilot story is clear enough to show.');
+  addGuidedTooltip('.engineer-command-pill', 'Status pill. Color and wording summarize the current calculated condition.');
+  addGuidedTooltip('.engineer-cell-badge', 'Small cell badge showing a supporting condition like Help, Stale, Down, Blocked, or Attention.');
+  addGuidedTooltip('.engineer-alert-action', 'Filters or focuses the dashboard on the alert source so the user can verify it quickly.');
+  addGuidedTooltip('.engineer-selected-cell-actions button', 'Cell-specific action. Uses the selected cell without changing saved source data.');
+  addGuidedTooltip('.qa-check-row', 'QA guardrail result. These help verify the command center is wired before a demo or pilot review.');
+  addGuidedInfoDots();
+}
+
+
     // v1.0.155 - guarded boot sequence.
     // A single dashboard/render error should never make the whole prototype feel dead.
     // These startup steps are intentionally isolated so tabs, CTC Pulse, and core buttons
@@ -12042,6 +12132,7 @@ Reason: ${error?.stack || error?.message || error}`;
     runStartupStep("renderPresentationModePanel", renderPresentationModePanel);
     runStartupStep("bindEngineerDashboardButtons", bindEngineerDashboardButtons);
     runStartupStep("bindEngineerDashboardDelegation", bindEngineerDashboardDelegation);
+    runStartupStep("initGuidedTooltips", initGuidedTooltips);
     runStartupStep("runPostBootHealthCheck", runPostBootHealthCheck);
     runStartupStep("switchTab:logbook", () => switchTab("logbook"));
   
