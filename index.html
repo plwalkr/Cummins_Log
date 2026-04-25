@@ -4337,7 +4337,38 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
   .engineer-presentation-actions button{flex-basis:100%}
 }
 
-  </style>
+  
+
+/* ==================== v1.0.187 - RELEASE CANDIDATE HARDENING ====================
+   Non-destructive readiness panel used before continuing feature work. */
+.rc-hardening-panel{display:none;border:1px solid rgba(148,163,184,.24);border-radius:20px;background:linear-gradient(180deg,rgba(15,23,42,.96),rgba(15,23,42,.88));color:#e5edf6;padding:18px;margin:14px 0;box-shadow:0 18px 44px rgba(2,6,23,.22)}
+.rc-hardening-panel.is-visible{display:block}
+.rc-hardening-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap;margin-bottom:14px}
+.rc-hardening-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#93c5fd;font-weight:900;margin-bottom:5px}
+.rc-hardening-head h3{margin:0;color:#f8fafc;font-size:18px}
+.rc-hardening-copy{color:#cbd5e1;font-size:13px;line-height:1.5;margin-top:6px;max-width:78ch}
+.rc-hardening-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:flex-end}
+.rc-hardening-actions button{border:1px solid rgba(148,163,184,.28);border-radius:999px;background:rgba(15,23,42,.72);color:#e5edf6;padding:8px 11px;font-size:12px;font-weight:800;cursor:pointer}
+.rc-hardening-actions button.primary{background:linear-gradient(90deg,#0f766e,#2563eb);border-color:rgba(34,211,238,.34);color:#fff}
+.rc-hardening-score-row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;align-items:center;margin:12px 0 14px}
+.rc-hardening-score{border:1px solid rgba(148,163,184,.24);border-radius:16px;background:rgba(255,255,255,.06);padding:12px;text-align:center}
+.rc-hardening-score strong{display:block;font-size:28px;line-height:1;color:#f8fafc}
+.rc-hardening-score span{display:block;margin-top:5px;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:.12em;font-weight:900}
+.rc-hardening-meter{height:12px;border-radius:999px;background:rgba(148,163,184,.18);overflow:hidden;border:1px solid rgba(148,163,184,.18)}
+.rc-hardening-meter-fill{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,#14b8a6,#22d3ee);box-shadow:0 0 18px rgba(34,211,238,.22);transition:width .35s ease,background .25s ease}
+.rc-hardening-meter-fill.warn{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+.rc-hardening-meter-fill.attn{background:linear-gradient(90deg,#ef4444,#fb7185)}
+.rc-hardening-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-top:10px}
+.rc-hardening-check{border:1px solid rgba(148,163,184,.20);border-radius:14px;background:rgba(255,255,255,.055);padding:11px 12px;min-height:78px}
+.rc-hardening-check.ok{border-color:rgba(20,184,166,.34);background:rgba(20,184,166,.08)}
+.rc-hardening-check.warn{border-color:rgba(245,158,11,.36);background:rgba(245,158,11,.09)}
+.rc-hardening-check.fail{border-color:rgba(239,68,68,.40);background:rgba(239,68,68,.10)}
+.rc-hardening-check strong{display:block;color:#f8fafc;font-size:13px;margin-bottom:5px}
+.rc-hardening-check span{display:block;color:#cbd5e1;font-size:12px;line-height:1.4}
+.rc-hardening-output{margin-top:12px;max-height:220px;overflow:auto;border:1px solid rgba(148,163,184,.20);border-radius:14px;background:rgba(2,6,23,.54);color:#dbeafe;padding:12px;font-size:12px;line-height:1.45;white-space:pre-wrap}
+@media(max-width:760px){.rc-hardening-score-row{grid-template-columns:1fr}.rc-hardening-actions{justify-content:flex-start}}
+
+</style>
 </head>
 <body data-theme="standard">
   <div class="app">
@@ -4349,7 +4380,7 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.186-presentation-pilot-cleanup</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.187-release-candidate-hardening</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -4357,7 +4388,7 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.186-presentation-pilot-cleanup</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.187-release-candidate-hardening</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -4752,7 +4783,7 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.186-presentation-pilot-cleanup</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.187-release-candidate-hardening</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -5380,7 +5411,7 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.186-presentation-pilot-cleanup</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.187-release-candidate-hardening</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -5438,7 +5469,7 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.186-presentation-pilot-cleanup</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.187-release-candidate-hardening</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -5644,7 +5675,7 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.186-presentation-pilot-cleanup</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.187-release-candidate-hardening</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -5723,8 +5754,8 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.186-presentation-pilot-cleanup";
-    const VERSION_DESCRIPTION = "Fixes Ops Map hover-card placement so the small info card no longer blocks the larger map, then upgrades the Selected Cell panel with read-only investigation evidence from hours, weekend, and logbook data while preserving all core workflows.";
+    const VERSION = "v1.0.187-release-candidate-hardening";
+    const VERSION_DESCRIPTION = "Release-candidate hardening pass that adds a final readiness panel, duplicate-ID scan, command-center guardrail review, and report/export checks before new feature work continues.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -13190,6 +13221,118 @@ function initGuidedTooltips(){
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bootQaPass); else bootQaPass();
   window.addEventListener("load", bootQaPass);
 })();
+
+
+/* ==================== v1.0.187 - RELEASE CANDIDATE HARDENING ====================
+   Final non-destructive check before continuing feature work.
+   This does not mutate logbook, hours, weekend, or manager data. */
+(function(){
+  const RC_PANEL_ID = "release-candidate-hardening-panel";
+  function rcExists(selector){ return !!document.querySelector(selector); }
+  function rcText(selector){ return String(document.querySelector(selector)?.textContent || "").trim(); }
+  function rcSafe(label, fn){ try { return { ok:true, value:fn() }; } catch(error){ return { ok:false, error:error?.message || String(error), label }; } }
+  function rcStatus(label, pass, detail, severity){ return { label, pass:!!pass, detail:String(detail || (pass ? "OK" : "Review")), severity:severity || (pass ? "ok" : "warn") }; }
+  function rcDuplicateIds(){
+    const counts = new Map();
+    document.querySelectorAll("[id]").forEach((node) => { if (node.id) counts.set(node.id, (counts.get(node.id) || 0) + 1); });
+    return Array.from(counts.entries()).filter(([, count]) => count > 1).map(([id, count]) => ({ id, count }));
+  }
+  function rcVisibleCommandSections(){
+    return ["engineer-graphics-section","engineer-ops-map","engineer-shift-timeline","engineer-attention-list","engineer-selected-cell-card","engineer-presentation-dock","qa-pass-panel"].filter((id) => !!document.getElementById(id));
+  }
+  function buildReleaseCandidateHardeningResults(){
+    const runtime = rcSafe("runtime", () => typeof createRuntimeHealthReport === "function" ? createRuntimeHealthReport() : null);
+    const intelligence = rcSafe("cell intelligence", () => typeof deriveCellIntelligenceLayer === "function" ? deriveCellIntelligenceLayer() : []);
+    const metrics = rcSafe("engineer metrics", () => typeof deriveEngineerPremiumMetrics === "function" ? deriveEngineerPremiumMetrics() : null);
+    const manager = rcSafe("manager aggregation", () => typeof aggregateManagerData === "function" ? aggregateManagerData() : null);
+    const qa = rcSafe("qa report", () => typeof buildCommandCenterQaResults === "function" ? buildCommandCenterQaResults() : null);
+    const duplicateIds = rcDuplicateIds();
+    const commandSections = rcVisibleCommandSections();
+    const runtimeReport = runtime.value;
+    const intelligenceRows = Array.isArray(intelligence.value) ? intelligence.value.length : 0;
+    const checks = [
+      rcStatus("Version consistency", rcText("#version-label") === VERSION && Array.from(document.querySelectorAll(".release-version-label")).every((el) => el.textContent === VERSION), `Displayed: ${rcText("#version-label") || "missing"}`),
+      rcStatus("Runtime self-check", runtime.ok && !!runtimeReport && runtimeReport.ok, runtime.ok && runtimeReport ? `${runtimeReport.failureCount || 0} issue(s), ${runtimeReport.warningCount || 0} warning(s)` : (runtime.error || "Runtime report unavailable"), runtime.ok && runtimeReport ? (runtimeReport.ok ? "ok" : "fail") : "fail"),
+      rcStatus("Duplicate ID scan", duplicateIds.length === 0, duplicateIds.length ? duplicateIds.slice(0,3).map(item => `#${item.id} x${item.count}`).join(", ") : "No duplicate IDs detected", duplicateIds.length ? "fail" : "ok"),
+      rcStatus("Core tabs", rcExists("#tab-logbook") && rcExists("#tab-hours") && rcExists("#tab-weekend") && rcExists("#tab-manager") && rcExists("#tab-engineer"), "Logbook, Hours, Weekend, Manager, Engineer shells scanned"),
+      rcStatus("CTC Pulse", rcExists("#ctc-pulse-fab") && rcExists("#ctc-pulse-panel") && typeof buildCtcPulseReport === "function", "Pulse button, panel, and report builder present"),
+      rcStatus("Command center sections", commandSections.length >= 5, `${commandSections.length} command section(s) found`, commandSections.length >= 5 ? "ok" : "warn"),
+      rcStatus("Cell intelligence", intelligence.ok && intelligenceRows > 0, intelligence.ok ? `${intelligenceRows} cell intelligence row(s)` : intelligence.error, intelligence.ok ? "ok" : "fail"),
+      rcStatus("Engineer metrics", metrics.ok && !!metrics.value, metrics.ok ? "Premium metrics derived" : metrics.error, metrics.ok ? "ok" : "fail"),
+      rcStatus("Manager aggregation", manager.ok && !!manager.value, manager.ok ? "Manager summary derived" : manager.error, manager.ok ? "ok" : "warn"),
+      rcStatus("Presentation controls", rcExists("#engineer-presentation-dock") && typeof togglePresentationMode === "function" && typeof toggleCommandCenterScreenshotMode === "function", "Presentation and Screenshot controls scanned"),
+      rcStatus("Pilot/demo controls", rcExists('[data-pilot-demo="true"]') && typeof launchPilotDemoMode === "function", "Pilot demo action is available", typeof launchPilotDemoMode === "function" ? "ok" : "warn"),
+      rcStatus("Map hover/tooltips", rcExists("#engineer-cell-hover-card") && (typeof bindEngineerHoverCards === "function" || typeof positionEngineerHoverCard === "function"), "Hover card shell and binding scanned", rcExists("#engineer-cell-hover-card") ? "ok" : "warn"),
+      rcStatus("Supporting details", rcExists(".engineer-supporting-details") || rcExists("#engineer-supporting-details"), "Supporting evidence area scanned", rcExists(".engineer-supporting-details") || rcExists("#engineer-supporting-details") ? "ok" : "warn"),
+      rcStatus("QA panel", qa.ok && !!qa.value, qa.ok ? `QA score: ${qa.value?.score ?? "n/a"}%` : qa.error, qa.ok ? "ok" : "warn"),
+      rcStatus("Exports", typeof exportEngineerSnapshot === "function" && typeof exportSelectedCellSnapshot === "function", "Engineer and selected-cell export functions present", typeof exportEngineerSnapshot === "function" ? "ok" : "warn")
+    ];
+    const hardFails = checks.filter((check) => !check.pass && check.severity === "fail").length;
+    const warnings = checks.filter((check) => !check.pass && check.severity !== "fail").length;
+    const passCount = checks.filter((check) => check.pass).length;
+    const score = Math.round((passCount / Math.max(checks.length, 1)) * 100);
+    return { checks, score, hardFails, warnings, duplicateIds, commandSections, intelligenceRows, timestamp:new Date().toLocaleString() };
+  }
+  function buildReleaseCandidateHardeningReport(){
+    const rc = buildReleaseCandidateHardeningResults();
+    const lines = ["Cummins Unified Logbook — Release Candidate Hardening Report",`Version: ${VERSION}`,`Description: ${VERSION_DESCRIPTION}`,`Timestamp: ${rc.timestamp}`,`Readiness score: ${rc.score}%`,`Hard failures: ${rc.hardFails}`,`Warnings: ${rc.warnings}`,`Cell intelligence rows: ${rc.intelligenceRows}`,`Command sections found: ${rc.commandSections.join(", ") || "none"}`,"","Checks:"];
+    rc.checks.forEach((check) => { lines.push(`- ${check.pass ? "PASS" : check.severity === "fail" ? "FAIL" : "WARN"}: ${check.label} — ${check.detail}`); });
+    if (rc.duplicateIds.length) { lines.push("", "Duplicate IDs:"); rc.duplicateIds.forEach((item) => lines.push(`- #${item.id}: ${item.count}`)); }
+    lines.push("", "RC note: this scan is read-only and does not alter saved operator data.");
+    return lines.join("\n");
+  }
+  function rcSetVisible(show){ const panel = document.getElementById(RC_PANEL_ID); if (!panel) return; panel.classList.toggle("is-visible", !!show); panel.setAttribute("aria-hidden", show ? "false" : "true"); }
+  function renderReleaseCandidateHardeningPanel(){
+    const panel = document.getElementById(RC_PANEL_ID); if (!panel) return;
+    const rc = buildReleaseCandidateHardeningResults();
+    const score = panel.querySelector("#rc-hardening-score-value");
+    const copy = panel.querySelector("#rc-hardening-copy");
+    const fill = panel.querySelector("#rc-hardening-meter-fill");
+    const grid = panel.querySelector("#rc-hardening-grid");
+    const output = panel.querySelector("#rc-hardening-output");
+    if (score) score.textContent = `${rc.score}%`;
+    if (copy) copy.textContent = `${rc.checks.length} checks scanned · ${rc.hardFails} hard failure(s) · ${rc.warnings} warning(s) · ${rc.intelligenceRows} cell row(s).`;
+    if (fill) { fill.style.width = `${rc.score}%`; fill.classList.toggle("warn", rc.score < 92 && rc.score >= 78); fill.classList.toggle("attn", rc.score < 78); }
+    if (grid) grid.innerHTML = rc.checks.map((check) => `<div class="rc-hardening-check ${check.pass ? "ok" : check.severity === "fail" ? "fail" : "warn"}"><strong>${escapeHtml(check.label)}</strong><span>${escapeHtml(check.detail)}</span></div>`).join("");
+    if (output) output.textContent = buildReleaseCandidateHardeningReport();
+  }
+  function ensureReleaseCandidateHardeningPanel(){
+    if (document.getElementById(RC_PANEL_ID)) return;
+    const engineerTab = document.getElementById("tab-engineer");
+    const anchor = document.getElementById("engineer-presentation-dock") || document.getElementById("qa-pass-panel") || engineerTab?.querySelector(".section-body");
+    if (!engineerTab || !anchor) return;
+    const panel = document.createElement("div");
+    panel.id = RC_PANEL_ID;
+    panel.className = "rc-hardening-panel";
+    panel.setAttribute("aria-hidden", "true");
+    panel.innerHTML = `<div class="rc-hardening-head"><div><div class="rc-hardening-kicker">Release Candidate Hardening</div><h3>Final readiness scan before more feature work</h3><div id="rc-hardening-copy" class="rc-hardening-copy">Run RC scan to check version labels, duplicate IDs, command sections, exports, Pulse, QA, presentation controls, and runtime guardrails.</div></div><div class="rc-hardening-actions"><button type="button" class="primary" onclick="runReleaseCandidateHardeningScan()">Run RC Scan</button><button type="button" onclick="copyReleaseCandidateHardeningReport(this)">Copy Report</button><button type="button" onclick="downloadReleaseCandidateHardeningReport()">Download Report</button><button type="button" onclick="toggleReleaseCandidateHardeningPanel(false)">Hide</button></div></div><div class="rc-hardening-score-row"><div class="rc-hardening-score"><strong id="rc-hardening-score-value">--%</strong><span>RC readiness</span></div><div class="rc-hardening-meter"><div id="rc-hardening-meter-fill" class="rc-hardening-meter-fill"></div></div></div><div id="rc-hardening-grid" class="rc-hardening-grid"></div><pre id="rc-hardening-output" class="rc-hardening-output">Release-candidate report will appear here after scan.</pre>`;
+    anchor.parentNode.insertBefore(panel, anchor.nextSibling);
+  }
+  function ensureReleaseCandidateHardeningButton(){
+    const target = document.querySelector("#engineer-presentation-dock .engineer-presentation-actions") || document.querySelector("#tab-engineer .temp-test-actions") || document.querySelector(".engineer-2026-topbar-actions");
+    if (!target || target.querySelector("[data-rc-hardening-toggle]")) return;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.setAttribute("data-rc-hardening-toggle", "true");
+    btn.textContent = "RC Scan";
+    btn.addEventListener("click", () => window.toggleReleaseCandidateHardeningPanel());
+    target.appendChild(btn);
+  }
+  window.runReleaseCandidateHardeningScan = function runReleaseCandidateHardeningScan(){ try { if (typeof runPostBootHealthCheck === "function") runPostBootHealthCheck(); } catch {} renderReleaseCandidateHardeningPanel(); rcSetVisible(true); if (typeof showToast === "function") showToast("Release-candidate scan complete"); };
+  window.toggleReleaseCandidateHardeningPanel = function toggleReleaseCandidateHardeningPanel(force){ const panel = document.getElementById(RC_PANEL_ID); const next = typeof force === "boolean" ? force : !panel?.classList.contains("is-visible"); rcSetVisible(next); if (next) renderReleaseCandidateHardeningPanel(); };
+  window.copyReleaseCandidateHardeningReport = async function copyReleaseCandidateHardeningReport(button){
+    const report = buildReleaseCandidateHardeningReport(); const original = button?.textContent;
+    try { if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(report); else window.prompt("Copy release-candidate report:", report); if (button) button.textContent = "Copied"; if (typeof showToast === "function") showToast("RC report copied"); }
+    catch { try { window.prompt("Copy release-candidate report:", report); } catch {} }
+    finally { if (button && original) window.setTimeout(() => { button.textContent = original; }, 1200); }
+    return report;
+  };
+  window.downloadReleaseCandidateHardeningReport = function downloadReleaseCandidateHardeningReport(){ const report = buildReleaseCandidateHardeningReport(); const blob = new Blob([report], { type:"text/plain;charset=utf-8" }); const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = "cummins_release_candidate_hardening_report.txt"; document.body.appendChild(link); link.click(); link.remove(); URL.revokeObjectURL(link.href); };
+  function bootReleaseCandidateHardening(){ ensureReleaseCandidateHardeningPanel(); ensureReleaseCandidateHardeningButton(); if (window.culRuntimeHealthReport == null && typeof runPostBootHealthCheck === "function") { try { runPostBootHealthCheck(); } catch {} } }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bootReleaseCandidateHardening); else bootReleaseCandidateHardening();
+  window.addEventListener("load", bootReleaseCandidateHardening);
+})();
+
 
 </script>
 </body>
