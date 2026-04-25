@@ -3535,6 +3535,39 @@ body.command-capture-mode .panel:not(#engineer-graphics-section) .panel-head{
   }
 }
 
+
+
+/* ==================== v1.0.177 - COMMAND CENTER QA PASS ====================
+   QA tooling is intentionally non-destructive. It scans existing DOM/state and
+   reports readiness without mutating operator, hours, weekend, manager, or demo data. */
+.qa-pass-panel{border:1px solid rgba(148,163,184,.28);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(248,250,252,.96));padding:14px;box-shadow:0 8px 24px rgba(15,23,42,.06);display:none;gap:12px;flex-direction:column}
+.qa-pass-panel.is-visible{display:flex}
+.qa-pass-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.qa-pass-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#64748b;font-weight:900;margin-bottom:4px}
+.qa-pass-head h3{font-size:18px;margin:0;color:#0f172a}
+.qa-pass-copy{font-size:12px;color:#475569;line-height:1.55;max-width:76ch;margin-top:4px}
+.qa-pass-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.qa-pass-actions button,.qa-pass-trigger{border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:999px;padding:8px 11px;font-size:12px;font-weight:800;cursor:pointer}
+.qa-pass-trigger.active,.qa-pass-actions button.primary{background:#0f172a;color:#fff;border-color:#0f172a}
+.qa-pass-score-row{display:grid;grid-template-columns:160px minmax(0,1fr);gap:12px;align-items:center}
+.qa-pass-score{border:1px solid #e2e8f0;border-radius:16px;background:#f8fafc;padding:12px;text-align:center}
+.qa-pass-score strong{display:block;font-size:32px;line-height:1;color:#0f172a}
+.qa-pass-score span{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#64748b;font-weight:900;margin-top:5px}
+.qa-pass-meter{height:12px;border-radius:999px;background:#e2e8f0;overflow:hidden;border:1px solid #cbd5e1}
+.qa-pass-meter-fill{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,#14b8a6,#22d3ee);transition:width .35s ease}
+.qa-pass-meter-fill.warn{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+.qa-pass-meter-fill.attn{background:linear-gradient(90deg,#dc2626,#fb7185)}
+.qa-pass-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.qa-pass-check{border:1px solid #e2e8f0;border-radius:12px;background:#fff;padding:10px;min-height:78px}
+.qa-pass-check strong{display:flex;align-items:center;gap:6px;font-size:12px;color:#0f172a;margin-bottom:4px}
+.qa-pass-check span{display:block;font-size:12px;color:#475569;line-height:1.4}
+.qa-pass-check.ok strong:before{content:'✓';color:#16a34a;font-weight:900}
+.qa-pass-check.warn strong:before{content:'!';color:#d97706;font-weight:900}
+.qa-pass-check.fail strong:before{content:'×';color:#dc2626;font-weight:900}
+.qa-pass-output{white-space:pre-wrap;background:#0f172a;color:#dbeafe;border-radius:14px;padding:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:11px;line-height:1.55;max-height:220px;overflow:auto;border:1px solid rgba(148,163,184,.24)}
+body.command-capture-mode .qa-pass-panel{display:none !important}
+@media (max-width: 900px){.qa-pass-score-row,.qa-pass-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body data-theme="standard">
@@ -3547,7 +3580,7 @@ body.command-capture-mode .panel:not(#engineer-graphics-section) .panel-head{
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.171-stability-hardening</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.177-command-center-qa-pass</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -3555,7 +3588,7 @@ body.command-capture-mode .panel:not(#engineer-graphics-section) .panel-head{
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.171-stability-hardening</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.177-command-center-qa-pass</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -3950,7 +3983,7 @@ body.command-capture-mode .panel:not(#engineer-graphics-section) .panel-head{
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.175-presentation-mode</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.177-command-center-qa-pass</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -4529,7 +4562,7 @@ body.command-capture-mode .panel:not(#engineer-graphics-section) .panel-head{
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.175-presentation-mode</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.177-command-center-qa-pass</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -4587,7 +4620,7 @@ body.command-capture-mode .panel:not(#engineer-graphics-section) .panel-head{
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.175-presentation-mode</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.177-command-center-qa-pass</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -4793,7 +4826,7 @@ body.command-capture-mode .panel:not(#engineer-graphics-section) .panel-head{
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.175-presentation-mode</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.177-command-center-qa-pass</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -4872,8 +4905,8 @@ body.command-capture-mode .panel:not(#engineer-graphics-section) .panel-head{
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.176-command-center-screenshot-mode";
-    const VERSION_DESCRIPTION = "Adds a screenshot-ready command-center capture mode for the Engineer view with visual cleanup controls, presentation framing, and non-destructive layout focus while preserving operator workflows and stability guardrails.";
+    const VERSION = "v1.0.177-command-center-qa-pass";
+    const VERSION_DESCRIPTION = "Adds a command-center QA pass with non-destructive runtime checks, a copyable QA report, and guarded verification for tabs, CTC Pulse, Engineer graphics, pilot/presentation/screenshot modes, map selection, exports, and core operator workflows.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -11828,6 +11861,206 @@ Reason: ${error?.stack || error?.message || error}`;
   }
 
   window.addEventListener("load", bootScreenshotMode);
+})();
+
+
+/* v1.0.177 - command center QA pass
+   Adds a non-destructive QA console for the fast-moving command-center build.
+   The checks verify presence/binding signals instead of clicking real operator
+   buttons, so the QA pass cannot mutate production-style data. */
+(function initCommandCenterQaPass(){
+  const QA_STORAGE_KEY = "cummins-command-center-qa-panel-visible";
+
+  function qaGetPanelVisible(){ try { return localStorage.getItem(QA_STORAGE_KEY) === "true"; } catch { return false; } }
+  function qaSetPanelVisible(visible){
+    try { localStorage.setItem(QA_STORAGE_KEY, visible ? "true" : "false"); } catch {}
+    const panel = document.getElementById("qa-pass-panel");
+    const btn = document.querySelector("[data-qa-pass-toggle]");
+    if (panel) panel.classList.toggle("is-visible", !!visible);
+    if (btn) {
+      btn.classList.toggle("active", !!visible);
+      btn.textContent = visible ? "Hide QA Pass" : "QA Pass";
+      btn.setAttribute("aria-pressed", visible ? "true" : "false");
+    }
+  }
+  function qaExists(selector){ return !!document.querySelector(selector); }
+  function qaText(selector){ return (document.querySelector(selector)?.textContent || "").trim(); }
+  function qaStatus(label, pass, detail, severity){ return { label, pass: !!pass, detail: detail || (pass ? "OK" : "Needs review"), severity: severity || (pass ? "ok" : "fail") }; }
+  function safeCall(label, fn){ try { return { ok:true, value:fn() }; } catch(error){ return { ok:false, error: error?.message || String(error), label }; } }
+
+  function buildCommandCenterQaResults(){
+    const tabButtons = document.querySelectorAll(".tab-btn").length;
+    const engineSection = document.getElementById("engineer-graphics-section");
+    const activeTab = document.body?.dataset?.activeTab || "unknown";
+    const intelligence = safeCall("deriveCellIntelligence", () => typeof deriveCellIntelligence === "function" ? deriveCellIntelligence() : []);
+    const metrics = safeCall("deriveEngineerPremiumMetrics", () => typeof deriveEngineerPremiumMetrics === "function" ? deriveEngineerPremiumMetrics() : null);
+    const attention = safeCall("deriveAttentionEngineAlerts", () => typeof deriveAttentionEngineAlerts === "function" ? deriveAttentionEngineAlerts() : []);
+    const readiness = safeCall("derivePilotReadinessScore", () => typeof derivePilotReadinessScore === "function" ? derivePilotReadinessScore() : null);
+    const cells = Array.isArray(intelligence.value) ? intelligence.value : [];
+    const alerts = Array.isArray(attention.value) ? attention.value : [];
+    const selectedCell = window.engineerSelectedCell || qaText("#selected-cell-id") || "none";
+    const checks = [
+      qaStatus("Version labels", qaText("#version-label") === VERSION && [...document.querySelectorAll(".release-version-label")].every(el => el.textContent === VERSION), `Displayed version: ${qaText("#version-label") || "missing"}`),
+      qaStatus("Tab shell", tabButtons >= 6 && qaExists("#tab-logbook") && qaExists("#tab-hours") && qaExists("#tab-engineer"), `${tabButtons} tab buttons found`),
+      qaStatus("CTC Pulse shell", qaExists("#ctc-pulse-fab") && qaExists("#ctc-pulse-panel") && typeof runCtcPulseScan === "function", "Pulse button/panel/function present"),
+      qaStatus("Engineer graphics shell", !!engineSection && qaExists("#engineer-graphics-body") && typeof renderEngineerPremiumDashboard === "function", engineSection ? "Engineer graphics section present" : "Engineer graphics section missing"),
+      qaStatus("Command map", qaExists("#engineer-cell-map") || qaExists("[data-cell-map]") || qaExists(".cell-ops-map") || qaExists(".ops-map-premium"), "Ops map DOM scanned", qaExists("#engineer-cell-map") || qaExists("[data-cell-map]") || qaExists(".cell-ops-map") || qaExists(".ops-map-premium") ? "ok" : "warn"),
+      qaStatus("Timeline ribbon", qaExists("#shift-timeline-ribbon") || qaExists(".shift-timeline-ribbon") || qaExists("[data-shift-timeline]"), "Timeline DOM scanned", qaExists("#shift-timeline-ribbon") || qaExists(".shift-timeline-ribbon") || qaExists("[data-shift-timeline]") ? "ok" : "warn"),
+      qaStatus("Attention engine", qaExists("#attention-engine-panel") || qaExists(".attention-engine-panel") || typeof deriveAttentionEngineAlerts === "function", `${alerts.length} alert(s) derived`, attention.ok ? "ok" : "fail"),
+      qaStatus("Selected cell detail", qaExists("#selected-cell-detail-panel") || qaExists(".selected-cell-detail-panel") || typeof renderSelectedCellDetailPanel === "function", `Selected cell: ${selectedCell}`, "ok"),
+      qaStatus("Pilot demo controls", qaExists("[data-pilot-demo]") && typeof launchPilotDemoMode === "function", "Pilot demo button/function present", qaExists("[data-pilot-demo]") ? "ok" : "warn"),
+      qaStatus("Presentation mode", typeof togglePresentationMode === "function" && qaExists("#presentation-mode-panel"), "Presentation panel/function present", typeof togglePresentationMode === "function" ? "ok" : "warn"),
+      qaStatus("Screenshot view", typeof toggleCommandCenterScreenshotMode === "function" && qaExists("[data-command-screenshot-toggle]"), "Screenshot control/function present", typeof toggleCommandCenterScreenshotMode === "function" ? "ok" : "warn"),
+      qaStatus("Exports", typeof exportEngineerSnapshot === "function" && typeof exportSelectedCellSnapshot === "function", "Engineer and cell snapshot exports present", typeof exportEngineerSnapshot === "function" ? "ok" : "warn"),
+      qaStatus("Cell intelligence", intelligence.ok && cells.length > 0, intelligence.ok ? `${cells.length} cell intelligence row(s)` : intelligence.error, intelligence.ok ? "ok" : "fail"),
+      qaStatus("Premium metrics", metrics.ok && !!metrics.value, metrics.ok ? "Engineer metrics derived" : metrics.error, metrics.ok ? "ok" : "fail"),
+      qaStatus("Pilot readiness", readiness.ok && !!readiness.value, readiness.ok ? `Readiness: ${readiness.value.score ?? "n/a"}` : readiness.error, readiness.ok ? "ok" : "warn"),
+      qaStatus("Running sheet resize", qaExists(".running-sheet-resizer") || qaExists("#running-sheet-resizer"), "Resize cue scanned", qaExists(".running-sheet-resizer") || qaExists("#running-sheet-resizer") ? "ok" : "warn"),
+      qaStatus("Startup guard", typeof runPostBootHealthCheck === "function" && !!window.commandCenterHealthCheck, "Post-boot health guard available", typeof runPostBootHealthCheck === "function" ? "ok" : "warn")
+    ];
+    const passCount = checks.filter(c => c.pass).length;
+    const score = Math.round((passCount / Math.max(checks.length, 1)) * 100);
+    const fails = checks.filter(c => !c.pass && c.severity === "fail").length;
+    const warns = checks.filter(c => !c.pass && c.severity !== "fail").length;
+    return { checks, score, fails, warns, activeTab, cells: cells.length, alerts: alerts.length, selectedCell };
+  }
+
+  function buildCommandCenterQaReport(){
+    const qa = buildCommandCenterQaResults();
+    const lines = [
+      "Cummins Unified Logbook — Command Center QA Pass",
+      `Version: ${VERSION}`,
+      `Description: ${VERSION_DESCRIPTION}`,
+      `Timestamp: ${new Date().toLocaleString()}`,
+      `Active tab: ${qa.activeTab}`,
+      `QA readiness score: ${qa.score}%`,
+      `Warnings: ${qa.warns}`,
+      `Failures: ${qa.fails}`,
+      `Cell intelligence rows: ${qa.cells}`,
+      `Attention alerts: ${qa.alerts}`,
+      `Selected cell: ${qa.selectedCell}`,
+      "",
+      "Checks:"
+    ];
+    qa.checks.forEach((check) => { lines.push(`- ${check.pass ? "PASS" : check.severity === "fail" ? "FAIL" : "WARN"}: ${check.label} — ${check.detail}`); });
+    lines.push("", "QA note: this pass is non-destructive and does not click operator workflow buttons or change saved data.");
+    return lines.join("\n");
+  }
+
+  function renderCommandCenterQaPass(){
+    const panel = document.getElementById("qa-pass-panel");
+    if (!panel) return;
+    const qa = buildCommandCenterQaResults();
+    const fill = panel.querySelector("#qa-pass-meter-fill");
+    const score = panel.querySelector("#qa-pass-score-value");
+    const copy = panel.querySelector("#qa-pass-copy");
+    const grid = panel.querySelector("#qa-pass-grid");
+    const output = panel.querySelector("#qa-pass-output");
+    if (score) score.textContent = `${qa.score}%`;
+    if (copy) copy.textContent = `${qa.checks.length} checks scanned · ${qa.warns} warning(s) · ${qa.fails} failure(s) · ${qa.cells} cell intelligence row(s) · ${qa.alerts} active alert(s).`;
+    if (fill) { fill.style.width = `${qa.score}%`; fill.classList.toggle("warn", qa.score < 90 && qa.score >= 75); fill.classList.toggle("attn", qa.score < 75); }
+    if (grid) {
+      grid.innerHTML = qa.checks.map((check) => `
+        <div class="qa-pass-check ${check.pass ? "ok" : check.severity === "fail" ? "fail" : "warn"}">
+          <strong>${escapeHtml(check.label)}</strong>
+          <span>${escapeHtml(check.detail)}</span>
+        </div>
+      `).join("");
+    }
+    if (output) output.textContent = buildCommandCenterQaReport();
+  }
+
+  window.runCommandCenterQaPass = function runCommandCenterQaPass(){
+    renderCommandCenterQaPass();
+    qaSetPanelVisible(true);
+    try { if (typeof runPostBootHealthCheck === "function") runPostBootHealthCheck(); } catch {}
+    if (typeof showToast === "function") showToast("Command Center QA scan complete");
+  };
+
+  window.toggleCommandCenterQaPass = function toggleCommandCenterQaPass(force){
+    const next = typeof force === "boolean" ? force : !document.getElementById("qa-pass-panel")?.classList.contains("is-visible");
+    qaSetPanelVisible(next);
+    if (next) renderCommandCenterQaPass();
+  };
+
+  window.copyCommandCenterQaReport = async function copyCommandCenterQaReport(button){
+    const report = buildCommandCenterQaReport();
+    const original = button?.textContent;
+    try {
+      if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(report);
+      else window.prompt("Copy QA report:", report);
+      if (button) button.textContent = "Copied";
+      if (typeof showToast === "function") showToast("QA report copied");
+    } catch { try { window.prompt("Copy QA report:", report); } catch {} }
+    finally { if (button && original) window.setTimeout(() => { button.textContent = original; }, 1200); }
+    return report;
+  };
+
+  window.downloadCommandCenterQaReport = function downloadCommandCenterQaReport(){
+    const report = buildCommandCenterQaReport();
+    const blob = new Blob([report], { type:"text/plain;charset=utf-8" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "cummins_command_center_qa_report.txt";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(link.href);
+  };
+
+  function ensureQaPanel(){
+    if (document.getElementById("qa-pass-panel")) return;
+    const engineerTab = document.getElementById("tab-engineer");
+    const anchor = document.getElementById("pilot-mode-banner") || engineerTab?.querySelector(".section-body");
+    if (!engineerTab || !anchor) return;
+    const panel = document.createElement("div");
+    panel.id = "qa-pass-panel";
+    panel.className = "qa-pass-panel";
+    panel.innerHTML = `
+      <div class="qa-pass-head">
+        <div>
+          <div class="qa-pass-kicker">Command Center QA</div>
+          <h3>Non-destructive readiness scan</h3>
+          <div id="qa-pass-copy" class="qa-pass-copy">Run QA Pass to scan command-center bindings, panels, exports, reports, and startup guard signals.</div>
+        </div>
+        <div class="qa-pass-actions">
+          <button type="button" class="primary" onclick="runCommandCenterQaPass()">Run QA Pass</button>
+          <button type="button" onclick="copyCommandCenterQaReport(this)">Copy Report</button>
+          <button type="button" onclick="downloadCommandCenterQaReport()">Download Report</button>
+          <button type="button" onclick="toggleCommandCenterQaPass(false)">Hide</button>
+        </div>
+      </div>
+      <div class="qa-pass-score-row">
+        <div class="qa-pass-score"><strong id="qa-pass-score-value">--%</strong><span>Readiness</span></div>
+        <div class="qa-pass-meter"><div id="qa-pass-meter-fill" class="qa-pass-meter-fill"></div></div>
+      </div>
+      <div id="qa-pass-grid" class="qa-pass-grid"></div>
+      <pre id="qa-pass-output" class="qa-pass-output">QA report will appear here after scan.</pre>
+    `;
+    anchor.parentNode.insertBefore(panel, anchor.nextSibling);
+  }
+
+  function ensureQaButton(){
+    const target = document.querySelector("#tab-engineer .temp-test-actions") || document.querySelector(".engineer-2026-topbar-actions");
+    if (!target || target.querySelector("[data-qa-pass-toggle]")) return;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "temp-test-btn qa-pass-trigger";
+    btn.setAttribute("data-qa-pass-toggle", "true");
+    btn.setAttribute("aria-pressed", "false");
+    btn.textContent = "QA Pass";
+    btn.addEventListener("click", () => window.toggleCommandCenterQaPass());
+    target.appendChild(btn);
+  }
+
+  function bootQaPass(){
+    ensureQaPanel();
+    ensureQaButton();
+    qaSetPanelVisible(qaGetPanelVisible());
+    if (qaGetPanelVisible()) renderCommandCenterQaPass();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bootQaPass); else bootQaPass();
+  window.addEventListener("load", bootQaPass);
 })();
 
 </script>
