@@ -4160,6 +4160,67 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 }
 
 
+/* ==================== v1.0.185 - OPS MAP HOVER FIX + CELL INVESTIGATION ====================
+   Keeps the rich hover card useful without letting it cover the Ops Map.
+   Also adds a compact evidence trail inside the selected-cell panel so the score has proof. */
+.engineer-hover-card.is-docked{
+  max-width:310px;
+  width:min(310px,calc(100vw - 24px));
+}
+.engineer-hover-card.is-docked .engineer-hover-card-grid{grid-template-columns:1fr 1fr}
+.engineer-hover-card.is-docked .engineer-hover-card-inner{padding:12px}
+.engineer-hover-card.is-docked .engineer-hover-card-title{font-size:18px}
+.engineer-selected-cell-investigation{
+  position:relative;
+  z-index:1;
+  border:1px solid rgba(148,163,184,.18);
+  border-radius:16px;
+  background:rgba(15,23,42,.24);
+  padding:12px;
+  margin:0 0 14px 0;
+}
+.engineer-dashboard--lightcards .engineer-selected-cell-investigation{background:rgba(248,250,252,.82)}
+.engineer-selected-cell-investigation-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:10px}
+.engineer-selected-cell-investigation-title{color:#F8FAFC;font-size:13px;font-weight:950;letter-spacing:-.01em}
+.engineer-dashboard--lightcards .engineer-selected-cell-investigation-title{color:#0F172A}
+.engineer-selected-cell-investigation-count{display:inline-flex;align-items:center;justify-content:center;padding:4px 8px;border-radius:999px;border:1px solid rgba(148,163,184,.22);background:rgba(15,23,42,.32);color:var(--eng-muted);font-size:10px;font-weight:950;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.engineer-selected-cell-evidence-list{display:grid;grid-template-columns:1fr;gap:8px}
+.engineer-selected-cell-evidence-row{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  gap:9px;
+  align-items:flex-start;
+  border:1px solid rgba(148,163,184,.14);
+  border-radius:13px;
+  background:rgba(2,6,23,.22);
+  padding:9px 10px;
+}
+.engineer-dashboard--lightcards .engineer-selected-cell-evidence-row{background:rgba(255,255,255,.78)}
+.engineer-selected-cell-evidence-type{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:62px;
+  padding:4px 7px;
+  border-radius:999px;
+  background:rgba(34,211,238,.12);
+  border:1px solid rgba(34,211,238,.18);
+  color:#67E8F9;
+  font-size:9px;
+  font-weight:950;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.engineer-selected-cell-evidence-copy{min-width:0;color:var(--eng-copy);font-size:12px;line-height:1.45}
+.engineer-selected-cell-evidence-copy strong{display:block;color:#F8FAFC;font-size:12.5px;margin-bottom:2px}
+.engineer-dashboard--lightcards .engineer-selected-cell-evidence-copy strong{color:#0F172A}
+.engineer-selected-cell-evidence-empty{color:var(--eng-muted);font-size:12px;line-height:1.45;border:1px dashed rgba(148,163,184,.20);border-radius:13px;padding:10px;background:rgba(15,23,42,.18)}
+@media (max-width: 900px){
+  .engineer-selected-cell-investigation-head{flex-direction:column}
+  .engineer-selected-cell-evidence-row{grid-template-columns:1fr}
+  .engineer-selected-cell-evidence-type{justify-content:flex-start;width:max-content}
+}
+
 /* ==================== v1.0.184 - SUPPORTING DETAILS COLLAPSE ====================
    Keeps the 2026 command center as the primary Engineer view while preserving
    raw evidence below in a clean collapsed audit/support area. */
@@ -4207,7 +4268,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.184-supporting-details-collapse</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.185-ops-map-hover-fix-selected-investigation</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -4215,7 +4276,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.184-supporting-details-collapse</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.185-ops-map-hover-fix-selected-investigation</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -4610,7 +4671,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.184-supporting-details-collapse</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.185-ops-map-hover-fix-selected-investigation</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -4764,7 +4825,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
                   <div class="engineer-2026-kicker">Prototype Graphical Overview</div>
                   <h3 class="engineer-2026-title">2026 Test Cell Command View</h3>
                   <div id="engineer-command-subtitle" class="engineer-command-subtitle">
-                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.184 keeps the command center first while collapsing raw supporting evidence below for cleaner review flow.
+                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.185 keeps the command center first, fixes the Ops Map hover-card overlap, and upgrades selected-cell investigation evidence without removing raw supporting details.
                   </div>
                 </div>
 
@@ -5104,6 +5165,21 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
                     <div class="engineer-selected-cell-detail"><strong>Data Confidence</strong><span id="engineer-selected-cell-confidence">—</span></div>
                   </div>
 
+                  <!-- v1.0.185 - Selected-cell investigation evidence
+                       Compact proof trail. Read-only. Uses existing hours/weekend/logbook data. -->
+                  <div id="engineer-selected-cell-investigation" class="engineer-selected-cell-investigation">
+                    <div class="engineer-selected-cell-investigation-head">
+                      <div>
+                        <div class="engineer-selected-cell-mini-label">Investigation Evidence</div>
+                        <div class="engineer-selected-cell-investigation-title">Why this cell is scored this way</div>
+                      </div>
+                      <span id="engineer-selected-cell-evidence-count" class="engineer-selected-cell-investigation-count">0 signals</span>
+                    </div>
+                    <div id="engineer-selected-cell-evidence-list" class="engineer-selected-cell-evidence-list">
+                      <div class="engineer-selected-cell-evidence-empty">Select a cell to show matching hours, weekend board, and logbook evidence.</div>
+                    </div>
+                  </div>
+
                   <div class="engineer-selected-cell-actions">
                     <button id="engineer-selected-cell-filter-btn" class="secondary" type="button" onclick="filterSelectedEngineerCell()">Filter to Cell</button>
                     <button id="engineer-selected-cell-export-btn" class="secondary" type="button" onclick="exportSelectedEngineerCellSnapshot()">Export Cell Snapshot</button>
@@ -5204,7 +5280,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.184-supporting-details-collapse</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.185-ops-map-hover-fix-selected-investigation</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -5262,7 +5338,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.184-supporting-details-collapse</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.185-ops-map-hover-fix-selected-investigation</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -5468,7 +5544,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.184-supporting-details-collapse</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.185-ops-map-hover-fix-selected-investigation</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -5547,8 +5623,8 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.184-supporting-details-collapse";
-    const VERSION_DESCRIPTION = "Refines Engineer command-center visual hierarchy so the Ops Map reads as the hero, KPI/health signals scan first, Attention and Selected Cell panels support the story, timeline remains quieter, and demo/QA controls are visually toned down while preserving all core workflows.";
+    const VERSION = "v1.0.185-ops-map-hover-fix-selected-investigation";
+    const VERSION_DESCRIPTION = "Fixes Ops Map hover-card placement so the small info card no longer blocks the larger map, then upgrades the Selected Cell panel with read-only investigation evidence from hours, weekend, and logbook data while preserving all core workflows.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -6862,14 +6938,40 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
     function positionEngineerHoverCard(event){
       const card = document.getElementById("engineer-hover-card");
       if (!card || !card.classList.contains("is-visible")) return;
+
       const margin = 14;
+      const gap = 14;
+      const mapCard = document.querySelector(".engineer-ops-map-card");
+      const mapRect = mapCard ? mapCard.getBoundingClientRect() : null;
+
+      card.classList.add("is-docked");
       const rect = card.getBoundingClientRect();
-      let left = event.clientX + 16;
-      let top = event.clientY + 16;
-      if (left + rect.width + margin > window.innerWidth) left = event.clientX - rect.width - 16;
-      if (top + rect.height + margin > window.innerHeight) top = window.innerHeight - rect.height - margin;
-      if (top < margin) top = margin;
-      if (left < margin) left = margin;
+      const eventX = Number(event?.clientX || 0);
+      const eventY = Number(event?.clientY || 0);
+
+      let left = eventX + 16;
+      let top = eventY + 16;
+
+      // v1.0.185: Keep the small hover card from covering the large Ops Map.
+      // Prefer docking beside the map card; fall back to viewport-safe cursor placement.
+      if (mapRect && eventX >= mapRect.left && eventX <= mapRect.right && eventY >= mapRect.top && eventY <= mapRect.bottom) {
+        const roomRight = window.innerWidth - mapRect.right - margin;
+        const roomLeft = mapRect.left - margin;
+        if (roomRight >= rect.width + gap) {
+          left = mapRect.right + gap;
+        } else if (roomLeft >= rect.width + gap) {
+          left = mapRect.left - rect.width - gap;
+        } else {
+          left = Math.min(Math.max(eventX + 18, margin), window.innerWidth - rect.width - margin);
+        }
+        top = Math.min(Math.max(eventY - Math.min(rect.height * 0.28, 84), margin), window.innerHeight - rect.height - margin);
+      } else {
+        if (left + rect.width + margin > window.innerWidth) left = eventX - rect.width - 16;
+        if (top + rect.height + margin > window.innerHeight) top = window.innerHeight - rect.height - margin;
+        if (top < margin) top = margin;
+        if (left < margin) left = margin;
+      }
+
       card.style.left = `${left}px`;
       card.style.top = `${top}px`;
     }
@@ -7302,6 +7404,72 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       if (node) node.textContent = value;
     }
 
+    function getEngineerSelectedCellEvidence(cellNumber){
+      const targetCell = safeCellNumber(cellNumber);
+      if (!targetCell) return [];
+
+      const evidence = [];
+      const pushEvidence = (type, title, copy) => {
+        const cleanTitle = String(title || "").replace(/<[^>]+>/g, " ").trim();
+        const cleanCopy = String(copy || "").replace(/<[^>]+>/g, " ").trim();
+        if (!cleanTitle && !cleanCopy) return;
+        evidence.push({ type, title: cleanTitle || type, copy: cleanCopy || "No additional detail entered." });
+      };
+
+      const weekendRowsForDate = typeof getWeekendRowsForCurrentDate === "function" ? getWeekendRowsForCurrentDate() : [];
+
+      (Array.isArray(hoursRows) ? hoursRows : []).forEach((row, index) => {
+        if (safeCellNumber(getEngineerCellValue(row)) !== targetCell) return;
+        const hours = Number(row?.hours ?? row?.loggedHours ?? 0) || 0;
+        const detail = String(row?.detail || row?.status || "Hours row").trim();
+        const comment = String(row?.comment || row?.comments || "").trim();
+        pushEvidence("Hours", `${hours.toFixed(1)}h · ${detail}`, comment || (isDowntimeEngineerRow(row) ? "Downtime-style row found." : `Hours row ${index + 1} supports the current cell read.`));
+      });
+
+      (Array.isArray(weekendRowsForDate) ? weekendRowsForDate : []).forEach((row) => {
+        if (safeCellNumber(getEngineerCellValue(row)) !== targetCell) return;
+        const status = String(row?.tcStatus || row?.status || "Weekend status").trim();
+        const help = row?.helpNeeded === "Yes" || row?.helpNeeded === true ? "Help needed" : "No help flag";
+        const comment = String(row?.comments || row?.note || row?.comment || "").trim();
+        pushEvidence("Weekend", `${status} · ${help}`, comment || "Weekend board row is contributing to this cell read.");
+      });
+
+      (Array.isArray(entries) ? entries : []).slice().reverse().forEach((entry) => {
+        if (safeCellNumber(getEngineerCellValue(entry)) !== targetCell) return;
+        const event = String(entry?.event || entry?.category || entry?.status || entry?.source || "Logbook").trim();
+        const note = String(entry?.note || entry?.comment || entry?.comments || entry?.text || entry?.description || "").trim();
+        pushEvidence("Log", event, note || "Logbook entry is tied to this cell.");
+      });
+
+      return evidence.slice(0, 5);
+    }
+
+    function renderEngineerSelectedCellEvidence(cellNumber){
+      const list = document.getElementById("engineer-selected-cell-evidence-list");
+      const count = document.getElementById("engineer-selected-cell-evidence-count");
+      if (!list) return;
+
+      const evidence = getEngineerSelectedCellEvidence(cellNumber);
+      if (count) count.textContent = `${evidence.length} signal${evidence.length === 1 ? "" : "s"}`;
+
+      if (!cellNumber) {
+        list.innerHTML = `<div class="engineer-selected-cell-evidence-empty">Select a cell to show matching hours, weekend board, and logbook evidence.</div>`;
+        return;
+      }
+
+      if (!evidence.length) {
+        list.innerHTML = `<div class="engineer-selected-cell-evidence-empty">No matching raw rows found yet. The score is currently based on available cell-state defaults and command-view signals.</div>`;
+        return;
+      }
+
+      list.innerHTML = evidence.map((item) => `
+        <div class="engineer-selected-cell-evidence-row">
+          <span class="engineer-selected-cell-evidence-type">${escapeHtml(item.type)}</span>
+          <span class="engineer-selected-cell-evidence-copy"><strong>${escapeHtml(item.title)}</strong>${escapeHtml(item.copy)}</span>
+        </div>
+      `).join("");
+    }
+
     function renderEngineerSelectedCellPanel(metrics){
       const card = document.getElementById("engineer-selected-cell-card");
       if (!card) return;
@@ -7330,6 +7498,7 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
           statePill.textContent = selectedCell ? "No Data" : "Select";
           applyEngineerTone(statePill, "warn");
         }
+        renderEngineerSelectedCellEvidence(selectedCell);
         return;
       }
 
@@ -7350,6 +7519,7 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       setSelectedCellDetailText("engineer-selected-cell-help", helpText);
       setSelectedCellDetailText("engineer-selected-cell-downtime", downtimeText);
       setSelectedCellDetailText("engineer-selected-cell-confidence", `${cell.dataConfidence ?? 0}%`);
+      renderEngineerSelectedCellEvidence(selectedCell);
 
       if (statePill) {
         statePill.textContent = cell.state || "Unknown";
@@ -7396,7 +7566,12 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
         `Help Needed: ${cell.helpNeeded ? "Yes" : "No"}`,
         `Downtime Hours: ${Number(cell.downtimeHours || 0).toFixed(1)}`,
         `Data Confidence: ${cell.dataConfidence ?? 0}%`,
-        `Recent Note: ${findEngineerSelectedCellNote(selectedCell)}`
+        `Recent Note: ${findEngineerSelectedCellNote(selectedCell)}`,
+        "",
+        "Investigation Evidence:",
+        ...(getEngineerSelectedCellEvidence(selectedCell).length
+          ? getEngineerSelectedCellEvidence(selectedCell).map((item) => `- ${item.type}: ${item.title} — ${item.copy}`)
+          : ["- No matching raw rows found yet."])
       ];
       const blob = new Blob([lines.join("\n")], { type:"text/plain;charset=utf-8" });
       const link = document.createElement("a");
