@@ -3962,6 +3962,203 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
   .engineer-supporting-details-divider em{text-align:left}
 }
 
+
+/* ==================== v1.0.183 - VISUAL HIERARCHY PASS ====================
+   Purpose: make the Engineer command center easier to read at a glance.
+   Ops Map is the hero. KPI/health signals come first. Alerts/detail/timeline
+   support the story. Demo, QA, and supporting-detail tools are intentionally quieter. */
+#tab-engineer .engineer-hero-card h2{
+  letter-spacing:-.035em;
+}
+
+#tab-engineer .engineer-filter-card{
+  opacity:.94;
+}
+
+.engineer-testcell-command .engineer-2026-shell{
+  position:relative;
+}
+
+.engineer-testcell-command .engineer-2026-topbar{
+  position:relative;
+}
+
+.engineer-testcell-command .engineer-2026-topbar::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-1px;
+  height:1px;
+  background:linear-gradient(90deg,rgba(34,211,238,.42),rgba(20,184,166,.18),rgba(148,163,184,0));
+}
+
+.engineer-testcell-command .engineer-2026-title{
+  font-size:clamp(26px,2.2vw,38px);
+  line-height:1.02;
+}
+
+.engineer-testcell-command .engineer-command-subtitle{
+  max-width:78ch;
+  opacity:.9;
+}
+
+.engineer-testcell-command .engineer-intel-band{
+  padding:2px;
+}
+
+.engineer-testcell-command .engineer-intel-card{
+  min-height:118px;
+  border-color:rgba(148,163,184,.18);
+  background:linear-gradient(180deg,rgba(15,23,42,.72),rgba(15,23,42,.50));
+}
+
+.engineer-testcell-command .engineer-intel-card:hover{
+  transform:translateY(-1px);
+  border-color:rgba(34,211,238,.26);
+}
+
+.engineer-testcell-command .engineer-intel-value{
+  font-size:clamp(24px,1.9vw,34px);
+  letter-spacing:-.045em;
+}
+
+.engineer-testcell-command .engineer-command-layout{
+  opacity:.96;
+}
+
+.engineer-testcell-command .engineer-command-hero,
+.engineer-testcell-command .engineer-command-health{
+  border-color:rgba(34,211,238,.18);
+}
+
+.engineer-testcell-command .engineer-modern-grid{
+  opacity:.96;
+}
+
+.engineer-testcell-command .engineer-ops-map-card{
+  border-color:rgba(34,211,238,.34);
+  box-shadow:0 22px 60px rgba(2,6,23,.28),0 0 0 1px rgba(34,211,238,.07) inset;
+  position:relative;
+  overflow:hidden;
+}
+
+.engineer-testcell-command .engineer-ops-map-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 22% 0%,rgba(34,211,238,.12),transparent 34%),
+    linear-gradient(180deg,rgba(255,255,255,.045),transparent 24%);
+  opacity:.88;
+}
+
+.engineer-testcell-command .engineer-ops-map-card > *{
+  position:relative;
+  z-index:1;
+}
+
+.engineer-testcell-command .engineer-ops-map-head h3,
+.engineer-testcell-command .engineer-command-title{
+  letter-spacing:-.025em;
+}
+
+.engineer-testcell-command .engineer-ops-map-head h3{
+  font-size:clamp(20px,1.5vw,26px);
+}
+
+.engineer-testcell-command .engineer-cell-tile{
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease,background .16s ease;
+}
+
+.engineer-testcell-command .engineer-cell-tile:hover{
+  transform:translateY(-2px) scale(1.012);
+  z-index:5;
+}
+
+.engineer-testcell-command .engineer-cell-tile.selected,
+.engineer-testcell-command .engineer-cell-tile[aria-selected="true"]{
+  transform:translateY(-2px) scale(1.018);
+}
+
+.engineer-testcell-command .engineer-selected-cell-card,
+.engineer-testcell-command .engineer-attention-engine-card{
+  box-shadow:0 14px 36px rgba(2,6,23,.20);
+}
+
+.engineer-testcell-command .engineer-selected-cell-card{
+  border-color:rgba(34,211,238,.24);
+}
+
+.engineer-testcell-command .engineer-attention-engine-card{
+  border-color:rgba(248,113,113,.18);
+}
+
+.engineer-testcell-command .engineer-attention-row,
+.engineer-testcell-command .engineer-selected-cell-panel,
+.engineer-testcell-command .engineer-selected-cell-evidence{
+  border-color:rgba(148,163,184,.18);
+}
+
+.engineer-testcell-command .engineer-attention-row:hover{
+  border-color:rgba(251,191,36,.28);
+  background:rgba(15,23,42,.52);
+}
+
+.engineer-testcell-command .engineer-shift-timeline-card{
+  opacity:.94;
+  border-color:rgba(148,163,184,.16);
+}
+
+.engineer-testcell-command .engineer-shift-timeline-card:hover{
+  opacity:1;
+  border-color:rgba(34,211,238,.20);
+}
+
+.engineer-testcell-command .engineer-2026-footer,
+.engineer-testcell-command .pilot-walkthrough-card,
+.engineer-testcell-command .pilot-readiness-card,
+.engineer-testcell-command .pilot-executive-brief-card,
+.engineer-testcell-command .command-screenshot-card,
+.engineer-testcell-command .command-qa-card{
+  opacity:.88;
+}
+
+.engineer-testcell-command .engineer-2026-footer:hover,
+.engineer-testcell-command .pilot-walkthrough-card:hover,
+.engineer-testcell-command .pilot-readiness-card:hover,
+.engineer-testcell-command .pilot-executive-brief-card:hover,
+.engineer-testcell-command .command-screenshot-card:hover,
+.engineer-testcell-command .command-qa-card:hover{
+  opacity:1;
+}
+
+.engineer-supporting-details-divider{
+  margin-top:18px;
+  opacity:.88;
+}
+
+.engineer-supporting-details-divider strong{
+  letter-spacing:.18em;
+}
+
+.engineer-supporting-details-divider em{
+  max-width:82ch;
+}
+
+.command-presentation-mode .engineer-testcell-command .engineer-ops-map-card,
+.command-capture-mode .engineer-testcell-command .engineer-ops-map-card{
+  box-shadow:0 24px 68px rgba(2,6,23,.34),0 0 0 1px rgba(34,211,238,.12) inset;
+}
+
+@media (max-width:1100px){
+  .engineer-testcell-command .engineer-ops-map-card{
+    box-shadow:0 16px 44px rgba(2,6,23,.24),0 0 0 1px rgba(34,211,238,.06) inset;
+  }
+  .engineer-testcell-command .engineer-2026-title{font-size:28px;}
+}
+
 </style>
 </head>
 <body data-theme="standard">
@@ -3974,7 +4171,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.182-layout-cleanup-pass</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.183-visual-hierarchy-pass</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -3982,7 +4179,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.182-layout-cleanup-pass</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.183-visual-hierarchy-pass</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -4377,7 +4574,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.182-layout-cleanup-pass</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.183-visual-hierarchy-pass</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -4531,7 +4728,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
                   <div class="engineer-2026-kicker">Prototype Graphical Overview</div>
                   <h3 class="engineer-2026-title">2026 Test Cell Command View</h3>
                   <div id="engineer-command-subtitle" class="engineer-command-subtitle">
-                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.182 tightens placement so the command view reads as one clean cockpit while supporting evidence remains below.
+                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.183 improves visual hierarchy so the Ops Map leads, alerts support, and evidence stays available below.
                   </div>
                 </div>
 
@@ -4966,7 +5163,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.182-layout-cleanup-pass</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.183-visual-hierarchy-pass</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -5024,7 +5221,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.182-layout-cleanup-pass</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.183-visual-hierarchy-pass</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -5230,7 +5427,7 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.182-layout-cleanup-pass</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.183-visual-hierarchy-pass</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -5309,8 +5506,8 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.182-layout-cleanup-pass";
-    const VERSION_DESCRIPTION = "Cleans up Engineer command-center placement, spacing, card hierarchy, supporting-detail separation, and presentation/readability flow while preserving all core operator workflows, guided tooltips, hover cards, QA, demo, and startup guard behavior.";
+    const VERSION = "v1.0.183-visual-hierarchy-pass";
+    const VERSION_DESCRIPTION = "Refines Engineer command-center visual hierarchy so the Ops Map reads as the hero, KPI/health signals scan first, Attention and Selected Cell panels support the story, timeline remains quieter, and demo/QA controls are visually toned down while preserving all core workflows.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
