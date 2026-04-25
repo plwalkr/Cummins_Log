@@ -3292,7 +3292,61 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
   .engineer-map-row-label{min-height:42px}
   .engineer-cell-tile.selected::after{display:none}
 }
-</style>
+
+
+/* ==================== v1.0.174 - TIMELINE / ATTENTION / DETAIL POLISH ====================
+   Visual-only hardening for the lower command-center zone.
+   No external libraries, no saved-data mutation, no operator workflow changes. */
+.engineer-testcell-command .engineer-shift-timeline-card{position:relative;overflow:hidden}
+.engineer-testcell-command .engineer-shift-timeline-card::before,
+.engineer-testcell-command .engineer-attention-engine-card::before,
+.engineer-testcell-command .engineer-selected-cell-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 18% 0%,rgba(34,211,238,.10),transparent 34%),linear-gradient(135deg,rgba(255,255,255,.05),transparent 42%);opacity:.78}
+.engineer-testcell-command .engineer-shift-timeline-head,
+.engineer-testcell-command .engineer-attention-engine-head,
+.engineer-testcell-command .engineer-selected-cell-head{position:relative;z-index:1}
+.engineer-testcell-command .engineer-timeline-window{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid rgba(148,163,184,.22);border-radius:999px;background:rgba(15,23,42,.30);font-weight:850;color:#E2E8F0}
+.engineer-dashboard--lightcards .engineer-testcell-command .engineer-timeline-window{background:rgba(248,250,252,.84);color:#0F172A}
+.engineer-testcell-command .engineer-timeline-shell{position:relative;z-index:1;padding:18px 14px 14px;border-radius:20px;background:linear-gradient(180deg,rgba(15,23,42,.45),rgba(15,23,42,.22));box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.engineer-dashboard--lightcards .engineer-testcell-command .engineer-timeline-shell{background:linear-gradient(180deg,rgba(248,250,252,.95),rgba(241,245,249,.72))}
+.engineer-testcell-command .engineer-shift-timeline{height:36px;border-radius:999px;padding:4px;background:rgba(2,6,23,.34);border:1px solid rgba(148,163,184,.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,.03),0 14px 26px rgba(2,6,23,.18)}
+.engineer-testcell-command .engineer-timeline-segment{min-width:18px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.82);font-size:10px;font-weight:950;letter-spacing:.07em;text-transform:uppercase;text-shadow:0 1px 7px rgba(2,6,23,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.18)}
+.engineer-testcell-command .engineer-timeline-segment span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 7px;opacity:.9}
+.engineer-testcell-command .engineer-timeline-now{top:-12px;height:66px;width:2px;background:linear-gradient(180deg,#BAE6FD,#38BDF8 48%,rgba(56,189,248,.16));box-shadow:0 0 0 1px rgba(56,189,248,.22),0 0 22px rgba(56,189,248,.30)}
+.engineer-testcell-command .engineer-timeline-now::before{content:"";position:absolute;left:50%;top:-5px;transform:translateX(-50%) rotate(45deg);width:10px;height:10px;border-radius:3px;background:#38BDF8;box-shadow:0 0 18px rgba(56,189,248,.50)}
+.engineer-testcell-command .engineer-timeline-now span{top:-26px;background:linear-gradient(135deg,#0EA5E9,#22D3EE);color:#02101A;border:0;box-shadow:0 8px 18px rgba(14,165,233,.25)}
+.engineer-testcell-command .engineer-timeline-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px;padding:0;background:transparent;border:0;color:inherit}
+.engineer-testcell-command .engineer-timeline-summary span{display:flex;flex-direction:column;gap:2px;padding:9px 10px;border:1px solid rgba(148,163,184,.18);border-radius:14px;background:rgba(15,23,42,.26);color:var(--eng-copy);font-size:11px;font-weight:800;line-height:1.25}
+.engineer-testcell-command .engineer-timeline-summary strong{color:#F8FAFC;font-size:16px;font-weight:950;letter-spacing:-.04em}
+.engineer-dashboard--lightcards .engineer-testcell-command .engineer-timeline-summary span{background:rgba(248,250,252,.88)}
+.engineer-dashboard--lightcards .engineer-testcell-command .engineer-timeline-summary strong{color:#0F172A}
+.engineer-testcell-command .engineer-timeline-summary .running strong{color:#86EFAC}.engineer-testcell-command .engineer-timeline-summary .downtime strong{color:#FDBA74}.engineer-testcell-command .engineer-timeline-summary .help strong{color:#D8B4FE}.engineer-testcell-command .engineer-timeline-summary .gap strong{color:#CBD5E1}
+.engineer-testcell-command .engineer-alert-list{position:relative;z-index:1}
+.engineer-testcell-command .engineer-alert-row{grid-template-columns:34px minmax(0,1fr) auto;padding:13px 12px;border-radius:18px;background:linear-gradient(180deg,rgba(15,23,42,.38),rgba(15,23,42,.22));box-shadow:0 10px 20px rgba(2,6,23,.10)}
+.engineer-testcell-command .engineer-alert-row.severity-high{border-color:rgba(248,113,113,.28);box-shadow:0 12px 24px rgba(127,29,29,.12)}
+.engineer-testcell-command .engineer-alert-row.severity-medium{border-color:rgba(251,191,36,.25)}
+.engineer-testcell-command .engineer-alert-icon{width:28px;height:28px;font-size:13px;box-shadow:0 8px 18px rgba(2,6,23,.22)}
+.engineer-testcell-command .engineer-alert-title{font-size:13.5px;letter-spacing:-.01em}
+.engineer-testcell-command .engineer-alert-meta{gap:5px}.engineer-testcell-command .engineer-alert-chip{padding:4px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:.06em}
+.engineer-testcell-command .engineer-alert-time{padding:5px 8px;border-radius:999px;border:1px solid rgba(148,163,184,.18);background:rgba(2,6,23,.18)}
+.engineer-testcell-command .engineer-alert-action{border-radius:999px;padding:6px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.08em}
+.engineer-testcell-command .engineer-selected-cell-card{position:relative;overflow:hidden}
+.engineer-testcell-command .engineer-selected-cell-card.state-attention,
+.engineer-testcell-command .engineer-selected-cell-card.state-blocked{border-color:rgba(248,113,113,.32);box-shadow:0 0 0 1px rgba(248,113,113,.10),0 16px 34px rgba(127,29,29,.13)}
+.engineer-testcell-command .engineer-selected-cell-card.state-watch,
+.engineer-testcell-command .engineer-selected-cell-card.state-stale{border-color:rgba(251,191,36,.28);box-shadow:0 0 0 1px rgba(251,191,36,.08),0 16px 30px rgba(120,53,15,.10)}
+.engineer-testcell-command .engineer-selected-cell-main,
+.engineer-testcell-command .engineer-selected-cell-detail-grid,
+.engineer-testcell-command .engineer-selected-cell-actions{position:relative;z-index:1}
+.engineer-testcell-command .engineer-selected-cell-reason{display:flex;flex-direction:column;justify-content:center;min-height:144px;background:linear-gradient(180deg,rgba(15,23,42,.42),rgba(15,23,42,.22));box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.engineer-testcell-command .engineer-selected-cell-scorebox{display:flex;flex-direction:column;justify-content:center;background:radial-gradient(circle at 50% 0%,rgba(34,211,238,.12),transparent 48%),rgba(15,23,42,.28)}
+.engineer-testcell-command .engineer-selected-cell-detail{transition:transform .16s ease,border-color .16s ease,background .16s ease}
+.engineer-testcell-command .engineer-selected-cell-detail:hover{transform:translateY(-1px);border-color:rgba(34,211,238,.26);background:rgba(15,23,42,.34)}
+.engineer-testcell-command .engineer-selected-cell-detail span{font-size:13.5px}
+.engineer-testcell-command .engineer-selected-cell-actions button{border-radius:999px;font-weight:850}
+@media (max-width: 880px){.engineer-testcell-command .engineer-timeline-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.engineer-testcell-command .engineer-alert-row{grid-template-columns:30px minmax(0,1fr)}.engineer-testcell-command .engineer-alert-side{grid-column:2;align-items:flex-start;flex-direction:row}}
+@media (max-width: 560px){.engineer-testcell-command .engineer-timeline-summary{grid-template-columns:1fr}.engineer-testcell-command .engineer-timeline-segment span{display:none}}
+
+  </style>
 </head>
 <body data-theme="standard">
   <div class="app">
@@ -3825,7 +3879,7 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
                   <div class="engineer-2026-kicker">Prototype Graphical Overview</div>
                   <h3 class="engineer-2026-title">2026 Test Cell Command View</h3>
                   <div id="engineer-command-subtitle" class="engineer-command-subtitle">
-                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.173 adds a premium ops-map pass with clearer cell grouping, stronger status badges, selected-cell glow, and map-to-detail feedback while keeping the view read-only and operator-safe.
+                    Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.174 polishes the timeline, attention engine, and selected-cell detail panels so the lower command area feels closer to a 2026 operations cockpit while remaining read-only and operator-safe.
                   </div>
                 </div>
 
@@ -4593,8 +4647,8 @@ body[data-theme="clarity"] .trade-cell-stamp{color:#44566f}
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.173-ops-map-premium-pass";
-    const VERSION_DESCRIPTION = "Adds a visual-alignment pass for the 2026 Engineer command center: tighter spacing, cleaner panel hierarchy, better card alignment, improved action-row rhythm, and more cohesive map/timeline/attention/detail layout while preserving all operator workflows and stability guardrails.";
+    const VERSION = "v1.0.174-timeline-attention-detail-polish";
+    const VERSION_DESCRIPTION = "Polishes the lower command-center zone: sharper shift timeline ribbon, clearer now marker and segment labels, richer attention alert cards, and a more focused selected-cell detail panel while preserving all operator workflows and stability guardrails.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -5999,13 +6053,16 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       if (!target) return;
 
       const timeline = buildEngineerShiftTimeline(metrics || deriveEngineerPremiumMetrics());
-      target.innerHTML = timeline.segments.map((segment) => `
-        <div
-          class="engineer-timeline-segment ${escapeHtml(segment.type)}"
-          style="width:${segment.pct.toFixed(2)}%"
-          title="${escapeHtml(segment.label)} · ${Number(segment.hours || 0).toFixed(1)}h"
-        ></div>
-      `).join("");
+      target.innerHTML = timeline.segments.map((segment) => {
+        const label = segment.type === "running" ? "Run" : segment.type === "downtime" ? "Down" : segment.type === "help" ? "Help" : "Gap";
+        return `
+          <div
+            class="engineer-timeline-segment ${escapeHtml(segment.type)}"
+            style="width:${segment.pct.toFixed(2)}%"
+            title="${escapeHtml(segment.label)} · ${Number(segment.hours || 0).toFixed(1)}h"
+          ><span>${escapeHtml(label)}</span></div>
+        `;
+      }).join("");
 
       if (axis) axis.innerHTML = timeline.windowInfo.axis.map((label) => `<span>${escapeHtml(label)}</span>`).join("");
       if (windowNode) windowNode.textContent = timeline.windowInfo.label;
@@ -6016,7 +6073,12 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
           acc[segment.type] = (acc[segment.type] || 0) + Number(segment.pct || 0);
           return acc;
         }, {});
-        summary.textContent = `Shift shape: ${Math.round(totals.running || 0)}% running · ${Math.round(totals.downtime || 0)}% downtime · ${Math.round(totals.help || 0)}% help · ${Math.round(totals.gap || 0)}% data gap. Read-only view from current saved rows.`;
+        summary.innerHTML = `
+          <span class="running"><strong>${Math.round(totals.running || 0)}%</strong> Running</span>
+          <span class="downtime"><strong>${Math.round(totals.downtime || 0)}%</strong> Downtime</span>
+          <span class="help"><strong>${Math.round(totals.help || 0)}%</strong> Help</span>
+          <span class="gap"><strong>${Math.round(totals.gap || 0)}%</strong> Data gap</span>
+        `;
       }
     }
 
@@ -6201,8 +6263,10 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       const statePill = document.getElementById("engineer-selected-cell-state");
       const healthFill = document.getElementById("engineer-selected-cell-health-fill");
 
+      card.classList.remove("state-running", "state-watch", "state-attention", "state-help", "state-blocked", "state-stale", "state-unknown");
+
       if (!selectedCell || !cell) {
-        card.classList.add("is-empty");
+        card.classList.add("is-empty", "state-unknown");
         setSelectedCellDetailText("engineer-selected-cell-title", selectedCell ? `Cell ${selectedCell}` : "No cell selected");
         setSelectedCellDetailText("engineer-selected-cell-reason", selectedCell ? "No intelligence data found for this cell yet." : "Click a tile in the Test Cell Ops Map to focus this panel.");
         setSelectedCellDetailText("engineer-selected-cell-note", "This readout is generated from existing hours, weekend, running sheet, and intelligence-layer data only.");
@@ -6222,8 +6286,9 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
         return;
       }
 
-      card.classList.remove("is-empty");
+      card.classList.remove("is-empty", "state-unknown");
       const stateClass = getEngineerMapStatusClass(cell.state);
+      card.classList.add(`state-${stateClass}`);
       const tone = stateClass === "attention" || stateClass === "blocked" ? "attn" : stateClass === "watch" || stateClass === "stale" ? "warn" : "good";
       const healthTone = toneClassForScore(cell.healthScore, 90, 76);
       const staleText = Number(cell.staleMinutes || 999) >= 999 ? "unknown" : formatEngineerAlertAge(cell.staleMinutes);
