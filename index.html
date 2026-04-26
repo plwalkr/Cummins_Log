@@ -6583,8 +6583,8 @@ body.command-capture-mode #engineer-purpose-tools:not([open]){
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.202-purposeful-workflow-cleanup";
-    const VERSION_DESCRIPTION = "Cleans up the Engineer workflow presentation after the building-row Ops Map update: tighter main path, quieter helper text, cleaner filter/hero spacing, and more intentional command-center/supporting-detail hierarchy.";
+    const VERSION = "v1.0.203-test-cell-row-label-cleanup";
+    const VERSION_DESCRIPTION = "Cleans up the Test Cell Ops Map row labels so the building split still happens at 116/117, 216/217, 316/317, and 416/417 while the visible row labels read 100 Row, 200 Row, 300 Row, and 400 Row.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -7772,14 +7772,14 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       // does not force the last cells off the right side.
       const makeRange = (start, count) => Array.from({ length: count }, (_, index) => String(start + index));
       return [
-        { label: "100s · 101–116", cells: makeRange(101, 16) },
-        { label: "100s · 117–122", cells: makeRange(117, 6) },
-        { label: "200s · 201–216", cells: makeRange(201, 16) },
-        { label: "200s · 217–222", cells: makeRange(217, 6) },
-        { label: "300s · 301–316", cells: makeRange(301, 16) },
-        { label: "300s · 317–322", cells: makeRange(317, 6) },
-        { label: "400s · 401–416", cells: makeRange(401, 16) },
-        { label: "400s · 417–422", cells: makeRange(417, 6) }
+        { label: "100 Row", cells: makeRange(101, 16) },
+        { label: "100 Row", cells: makeRange(117, 6) },
+        { label: "200 Row", cells: makeRange(201, 16) },
+        { label: "200 Row", cells: makeRange(217, 6) },
+        { label: "300 Row", cells: makeRange(301, 16) },
+        { label: "300 Row", cells: makeRange(317, 6) },
+        { label: "400 Row", cells: makeRange(401, 16) },
+        { label: "400 Row", cells: makeRange(417, 6) }
       ];
     }
 
