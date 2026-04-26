@@ -4706,6 +4706,148 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
   }
 }
 
+/* ==================== v1.0.197 - GLOBAL VISUAL CLEANUP LITE ====================
+   Safe cherry-pick of the broad 2026 polish draft.
+   Scope is intentionally limited: tokens, panels, controls, focus states, tabs,
+   and gentle spacing. Avoid global table/grid rewrites so Hours, Weekend,
+   Manager, CTC Pulse, and the Ops Map stay stable. */
+:root{
+  --radius-sm:10px;
+  --radius-md:14px;
+  --radius-lg:20px;
+  --shadow-sm:0 1px 3px rgba(15,23,42,.06);
+  --shadow-md:0 6px 16px rgba(15,23,42,.08);
+  --shadow-lg:0 12px 32px rgba(15,23,42,.10);
+  --focus-ring:0 0 0 4px rgba(15,23,42,.08);
+  --ease-2026:all .20s cubic-bezier(.4,0,.2,1);
+}
+body{
+  background:linear-gradient(180deg,#f8fafc 0%,var(--bg) 42%,#f5f5f4 100%);
+}
+.panel{
+  border-color:rgba(148,163,184,.42);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);
+  transition:box-shadow .18s ease,border-color .18s ease,transform .18s ease;
+}
+.panel:hover{
+  box-shadow:var(--shadow-md);
+}
+.panel-head{
+  background:linear-gradient(180deg,#ffffff 0%,var(--soft) 100%);
+  padding:14px 18px;
+}
+.eyebrow{
+  font-weight:800;
+  letter-spacing:.24em;
+}
+button.primary,
+button.secondary,
+.tab-btn,
+.action-stack button,
+.hours-row-actions button,
+.filter-clear-btn{
+  transition:var(--ease-2026);
+}
+button.primary:hover,
+button.secondary:hover,
+.tab-btn:hover:not(.active),
+.action-stack button:hover,
+.hours-row-actions button:hover,
+.filter-clear-btn:hover{
+  transform:translateY(-1px);
+  box-shadow:var(--shadow-sm);
+}
+button.primary:focus-visible,
+button.secondary:focus-visible,
+.tab-btn:focus-visible,
+.action-stack button:focus-visible,
+.hours-row-actions button:focus-visible,
+.filter-clear-btn:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[contenteditable="true"]:focus-visible{
+  outline:none;
+  border-color:#0f172a;
+  box-shadow:var(--focus-ring);
+}
+.header-cell input,
+.header-cell select,
+.field input,
+.field select,
+.search,
+.followup-textarea,
+.hours-inline-input,
+.hours-inline-select,
+.date-filter-row input[type="date"]{
+  border-radius:var(--radius-sm);
+  transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.view-tabs{
+  padding:12px 14px;
+  gap:10px;
+  background:linear-gradient(180deg,#ffffff 0%,var(--soft) 100%);
+  box-shadow:0 1px 2px rgba(15,23,42,.04);
+}
+.tab-btn{
+  padding:10px 15px;
+  box-shadow:0 1px 1px rgba(15,23,42,.03);
+}
+.tab-btn.active{
+  box-shadow:0 8px 18px rgba(15,23,42,.12);
+}
+.section-body{
+  gap:12px;
+}
+.section-card,
+.hours-summary-card,
+.hours-breakdown-card,
+.hours-sidebox,
+.manager-card,
+.manager-band-card,
+.manager-signal-card,
+.manager-list-card,
+.manager-chart-card,
+.manager-hero-card,
+.engineer-summary-card,
+.engineer-priority-card,
+.engineer-cell-card{
+  border-color:rgba(203,213,225,.82);
+  box-shadow:0 1px 2px rgba(15,23,42,.04);
+}
+.badge,.pill,.manager-intel-chip,.engineer-command-pill,.engineer-state-badge{
+  box-shadow:0 1px 1px rgba(15,23,42,.03);
+}
+.running-sheet-resizer{
+  height:24px;
+  background:linear-gradient(180deg,#f8fafc 0%,#e8eef6 100%);
+}
+/* Keep dense operator tables readable; do not apply the broad draft's large table padding. */
+.hours-table th,
+.hours-table td,
+table th,
+table td{
+  transition:background .14s ease;
+}
+/* Engineer command area gets a little more premium without changing map tile geometry. */
+.engineer-testcell-command .engineer-command-tile,
+.engineer-testcell-command .engineer-command-hero,
+.engineer-testcell-command .engineer-command-health,
+.engineer-testcell-command .engineer-ops-map-card,
+.engineer-testcell-command .engineer-attention-engine-card,
+.engineer-testcell-command .engineer-selected-cell-panel,
+.engineer-testcell-command .engineer-timeline-card{
+  box-shadow:0 14px 34px rgba(2,6,23,.16);
+}
+.engineer-testcell-command .engineer-ops-map-card:hover{
+  transform:none;
+}
+@media (max-width:900px){
+  .panel-head{padding:12px 14px;}
+  .view-tabs{padding:10px;}
+  .tab-btn{width:auto;}
+}
 
   </style>
 </head>
@@ -4719,7 +4861,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.196-ops-map-readable-tiles</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.197-global-visual-cleanup-lite</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -4727,7 +4869,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.196-ops-map-readable-tiles</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.197-global-visual-cleanup-lite</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -6140,8 +6282,8 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.196-ops-map-readable-tiles";
-    const VERSION_DESCRIPTION = "Simplifies Test Cell Ops Map tiles so the map stays readable: cell number, state, and health remain on the tile while deeper evidence moves to hover cards and the selected-cell panel.";
+    const VERSION = "v1.0.197-global-visual-cleanup-lite";
+    const VERSION_DESCRIPTION = "Applies a safe cherry-picked visual cleanup layer: refined tokens, panels, focus states, tabs, controls, and subtle spacing polish without broad table/grid rewrites or Ops Map geometry changes.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
