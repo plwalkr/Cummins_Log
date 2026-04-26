@@ -5059,7 +5059,63 @@ body.command-capture-mode #engineer-purpose-tools:not([open]){
   .engineer-testcell-command .engineer-map-row-grid{grid-template-columns:repeat(auto-fit,minmax(88px,1fr)) !important;}
 }
 
-</style>
+
+/* ==================== v1.0.202 - PURPOSEFUL WORKFLOW CLEANUP ====================
+   Keep the 2026 Engineer command center powerful, but reduce filler and visual friction.
+   This pass changes presentation only: no data model, no operator workflow changes. */
+#tab-engineer .section-body{gap:16px;}
+#tab-engineer .engineer-shell{gap:16px;}
+#tab-engineer .engineer-hero{grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);align-items:stretch;}
+#tab-engineer .engineer-hero-card,
+#tab-engineer .engineer-filter-card{min-height:auto;}
+#tab-engineer .engineer-hero-card h2{max-width:30ch;letter-spacing:-.025em;}
+#tab-engineer .engineer-hero-copy{max-width:58ch;font-size:13px;line-height:1.52;margin-top:6px;}
+#tab-engineer .engineer-filter-card{justify-content:center;}
+#tab-engineer .engineer-filter-note{font-size:11.5px;line-height:1.45;color:#64748b;margin-top:2px;}
+#tab-engineer .engineer-filter-row select,
+#tab-engineer .engineer-filter-row input{min-height:42px;}
+
+#tab-engineer .engineer-purpose-tools{margin-bottom:2px;}
+#tab-engineer .engineer-purpose-tools-summary{padding:12px 14px;}
+#tab-engineer .engineer-purpose-tools-summary strong{font-size:13px;}
+#tab-engineer .engineer-purpose-tools-summary em{max-width:34ch;font-size:11.5px;}
+#tab-engineer .engineer-purpose-tools-body{gap:10px;padding:12px;}
+#tab-engineer .temp-test-bar,
+#tab-engineer .engineer-presentation-dock{padding:12px;border-radius:16px;}
+#tab-engineer .engineer-presentation-title span,
+#tab-engineer .temp-test-copy{font-size:12px;line-height:1.45;}
+#tab-engineer .engineer-presentation-actions button,
+#tab-engineer .temp-test-actions button{min-height:36px;padding:8px 11px;}
+
+#tab-engineer .engineer-testcell-command .engineer-command-subtitle,
+#tab-engineer .engineer-testcell-command .engineer-command-caption{font-size:12px;line-height:1.45;}
+#tab-engineer .engineer-testcell-command .engineer-command-card-head{margin-bottom:10px;}
+#tab-engineer .engineer-testcell-command .engineer-command-label{letter-spacing:.12em;}
+#tab-engineer .engineer-testcell-command .engineer-2026-topbar{gap:14px;}
+#tab-engineer .engineer-testcell-command .engineer-2026-title{letter-spacing:-.03em;}
+
+#tab-engineer .engineer-supporting-details-shell{margin-top:2px;}
+#tab-engineer .engineer-supporting-details-divider{padding:12px 14px;}
+#tab-engineer .engineer-supporting-details-divider strong{font-size:14px;}
+#tab-engineer .engineer-supporting-details-divider em{font-size:11.5px;max-width:36ch;}
+
+#tab-engineer .engineer-command-actions,
+#tab-engineer .engineer-2026-footer{align-items:center;}
+#tab-engineer .engineer-2026-footer button{min-height:38px;}
+
+@media (max-width: 1100px){
+  #tab-engineer .engineer-hero{grid-template-columns:1fr;}
+  #tab-engineer .engineer-purpose-tools-summary{align-items:flex-start;}
+}
+
+@media (max-width: 720px){
+  #tab-engineer .engineer-purpose-tools-summary{grid-template-columns:1fr;gap:8px;}
+  #tab-engineer .engineer-purpose-tools-summary em{text-align:left;max-width:none;}
+  #tab-engineer .engineer-hero-copy,
+  #tab-engineer .engineer-filter-note{font-size:12px;}
+}
+
+  </style>
 </head>
 <body data-theme="standard">
   <div class="app">
@@ -5662,7 +5718,7 @@ body.command-capture-mode #engineer-purpose-tools:not([open]){
               <div class="engineer-hero-card">
                 <div class="engineer-kicker">Engineer review</div>
                 <h2>Scan cells, select the risk, verify the evidence.</h2>
-                <div class="engineer-hero-copy">Engineer review is read-only by design: command-center signals first, investigation evidence second, trade-style coverage only when needed.</div>
+                <div class="engineer-hero-copy">Read-only command view: scan the map, select a cell, verify evidence, then review trade coverage when needed.</div>
               </div>
               <div class="engineer-filter-card">
                 <div class="engineer-kicker">Filter + search</div>
@@ -5672,7 +5728,7 @@ body.command-capture-mode #engineer-purpose-tools:not([open]){
                   </select>
                   <input id="engineer-search-input" type="search" placeholder="Search cell, note, event, status, detail, WWID, tech, engineer..." />
                 </div>
-                <div class="engineer-filter-note">All cells stay available in the dropdown. Search narrows the visible read-only review cards without exposing any edit controls.</div>
+                <div class="engineer-filter-note">Read-only filters. Search narrows review cards without exposing edit controls.</div>
               </div>
             </div>
             
@@ -6527,8 +6583,8 @@ body.command-capture-mode #engineer-purpose-tools:not([open]){
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.201-building-row-breaks";
-    const VERSION_DESCRIPTION = "Updates the Test Cell Ops Map to split each CTC building row at the real 116/117, 216/217, 316/317, and 416/417 breakpoints so the map matches the building layout without shrinking tiles.";
+    const VERSION = "v1.0.202-purposeful-workflow-cleanup";
+    const VERSION_DESCRIPTION = "Cleans up the Engineer workflow presentation after the building-row Ops Map update: tighter main path, quieter helper text, cleaner filter/hero spacing, and more intentional command-center/supporting-detail hierarchy.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
