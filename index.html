@@ -4592,6 +4592,121 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
 .manager-intel-lists{display:grid;grid-template-columns:1.05fr .95fr;gap:12px;margin-top:12px}.manager-intel-listbox{border:1px solid #e2e8f0;border-radius:14px;background:#fff;padding:12px}.manager-intel-listbox h4{margin:0 0 8px 0;font-size:13px;color:#0f172a}.manager-intel-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:start;padding:10px 0;border-bottom:1px dashed #e2e8f0;font-size:13px;color:#334155;line-height:1.45}.manager-intel-row:last-child{border-bottom:none;padding-bottom:0}.manager-intel-row b{color:#0f172a}.manager-intel-chip{display:inline-flex;align-items:center;justify-content:center;min-width:58px;padding:5px 8px;border-radius:999px;border:1px solid #dbe3ed;background:#f8fafc;color:#334155;font-size:11px;font-weight:900;white-space:nowrap}.manager-intel-chip.good{background:#f0fdf4;color:#166534;border-color:#bbf7d0}.manager-intel-chip.watch{background:#fffbeb;color:#92400e;border-color:#fde68a}.manager-intel-chip.attention,.manager-intel-chip.blocked{background:#fef2f2;color:#b91c1c;border-color:#fecaca}.manager-intel-chip.stale{background:#f1f5f9;color:#475569;border-color:#cbd5e1}.manager-intel-empty{font-size:13px;color:#64748b;line-height:1.5}@media (max-width: 1200px){.manager-intel-sync-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.manager-intel-lists{grid-template-columns:1fr}}@media (max-width: 720px){.manager-intel-sync-grid{grid-template-columns:1fr}}
 
 
+/* ==================== v1.0.196 - OPS MAP READABLE TILES ====================
+   Readability fix after full CTC map expansion.
+   The Ops Map tile should not carry the entire cell story. Keep the tile to
+   Cell -> State -> Health, and let hover cards / Selected Cell evidence carry
+   top reason, badges, comments, stale age, downtime, and confidence details. */
+.engineer-testcell-command .engineer-ops-map-card{
+  overflow:visible;
+}
+.engineer-testcell-command .engineer-ops-map{
+  overflow:visible;
+}
+.engineer-testcell-command .engineer-map-row-grid{
+  align-items:stretch;
+}
+.engineer-testcell-command .engineer-cell-tile{
+  min-height:70px;
+  max-height:88px;
+  padding:10px 9px 9px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:6px;
+  overflow:hidden;
+}
+.engineer-testcell-command .engineer-cell-topline{
+  min-height:0;
+  margin:0;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+}
+.engineer-testcell-command .engineer-cell-number{
+  font-size:18px;
+  line-height:1;
+  letter-spacing:-.035em;
+}
+.engineer-testcell-command .engineer-cell-status{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  min-width:0;
+  max-width:100%;
+  font-size:10px;
+  line-height:1.1;
+  font-weight:950;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.engineer-testcell-command .engineer-cell-meta,
+.engineer-testcell-command .engineer-cell-badges{
+  display:none !important;
+}
+.engineer-testcell-command .engineer-cell-footer{
+  margin-top:0;
+  padding-top:6px;
+  border-top:1px solid rgba(148,163,184,.12);
+  min-width:0;
+}
+.engineer-testcell-command .engineer-cell-score-label{
+  font-size:7px;
+  letter-spacing:.12em;
+  opacity:.72;
+}
+.engineer-testcell-command .engineer-cell-score{
+  font-size:9px;
+  padding:1px 6px;
+  flex:0 0 auto;
+}
+.engineer-testcell-command .engineer-cell-tile.selected::after{
+  content:"";
+  display:none !important;
+}
+.engineer-testcell-command .engineer-cell-tile:hover,
+.engineer-testcell-command .engineer-cell-tile.selected{
+  overflow:visible;
+}
+.engineer-testcell-command .engineer-cell-tile::after{
+  content:"";
+  position:absolute;
+  right:8px;
+  top:8px;
+  width:7px;
+  height:7px;
+  border-radius:999px;
+  background:rgba(148,163,184,.45);
+  box-shadow:0 0 12px rgba(148,163,184,.22);
+  pointer-events:none;
+}
+.engineer-testcell-command .engineer-cell-tile.state-running::after{background:#4ADE80;box-shadow:0 0 12px rgba(74,222,128,.32)}
+.engineer-testcell-command .engineer-cell-tile.state-watch::after{background:#FACC15;box-shadow:0 0 12px rgba(250,204,21,.30)}
+.engineer-testcell-command .engineer-cell-tile.state-attention::after{background:#FB923C;box-shadow:0 0 12px rgba(251,146,60,.34)}
+.engineer-testcell-command .engineer-cell-tile.state-help::after{background:#C084FC;box-shadow:0 0 12px rgba(192,132,252,.34)}
+.engineer-testcell-command .engineer-cell-tile.state-blocked::after{background:#F87171;box-shadow:0 0 13px rgba(248,113,113,.36)}
+.engineer-testcell-command .engineer-cell-tile.state-stale::after{background:#94A3B8;box-shadow:0 0 10px rgba(148,163,184,.26)}
+@media (min-width:1740px){
+  .engineer-testcell-command .engineer-map-row-grid{
+    grid-template-columns:repeat(22,minmax(68px,1fr));
+  }
+}
+@media (max-width:1739px){
+  .engineer-testcell-command .engineer-map-row-grid{
+    grid-template-columns:repeat(auto-fit,minmax(86px,1fr));
+  }
+}
+@media (max-width:720px){
+  .engineer-testcell-command .engineer-cell-tile{
+    max-height:none;
+    min-height:76px;
+  }
+}
+
+
   </style>
 </head>
 <body data-theme="standard">
@@ -4604,7 +4719,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.194-manager-view-intelligence-sync</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.196-ops-map-readable-tiles</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -4612,7 +4727,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.194-manager-view-intelligence-sync</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.196-ops-map-readable-tiles</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -6025,8 +6140,8 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.195-export-and-report-polish";
-    const VERSION_DESCRIPTION = "Polishes Manager and Engineer exports with cleaner executive summaries, action-ready sections, report filenames, and handoff-friendly wording while preserving the command-center workflow.";
+    const VERSION = "v1.0.196-ops-map-readable-tiles";
+    const VERSION_DESCRIPTION = "Simplifies Test Cell Ops Map tiles so the map stays readable: cell number, state, and health remain on the tile while deeper evidence moves to hover cards and the selected-cell panel.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
