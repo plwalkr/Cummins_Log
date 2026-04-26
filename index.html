@@ -5115,6 +5115,59 @@ body.command-capture-mode #engineer-purpose-tools:not([open]){
   #tab-engineer .engineer-filter-note{font-size:12px;}
 }
 
+
+/* ==================== v1.0.204 - CALM DASHBOARD POLISH ====================
+   Surgical visual cleanup only. Do not alter data flows, IDs, JS bindings, Ops Map
+   row breaks, read-only Engineer trade coverage, or Manager aggregation behavior. */
+:root{--ui-radius-soft:18px;--ui-radius-card:22px;--ui-shadow-calm:0 10px 30px rgba(15,23,42,.07);--ui-focus-ring:0 0 0 4px rgba(37,99,235,.14);--ui-ease:all .18s ease;}
+body{font-size:14px;letter-spacing:-.005em;background:linear-gradient(180deg,#f8fafc 0%,#f3f6fb 100%);}
+.app{gap:16px;padding-top:16px;padding-bottom:20px;}
+.panel{border-color:rgba(148,163,184,.34);border-radius:var(--ui-radius-card);box-shadow:0 1px 2px rgba(15,23,42,.04);}
+.panel-head{padding:15px 18px;background:linear-gradient(180deg,#fff 0%,#f8fafc 100%);}
+.section-body{padding:16px;gap:14px;}
+.eyebrow{font-weight:850;letter-spacing:.20em;color:#64748b;}
+h1{font-size:clamp(24px,2.1vw,34px);letter-spacing:-.04em;line-height:1.05;}
+h2{font-size:clamp(19px,1.5vw,25px);letter-spacing:-.03em;line-height:1.12;}
+h3{font-size:clamp(15px,1.08vw,18px);letter-spacing:-.02em;line-height:1.2;}
+.small{font-size:12.5px;color:#64748b;}
+button.primary,button.secondary,.tab-btn,.display-mode-btn,.manager-mode-btn,.qa-pass-trigger{transition:var(--ui-ease);}
+button.primary:hover,button.secondary:hover,.tab-btn:hover,.display-mode-btn:hover,.manager-mode-btn:hover,.qa-pass-trigger:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(15,23,42,.08);}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:none;box-shadow:var(--ui-focus-ring);}
+input,select,textarea,.search,.followup-textarea{border-color:#cbd5e1;border-radius:12px;transition:var(--ui-ease);}
+input:focus,select:focus,textarea:focus,.search:focus,.followup-textarea:focus{border-color:#2563eb;box-shadow:var(--ui-focus-ring);outline:none;}
+.view-tabs{padding:12px 14px;gap:8px;border-radius:20px;background:rgba(248,250,252,.94);box-shadow:0 1px 2px rgba(15,23,42,.04);}
+.tab-btn{padding:9px 14px;}
+.tab-btn.active{box-shadow:0 10px 22px rgba(15,23,42,.13);}
+.manager-card,.manager-hero-card,.manager-band-card,.manager-signal-card,.manager-list-card,.manager-chart-card,.engineer-summary-card,.engineer-priority-card,.engineer-cell-card,.section-card,.hours-summary-card,.hours-breakdown-card,.hours-sidebox{border-color:rgba(148,163,184,.30);border-radius:var(--ui-radius-soft);box-shadow:0 1px 2px rgba(15,23,42,.035);}
+.manager-card:hover,.manager-hero-card:hover,.manager-band-card:hover,.manager-signal-card:hover,.manager-list-card:hover,.manager-chart-card:hover,.engineer-summary-card:hover,.engineer-priority-card:hover,.engineer-cell-card:hover,.section-card:hover{box-shadow:var(--ui-shadow-calm);}
+.manager-shell,.engineer-shell{gap:16px;}
+.manager-hero-card,.manager-list-card,.manager-chart-card{padding:18px;}
+.manager-band{gap:14px;}
+.manager-value,.manager-signal-value,.engineer-summary-value{letter-spacing:-.055em;}
+.manager-chart-head,.manager-list-head{min-height:auto;}
+.manager-note{color:#64748b;}
+.engineer-testcell-command .engineer-2026-shell{border-radius:28px;box-shadow:0 22px 60px rgba(2,6,23,.16);}
+.engineer-testcell-command .engineer-command-title,.engineer-testcell-command .engineer-2026-title{letter-spacing:-.045em;}
+.engineer-testcell-command .engineer-command-layout,.engineer-testcell-command .engineer-modern-grid,.engineer-testcell-command .engineer-command-main-grid{gap:16px;}
+.engineer-testcell-command .engineer-command-hero,.engineer-testcell-command .engineer-command-health,.engineer-testcell-command .engineer-command-tile,.engineer-testcell-command .engineer-ops-map-card,.engineer-testcell-command .engineer-shift-timeline-card,.engineer-testcell-command .engineer-attention-engine-card,.engineer-testcell-command .engineer-selected-cell-card{border-color:rgba(148,163,184,.22);box-shadow:0 12px 28px rgba(2,6,23,.10);}
+.engineer-testcell-command .engineer-command-hero:hover,.engineer-testcell-command .engineer-command-health:hover,.engineer-testcell-command .engineer-command-tile:hover,.engineer-testcell-command .engineer-ops-map-card:hover,.engineer-testcell-command .engineer-shift-timeline-card:hover,.engineer-testcell-command .engineer-attention-engine-card:hover,.engineer-testcell-command .engineer-selected-cell-card:hover{box-shadow:0 18px 42px rgba(2,6,23,.15);}
+.engineer-command-caption,.engineer-command-subtitle,.engineer-ops-map-note{line-height:1.55;}
+.engineer-ops-row-label{letter-spacing:.12em;}
+.engineer-cell-tile{transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;}
+.engineer-cell-tile:hover{transform:translateY(-2px);}
+.engineer-cell-tile.selected{box-shadow:0 0 0 2px rgba(34,211,238,.28),0 16px 28px rgba(34,211,238,.10);}
+.hours-summary-grid,.manager-grid,.engineer-summary-strip{gap:12px;}
+.hours-table-wrap,.table-wrap,.running-sheet-wrap{border-radius:16px;border-color:rgba(148,163,184,.32);}
+th{font-weight:850;letter-spacing:.08em;color:#475569;}
+td{line-height:1.45;}
+.toolbar{gap:7px;background:linear-gradient(180deg,#fff 0%,#f8fafc 100%);}
+.toolbar button{transition:var(--ui-ease);}
+.toolbar button:hover{transform:translateY(-1px);box-shadow:0 5px 12px rgba(15,23,42,.08);}
+.running-sheet-resizer{height:24px;background:linear-gradient(180deg,#f8fafc,#eef2f7);}
+.engineer-tools-collapsed,.presentation-controls-dock,.qa-pass-panel,.pilot-readiness-panel,.pilot-walkthrough-panel,.command-screenshot-banner{border-color:rgba(148,163,184,.26)!important;box-shadow:0 6px 18px rgba(15,23,42,.05)!important;}
+.engineer-tools-collapsed button,.presentation-controls-dock button,.qa-pass-actions button,.pilot-readiness-actions button,.pilot-walkthrough-actions button{border-radius:999px;}
+.badge,.pill,.manager-posture,.engineer-command-pill,.engineer-state-badge,.hours-row-badge{letter-spacing:.045em;}
+@media (max-width:900px){.app{padding:10px;gap:12px}.panel-head,.section-body{padding:12px}.view-tabs{padding:10px}.tab-btn{width:auto}}
   </style>
 </head>
 <body data-theme="standard">
@@ -6583,8 +6636,8 @@ body.command-capture-mode #engineer-purpose-tools:not([open]){
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.203-test-cell-row-label-cleanup";
-    const VERSION_DESCRIPTION = "Cleans up the Test Cell Ops Map row labels so the building split still happens at 116/117, 216/217, 316/317, and 416/417 while the visible row labels read 100 Row, 200 Row, 300 Row, and 400 Row.";
+    const VERSION = "v1.0.204-calm-dashboard-polish";
+    const VERSION_DESCRIPTION = "Applies a controlled calm-dashboard visual polish: cleaner spacing, typography, card surfaces, focus states, and quieter tool presentation while preserving all workflows, IDs, JavaScript behavior, Ops Map row breaks, and Manager alignment.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
