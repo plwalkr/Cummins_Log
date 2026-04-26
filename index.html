@@ -4965,7 +4965,101 @@ body.command-capture-mode #engineer-purpose-tools:not([open]){
   .engineer-purpose-tools-summary em{text-align:left}
 }
 
-  </style>
+  
+/* ==================== v1.0.200 - LAYOUT OVERFLOW + MANAGER ALIGNMENT FIX ====================
+   Purpose: fix two layout regressions without touching data or workflow logic.
+   1) Test Cell Ops Map must never fall off the right edge.
+   2) Manager / Coaches view should use the full available canvas instead of
+      looking pinned left with dead white space on the right. */
+.app{
+  width:100%;
+  max-width:clamp(1500px, 96vw, 2160px);
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* Manager view alignment: keep cards centered and let the dashboard breathe. */
+.manager-shell{
+  width:100% !important;
+  max-width:none !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  align-self:stretch;
+}
+.manager-hero,
+.manager-band,
+.manager-layout,
+.manager-dashboard-grid,
+.manager-dashboard-grid.bottom,
+.manager-intel-sync-card{
+  width:100%;
+  max-width:none;
+}
+.manager-layout{
+  grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);
+}
+.manager-dashboard-grid,
+.manager-dashboard-grid.bottom{
+  justify-items:stretch;
+}
+.manager-list-card,
+.manager-chart-card,
+.manager-story-card{
+  width:100%;
+}
+
+/* Ops Map overflow relief: prefer clean wrapping over horizontal spill. */
+.engineer-testcell-command .engineer-ops-map-card{
+  overflow:hidden !important;
+  max-width:100%;
+}
+.engineer-testcell-command .engineer-ops-map{
+  overflow:hidden !important;
+  width:100%;
+  max-width:100%;
+  padding:16px;
+}
+.engineer-testcell-command .engineer-map-row{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  grid-template-columns:64px minmax(0,1fr);
+  gap:10px;
+}
+.engineer-testcell-command .engineer-map-row-grid{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  grid-template-columns:repeat(auto-fit,minmax(76px,1fr)) !important;
+  gap:9px;
+}
+.engineer-testcell-command .engineer-cell-tile{
+  min-width:0 !important;
+  width:100%;
+  max-width:100%;
+}
+
+/* Only allow the full 22-cell row on very wide displays where it truly fits. */
+@media (min-width: 2060px){
+  .engineer-testcell-command .engineer-map-row-grid{
+    grid-template-columns:repeat(22,minmax(70px,1fr)) !important;
+  }
+}
+@media (max-width: 1500px){
+  .engineer-testcell-command .engineer-map-row{
+    grid-template-columns:56px minmax(0,1fr);
+  }
+  .engineer-testcell-command .engineer-map-row-grid{
+    grid-template-columns:repeat(auto-fit,minmax(82px,1fr)) !important;
+  }
+}
+@media (max-width: 980px){
+  .manager-layout{grid-template-columns:1fr;}
+  .engineer-testcell-command .engineer-map-row{grid-template-columns:1fr;}
+  .engineer-testcell-command .engineer-map-row-grid{grid-template-columns:repeat(auto-fit,minmax(88px,1fr)) !important;}
+}
+
+</style>
 </head>
 <body data-theme="standard">
   <div class="app">
@@ -6433,8 +6527,8 @@ body.command-capture-mode #engineer-purpose-tools:not([open]){
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.199-purposeful-ui-audit";
-    const VERSION_DESCRIPTION = "Routes Engineer hours breakdown actions to a read-only Trade Coverage panel inside Engineer instead of the editable Hours worksheet, preserving operator controls while giving Engineers a view-only reconciliation path.";
+    const VERSION = "v1.0.200-layout-overflow-alignment-fix";
+    const VERSION_DESCRIPTION = "Fixes Test Cell Ops Map overflow and recenters the Manager / Coaches view so command and leadership layouts use the available page width without changing workflow logic.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
