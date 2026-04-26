@@ -4224,6 +4224,46 @@ body.command-capture-mode .qa-pass-panel{display:none !important}
   .engineer-selected-cell-evidence-type{justify-content:flex-start;width:max-content}
 }
 
+/* ==================== v1.0.198 - ENGINEER READ-ONLY TRADE COVERAGE ====================
+   Keeps Engineers in the Engineer tab when reconciling hours signals.
+   Uses trade-style grouping, but exposes no editable Hours worksheet controls. */
+.engineer-readonly-trade-panel{position:relative;z-index:1;border:1px solid rgba(34,211,238,.18);border-radius:22px;background:linear-gradient(180deg,rgba(15,23,42,.56),rgba(15,23,42,.32));box-shadow:0 18px 42px rgba(2,6,23,.18);padding:16px;margin-top:4px}
+.engineer-dashboard--lightcards .engineer-readonly-trade-panel{background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(248,250,252,.86));border-color:rgba(148,163,184,.28)}
+.engineer-readonly-trade-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.engineer-readonly-trade-copy{margin-top:6px;color:var(--eng-copy);font-size:13px;line-height:1.5;max-width:70ch}
+.engineer-readonly-trade-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.engineer-readonly-trade-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.engineer-readonly-trade-stat{border:1px solid rgba(148,163,184,.16);border-radius:15px;background:rgba(2,6,23,.20);padding:11px 12px}
+.engineer-dashboard--lightcards .engineer-readonly-trade-stat{background:rgba(255,255,255,.78)}
+.engineer-readonly-trade-stat strong{display:block;color:var(--eng-muted);font-size:10px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px}
+.engineer-readonly-trade-stat span{display:block;color:#F8FAFC;font-size:18px;font-weight:950;line-height:1.15}
+.engineer-dashboard--lightcards .engineer-readonly-trade-stat span{color:#0F172A}
+.engineer-readonly-trade-list{display:flex;flex-direction:column;gap:12px;max-height:520px;overflow:auto;padding-right:4px}
+.engineer-readonly-trade-cell{border:1px solid rgba(148,163,184,.18);border-radius:18px;background:rgba(2,6,23,.20);padding:13px}
+.engineer-dashboard--lightcards .engineer-readonly-trade-cell{background:rgba(255,255,255,.82)}
+.engineer-readonly-trade-cell-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.engineer-readonly-trade-cell-title{color:#F8FAFC;font-size:17px;font-weight:950;letter-spacing:-.02em}
+.engineer-dashboard--lightcards .engineer-readonly-trade-cell-title{color:#0F172A}
+.engineer-readonly-trade-cell-meta{color:var(--eng-muted);font-size:12px;line-height:1.45;margin-top:3px}
+.engineer-readonly-trade-chunk{border-top:1px dashed rgba(148,163,184,.18);padding-top:10px;margin-top:10px}
+.engineer-readonly-trade-chunk:first-of-type{border-top:none;padding-top:0;margin-top:0}
+.engineer-readonly-trade-stamp{color:var(--eng-muted);font-size:12px;line-height:1.45;margin-bottom:8px}
+.engineer-readonly-trade-pills{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:8px}
+.engineer-readonly-trade-pill{display:inline-flex;align-items:center;padding:4px 9px;border-radius:999px;border:1px solid rgba(148,163,184,.18);background:rgba(15,23,42,.28);color:var(--eng-copy);font-size:11px;font-weight:850}
+.engineer-dashboard--lightcards .engineer-readonly-trade-pill{background:rgba(248,250,252,.92)}
+.engineer-readonly-trade-mini-table{width:100%;border-collapse:collapse;font-size:12px;border:1px solid rgba(148,163,184,.16);border-radius:12px;overflow:hidden;display:table}
+.engineer-readonly-trade-mini-table th{background:rgba(15,23,42,.34);color:var(--eng-muted);font-size:10px;text-transform:uppercase;letter-spacing:.10em;padding:8px 9px;text-align:left;border-bottom:1px solid rgba(148,163,184,.16)}
+.engineer-dashboard--lightcards .engineer-readonly-trade-mini-table th{background:rgba(241,245,249,.96)}
+.engineer-readonly-trade-mini-table td{padding:8px 9px;border-bottom:1px solid rgba(148,163,184,.12);color:var(--eng-copy);vertical-align:top}
+.engineer-readonly-trade-mini-table tr:last-child td{border-bottom:none}
+.engineer-readonly-trade-mini-table .num{text-align:right;font-weight:950;color:#F8FAFC;white-space:nowrap}
+.engineer-dashboard--lightcards .engineer-readonly-trade-mini-table .num{color:#0F172A}
+.engineer-readonly-trade-empty{border:1px dashed rgba(148,163,184,.22);border-radius:16px;padding:16px;color:var(--eng-copy);background:rgba(15,23,42,.18);font-size:13px;line-height:1.55}
+.engineer-readonly-trade-note{margin-top:12px;border:1px dashed rgba(148,163,184,.20);border-radius:14px;padding:10px 12px;color:var(--eng-muted);font-size:12px;line-height:1.45;background:rgba(15,23,42,.16)}
+@media (max-width: 900px){.engineer-readonly-trade-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.engineer-readonly-trade-actions{justify-content:stretch}.engineer-readonly-trade-actions button{flex:1 1 150px}}
+@media (max-width: 560px){.engineer-readonly-trade-summary{grid-template-columns:1fr}.engineer-readonly-trade-mini-table{font-size:11px}.engineer-readonly-trade-mini-table th,.engineer-readonly-trade-mini-table td{padding:7px}}
+
+
 /* ==================== v1.0.184 - SUPPORTING DETAILS COLLAPSE ====================
    Keeps the 2026 command center as the primary Engineer view while preserving
    raw evidence below in a clean collapsed audit/support area. */
@@ -5827,7 +5867,7 @@ table td{
                   <div class="engineer-selected-cell-actions">
                     <button id="engineer-selected-cell-filter-btn" class="secondary" type="button" onclick="filterSelectedEngineerCell()">Filter to Cell</button>
                     <button id="engineer-selected-cell-export-btn" class="secondary" type="button" onclick="exportSelectedEngineerCellSnapshot()">Export Cell Snapshot</button>
-                    <button class="secondary" type="button" onclick="openHoursBreakdownFromEngineer()">View Hours Breakdown</button>
+                    <button class="secondary" type="button" onclick="openEngineerTradeCoverageView('selected')">View Trade Coverage</button>
                     <button id="engineer-selected-cell-clear-btn" class="secondary" type="button" onclick="clearSelectedEngineerCell()">Clear</button>
                   </div>
                 </article>
@@ -5840,9 +5880,29 @@ table td{
                     Export Snapshot
                   </button>
                   <button id="engineer-view-hours-btn" class="secondary" type="button" onclick="openHoursBreakdownFromEngineer()">
-                    View Full Hours Breakdown
+                    View Read-Only Trade Coverage
                   </button>
                 </div>
+
+                <!-- v1.0.198 - Engineer read-only trade coverage
+                     Engineers should reconcile command-center signals against trade-style coverage without being routed to the editable Hours worksheet. -->
+                <section id="engineer-readonly-trade-panel" class="engineer-readonly-trade-panel" hidden>
+                  <div class="engineer-readonly-trade-head">
+                    <div>
+                      <div class="engineer-command-label">Read-Only Trade Coverage</div>
+                      <div class="engineer-command-title">Engineer reconciliation view</div>
+                      <div id="engineer-readonly-trade-scope" class="engineer-readonly-trade-copy">View-only coverage grouped by test cell and saved shift chunk.</div>
+                    </div>
+                    <div class="engineer-readonly-trade-actions">
+                      <button class="secondary" type="button" onclick="openEngineerTradeCoverageView('all')">Show All Cells</button>
+                      <button class="secondary" type="button" onclick="openEngineerTradeCoverageView('selected')">Selected Cell</button>
+                      <button class="secondary" type="button" onclick="closeEngineerTradeCoverageView()">Close</button>
+                    </div>
+                  </div>
+                  <div id="engineer-readonly-trade-summary" class="engineer-readonly-trade-summary"></div>
+                  <div id="engineer-readonly-trade-list" class="engineer-readonly-trade-list"></div>
+                  <div class="engineer-readonly-trade-note">This panel is read-only. It uses the same trade grouping logic as the Hours Trade Coverage View, but it does not expose technician edit controls.</div>
+                </section>
               </div>
             </div>
           </section>
@@ -6282,8 +6342,8 @@ table td{
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.197-global-visual-cleanup-lite";
-    const VERSION_DESCRIPTION = "Applies a safe cherry-picked visual cleanup layer: refined tokens, panels, focus states, tabs, controls, and subtle spacing polish without broad table/grid rewrites or Ops Map geometry changes.";
+    const VERSION = "v1.0.198-engineer-readonly-trade-breakdown";
+    const VERSION_DESCRIPTION = "Routes Engineer hours breakdown actions to a read-only Trade Coverage panel inside Engineer instead of the editable Hours worksheet, preserving operator controls while giving Engineers a view-only reconciliation path.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -8654,10 +8714,162 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
       URL.revokeObjectURL(link.href);
     }
 
-    function openHoursBreakdownFromEngineer() {
-      if (typeof switchTab === "function") {
-        switchTab("hours");
+    function getEngineerSelectedTradeCell(){
+      try {
+        const metrics = typeof deriveEngineerPremiumMetrics === "function" ? deriveEngineerPremiumMetrics() : null;
+        const picked = typeof getEngineerSelectedCellIntel === "function" ? getEngineerSelectedCellIntel(metrics) : null;
+        return safeCellNumber(picked?.selectedCell || metrics?.selectedCell || (engineerCellFilter && engineerCellFilter.value !== "All" ? engineerCellFilter.value : "") || window.engineerSelectedOpsCell || "");
+      } catch {
+        return "";
       }
+    }
+
+    function summarizeEngineerTradeRows(rows, status){
+      const entries = summarizeHoursRows(rows || [], status);
+      const total = entries.reduce((sum, [, data]) => sum + (Number(data.hours) || 0), 0);
+      return { entries, total };
+    }
+
+    function renderEngineerReadonlyTradeRows(label, summary){
+      const rows = [`<tr><th colspan="3">${escapeHtml(label)}</th></tr>`];
+      if (!summary.entries.length) {
+        rows.push(`<tr><td colspan="3">No ${escapeHtml(label.toLowerCase())} logged in this chunk.</td></tr>`);
+      } else {
+        summary.entries.forEach(([name, data]) => {
+          const comments = Array.isArray(data.comments) && data.comments.length
+            ? escapeHtml(data.comments[0]) + (data.comments.length > 1 ? ` (+${data.comments.length - 1} more)` : "")
+            : "—";
+          rows.push(`<tr><td>${escapeHtml(name)}</td><td class="num">${(Number(data.hours) || 0).toFixed(1)}</td><td>${comments}</td></tr>`);
+        });
+      }
+      rows.push(`<tr><td><strong>${escapeHtml(label)} subtotal</strong></td><td class="num">${summary.total.toFixed(1)}</td><td>—</td></tr>`);
+      return rows.join("");
+    }
+
+    function renderEngineerReadonlyTradePanel(mode = "all"){
+      const panel = document.getElementById("engineer-readonly-trade-panel");
+      const scopeEl = document.getElementById("engineer-readonly-trade-scope");
+      const summaryEl = document.getElementById("engineer-readonly-trade-summary");
+      const listEl = document.getElementById("engineer-readonly-trade-list");
+      if (!panel || !summaryEl || !listEl) return;
+
+      const selectedCell = getEngineerSelectedTradeCell();
+      const useSelected = mode === "selected" && selectedCell;
+      const allRecords = typeof getHoursTradeRecords === "function" ? getHoursTradeRecords() : [];
+      const records = useSelected
+        ? allRecords.filter(record => String(record?.banner?.testCell || "") === String(selectedCell))
+        : allRecords;
+
+      panel.hidden = false;
+      panel.dataset.tradeScope = useSelected ? "selected" : "all";
+
+      if (scopeEl) {
+        scopeEl.textContent = useSelected
+          ? `Read-only trade coverage for Cell ${selectedCell}. Engineers stay in this view-only panel instead of entering the editable Hours worksheet.`
+          : `Read-only trade coverage for all visible saved hour chunks. Engineers can reconcile signals here without opening technician edit controls.`;
+      }
+
+      if (!records.length) {
+        summaryEl.innerHTML = `
+          <div class="engineer-readonly-trade-stat"><strong>Records</strong><span>0</span></div>
+          <div class="engineer-readonly-trade-stat"><strong>Cells</strong><span>0</span></div>
+          <div class="engineer-readonly-trade-stat"><strong>Logged</strong><span>0.0h</span></div>
+          <div class="engineer-readonly-trade-stat"><strong>Scope</strong><span>${useSelected ? `Cell ${escapeHtml(selectedCell)}` : "All"}</span></div>
+        `;
+        listEl.innerHTML = `<div class="engineer-readonly-trade-empty">No saved trade coverage records match this Engineer scope yet. This panel is view-only; hour entry remains owned by the Technician Logging worksheet.</div>`;
+        return;
+      }
+
+      const grouped = records.reduce((map, record) => {
+        const cell = String(record?.banner?.testCell || "—");
+        if (!map.has(cell)) map.set(cell, []);
+        map.get(cell).push(record);
+        return map;
+      }, new Map());
+
+      const totalLogged = records.reduce((sum, record) => sum + (record.rows || []).reduce((rowSum, row) => rowSum + (Number(row.hours) || 0), 0), 0);
+      const downtimeLogged = records.reduce((sum, record) => sum + (record.rows || []).filter(row => row.status === "Downtime").reduce((rowSum, row) => rowSum + (Number(row.hours) || 0), 0), 0);
+
+      summaryEl.innerHTML = `
+        <div class="engineer-readonly-trade-stat"><strong>Records</strong><span>${records.length}</span></div>
+        <div class="engineer-readonly-trade-stat"><strong>Cells</strong><span>${grouped.size}</span></div>
+        <div class="engineer-readonly-trade-stat"><strong>Logged</strong><span>${totalLogged.toFixed(1)}h</span></div>
+        <div class="engineer-readonly-trade-stat"><strong>Downtime</strong><span>${downtimeLogged.toFixed(1)}h</span></div>
+      `;
+
+      listEl.innerHTML = Array.from(grouped.entries()).sort((a,b) => Number(a[0]) - Number(b[0])).map(([cell, cellRecords]) => {
+        const chunks = cellRecords.sort((a,b) => {
+          const dateCmp = String(a.session?.iso || "").localeCompare(String(b.session?.iso || ""));
+          if (dateCmp !== 0) return dateCmp;
+          return String(a.banner?.startTime || "").localeCompare(String(b.banner?.startTime || ""));
+        }).map(record => {
+          const running = summarizeEngineerTradeRows(record.rows, "Running");
+          const downtime = summarizeEngineerTradeRows(record.rows, "Downtime");
+          const rerun = summarizeEngineerTradeRows(record.rows, "Rerun");
+          const total = running.total + downtime.total + rerun.total;
+          const shortDate = record.session?.valid
+            ? new Date(`${record.session.iso}T12:00:00`).toLocaleDateString([], {weekday:"short", month:"short", day:"numeric"})
+            : (record.session?.display || "No date");
+          const stamp = [
+            shortDate,
+            record.banner?.shift ? `Shift ${record.banner.shift}` : null,
+            record.banner?.startTime ? `Start ${record.banner.startTime}${record.banner.endTime ? " → " + record.banner.endTime : ""}` : null,
+            record.banner?.cellHourMeter ? `Meter ${record.banner.cellHourMeter}` : null,
+            record.coverage?.window ? `Coverage ${record.coverage.window}` : null
+          ].filter(Boolean).join(" · ");
+
+          return `
+            <div class="engineer-readonly-trade-chunk">
+              <div class="engineer-readonly-trade-stamp">${escapeHtml(stamp)}</div>
+              <div class="engineer-readonly-trade-pills">
+                <span class="engineer-readonly-trade-pill">Tech ${(Number(record.coverage?.techHours) || 0).toFixed(1)}h · ${escapeHtml(record.coverage?.techWindow || "—")}</span>
+                <span class="engineer-readonly-trade-pill">${escapeHtml(record.coverage?.tradeRunLabel || "Trade Run")} · ${(Number(record.coverage?.hours) || 0).toFixed(1)}h</span>
+                <span class="engineer-readonly-trade-pill">Logged ${total.toFixed(1)}h</span>
+              </div>
+              <table class="engineer-readonly-trade-mini-table">
+                <tbody>
+                  ${renderEngineerReadonlyTradeRows("Running Hours", running)}
+                  ${renderEngineerReadonlyTradeRows("Downtime Hours", downtime)}
+                  ${renderEngineerReadonlyTradeRows("Rerun Hours", rerun)}
+                  <tr><td><strong>Total logged hours</strong></td><td class="num">${total.toFixed(1)}</td><td>${escapeHtml(record.banner?.technician || "—")}</td></tr>
+                </tbody>
+              </table>
+            </div>
+          `;
+        }).join("");
+
+        return `
+          <section class="engineer-readonly-trade-cell">
+            <div class="engineer-readonly-trade-cell-head">
+              <div>
+                <div class="engineer-readonly-trade-cell-title">Cell ${escapeHtml(cell)}</div>
+                <div class="engineer-readonly-trade-cell-meta">View-only trade coverage grouped by saved day/shift chunk.</div>
+              </div>
+              <span class="engineer-command-pill good">Read-only</span>
+            </div>
+            ${chunks}
+          </section>
+        `;
+      }).join("");
+    }
+
+    function openEngineerTradeCoverageView(mode = "all"){
+      renderEngineerReadonlyTradePanel(mode);
+      const panel = document.getElementById("engineer-readonly-trade-panel");
+      if (panel && typeof panel.scrollIntoView === "function") {
+        panel.scrollIntoView({behavior:"smooth", block:"start"});
+      }
+    }
+
+    function closeEngineerTradeCoverageView(){
+      const panel = document.getElementById("engineer-readonly-trade-panel");
+      if (panel) panel.hidden = true;
+    }
+
+    function openHoursBreakdownFromEngineer() {
+      // v1.0.198: Engineer actions must remain view-only.
+      // Do not route to the editable Technician Logging worksheet.
+      openEngineerTradeCoverageView("all");
     }
 
     function bindEngineerDashboardButtons() {
@@ -13632,7 +13844,7 @@ function initGuidedTooltips(){
   addGuidedTooltip('#data-quality-header', 'Quick confidence badge for the current data set. Lower scores usually mean missing hours, stale updates, or incomplete comments.');
   addGuidedTooltip('#engineer-live-toggle-btn', 'Demo-only pulse. It gently moves dashboard numbers without changing saved logbook, hours, weekend, or manager data.');
   addGuidedTooltip('#engineer-export-snapshot-btn', 'Downloads a plain-text Engineer command snapshot for handoff, review, or presentation notes.');
-  addGuidedTooltip('#engineer-view-hours-btn', 'Jumps to the Hours tab so the visual signal can be reconciled against the source rows.');
+  addGuidedTooltip('#engineer-view-hours-btn', 'Opens a read-only Trade Coverage panel inside Engineer so the signal can be reconciled without entering technician edit controls.');
   addGuidedTooltip('[data-pilot-demo="true"]', 'Seeds a presentation-safe scenario so the command center can be demonstrated without manual setup.');
   addGuidedTooltip('[data-command-screenshot-toggle]', 'Tightens the command center for screenshots or Save-as-PDF without changing stored data.');
   addGuidedTooltip('.presentation-action-row button', 'Presentation helper. Use these during a walkthrough to focus the story quickly.');
@@ -13641,6 +13853,7 @@ function initGuidedTooltips(){
   addGuidedTooltip('.engineer-cell-badge', 'Small cell badge showing a supporting condition like Help, Stale, Down, Blocked, or Attention.');
   addGuidedTooltip('.engineer-alert-action', 'Filters or focuses the dashboard on the alert source so the user can verify it quickly.');
   addGuidedTooltip('.engineer-selected-cell-actions button', 'Cell-specific action. Uses the selected cell without changing saved source data.');
+  addGuidedTooltip('.engineer-readonly-trade-actions button', 'Read-only trade coverage control. This stays inside Engineer and does not open editable hour entry.');
   addGuidedTooltip('.qa-check-row', 'QA guardrail result. These help verify the command center is wired before a demo or pilot review.');
   addGuidedInfoDots();
 }
