@@ -4396,6 +4396,44 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
 .rc-hardening-output{margin-top:12px;max-height:220px;overflow:auto;border:1px solid rgba(148,163,184,.20);border-radius:14px;background:rgba(2,6,23,.54);color:#dbeafe;padding:12px;font-size:12px;line-height:1.45;white-space:pre-wrap}
 @media(max-width:760px){.rc-hardening-score-row{grid-template-columns:1fr}.rc-hardening-actions{justify-content:flex-start}}
 
+
+/* ==================== v1.0.189 - OPS MAP WRAP FIX ====================
+   Fixes the Test Cell Ops Map spilling off the right side on narrower command layouts.
+   Keeps the big map card readable by allowing cell tiles to wrap inside the card instead of forcing 16 fixed columns.
+   Safety: CSS-only layout fix; does not change saved data, intelligence scoring, tabs, Pulse, or demo behavior. */
+.engineer-testcell-command .engineer-ops-map-card,
+.engineer-testcell-command .engineer-ops-map,
+.engineer-testcell-command .engineer-map-row,
+.engineer-testcell-command .engineer-map-row-grid{
+  min-width:0;
+  max-width:100%;
+}
+.engineer-testcell-command .engineer-ops-map-card{overflow:hidden}
+.engineer-testcell-command .engineer-ops-map{overflow:hidden}
+.engineer-testcell-command .engineer-map-row{grid-template-columns:minmax(44px,54px) minmax(0,1fr)}
+.engineer-testcell-command .engineer-map-row-grid{
+  grid-template-columns:repeat(auto-fit,minmax(64px,1fr));
+  align-items:stretch;
+  overflow:hidden;
+}
+.engineer-testcell-command .engineer-cell-tile{min-width:0;width:100%}
+.engineer-testcell-command .engineer-cell-number,
+.engineer-testcell-command .engineer-cell-status,
+.engineer-testcell-command .engineer-cell-meta{min-width:0}
+@media (min-width:1320px){
+  .engineer-testcell-command .engineer-map-row-grid{grid-template-columns:repeat(16,minmax(0,1fr))}
+}
+@media (max-width:980px){
+  .engineer-testcell-command .engineer-map-row{grid-template-columns:1fr;gap:8px}
+  .engineer-testcell-command .engineer-map-row-label{justify-content:flex-start;padding-left:2px}
+  .engineer-testcell-command .engineer-map-row-grid{grid-template-columns:repeat(auto-fit,minmax(72px,1fr))}
+}
+@media (max-width:520px){
+  .engineer-testcell-command .engineer-ops-map-card,
+  .engineer-testcell-command .engineer-ops-map{padding:12px}
+  .engineer-testcell-command .engineer-map-row-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
 </style>
 </head>
 <body data-theme="standard">
@@ -4408,7 +4446,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.188-demo-data-polish</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.189-ops-map-wrap-fix</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -4416,7 +4454,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.188-demo-data-polish</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.189-ops-map-wrap-fix</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -4811,7 +4849,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.188-demo-data-polish</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.189-ops-map-wrap-fix</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -5466,7 +5504,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.188-demo-data-polish</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.189-ops-map-wrap-fix</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -5524,7 +5562,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.188-demo-data-polish</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.189-ops-map-wrap-fix</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -5730,7 +5768,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.188-demo-data-polish</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.189-ops-map-wrap-fix</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -5809,8 +5847,8 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.188-demo-data-polish";
-    const VERSION_DESCRIPTION = "Demo-data polish pass that makes the staged pilot scenario more realistic, clearer for leadership review, and easier to explain without changing normal operator workflows.";
+    const VERSION = "v1.0.189-ops-map-wrap-fix";
+    const VERSION_DESCRIPTION = "Ops Map wrap fix that keeps the cell-by-cell readiness grid inside the visible Engineer card while preserving the demo-data polish and command-center features.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
