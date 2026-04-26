@@ -4339,6 +4339,34 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
 
   
 
+
+/* ==================== v1.0.188 - DEMO DATA POLISH ====================
+   Presentation helper only. This improves the staged pilot story and scenario
+   summary without mutating normal operator data unless Pilot Demo is launched. */
+.pilot-scenario-brief{display:none;margin:10px 0 14px;border:1px solid rgba(148,163,184,.24);border-radius:20px;background:linear-gradient(135deg,rgba(15,23,42,.96),rgba(30,41,59,.90));color:#e5edf6;padding:14px;box-shadow:0 16px 36px rgba(2,6,23,.18)}
+.pilot-scenario-brief.active{display:block}
+.pilot-scenario-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap;margin-bottom:12px}
+.pilot-scenario-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#93c5fd;font-weight:950;margin-bottom:4px}
+.pilot-scenario-head h3{margin:0;color:#f8fafc;font-size:17px;letter-spacing:-.02em}
+.pilot-scenario-head p{margin:4px 0 0;color:#cbd5e1;font-size:12px;line-height:1.5;max-width:82ch}
+.pilot-scenario-pill{display:inline-flex;align-items:center;justify-content:center;padding:6px 10px;border-radius:999px;border:1px solid rgba(34,211,238,.28);background:rgba(34,211,238,.10);color:#a5f3fc;font-size:10px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}
+.pilot-scenario-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.pilot-scenario-card{border:1px solid rgba(148,163,184,.20);border-radius:16px;background:rgba(255,255,255,.055);padding:12px;min-height:132px}
+.pilot-scenario-card strong{display:flex;justify-content:space-between;gap:8px;align-items:center;color:#f8fafc;font-size:13px;line-height:1.35;margin-bottom:6px}
+.pilot-scenario-card small{color:#93c5fd;font-size:11px;font-weight:950}
+.pilot-scenario-card span{display:block;color:#cbd5e1;font-size:12px;line-height:1.48}
+.pilot-scenario-chip{display:inline-flex !important;width:max-content;margin-top:9px;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:950;text-transform:uppercase;letter-spacing:.06em;border:1px solid transparent}
+.pilot-scenario-chip.attention{background:rgba(248,113,113,.14);border-color:rgba(248,113,113,.26);color:#fecaca}
+.pilot-scenario-chip.running{background:rgba(20,184,166,.14);border-color:rgba(45,212,191,.26);color:#99f6e4}
+.pilot-scenario-chip.watch{background:rgba(245,158,11,.14);border-color:rgba(251,191,36,.26);color:#fde68a}
+.pilot-scenario-chip.blocked{background:rgba(168,85,247,.14);border-color:rgba(196,181,253,.28);color:#ddd6fe}
+.pilot-scenario-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.pilot-scenario-actions button{border:1px solid rgba(191,219,254,.26);background:rgba(255,255,255,.06);color:#e0f2fe;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:900;cursor:pointer}
+.pilot-scenario-actions button:hover{border-color:#67e8f9;background:rgba(34,211,238,.10)}
+body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .pilot-scenario-brief{display:block}
+@media (max-width:1100px){.pilot-scenario-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.pilot-scenario-grid{grid-template-columns:1fr}.pilot-scenario-actions button{flex:1 1 100%}}
+
 /* ==================== v1.0.187 - RELEASE CANDIDATE HARDENING ====================
    Non-destructive readiness panel used before continuing feature work. */
 .rc-hardening-panel{display:none;border:1px solid rgba(148,163,184,.24);border-radius:20px;background:linear-gradient(180deg,rgba(15,23,42,.96),rgba(15,23,42,.88));color:#e5edf6;padding:18px;margin:14px 0;box-shadow:0 18px 44px rgba(2,6,23,.22)}
@@ -4380,7 +4408,7 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.187-release-candidate-hardening</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.188-demo-data-polish</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -4388,7 +4416,7 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.187-release-candidate-hardening</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.188-demo-data-polish</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -4783,7 +4811,7 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.187-release-candidate-hardening</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.188-demo-data-polish</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -4818,6 +4846,33 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
             <div><strong>Pilot demo mode</strong><span id="pilot-mode-banner-copy">Presentation-safe command-center data is ready for Engineer review.</span></div>
             <span class="pilot-mode-pill">Demo only</span>
           </div>
+
+
+          <!-- v1.0.188 - Demo Data Polish
+               Visible after Pilot Demo is launched or during presentation/screenshot mode.
+               Explains the staged cells so the demo story is clearer without adding clutter. -->
+          <div id="pilot-scenario-brief" class="pilot-scenario-brief" aria-live="polite">
+            <div class="pilot-scenario-head">
+              <div>
+                <div class="pilot-scenario-kicker">Pilot scenario brief</div>
+                <h3>Staged test-cell story</h3>
+                <p id="pilot-scenario-summary">Load Pilot Data to stage a realistic command-center story with attention, running, watch, and blocked examples.</p>
+              </div>
+              <span class="pilot-scenario-pill">Demo data only</span>
+            </div>
+            <div id="pilot-scenario-grid" class="pilot-scenario-grid">
+              <div class="pilot-scenario-card"><strong>Cell 205</strong><span>Primary attention example appears here after Pilot Demo is launched.</span></div>
+              <div class="pilot-scenario-card"><strong>Cell 212</strong><span>Healthy running reference appears here after Pilot Demo is launched.</span></div>
+              <div class="pilot-scenario-card"><strong>Cell 309</strong><span>Watch-state timing example appears here after Pilot Demo is launched.</span></div>
+              <div class="pilot-scenario-card"><strong>Cell 417</strong><span>Blocked-cell planning example appears here after Pilot Demo is launched.</span></div>
+            </div>
+            <div class="pilot-scenario-actions">
+              <button type="button" onclick="runPilotWalkthroughStep('attention')">Focus 205 Attention Story</button>
+              <button type="button" onclick="runPilotWalkthroughStep('blocked')">Focus 417 Blocked Story</button>
+              <button type="button" onclick="copyPilotScenarioBrief()">Copy Scenario Brief</button>
+            </div>
+          </div>
+
 
           <!-- v1.0.165 - Pilot walkthrough mode
                Presentation helper only. It does not create another data model;
@@ -5411,7 +5466,7 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.187-release-candidate-hardening</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.188-demo-data-polish</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -5469,7 +5524,7 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.187-release-candidate-hardening</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.188-demo-data-polish</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -5675,7 +5730,7 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.187-release-candidate-hardening</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.188-demo-data-polish</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -5754,8 +5809,8 @@ body.presentation-mode-active #tab-engineer .engineer-presentation-dock{
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.187-release-candidate-hardening";
-    const VERSION_DESCRIPTION = "Release-candidate hardening pass that adds a final readiness panel, duplicate-ID scan, command-center guardrail review, and report/export checks before new feature work continues.";
+    const VERSION = "v1.0.188-demo-data-polish";
+    const VERSION_DESCRIPTION = "Demo-data polish pass that makes the staged pilot scenario more realistic, clearer for leadership review, and easier to explain without changing normal operator workflows.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -10427,6 +10482,7 @@ function renderManagerTab(){
       if (bannerCopy) bannerCopy.textContent = copy || 'Presentation-safe command-center data is ready for Engineer review.';
       if (active) updatePilotWalkthroughStats();
       if (typeof renderPilotReadinessScorecard === 'function') renderPilotReadinessScorecard();
+      if (typeof renderPilotScenarioBrief === 'function') renderPilotScenarioBrief();
     }
 
     function updatePilotWalkthroughStats(){
@@ -10439,6 +10495,82 @@ function renderManagerTab(){
       setText(document.getElementById('pilot-walkthrough-risk-count'), cells.length ? String(riskCells) : '--');
       setText(document.getElementById('pilot-walkthrough-alert-count'), String(alerts.length || 0));
       if (typeof renderPilotReadinessScorecard === 'function') renderPilotReadinessScorecard();
+    }
+
+
+    // v1.0.188 - Demo data polish.
+    // Builds a small leadership-friendly explanation of the staged pilot story.
+    // This reads the current intelligence snapshot only; it does not mutate saved data.
+    function getPilotScenarioBriefItems(){
+      const layer = window.cellIntelligenceSnapshot || (typeof deriveCellIntelligenceLayer === 'function' ? deriveCellIntelligenceLayer() : null);
+      const cells = Array.isArray(layer?.cells) ? layer.cells : [];
+      const byCell = {};
+      cells.forEach(cell => { byCell[String(cell.cell || cell.testCell || '')] = cell; });
+      const fallback = {
+        '205': {state:'Attention', healthScore:68, topReason:'Material/help-needed story is staged for review.', confidenceScore:74, lastUpdateAge:'18m'},
+        '212': {state:'Running', healthScore:96, topReason:'Clean running reference cell for comparison.', confidenceScore:94, lastUpdateAge:'6m'},
+        '309': {state:'Watch', healthScore:82, topReason:'Cold-soak/watch timing is visible but not blocked.', confidenceScore:84, lastUpdateAge:'32m'},
+        '417': {state:'Blocked', healthScore:42, topReason:'Blocked planning example with support action pending.', confidenceScore:70, lastUpdateAge:'1h 20m'}
+      };
+      return ['205','212','309','417'].map(cell => {
+        const src = byCell[cell] || fallback[cell];
+        const state = String(src.state || fallback[cell].state);
+        const lower = state.toLowerCase();
+        const tone = lower.includes('block') ? 'blocked' : lower.includes('attention') ? 'attention' : lower.includes('watch') ? 'watch' : 'running';
+        return {
+          cell,
+          state,
+          tone,
+          health: Number(src.healthScore ?? src.health ?? fallback[cell].healthScore) || fallback[cell].healthScore,
+          confidence: Number(src.confidenceScore ?? src.dataConfidence ?? fallback[cell].confidenceScore) || fallback[cell].confidenceScore,
+          reason: String(src.topReason || src.reason || fallback[cell].topReason),
+          lastUpdate: String(src.lastUpdateAge || src.lastUpdatedAge || fallback[cell].lastUpdateAge)
+        };
+      });
+    }
+
+    function buildPilotScenarioBriefText(){
+      const items = getPilotScenarioBriefItems();
+      return [
+        'Pilot Scenario Brief',
+        `Version: ${VERSION}`,
+        '',
+        'Purpose: staged demo data that shows how the Engineer command center turns hours, weekend, and logbook signals into an explainable operations story.',
+        '',
+        ...items.map(item => `Cell ${item.cell}: ${item.state} | Health ${Math.round(item.health)}/100 | Confidence ${Math.round(item.confidence)}% | Last update ${item.lastUpdate} | ${item.reason}`)
+      ].join('\n');
+    }
+
+    function renderPilotScenarioBrief(){
+      const panel = document.getElementById('pilot-scenario-brief');
+      const grid = document.getElementById('pilot-scenario-grid');
+      const summary = document.getElementById('pilot-scenario-summary');
+      if (!panel || !grid) return;
+      const pilotActive = document.getElementById('pilot-mode-banner')?.classList.contains('active') || document.body.classList.contains('presentation-mode-active') || document.body.classList.contains('command-capture-mode');
+      panel.classList.toggle('active', !!pilotActive);
+      const items = getPilotScenarioBriefItems();
+      if (summary) summary.textContent = 'Demo scenario anchors the review around one attention cell, one healthy reference, one watch-state cell, and one blocked planning cell.';
+      grid.innerHTML = items.map(item => `
+        <div class="pilot-scenario-card">
+          <strong>Cell ${escapeHtml(item.cell)} <small>${Math.round(item.health)}/100</small></strong>
+          <span>${escapeHtml(item.reason)}</span>
+          <span class="pilot-scenario-chip ${escapeHtml(item.tone)}">${escapeHtml(item.state)} · ${Math.round(item.confidence)}% confidence</span>
+        </div>
+      `).join('');
+    }
+
+    function copyPilotScenarioBrief(){
+      const text = buildPilotScenarioBriefText();
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(text).then(() => { if (typeof showToast === 'function') showToast('Pilot scenario brief copied'); });
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); if (typeof showToast === 'function') showToast('Pilot scenario brief copied'); } catch {}
+        ta.remove();
+      }
     }
 
     function scrollEngineerPilotTarget(selector){
@@ -10535,12 +10667,12 @@ function renderManagerTab(){
     function seedPilotWeekendRows(boardIso){
       const rows = createWeekendUpdateRows();
       const fill = {
-        '205': {tcStatus:'Parts', helpNeeded:'Yes', comments:'Pilot signal: help-needed status is open and material timing needs a fresh update before release.', lastUpdate:'07:42 AM', wwid:randomWWID()},
-        '212': {tcStatus:'Running', helpNeeded:'No', comments:'Pilot signal: clean running state with recent operator confidence and no visible support request.', lastUpdate:'10:18 AM', wwid:randomWWID()},
-        '309': {tcStatus:'Cold Soak', helpNeeded:'No', comments:'Pilot signal: watch state only; timing is on plan but not ready to call fully running yet.', lastUpdate:'09:36 AM', wwid:randomWWID()},
+        '205': {tcStatus:'Parts', helpNeeded:'Yes', comments:'Pilot signal: material is not at point-of-use yet; help-needed is open and the cell needs a fresh status before the next clean release.', lastUpdate:'07:42 AM', wwid:randomWWID()},
+        '212': {tcStatus:'Running', helpNeeded:'No', comments:'Pilot signal: healthy reference cell; recent update, no support request, and enough running time to compare against risk cells.', lastUpdate:'10:18 AM', wwid:randomWWID()},
+        '309': {tcStatus:'Cold Soak', helpNeeded:'No', comments:'Pilot signal: watch-state timing; cold-soak/restart path is on plan but not ready to be treated as fully healthy.', lastUpdate:'09:36 AM', wwid:randomWWID()},
         '304': {tcStatus:'Emission Carts', helpNeeded:'Yes', comments:'Pilot signal: cart reconnect needs support acknowledgement before the next stable block.', lastUpdate:'08:54 AM', wwid:randomWWID()},
         '311': {tcStatus:'Data Review', helpNeeded:'No', comments:'Pilot signal: review row is active and should stay visible in the attention engine.', lastUpdate:'09:10 AM', wwid:randomWWID()},
-        '417': {tcStatus:'Down, Not Running', helpNeeded:'Yes', comments:'Pilot signal: replacement fitting is still open; treat this as blocked until support clears the action.', lastUpdate:'06:58 AM', wwid:randomWWID()}
+        '417': {tcStatus:'Down, Not Running', helpNeeded:'Yes', comments:'Pilot signal: blocked planning example; replacement fitting and support clearance are still open before physical work can restart.', lastUpdate:'06:58 AM', wwid:randomWWID()}
       };
       rows.forEach(row => {
         if (fill[row.testCell]) Object.assign(row, fill[row.testCell]);
@@ -10571,6 +10703,7 @@ function renderManagerTab(){
       finalizeTempScenario('engineer');
       renderEngineerPremiumDashboard();
       updatePilotWalkthroughStats();
+      if (typeof renderPilotScenarioBrief === 'function') renderPilotScenarioBrief();
       bindEngineerDashboardButtons();
       if (typeof showToast === 'function') showToast('Pilot demo loaded for Engineer command view');
     }
