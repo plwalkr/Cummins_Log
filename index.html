@@ -4581,6 +4581,16 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
     grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
   }
 }
+/* ==================== v1.0.194 - MANAGER VIEW INTELLIGENCE SYNC ====================
+   Read-only leadership layer. Mirrors high-value Engineer intelligence signals
+   into the Manager / Coaches view without changing source data or operator flows. */
+.manager-intel-sync-card{border:1px solid #dbe3ed;border-radius:18px;background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);padding:16px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.manager-intel-sync-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid #e2e8f0}
+.manager-intel-sync-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:800;margin-bottom:5px}.manager-intel-sync-head h3{font-size:18px;margin:0;color:#0f172a}.manager-intel-sync-copy{margin-top:4px;font-size:13px;color:#475569;line-height:1.5;max-width:78ch}
+.manager-intel-sync-badge{display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border-radius:999px;border:1px solid #dbe3ed;background:#fff;color:#334155;font-size:12px;font-weight:900;white-space:nowrap}.manager-intel-sync-badge.good{background:#f0fdf4;color:#166534;border-color:#bbf7d0}.manager-intel-sync-badge.watch{background:#fffbeb;color:#92400e;border-color:#fde68a}.manager-intel-sync-badge.attention{background:#fef2f2;color:#b91c1c;border-color:#fecaca}
+.manager-intel-sync-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:12px}.manager-intel-stat{border:1px solid #e2e8f0;border-radius:14px;background:#fff;padding:12px;min-height:102px}.manager-intel-stat strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.13em;color:#64748b;margin-bottom:6px}.manager-intel-stat span{display:block;font-size:24px;line-height:1;font-weight:900;color:#0f172a}.manager-intel-stat small{display:block;font-size:12px;color:#64748b;line-height:1.45;margin-top:7px}
+.manager-intel-lists{display:grid;grid-template-columns:1.05fr .95fr;gap:12px;margin-top:12px}.manager-intel-listbox{border:1px solid #e2e8f0;border-radius:14px;background:#fff;padding:12px}.manager-intel-listbox h4{margin:0 0 8px 0;font-size:13px;color:#0f172a}.manager-intel-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:start;padding:10px 0;border-bottom:1px dashed #e2e8f0;font-size:13px;color:#334155;line-height:1.45}.manager-intel-row:last-child{border-bottom:none;padding-bottom:0}.manager-intel-row b{color:#0f172a}.manager-intel-chip{display:inline-flex;align-items:center;justify-content:center;min-width:58px;padding:5px 8px;border-radius:999px;border:1px solid #dbe3ed;background:#f8fafc;color:#334155;font-size:11px;font-weight:900;white-space:nowrap}.manager-intel-chip.good{background:#f0fdf4;color:#166534;border-color:#bbf7d0}.manager-intel-chip.watch{background:#fffbeb;color:#92400e;border-color:#fde68a}.manager-intel-chip.attention,.manager-intel-chip.blocked{background:#fef2f2;color:#b91c1c;border-color:#fecaca}.manager-intel-chip.stale{background:#f1f5f9;color:#475569;border-color:#cbd5e1}.manager-intel-empty{font-size:13px;color:#64748b;line-height:1.5}@media (max-width: 1200px){.manager-intel-sync-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.manager-intel-lists{grid-template-columns:1fr}}@media (max-width: 720px){.manager-intel-sync-grid{grid-template-columns:1fr}}
+
 
   </style>
 </head>
@@ -4594,7 +4604,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.193-wide-command-canvas</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.194-manager-view-intelligence-sync</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -4602,7 +4612,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.193-wide-command-canvas</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.194-manager-view-intelligence-sync</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -5002,7 +5012,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.193-wide-command-canvas</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.194-manager-view-intelligence-sync</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -5657,7 +5667,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.193-wide-command-canvas</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.194-manager-view-intelligence-sync</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -5715,7 +5725,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.193-wide-command-canvas</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.194-manager-view-intelligence-sync</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -5733,6 +5743,21 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
           </div>
 
           <div class="manager-note">Read-only leadership view with posture, comparisons, and trend cards.</div>
+          <div class="manager-intel-sync-card" id="manager-intelligence-sync-card">
+            <div class="manager-intel-sync-head">
+              <div><div class="manager-intel-sync-kicker">Cell intelligence sync</div><h3>Leadership scan from Engineer signals</h3><div class="manager-intel-sync-copy" id="manager-intel-sync-copy">Top risk cells, data confidence, help pressure, stale cells, and downtime pressure roll up here from the same read-only intelligence layer used by Engineer.</div></div>
+              <span class="manager-intel-sync-badge good" id="manager-intel-sync-badge">Synced</span>
+            </div>
+            <div class="manager-intel-sync-grid">
+              <div class="manager-intel-stat"><strong>Top Risk Cells</strong><span id="manager-intel-risk-count">0</span><small id="manager-intel-risk-note">No risk cells standing out.</small></div>
+              <div class="manager-intel-stat"><strong>Help Pressure</strong><span id="manager-intel-help-count">0</span><small id="manager-intel-help-note">No active help pressure.</small></div>
+              <div class="manager-intel-stat"><strong>Downtime Pressure</strong><span id="manager-intel-downtime-count">0</span><small id="manager-intel-downtime-note">No downtime pressure in the intelligence layer.</small></div>
+              <div class="manager-intel-stat"><strong>Data Confidence</strong><span id="manager-intel-confidence">100%</span><small id="manager-intel-confidence-note">Cell evidence is clean.</small></div>
+              <div class="manager-intel-stat"><strong>Stale Cells</strong><span id="manager-intel-stale-count">0</span><small id="manager-intel-stale-note">No stale-cell pressure.</small></div>
+            </div>
+            <div class="manager-intel-lists"><div class="manager-intel-listbox"><h4>Cells needing manager awareness</h4><div id="manager-intel-risk-list" class="manager-intel-list"></div></div><div class="manager-intel-listbox"><h4>Operating takeaways</h4><div id="manager-intel-takeaways" class="manager-intel-list"></div></div></div>
+          </div>
+
 
           <div id="manager-summary-view" class="manager-view-panel">
           <div class="manager-hero">
@@ -5921,7 +5946,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.193-wide-command-canvas</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.194-manager-view-intelligence-sync</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -6000,8 +6025,8 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.193-wide-command-canvas";
-    const VERSION_DESCRIPTION = "Moves the Ops Map health/confidence chip out of the top of each cell tile so cell numbers and status remain readable, while preserving the Rerun billable-hours option and command-center features.";
+    const VERSION = "v1.0.194-manager-view-intelligence-sync";
+    const VERSION_DESCRIPTION = "Syncs the Manager / Coaches view with the Cell Intelligence Layer so leadership gets top risk cells, help pressure, downtime pressure, stale-cell visibility, and data confidence without changing operator workflows.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -10064,6 +10089,60 @@ function computeManagerPulseState(summary){
   };
 }
 
+function managerIntelToneFromState(state){
+  const normalized = String(state || "").toLowerCase();
+  if (normalized.includes("blocked") || normalized.includes("attention")) return "attention";
+  if (normalized.includes("watch")) return "watch";
+  if (normalized.includes("stale")) return "stale";
+  return "good";
+}
+
+function renderManagerIntelligenceSync(summary = {}){
+  const layer = typeof deriveCellIntelligenceLayer === "function" ? deriveCellIntelligenceLayer() : (window.cellIntelligenceSnapshot || { cells: [], summary: {} });
+  const cells = Array.isArray(layer?.cells) ? layer.cells : [];
+  const intelSummary = layer?.summary || {};
+  const riskCells = cells.filter(cell => ["Attention", "Blocked", "Watch", "Stale"].includes(cell.state) || Number(cell.healthScore || 0) < 78 || cell.helpNeeded || Number(cell.downtimeHours || 0) > 0).sort((a,b) => {
+    const stateWeight = { Blocked: 5, Attention: 4, Watch: 3, Stale: 2, Running: 1, Unknown: 0 };
+    return ((stateWeight[b.state] || 0) - (stateWeight[a.state] || 0)) || (Number(a.healthScore || 0) - Number(b.healthScore || 0)) || (Number(b.downtimeHours || 0) - Number(a.downtimeHours || 0));
+  });
+  const helpCells = cells.filter(cell => cell.helpNeeded);
+  const downtimeCells = cells.filter(cell => Number(cell.downtimeHours || 0) > 0);
+  const staleCells = cells.filter(cell => Number(cell.staleMinutes || 0) >= 120 || cell.state === "Stale");
+  const lowConfidenceCells = cells.filter(cell => Number(cell.dataConfidence || 100) < 85);
+  const avgConfidence = Number(intelSummary.avgDataConfidence ?? 100);
+  const setText = (id, value) => { const node = document.getElementById(id); if (node) node.textContent = value; };
+  const badge = document.getElementById("manager-intel-sync-badge");
+  const copy = document.getElementById("manager-intel-sync-copy");
+  const postureTone = riskCells.some(cell => cell.state === "Blocked" || cell.state === "Attention") || helpCells.length ? "attention" : riskCells.length ? "watch" : "good";
+  if (badge) { badge.className = `manager-intel-sync-badge ${postureTone}`; badge.textContent = postureTone === "attention" ? "Action" : postureTone === "watch" ? "Watch" : "Synced"; }
+  if (copy) copy.textContent = cells.length ? `${cells.length} cells scanned from the Cell Intelligence Layer. Manager view is showing the highest-risk cells, stale evidence, help pressure, and confidence gaps without changing source data.` : "Cell intelligence is waiting for cells to render. Load demo data or saved rows to build the leadership scan.";
+  setText("manager-intel-risk-count", String(riskCells.length));
+  setText("manager-intel-risk-note", riskCells.length ? `${riskCells.slice(0,3).map(cell => `Cell ${cell.cell}`).join(", ")} need the first manager scan.` : "No risk cells standing out.");
+  setText("manager-intel-help-count", String(helpCells.length || Number(summary.helpNeededCount || 0)));
+  setText("manager-intel-help-note", helpCells.length ? `${helpCells.length} cell(s) have help-needed pressure.` : "No active help pressure.");
+  setText("manager-intel-downtime-count", String(downtimeCells.length));
+  setText("manager-intel-downtime-note", downtimeCells.length ? `${downtimeCells.reduce((sum, cell) => sum + Number(cell.downtimeHours || 0), 0).toFixed(1)} downtime hour(s) across flagged cells.` : "No downtime pressure in the intelligence layer.");
+  setText("manager-intel-confidence", `${avgConfidence}%`);
+  setText("manager-intel-confidence-note", lowConfidenceCells.length ? `${lowConfidenceCells.length} cell(s) have lower confidence evidence.` : "Cell evidence is clean.");
+  setText("manager-intel-stale-count", String(staleCells.length));
+  setText("manager-intel-stale-note", staleCells.length ? `${staleCells.slice(0,4).map(cell => `Cell ${cell.cell}`).join(", ")} need freshness review.` : "No stale-cell pressure.");
+  const riskList = document.getElementById("manager-intel-risk-list");
+  if (riskList) riskList.innerHTML = riskCells.length ? riskCells.slice(0,6).map(cell => {
+    const tone = managerIntelToneFromState(cell.state);
+    return `<div class="manager-intel-row"><span><b>Cell ${escapeHtml(cell.cell)}</b><br>${escapeHtml(cell.topReason || "Review current cell state.")}<br><span class="manager-note">Health ${Number(cell.healthScore || 0)}/100 · Confidence ${Number(cell.dataConfidence || 0)}% · Downtime ${Number(cell.downtimeHours || 0).toFixed(1)}h</span></span><span class="manager-intel-chip ${tone}">${escapeHtml(cell.state || "Unknown")}</span></div>`;
+  }).join("") : `<div class="manager-intel-empty">No manager-awareness cells are currently standing out.</div>`;
+  const takeaways = document.getElementById("manager-intel-takeaways");
+  if (takeaways) {
+    const rows = [];
+    if (riskCells.length) rows.push({ label: "First scan", value: `Cell ${riskCells[0].cell}`, note: riskCells[0].topReason || "Highest intelligence risk." });
+    if (helpCells.length) rows.push({ label: "Help pressure", value: String(helpCells.length), note: "Open help-needed cells should be cleared before handoff." });
+    if (downtimeCells.length) rows.push({ label: "Downtime pressure", value: `${downtimeCells.length} cells`, note: "Downtime is present in the cell intelligence layer." });
+    if (lowConfidenceCells.length) rows.push({ label: "Data confidence", value: `${avgConfidence}%`, note: "Evidence quality is low enough to review stale/missing data." });
+    if (!rows.length) rows.push({ label: "Operating story", value: "Clear", note: "No cell intelligence pressure is currently standing out." });
+    takeaways.innerHTML = rows.map(item => `<div class="manager-intel-row"><span><b>${escapeHtml(item.label)}</b><br>${escapeHtml(item.note)}</span><span class="manager-intel-chip ${item.value === "Clear" ? "good" : "watch"}">${escapeHtml(item.value)}</span></div>`).join("");
+  }
+}
+
 function renderManagerTab(){
   renderManagerModeControls();
   renderEngineerInfoMode();
@@ -10220,6 +10299,7 @@ function renderManagerTab(){
     statusBars.innerHTML = '';
   }
 
+  renderManagerIntelligenceSync(summary);
   renderManagerReport(summary, pulseState, dashboard);
 }
 
