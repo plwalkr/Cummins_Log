@@ -4889,6 +4889,82 @@ table td{
   .tab-btn{width:auto;}
 }
 
+  
+/* ==================== v1.0.199 - PURPOSEFUL UI AUDIT ====================
+   Purpose: reduce filler and keep the Engineer path intentional.
+   Main workflow: command center -> selected cell -> evidence -> read-only trade coverage.
+   Demo/pilot/QA tools remain available but are collapsed by default. */
+.engineer-purpose-tools{
+  border:1px solid rgba(148,163,184,.28);
+  border-radius:18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(248,250,252,.92));
+  box-shadow:0 6px 18px rgba(15,23,42,.05);
+  overflow:hidden;
+}
+.engineer-purpose-tools-summary{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:13px 16px;
+  cursor:pointer;
+  user-select:none;
+  list-style:none;
+}
+.engineer-purpose-tools-summary::-webkit-details-marker{display:none}
+.engineer-purpose-tools-summary > div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.engineer-purpose-tools-summary span{
+  color:#64748b;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.engineer-purpose-tools-summary strong{color:#0f172a;font-size:13px;line-height:1.25}
+.engineer-purpose-tools-summary em{color:#64748b;font-size:12px;font-style:normal;text-align:right;line-height:1.35}
+.engineer-purpose-tools[open] .engineer-purpose-tools-summary{border-bottom:1px solid rgba(148,163,184,.24)}
+.engineer-purpose-tools-body{padding:14px;display:flex;flex-direction:column;gap:12px;background:rgba(248,250,252,.58)}
+.engineer-purpose-tools-body .temp-test-bar,
+.engineer-purpose-tools-body .engineer-presentation-dock,
+.engineer-purpose-tools-body .pilot-scenario-brief,
+.engineer-purpose-tools-body .pilot-walkthrough-panel,
+.engineer-purpose-tools-body .pilot-readiness-panel,
+.engineer-purpose-tools-body .presentation-mode-panel,
+.engineer-purpose-tools-body .pilot-executive-brief-card,
+.engineer-purpose-tools-body .command-center-screenshot-card,
+.engineer-purpose-tools-body .qa-pass-panel,
+.engineer-purpose-tools-body .release-candidate-panel{
+  margin:0 !important;
+  box-shadow:none !important;
+}
+#tab-engineer .engineer-hero{margin-top:0}
+#tab-engineer .engineer-hero-card h2{max-width:18ch}
+#tab-engineer .engineer-hero-copy{max-width:62ch}
+#tab-engineer .engineer-2026-topbar{gap:18px}
+#tab-engineer .engineer-2026-title{letter-spacing:-.04em}
+#tab-engineer .engineer-2026-footer{
+  border-top:1px solid rgba(148,163,184,.18);
+  padding-top:12px;
+  margin-top:4px;
+}
+#tab-engineer .engineer-2026-footer button,
+#tab-engineer .engineer-selected-cell-actions button,
+#tab-engineer .engineer-readonly-trade-actions button{
+  min-height:38px;
+  white-space:normal;
+}
+#tab-engineer .engineer-supporting-details-shell{margin-top:4px}
+#tab-engineer .engineer-supporting-details-divider strong{font-size:13px}
+#tab-engineer .engineer-supporting-details-divider em{font-size:12px}
+body.presentation-mode-active #engineer-purpose-tools:not([open]),
+body.command-capture-mode #engineer-purpose-tools:not([open]){
+  display:none;
+}
+@media (max-width:900px){
+  .engineer-purpose-tools-summary{align-items:flex-start;flex-direction:column}
+  .engineer-purpose-tools-summary em{text-align:left}
+}
+
   </style>
 </head>
 <body data-theme="standard">
@@ -5309,9 +5385,21 @@ table td{
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.194-manager-view-intelligence-sync</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.199-purposeful-ui-audit</span></span></div>
       <section class="panel">
         <div class="section-body">
+          <!-- v1.0.199 - Purposeful UI audit
+               Demo, QA, presentation, and pilot controls are still available, but no longer compete with the primary Engineer workflow.
+               Main path: scan command center → select cell → review evidence → view read-only trade coverage/export. -->
+          <details id="engineer-purpose-tools" class="engineer-purpose-tools">
+            <summary class="engineer-purpose-tools-summary">
+              <div>
+                <span>Engineer tools</span>
+                <strong>Demo, QA, presentation, and pilot helpers</strong>
+              </div>
+              <em>Collapsed by default so the command center stays the main workflow.</em>
+            </summary>
+            <div class="engineer-purpose-tools-body">
           <div class="temp-test-bar">
             <div class="temp-test-copy"><strong>Test tools</strong>Load sample review data, then reset when you are done checking the engineer view.</div>
             <div class="temp-test-actions">
@@ -5472,12 +5560,15 @@ table td{
             </div>
           </div>
 
+            </div>
+          </details>
+
           <div class="engineer-shell">
             <div class="engineer-hero">
               <div class="engineer-hero-card">
                 <div class="engineer-kicker">Engineer review</div>
-                <h2>Cell-focused read-only detail without touching the live entry flow.</h2>
-                <div class="engineer-hero-copy">This temporary tab blends trade-style grouping with manager-style signal. It keeps the specifics visible for engineers while staying entirely view-only.</div>
+                <h2>Scan cells, select the risk, verify the evidence.</h2>
+                <div class="engineer-hero-copy">Engineer review is read-only by design: command-center signals first, investigation evidence second, trade-style coverage only when needed.</div>
               </div>
               <div class="engineer-filter-card">
                 <div class="engineer-kicker">Filter + search</div>
@@ -5506,8 +5597,8 @@ table td{
 
               <div class="engineer-2026-topbar">
                 <div>
-                  <div class="engineer-2026-kicker">Prototype Graphical Overview</div>
-                  <h3 class="engineer-2026-title">2026 Test Cell Command View</h3>
+                  <div class="engineer-2026-kicker">Engineer command center</div>
+                  <h3 class="engineer-2026-title">Test Cell Readiness View</h3>
                   <div id="engineer-command-subtitle" class="engineer-command-subtitle">
                     Uptime, downtime, utilization, help queue, and cell health from the current Engineer scope. v1.0.185 keeps the command center first, fixes the Ops Map hover-card overlap, and upgrades selected-cell investigation evidence without removing raw supporting details.
                   </div>
@@ -5984,7 +6075,7 @@ table td{
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.194-manager-view-intelligence-sync</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.199-purposeful-ui-audit</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -6042,7 +6133,7 @@ table td{
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.194-manager-view-intelligence-sync</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.199-purposeful-ui-audit</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -6263,7 +6354,7 @@ table td{
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.194-manager-view-intelligence-sync</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.199-purposeful-ui-audit</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -6342,7 +6433,7 @@ table td{
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.198-engineer-readonly-trade-breakdown";
+    const VERSION = "v1.0.199-purposeful-ui-audit";
     const VERSION_DESCRIPTION = "Routes Engineer hours breakdown actions to a read-only Trade Coverage panel inside Engineer instead of the editable Hours worksheet, preserving operator controls while giving Engineers a view-only reconciliation path.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
