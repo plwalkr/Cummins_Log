@@ -6527,8 +6527,8 @@ body.command-capture-mode #engineer-purpose-tools:not([open]){
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.200-layout-overflow-alignment-fix";
-    const VERSION_DESCRIPTION = "Fixes Test Cell Ops Map overflow and recenters the Manager / Coaches view so command and leadership layouts use the available page width without changing workflow logic.";
+    const VERSION = "v1.0.201-building-row-breaks";
+    const VERSION_DESCRIPTION = "Updates the Test Cell Ops Map to split each CTC building row at the real 116/117, 216/217, 316/317, and 416/417 breakpoints so the map matches the building layout without shrinking tiles.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -7709,13 +7709,21 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
     }
 
     function getEngineerMapCellGroups(){
-      // v1.0.192 - Full CTC map based on the utilization monitor layout.
-      // Rows now include 101-122, 201-222, 301-322, and 401-422.
+      // v1.0.201 - CTC building-row breakpoints.
+      // The physical building layout breaks at 116/117, 216/217, 316/317,
+      // and 416/417. Keep the full 22-cell family, but render it as the real
+      // 16 + 6 split so the Ops Map reads like the floor/building layout and
+      // does not force the last cells off the right side.
+      const makeRange = (start, count) => Array.from({ length: count }, (_, index) => String(start + index));
       return [
-        { label: "100s", cells: Array.from({ length: 22 }, (_, index) => String(101 + index)) },
-        { label: "200s", cells: Array.from({ length: 22 }, (_, index) => String(201 + index)) },
-        { label: "300s", cells: Array.from({ length: 22 }, (_, index) => String(301 + index)) },
-        { label: "400s", cells: Array.from({ length: 22 }, (_, index) => String(401 + index)) }
+        { label: "100s · 101–116", cells: makeRange(101, 16) },
+        { label: "100s · 117–122", cells: makeRange(117, 6) },
+        { label: "200s · 201–216", cells: makeRange(201, 16) },
+        { label: "200s · 217–222", cells: makeRange(217, 6) },
+        { label: "300s · 301–316", cells: makeRange(301, 16) },
+        { label: "300s · 317–322", cells: makeRange(317, 6) },
+        { label: "400s · 401–416", cells: makeRange(401, 16) },
+        { label: "400s · 417–422", cells: makeRange(417, 6) }
       ];
     }
 
