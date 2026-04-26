@@ -6025,8 +6025,8 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.194-manager-view-intelligence-sync";
-    const VERSION_DESCRIPTION = "Syncs the Manager / Coaches view with the Cell Intelligence Layer so leadership gets top risk cells, help pressure, downtime pressure, stale-cell visibility, and data confidence without changing operator workflows.";
+    const VERSION = "v1.0.195-export-and-report-polish";
+    const VERSION_DESCRIPTION = "Polishes Manager and Engineer exports with cleaner executive summaries, action-ready sections, report filenames, and handoff-friendly wording while preserving the command-center workflow.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -9528,6 +9528,46 @@ function downloadPlainTextReport(text, filename, button){
   }
 }
 
+
+/* v1.0.195 - export and report polish.
+   Keeps reports plain-text and self-contained, but makes them easier to paste into email,
+   Teams, meeting notes, or a leadership handoff without losing the audit trail. */
+function buildReportActionLine(label, value){
+  return `- ${label}: ${value == null || value === '' ? '—' : value}`;
+}
+
+function buildManagerExecutiveReadout(summary, pulseState, intelSummary, alerts, riskCells){
+  const attentionCount = (intelSummary.attention || 0) + (intelSummary.blocked || 0);
+  const helpCount = intelSummary.helpNeeded || summary.helpNeededCount || 0;
+  const leadRisk = riskCells && riskCells.length ? `Cell ${riskCells[0].cell} · ${riskCells[0].state} · ${riskCells[0].topReason}` : 'No high-risk cell currently leading the list';
+  return [
+    'Executive readout',
+    buildReportActionLine('Current posture', pulseState.postureLabel),
+    buildReportActionLine('Primary focus', pulseState.focusHeadline),
+    buildReportActionLine('Risk cells', `${attentionCount} attention/blocked · ${helpCount} help-needed`),
+    buildReportActionLine('Top cell to ask about', leadRisk),
+    buildReportActionLine('Data confidence', `${intelSummary.avgDataConfidence ?? '—'}% average · ${alerts.length} intelligence alert(s)`)
+  ];
+}
+
+function buildEngineerExecutiveReadout(data, intelSummary, alerts, riskCells){
+  const scopeLabel = data.selectedCell ? `Cell ${data.selectedCell}` : `${data.cards.length} visible cell(s)`;
+  const leadRisk = riskCells && riskCells.length ? `Cell ${riskCells[0].cell} · ${riskCells[0].state} · ${riskCells[0].topReason}` : 'No high-risk cell currently leading the list';
+  return [
+    'Executive readout',
+    buildReportActionLine('Scope', scopeLabel),
+    buildReportActionLine('Downtime in view', `${data.totalDowntime.toFixed(1)} hour(s)`),
+    buildReportActionLine('Top cell to review', leadRisk),
+    buildReportActionLine('Data confidence', `${intelSummary.avgDataConfidence ?? '—'}% average`),
+    buildReportActionLine('Attention alerts', `${alerts.length} scoped alert(s)`)
+  ];
+}
+
+function makeReportFilename(scope){
+  const stamp = new Date().toISOString().slice(0,10);
+  return `cummins_unified_logbook_${scope}_report_${stamp}_${VERSION.replace(/[^a-z0-9]+/gi,'_')}.txt`;
+}
+
 function buildManagerReport(summary, pulseState, dashboard){
   const intelligence = getReportCellIntelligence();
   const intelSummary = intelligence.summary || {};
@@ -9539,6 +9579,8 @@ function buildManagerReport(summary, pulseState, dashboard){
     `Version: ${VERSION}`,
     `Generated: ${new Date().toLocaleString()}`,
     `Board date: ${displayDate(weekendDateInput?.value || bannerFields?.date || '')}`,
+    '',
+    ...buildManagerExecutiveReadout(summary, pulseState, intelSummary, alerts, riskCells),
     '',
     'Operating posture',
     `- Posture: ${pulseState.postureLabel}`,
@@ -9648,6 +9690,8 @@ function buildEngineerReport(data){
     `Generated: ${new Date().toLocaleString()}`,
     `Scope: ${data.selectedCell ? `Cell ${data.selectedCell}` : 'All cells'}`,
     `Search: ${data.query ? `"${data.query}"` : 'None'}`,
+    '',
+    ...buildEngineerExecutiveReadout(data, intelSummary, alerts, riskCells),
     '',
     'Visible review footprint',
     `- Visible cells: ${data.cards.length}`,
@@ -13279,7 +13323,7 @@ Reason: ${error?.stack || error?.message || error}`;
           await copyPlainTextReport(reportText, button);
         } else {
           const stamp = new Date().toISOString().slice(0,10);
-          downloadPlainTextReport(reportText, `cummins_${scope}_intelligence_report_${stamp}.txt`, button);
+          downloadPlainTextReport(reportText, makeReportFilename(scope), button);
         }
       });
     }
