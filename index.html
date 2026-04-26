@@ -4437,6 +4437,66 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
   .engineer-testcell-command .engineer-map-row-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
+
+/* v1.0.191 - Ops Map confidence chip placement fix
+   The health/confidence chip was useful, but it was competing with the cell
+   number at the top of each tile. Keep the signal, move it into a quiet footer
+   so the primary tile read remains: Cell number -> state -> reason/badges. */
+.engineer-testcell-command .engineer-cell-tile{
+  min-height:84px;
+  padding:10px 9px;
+}
+.engineer-testcell-command .engineer-cell-topline{
+  min-height:18px;
+  margin-bottom:5px;
+  align-items:flex-start;
+  justify-content:flex-start;
+}
+.engineer-testcell-command .engineer-cell-number{
+  font-size:17px;
+  line-height:1;
+}
+.engineer-testcell-command .engineer-cell-footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:6px;
+  margin-top:7px;
+  padding-top:6px;
+  border-top:1px solid rgba(148,163,184,.12);
+}
+.engineer-testcell-command .engineer-cell-score-label{
+  color:var(--eng-muted);
+  font-size:8px;
+  font-weight:950;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+}
+.engineer-testcell-command .engineer-cell-score{
+  min-width:auto;
+  padding:1px 6px;
+  font-size:9px;
+  line-height:1.35;
+  background:rgba(15,23,42,.20);
+  opacity:.9;
+}
+.engineer-dashboard--lightcards .engineer-testcell-command .engineer-cell-score{
+  background:rgba(248,250,252,.76);
+}
+.engineer-testcell-command .engineer-cell-badges{
+  margin-top:6px;
+}
+.engineer-testcell-command .engineer-cell-tile.selected::after{
+  top:auto;
+  bottom:7px;
+  right:7px;
+  transform:translateY(calc(100% + 5px));
+  pointer-events:none;
+}
+@media (max-width: 900px){
+  .engineer-testcell-command .engineer-cell-tile.selected::after{display:none;}
+}
+
 </style>
 </head>
 <body data-theme="standard">
@@ -4449,7 +4509,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
         </div>
         <div class="small header-meta-stack" style="text-align:right">
           <div>Controlled running sheet with locked system and operator history.</div>
-          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.190-rerun-billable-hours-option</span></div>
+          <div style="font-weight:700;color:#334155;margin-top:4px">Version <span id="version-label">v1.0.191-ops-map-confidence-chip-placement</span></div>
           <div id="data-quality-header" class="data-quality-badge good" title="No significant anomalies detected today — 94% high-quality data" hidden>Data Quality: <span id="quality-percent">94</span>%</div>
         </div>
       </div>
@@ -4457,7 +4517,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
     </header>
 
     <div class="compact-release-bar" aria-hidden="true">
-      <div class="compact-release-label">Version <span class="release-version-label">v1.0.190-rerun-billable-hours-option</span></div>
+      <div class="compact-release-label">Version <span class="release-version-label">v1.0.191-ops-map-confidence-chip-placement</span></div>
     </div>
 
     <div class="view-tabs" aria-label="Main views">
@@ -4857,7 +4917,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
 
 
     <div id="tab-engineer" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.190-rerun-billable-hours-option</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.191-ops-map-confidence-chip-placement</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="temp-test-bar">
@@ -5512,7 +5572,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
     </div>
 
     <div id="tab-weekend" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.190-rerun-billable-hours-option</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.191-ops-map-confidence-chip-placement</span></span></div>
       <section class="panel">
         <div class="section-body weekend-board">
           <div class="temp-test-bar">
@@ -5570,7 +5630,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
 
 
     <div id="tab-manager" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.190-rerun-billable-hours-option</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.191-ops-map-confidence-chip-placement</span></span></div>
       <section class="panel">
         <div class="section-body manager-shell">
           <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
@@ -5776,7 +5836,7 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
 
     
     <div id="tab-settings" class="tab-view" hidden>
-      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.190-rerun-billable-hours-option</span></span></div>
+      <div class="tab-release-note"><span class="release-label">Version <span class="release-version-label">v1.0.191-ops-map-confidence-chip-placement</span></span></div>
       <section class="panel">
         <div class="section-body">
           <div class="settings-hero" style="grid-template-columns:1fr">
@@ -5855,8 +5915,8 @@ body.presentation-mode-active .pilot-scenario-brief,body.command-capture-mode .p
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.190-rerun-billable-hours-option";
-    const VERSION_DESCRIPTION = "Adds a Rerun billable-hours option with Equipment/Operator detail choices and a short 10-15 character rerun note, while preserving the Ops Map wrap fix and command-center features.";
+    const VERSION = "v1.0.191-ops-map-confidence-chip-placement";
+    const VERSION_DESCRIPTION = "Moves the Ops Map health/confidence chip out of the top of each cell tile so cell numbers and status remain readable, while preserving the Rerun billable-hours option and command-center features.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -7296,10 +7356,13 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
             >
               <span class="engineer-cell-topline">
                 <span class="engineer-cell-number">${escapeHtml(cellNumber)}</span>
-                <span class="engineer-cell-score">${Number(cell.healthScore || 0) ? escapeHtml(String(cell.healthScore)) : "—"}</span>
               </span>
               <span class="engineer-cell-status"><i class="state-dot ${statusClass}"></i>${escapeHtml(label)}</span>
               <span class="engineer-cell-meta">${escapeHtml(getEngineerMapMeta(cell))}</span>
+              <span class="engineer-cell-footer">
+                <span class="engineer-cell-score-label">Health</span>
+                <span class="engineer-cell-score">${Number(cell.healthScore || 0) ? escapeHtml(String(cell.healthScore)) : "—"}</span>
+              </span>
               ${renderEngineerMapBadges(cell)}
             </button>
           `;
