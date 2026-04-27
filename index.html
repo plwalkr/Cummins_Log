@@ -42,7 +42,9 @@
     .editor{min-height:110px;max-height:320px;overflow:auto;padding:10px;outline:none;background:#fafaf9;line-height:1.45;white-space:pre-wrap}
     .editor:empty:before{content:attr(data-placeholder);color:#94a3b8}
     .editor ul{padding-left:20px;margin:.3rem 0}
-    .actions-row{display:grid;grid-template-columns:auto auto 1fr auto;gap:8px;align-items:end;padding-top:8px;border-top:1px solid #e2e8f0}
+    .actions-row{display:grid;grid-template-columns:auto auto auto 1fr auto;gap:8px;align-items:end;padding-top:8px;border-top:1px solid #e2e8f0}
+    .cycle-submit-note{grid-column:1 / -1;font-size:12px;color:#475569;line-height:1.45;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:8px 10px}
+    .cycle-submit-note strong{color:#0f172a}
     button.primary{background:#0f172a;color:#fff;border:1px solid #0f172a;border-radius:10px;padding:10px 14px;cursor:pointer}
     button.secondary{background:#fff;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer}
     .hours-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
@@ -5267,12 +5269,14 @@ td{line-height:1.45;}
 
         <div class="actions-row">
           <button class="primary" id="add-entry-btn">Add Operator Entry</button>
+          <button class="secondary" id="cycle-submit-btn" type="button">Submit Cycle Info Only</button>
           <button class="secondary" id="clear-btn">Clear</button>
           <label class="field" style="margin:0">
             <label>Auto Log Event</label>
             <select id="auto-log-select"></select>
           </label>
           <button class="secondary" id="auto-log-btn">Auto Log Event</button>
+          <div class="cycle-submit-note"><strong>Cycle info only:</strong> submits the structured cycle values to the running sheet without requiring a note. Future Cyflex automation can target this same schema and lock the entry as a system/cycle capture.</div>
         </div>
       </div>
     </section>
@@ -6636,8 +6640,8 @@ td{line-height:1.45;}
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.204-calm-dashboard-polish";
-    const VERSION_DESCRIPTION = "Applies a controlled calm-dashboard visual polish: cleaner spacing, typography, card surfaces, focus states, and quieter tool presentation while preserving all workflows, IDs, JavaScript behavior, Ops Map row breaks, and Manager alignment.";
+    const VERSION = "v1.0.205-cycle-info-log-submit";
+    const VERSION_DESCRIPTION = "Adds a focused cycle-information-only log submission path for structured cycle data, preserving the normal operator note workflow and keeping the same schema ready for future Cyflex automation.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -6691,6 +6695,7 @@ td{line-height:1.45;}
     // "Custom" keeps the operator in the standard cycle selector but reveals a
     // dedicated free-text field so the entered cycle name travels with the log entry.
     const cycleOptions = ["","605 Parent","WHTP","vLLC","LLC","FTP","RMC","Hot Soak","Cold Start","Custom"];
+    const logCategoryOptions = ["General","Cycle Information","Test Update","Issue","Emissions","Calibration","Engineer Direction","Handoff"];
     const bannerConfig = [
       ["Engine Model","engineModel"],["Engine S/N","engineSN"],["Engineer","engineer"],["PPH","pph"],["Test Cell","testCell"],["Test Plan ID","testPlanId"],["Technician","technician"],["Shift","shift"],["Date","date"],["Start Time","startTime"],["End Time","endTime"],["Cell Hour Meter","cellHourMeter"]
     ];
@@ -12054,6 +12059,10 @@ function getEffectiveCycleValue(){
       return customName || "Custom";
     }
 
+    function getCycleInfoCategoryValue(){
+      return formState.category && formState.category !== "General" ? formState.category : "Cycle Information";
+    }
+
 function renderForm(){
       const showCustomCycleName = formState.cycle === "Custom";
       formGrid.innerHTML = `
@@ -12070,7 +12079,7 @@ function renderForm(){
         <label class="field"><label>Work</label><input id="field-work" value="${escapeHtml(formState.work)}" placeholder="Work" /></label>
         <label class="field"><label>Filter</label><input id="field-filter" value="${escapeHtml(formState.filter)}" placeholder="#" /></label>
         <label class="field"><label>Test Map</label><input id="field-testMap" value="${escapeHtml(formState.testMap)}" placeholder="#" /></label>
-        <label class="field"><label>Category</label><select id="field-category">${["General","Test Update","Issue","Emissions","Calibration","Engineer Direction","Handoff"].map(opt => `<option value="${opt}" ${formState.category===opt?"selected":""}>${opt}</option>`).join("")}</select></label>
+        <label class="field"><label>Category</label><select id="field-category">${logCategoryOptions.map(opt => `<option value="${opt}" ${formState.category===opt?"selected":""}>${opt}</option>`).join("")}</select></label>
         <label class="field"><label>Status</label><select id="field-status">${["Open","Monitoring","Resolved","Waiting"].map(opt => `<option value="${opt}" ${formState.status===opt?"selected":""}>${opt}</option>`).join("")}</select></label>
       `;
       formGrid.querySelectorAll("input,select").forEach(el => {
@@ -12907,6 +12916,85 @@ function renderHours(){
       renderEntries();
     }
 
+    function buildCycleInfoRows(){
+      const effectiveCycle = getEffectiveCycleValue();
+      return [
+        ["Time", formState.time || formatCurrentTime()],
+        ["Run #", formState.run || "—"],
+        ["Cycle Type", formState.cycle || "—"],
+        ["Custom Cycle Name", formState.cycle === "Custom" ? (formState.customCycleName || "—") : "—"],
+        ["Torque", formState.torqueMap || "—"],
+        ["PanT", formState.PanT || "—"],
+        ["Carbon", formState.carbon || "—"],
+        ["NOx", formState.nox || "—"],
+        ["THC", formState.thc || "—"],
+        ["PM", formState.pm || "—"],
+        ["Work", formState.work || "—"],
+        ["Filter", formState.filter || "—"],
+        ["Test Map", formState.testMap || "—"],
+        ["Category", getCycleInfoCategoryValue()],
+        ["Effective Cycle", effectiveCycle]
+      ];
+    }
+
+    function buildCycleInfoNoteHtml(sourceLabel = "Manual cycle information submission"){
+      const rows = buildCycleInfoRows();
+      const rowHtml = rows.map(([label,value]) => `<div><strong>${escapeHtml(label)}:</strong> ${escapeHtml(String(value || "—"))}</div>`).join("");
+      return `<div><strong>${escapeHtml(sourceLabel)}</strong></div><div style="margin-top:6px">${rowHtml}</div><div style="margin-top:6px;color:#475569"><em>Structured for future Cyflex cycle capture automation.</em></div>`;
+    }
+
+    function buildCycleInfoNoteText(sourceLabel = "Manual cycle information submission"){
+      const rows = buildCycleInfoRows();
+      return [sourceLabel, ...rows.map(([label,value]) => `${label}: ${value || "—"}`), "Structured for future Cyflex cycle capture automation."].join(" | ");
+    }
+
+    function validateCycleInfoOnlyEntry(){
+      const missing = [];
+      if (!String(formState.run || "").trim()) missing.push("Run #");
+      if (!String(formState.cycle || "").trim()) missing.push("Cycle Type");
+      if (formState.cycle === "Custom" && !String(formState.customCycleName || "").trim()) missing.push("Custom Cycle Name");
+      return missing;
+    }
+
+    function addCycleInfoOnlyEntry(){
+      const missing = validateCycleInfoOnlyEntry();
+      if (missing.length) {
+        alert(`Cycle information needs: ${missing.join(", ")}`);
+        return;
+      }
+      const effectiveCycle = getEffectiveCycleValue();
+      entries.unshift({
+        ...formState,
+        id: Date.now(),
+        time: formState.time || formatCurrentTime(),
+        source: "operator",
+        locked: true,
+        ignored: false,
+        reviewState: "Active",
+        eventType: "Cycle Info",
+        run: formState.run || "—",
+        cycle: effectiveCycle,
+        torqueMap: formState.torqueMap || "—",
+        PanT: formState.PanT || "—",
+        carbon: formState.carbon || "—",
+        nox: formState.nox || "—",
+        thc: formState.thc || "—",
+        pm: formState.pm || "—",
+        work: formState.work || "—",
+        filter: formState.filter || "—",
+        testMap: formState.testMap || "—",
+        category: getCycleInfoCategoryValue(),
+        status: formState.status || "Open",
+        captureMode: "manual-cycle-info",
+        cyflexReady: true,
+        noteHtml: buildCycleInfoNoteHtml(),
+        noteText: buildCycleInfoNoteText(),
+        headerSnapshot: deepClone(bannerFields)
+      });
+      resetForm();
+      renderEntries();
+    }
+
     function resetForm(){
       Object.assign(formState, {time:formatCurrentTime(),run:"",cycle:"",customCycleName:"",torqueMap:"",PanT:"",carbon:"",nox:"",thc:"",pm:"",work:"",filter:"",testMap:"",category:"General",status:"Open"});
       renderForm();
@@ -13097,6 +13185,7 @@ function renderHours(){
     }
 
     document.getElementById("add-entry-btn").addEventListener("click", addOperatorEntry);
+    document.getElementById("cycle-submit-btn").addEventListener("click", addCycleInfoOnlyEntry);
     document.getElementById("auto-log-btn").addEventListener("click", addSystemEvent);
     document.getElementById("clear-btn").addEventListener("click", resetForm);
     document.getElementById("followup-add").addEventListener("click", addFollowUp);
