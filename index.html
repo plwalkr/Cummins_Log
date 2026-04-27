@@ -6640,8 +6640,8 @@ td{line-height:1.45;}
        Adds a read-only pilot readiness scorecard for leadership/demo review
        while preserving all operator workflows, startup guard, CTC Pulse, demo
        tools, and existing data paths. */
-    const VERSION = "v1.0.205-cycle-info-log-submit";
-    const VERSION_DESCRIPTION = "Adds a focused cycle-information-only log submission path for structured cycle data, preserving the normal operator note workflow and keeping the same schema ready for future Cyflex automation.";
+    const VERSION = "v1.0.206-cycle-note-dedup-warnings";
+    const VERSION_DESCRIPTION = "Removes redundant cycle data from the log note while keeping structured cycle details, stronger required-field warnings, and the same Cyflex-ready schema.";
     let lastCtcPulseMetrics = null;
     function setText(el, value){
       if (el) el.textContent = value;
@@ -12938,14 +12938,23 @@ function renderHours(){
     }
 
     function buildCycleInfoNoteHtml(sourceLabel = "Manual cycle information submission"){
-      const rows = buildCycleInfoRows();
-      const rowHtml = rows.map(([label,value]) => `<div><strong>${escapeHtml(label)}:</strong> ${escapeHtml(String(value || "—"))}</div>`).join("");
-      return `<div><strong>${escapeHtml(sourceLabel)}</strong></div><div style="margin-top:6px">${rowHtml}</div><div style="margin-top:6px;color:#475569"><em>Structured for future Cyflex cycle capture automation.</em></div>`;
+      const run = String(formState.run || "—").trim() || "—";
+      const effectiveCycle = getEffectiveCycleValue() || "—";
+      const category = getCycleInfoCategoryValue() || "Cycle Information";
+      return `
+        <div><strong>${escapeHtml(sourceLabel)}</strong></div>
+        <div style="margin-top:6px;color:#475569">
+          Cycle data submitted for Run <strong>${escapeHtml(run)}</strong> · ${escapeHtml(effectiveCycle)} · ${escapeHtml(category)}.
+        </div>
+        <div style="margin-top:6px;color:#64748b"><em>Full cycle values are stored in Details. Cyflex-ready capture structure preserved.</em></div>
+      `;
     }
 
     function buildCycleInfoNoteText(sourceLabel = "Manual cycle information submission"){
-      const rows = buildCycleInfoRows();
-      return [sourceLabel, ...rows.map(([label,value]) => `${label}: ${value || "—"}`), "Structured for future Cyflex cycle capture automation."].join(" | ");
+      const run = String(formState.run || "—").trim() || "—";
+      const effectiveCycle = getEffectiveCycleValue() || "—";
+      const category = getCycleInfoCategoryValue() || "Cycle Information";
+      return `${sourceLabel} | Run ${run} · ${effectiveCycle} · ${category} | Full cycle values stored in Details. Cyflex-ready capture structure preserved.`;
     }
 
     function validateCycleInfoOnlyEntry(){
@@ -12956,10 +12965,16 @@ function renderHours(){
       return missing;
     }
 
+    function formatCycleInfoValidationWarning(missing){
+      const list = missing.map(item => `• ${item}`).join("\n");
+      const first = missing[0] || "required cycle field";
+      return `Cycle information cannot be submitted yet.\n\nMissing required field(s):\n${list}\n\nFirst check: enter ${first}.`;
+    }
+
     function addCycleInfoOnlyEntry(){
       const missing = validateCycleInfoOnlyEntry();
       if (missing.length) {
-        alert(`Cycle information needs: ${missing.join(", ")}`);
+        alert(formatCycleInfoValidationWarning(missing));
         return;
       }
       const effectiveCycle = getEffectiveCycleValue();
