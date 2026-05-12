@@ -6716,20 +6716,21 @@ body[data-theme="clarity"] #tab-hours .hours-readiness-issues{
 
 /* ==================== v1.0.270 RESET TEMP SIDEBAR ==================== */
 :root{--temp-console-width:330px}
-body{padding-right:var(--temp-console-width)}
-@media(max-width:1150px){body{padding-right:0}}
-.temp-dev-console{position:fixed;right:0;top:0;bottom:0;width:var(--temp-console-width);z-index:1200;border-left:1px solid rgba(15,23,42,.14);background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);box-shadow:-18px 0 40px rgba(15,23,42,.12);padding:14px;display:flex;flex-direction:column;gap:12px;overflow:auto}
+body.temp-console-open{padding-right:var(--temp-console-width)}
+@media(max-width:1150px){body.temp-console-open{padding-right:0}}
+.temp-dev-console{position:fixed;right:0;top:0;bottom:92px;width:var(--temp-console-width);z-index:1200;border-left:1px solid rgba(15,23,42,.14);background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);box-shadow:-18px 0 40px rgba(15,23,42,.12);padding:14px;display:flex;flex-direction:column;gap:12px;overflow:auto}
 .temp-dev-console.is-hidden{display:none}
 .temp-dev-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;border-bottom:1px solid #e2e8f0;padding-bottom:10px}
-.temp-dev-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#64748b;font-weight:900;margin-bottom:3px}
+.temp-dev-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#b45309;font-weight:900;margin-bottom:3px}
 .temp-dev-head strong{font-size:18px;color:#0f172a}
-.temp-dev-mini-btn,.temp-dev-btn,.temp-dev-primary,.temp-dev-danger{border:1px solid #cbd5e1;border-radius:12px;background:#fff;color:#0f172a;padding:10px 12px;font-size:12px;font-weight:900;cursor:pointer;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease,background .16s ease}
-.temp-dev-mini-btn{padding:7px 9px;font-size:11px}.temp-dev-primary{background:#0f172a;border-color:#0f172a;color:#fff}.temp-dev-danger{border-color:#fecaca;background:#fff7f7;color:#991b1b}
+.temp-dev-mini-btn,.temp-dev-btn,.temp-dev-primary,.temp-dev-danger{position:relative;border:1px dashed #f59e0b;border-radius:12px;background:#fff7ed;color:#7c2d12;padding:10px 12px 10px 32px;font-size:12px;font-weight:900;cursor:pointer;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease,background .16s ease;text-align:left}
+.temp-dev-mini-btn:before,.temp-dev-btn:before,.temp-dev-primary:before,.temp-dev-danger:before{content:"TEMP";position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:8px;letter-spacing:.08em;color:#9a3412;background:#ffedd5;border:1px solid #fdba74;border-radius:999px;padding:2px 4px}
+.temp-dev-mini-btn{padding:7px 9px 7px 32px;font-size:11px}.temp-dev-primary{background:#0f172a;border-color:#f59e0b;color:#fff}.temp-dev-primary:before{background:#fde68a;color:#78350f}.temp-dev-danger{border-color:#fecaca;background:#fff7f7;color:#991b1b}.temp-dev-danger:before{background:#fee2e2;border-color:#fecaca;color:#991b1b}
 .temp-dev-btn:hover,.temp-dev-primary:hover,.temp-dev-danger:hover,.temp-dev-mini-btn:hover{transform:translateY(-1px);box-shadow:0 10px 20px rgba(15,23,42,.10)}
 .temp-dev-status{border:1px solid #dbe3ed;border-radius:14px;background:#fff;padding:10px 12px;font-size:12px;line-height:1.45;color:#334155;font-weight:700}.temp-dev-status.good{background:#f0fdf4;border-color:#bbf7d0;color:#166534}.temp-dev-status.warn{background:#fffbeb;border-color:#fde68a;color:#92400e}.temp-dev-status.bad{background:#fef2f2;border-color:#fecaca;color:#991b1b}
-.temp-dev-actions{display:grid;grid-template-columns:1fr;gap:8px}.temp-dev-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.temp-dev-grid div{border:1px solid #e2e8f0;border-radius:14px;background:#fff;padding:10px}.temp-dev-grid span{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.13em;color:#64748b;font-weight:900;margin-bottom:5px}.temp-dev-grid strong{display:block;font-size:19px;color:#0f172a;line-height:1}.temp-dev-note{font-size:11px;line-height:1.45;color:#64748b;border-top:1px dashed #cbd5e1;padding-top:10px}
-.temp-dev-show{position:fixed;right:16px;top:16px;z-index:1201;border:1px solid #0f172a;border-radius:999px;background:#0f172a;color:#fff;padding:10px 13px;font-size:12px;font-weight:900;box-shadow:0 10px 24px rgba(15,23,42,.18);cursor:pointer}
-@media(max-width:1150px){.temp-dev-console{width:min(360px,calc(100vw - 20px));right:10px;top:10px;bottom:10px;border:1px solid rgba(15,23,42,.14);border-radius:22px}}
+.temp-dev-statusline{border:1px dashed #cbd5e1;border-radius:14px;background:#fff;padding:9px 10px;font-size:11px;line-height:1.55;color:#475569;font-weight:800}.temp-dev-statusline span{display:block}.temp-dev-section{border:1px solid #e2e8f0;border-radius:16px;background:rgba(255,255,255,.88);padding:10px;display:flex;flex-direction:column;gap:8px}.temp-dev-section-title{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:#9a3412;font-weight:950}.temp-dev-actions{display:grid;grid-template-columns:1fr;gap:8px}.temp-dev-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.temp-dev-grid div{border:1px solid #e2e8f0;border-radius:14px;background:#fff;padding:10px}.temp-dev-grid span{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.13em;color:#64748b;font-weight:900;margin-bottom:5px}.temp-dev-grid strong{display:block;font-size:19px;color:#0f172a;line-height:1}.temp-dev-note{font-size:11px;line-height:1.45;color:#64748b;border-top:1px dashed #cbd5e1;padding-top:10px}
+.temp-dev-show{position:fixed;right:16px;top:16px;z-index:1201;border:1px dashed #f59e0b;border-radius:999px;background:#fff7ed;color:#7c2d12;padding:10px 13px;font-size:12px;font-weight:900;box-shadow:0 10px 24px rgba(15,23,42,.18);cursor:pointer}
+@media(max-width:1150px){.temp-dev-console{width:min(360px,calc(100vw - 20px));right:10px;top:10px;bottom:92px;border:1px solid rgba(15,23,42,.14);border-radius:22px}}
 /* v1.0.275 - Non-blocking temp console defaults.
    The Temp Console starts collapsed so it cannot cover CTC Pulse or page-level Fill buttons. */
 .temp-dev-console.is-hidden{display:none!important}
@@ -6839,6 +6840,15 @@ body.prototype-clean-mode .trade-note-box{display:none!important}
   text-transform:uppercase;
   letter-spacing:.06em;
 }
+
+
+/* v1.0.276 - Trade Coverage readability pass */
+.trade-empty-card.trade-empty-action{font-size:14px;font-weight:800;color:#334155;border-color:#bfdbfe;background:linear-gradient(180deg,#ffffff 0%,#eff6ff 100%)}
+.trade-source-label{display:inline-flex;align-items:center;gap:6px;margin-bottom:8px;padding:5px 9px;border:1px solid #bfdbfe;border-radius:999px;background:#eff6ff;color:#1d4ed8;font-size:11px;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
+.trade-pressure-pill{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;border:1px solid #cbd5e1;background:#f8fafc;color:#334155;font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.06em}
+.trade-pressure-pill.low{border-color:#bbf7d0;background:#f0fdf4;color:#166534}.trade-pressure-pill.moderate{border-color:#fde68a;background:#fffbeb;color:#92400e}.trade-pressure-pill.high{border-color:#fecaca;background:#fef2f2;color:#991b1b}
+.trade-table tr.rerun-row td,.trade-direct-table tr.rerun-row td{background:#f5f3ff;color:#4c1d95}.trade-table tr.rerun-row td:first-child,.trade-direct-table tr.rerun-row td:first-child{box-shadow:inset 4px 0 0 #8b5cf6}.trade-rerun-badge{display:inline-flex;margin-right:6px;padding:2px 7px;border-radius:999px;background:#ede9fe;color:#5b21b6;font-size:10px;font-weight:950;text-transform:uppercase;letter-spacing:.06em}
+.trade-cell-kpi-strip{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.trade-cell-kpi{display:inline-flex;align-items:center;padding:5px 9px;border:1px solid #e2e8f0;border-radius:999px;background:#f8fafc;color:#334155;font-size:11px;font-weight:850}
 
 
 /* v1.0.274 - Trade hard-wire diagnostics */
@@ -8541,17 +8551,19 @@ body.prototype-clean-mode .trade-note-box{display:none!important}
     </div>
   </section>
 
-    <aside id="temp-dev-console" class="temp-dev-console is-hidden" aria-label="Temporary prototype tools">
-    <div class="temp-dev-head"><div><div class="temp-dev-kicker">Prototype Tools</div><strong>Temp Console</strong></div><button type="button" id="temp-dev-collapse" class="temp-dev-mini-btn">Hide</button></div>
-    <div class="temp-dev-status" id="temp-dev-status">Ready. Select a tab and use Fill Current Tab.</div>
-    <div class="temp-dev-actions">
-      <button type="button" id="temp-fill-current" class="temp-dev-primary">Fill Current Tab</button>
-      <button type="button" id="temp-store-hours" class="temp-dev-btn">Store Hours Snapshot</button>
-      <button type="button" id="temp-open-pulse" class="temp-dev-btn">CTC Pulse</button>
-      <button type="button" id="temp-use-session" class="temp-dev-btn">Apply Suggested Session</button>
-      <button type="button" id="temp-auto-log" class="temp-dev-btn">Auto Log Event</button>
-      <button type="button" id="temp-reset" class="temp-dev-danger">Reset Temp Data</button>
+    <aside id="temp-dev-console" class="temp-dev-console is-hidden" aria-label="Temporary prototype tools" aria-hidden="true">
+    <div class="temp-dev-head"><div><div class="temp-dev-kicker">Temporary / Test Only</div><strong>Temp Console</strong></div><button type="button" id="temp-dev-collapse" class="temp-dev-mini-btn">Hide Temp</button></div>
+    <div class="temp-dev-status" id="temp-dev-status">Ready. Select a tab and use a clearly marked temp action.</div>
+    <div class="temp-dev-statusline" id="temp-status-line">
+      <span>Active tab: <strong id="temp-active-tab-line">logbook</strong></span>
+      <span>Saved hour rows: <strong id="temp-saved-hours-line">0</strong> · Trade cards: <strong id="temp-rendered-trade-line">0</strong></span>
+      <span>Last render: <strong id="temp-last-render-line">Not rendered yet</strong></span>
     </div>
+    <div class="temp-dev-section"><div class="temp-dev-section-title">1. CTC Pulse</div><button type="button" id="temp-open-pulse" class="temp-dev-btn">Open / Run CTC Pulse</button></div>
+    <div class="temp-dev-section"><div class="temp-dev-section-title">2. Demo Fill Tools</div><button type="button" id="temp-fill-current" class="temp-dev-primary">Fill Current Tab</button><button type="button" id="temp-auto-log" class="temp-dev-btn">Auto Log Event</button></div>
+    <div class="temp-dev-section"><div class="temp-dev-section-title">3. Smoke Test</div><button type="button" id="temp-store-hours" class="temp-dev-btn">Store Hours Snapshot</button></div>
+    <div class="temp-dev-section"><div class="temp-dev-section-title">4. Session Awareness</div><button type="button" id="temp-use-session" class="temp-dev-btn">Apply Suggested Session</button></div>
+    <div class="temp-dev-section"><div class="temp-dev-section-title">5. Reset / Clear Demo Data</div><button type="button" id="temp-reset" class="temp-dev-danger">Reset Temp Data</button></div>
     <div class="temp-dev-grid">
       <div><span>Active Tab</span><strong id="temp-active-tab">logbook</strong></div>
       <div><span>Saved Hours</span><strong id="temp-hours-count">0</strong></div>
@@ -8559,7 +8571,7 @@ body.prototype-clean-mode .trade-note-box{display:none!important}
       <div><span>Weekend Rows</span><strong id="temp-weekend-count">0</strong></div>
       <div><span>Visible Logs</span><strong id="temp-log-count">0</strong></div>
     </div>
-    <div class="temp-dev-note">Temporary only. This replaces scattered page-level test tools and should not ship in the final product.</div>
+    <div class="temp-dev-note">Temporary/test-only. These controls are intentionally isolated from the production tab layout and should not ship in the final product.</div>
   </aside>
   <button type="button" id="temp-dev-show" class="temp-dev-show">Temp Tools</button>
 <script>
@@ -9165,6 +9177,16 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
         </button>
       `).join("");
     }
+    function showTradeCoverageView(){
+      saveCurrentHoursSheet();
+      hoursSheet.viewMode = "trade";
+      saveCurrentHoursSheet();
+      renderHours();
+      renderTradeCoverageView();
+      syncCtcPulseSnapshot();
+      updateTempDevConsole?.();
+    }
+
     function initHoursModeControls(){
       refreshTechShiftButtons();
       if (hoursTechShiftNote) {
@@ -9175,10 +9197,13 @@ const tradeReferenceNote = document.getElementById("trade-reference-note");
         hoursViewModeBar.addEventListener("click", (event) => {
           const button = event.target.closest("[data-hours-view-mode]");
           if (!button) return;
+          if (button.dataset.hoursViewMode === "trade") {
+            showTradeCoverageView();
+            return;
+          }
           hoursSheet.viewMode = button.dataset.hoursViewMode;
           saveCurrentHoursSheet();
           renderHours();
-          if (hoursSheet.viewMode === "trade") renderTradeCoverageView();
         });
       }
       if (hoursWorkPatternBar) {
@@ -14649,12 +14674,14 @@ function updateHoursSourceDiagnostics(records){
   if (rowCountEl) rowCountEl.textContent = String(rowCount);
 }
 
-function getHoursTradeRecords(){
-  saveCurrentHoursSheet();
-  const query = String(hoursFilterSearch?.value || "").trim().toLowerCase();
-  const statusFilter = String(hoursFilterStatus?.value || "").trim();
-  const dateFrom = String(hoursFilterDateFrom?.value || "").trim();
-  const dateTo = String(hoursFilterDateTo?.value || "").trim();
+function getHoursTradeRecords(options = {}){
+  const applyFilters = options.applyFilters !== false;
+  const saveFirst = options.saveFirst !== false;
+  if (saveFirst) saveCurrentHoursSheet();
+  const query = applyFilters ? String(hoursFilterSearch?.value || "").trim().toLowerCase() : "";
+  const statusFilter = applyFilters ? String(hoursFilterStatus?.value || "").trim() : "";
+  const dateFrom = applyFilters ? String(hoursFilterDateFrom?.value || "").trim() : "";
+  const dateTo = applyFilters ? String(hoursFilterDateTo?.value || "").trim() : "";
 
   return Object.values(hoursCellSheets || {}).map(record => {
     const banner = record.bannerSnapshot || {};
@@ -14725,6 +14752,38 @@ function summarizeCoverageGapRows(rows){
   });
   return Array.from(items.entries()).sort((a,b) => a[0].localeCompare(b[0]));
 }
+function getTradeDowntimePressure(downtimeHours, billableHours){
+  const total = Number(billableHours || 0);
+  const ratio = total > 0 ? Number(downtimeHours || 0) / total : 0;
+  if (ratio >= 0.30) return {label:"High", className:"high", ratio};
+  if (ratio >= 0.12) return {label:"Moderate", className:"moderate", ratio};
+  return {label:"Low", className:"low", ratio};
+}
+function getTradeSourceLabel(record){
+  const date = record.session?.valid
+    ? new Date(`${record.session.iso}T12:00:00`).toLocaleDateString([], {weekday:"short", month:"short", day:"numeric"})
+    : (record.session?.display || record.banner?.date || "Saved date");
+  const shift = record.banner?.shift || record.sheet?.techShift || record.banner?.startTime || "Shift not set";
+  return `Source: ${date} / ${shift}`;
+}
+function renderTradePressurePill(downtimeHours, billableHours){
+  const pressure = getTradeDowntimePressure(downtimeHours, billableHours);
+  return `<span class="trade-pressure-pill ${pressure.className}">Downtime Pressure: ${pressure.label}</span>`;
+}
+function isTradeBillableRow(row){
+  return !isCoverageGapLine(row) && ["Running","Downtime","Rerun"].includes(row?.status) && (Number(row?.hours) || 0) > 0;
+}
+function getTradeCoveragePipelineStats(records){
+  const list = Array.isArray(records) ? records : getHoursTradeRecords({saveFirst:false, applyFilters:false});
+  const savedRows = Object.values(hoursCellSheets || {}).reduce((sum, record) => sum + normalizeHoursRows(record?.hoursRows || []).filter(isHoursRowStarted).length, 0);
+  const billableRows = list.reduce((sum, record) => sum + normalizeHoursRows(record?.rows || []).filter(isTradeBillableRow).length, 0);
+  const totalBillable = list.reduce((sum, record) => sum + normalizeHoursRows(record?.rows || []).filter(isTradeBillableRow).reduce((rowSum, row) => rowSum + (Number(row.hours) || 0), 0), 0);
+  const groups = new Set(list.map(record => String(record?.banner?.testCell || "").trim()).filter(Boolean));
+  return { savedRows, billableRows, tradeCellGroups: groups.size, totalBillable };
+}
+function getLastTradeRenderTimestamp(){
+  return tempLastRenderTimestamp || "Not rendered yet";
+}
 
 function getDirectTradeSourceRecords(){
   return Object.values(hoursCellSheets || {}).filter(Boolean).map(record => {
@@ -14771,20 +14830,26 @@ function renderTradeCoverageDirectFallback(reason = "direct"){
 
   tradeCollection.innerHTML = Array.from(grouped.entries()).sort((a,b) => Number(a[0]) - Number(b[0])).map(([cell, cellRecords]) => {
     const cellHours = cellRecords.reduce((sum, record) => sum + record.rows.reduce((rowSum, row) => rowSum + (Number(row.hours) || 0), 0), 0);
+    const sourceLabels = cellRecords.map(getTradeSourceLabel).join(" · ");
     const cards = cellRecords.map(record => {
       const lineRows = record.rows.map(row => {
         const status = [row.status || "Running", row.detail || "General"].filter(Boolean).join(" · ");
         const comment = String(row.comment || "").trim() || "—";
         const gapBadge = isCoverageGapLine(row) ? `<span class="trade-direct-gap">Time Gap</span>` : "";
-        return `<tr><td>${gapBadge}<strong>${escapeHtml(status)}</strong></td><td class="col-hours">${(Number(row.hours) || 0).toFixed(1)}</td><td>${escapeHtml(comment)}</td></tr>`;
+        const rerunBadge = row.status === "Rerun" ? `<span class="trade-rerun-badge">Billable rerun</span>` : "";
+        const rowClass = row.status === "Rerun" ? ` class="rerun-row"` : "";
+        return `<tr${rowClass}><td>${gapBadge}${rerunBadge}<strong>${escapeHtml(status)}</strong></td><td class="col-hours">${(Number(row.hours) || 0).toFixed(1)}</td><td>${escapeHtml(comment)}</td></tr>`;
       }).join("");
       const recordHours = record.rows.reduce((sum, row) => sum + (Number(row.hours) || 0), 0);
+      const recordDowntime = record.rows.filter(row => !isCoverageGapLine(row) && row.status === "Downtime").reduce((sum, row) => sum + (Number(row.hours) || 0), 0);
       return `
         <div class="trade-direct-chunk">
           <div class="trade-direct-chunk-head">
             <strong>${escapeHtml(record.session?.display || record.banner.date || "Saved shift")}</strong>
             <span>${escapeHtml(record.banner.shift || record.banner.startTime || "Shift")} · ${recordHours.toFixed(1)}h</span>
           </div>
+          <div class="trade-source-label">${escapeHtml(getTradeSourceLabel(record))}</div>
+          <div class="trade-mini-strip">${renderTradePressurePill(recordDowntime, recordHours)}</div>
           <table class="trade-direct-table">
             <thead><tr><th>Status / Detail</th><th>Hours</th><th>Comment</th></tr></thead>
             <tbody>${lineRows}</tbody>
@@ -14798,6 +14863,7 @@ function renderTradeCoverageDirectFallback(reason = "direct"){
           <div>
             <div class="trade-direct-kicker">Trade Coverage Source</div>
             <h3>Cell ${escapeHtml(cell)}</h3>
+            <div class="trade-source-label">${escapeHtml(sourceLabels)}</div>
           </div>
           <span>${cellRecords.length} record(s) · ${cellHours.toFixed(1)}h</span>
         </div>
@@ -14810,23 +14876,29 @@ function renderTradeCoverageDirectFallback(reason = "direct"){
     tradeReferenceNote.textContent = `Trade Coverage is reading ${records.length} saved Hours record(s) directly from the temporary Cell Hours source. Running ${runningHours.toFixed(1)}h · Downtime ${downtimeHours.toFixed(1)}h · Rerun ${rerunHours.toFixed(1)}h.`;
   }
   setTempDevStatus?.(`Trade Coverage rendered ${records.length} saved Hours record(s) via ${reason} source.`, "good");
+  markTempRenderTimestamp?.();
   updateTempDevConsole?.();
   return true;
 }
 
 function renderTradeCoverageView(){
   if (!tradeSummaryGrid || !tradeCollection) return;
-  const records = getHoursTradeRecords();
+  saveCurrentHoursSheet();
+  const records = getHoursTradeRecords({saveFirst:false, applyFilters:true});
   const savedSourceCount = Object.keys(hoursCellSheets || {}).length;
 
   tradeSummaryGrid.hidden = false;
   tradeSummaryGrid.innerHTML = "";
 
   if (!records.length) {
-    if (renderTradeCoverageDirectFallback("fallback")) return;
+    if (renderTradeCoverageDirectFallback("fallback")) { markTempRenderTimestamp?.(); updateTempDevConsole?.(); return; }
     tradeSummaryGrid.hidden = true;
-    tradeCollection.innerHTML = `<div class="trade-empty-card">Trade Coverage found ${savedSourceCount} saved Hours source record(s), but 0 renderable trade record(s). Use Temp Console → Fill Current Tab while on Cell Hours, then return to Trade Coverage.</div>`;
+    tradeCollection.innerHTML = savedSourceCount === 0
+      ? `<div class="trade-empty-card trade-empty-action">No billable hours found. Add Cell Hours rows or use Fill This Tab.</div>`
+      : `<div class="trade-empty-card">Trade Coverage found ${savedSourceCount} saved Hours source record(s), but 0 renderable trade record(s). Use Temp Console → Fill Current Tab while on Cell Hours, then return to Trade Coverage.</div>`;
     if (tradeReferenceNote) tradeReferenceNote.textContent = "Trade Coverage reads the temporary Cell Hours source. No records are currently stored.";
+    markTempRenderTimestamp?.();
+    updateTempDevConsole?.();
     return;
   }
 
@@ -14839,6 +14911,8 @@ function renderTradeCoverageView(){
 
   const totalLogged = records.reduce((sum, record) => sum + (record.rows || []).reduce((rowSum, row) => rowSum + Number(row.hours || 0), 0), 0);
   const totalTradeSpan = records.reduce((sum, record) => sum + Number(record.coverage?.hours || 0), 0);
+  const totalDowntime = records.reduce((sum, record) => sum + (record.rows || []).filter(row => !isCoverageGapLine(row) && row.status === "Downtime").reduce((rowSum, row) => rowSum + Number(row.hours || 0), 0), 0);
+  const totalRerun = records.reduce((sum, record) => sum + (record.rows || []).filter(row => !isCoverageGapLine(row) && row.status === "Rerun").reduce((rowSum, row) => rowSum + Number(row.hours || 0), 0), 0);
   const cellCount = grouped.size;
   const topCell = Array.from(grouped.entries()).map(([cell, cellRecords]) => {
     const logged = cellRecords.reduce((sum, record) => sum + (record.rows || []).reduce((rowSum, row) => rowSum + Number(row.hours || 0), 0), 0);
@@ -14847,11 +14921,11 @@ function renderTradeCoverageView(){
   tradeSummaryGrid.innerHTML = `
     <div class="trade-strip-item"><strong>Active Cells</strong><span>${cellCount}</span></div>
     <div class="trade-strip-item"><strong>Shift Records</strong><span>${records.length}</span></div>
-    <div class="trade-strip-item"><strong>Logged Hours</strong><span>${totalLogged.toFixed(1)}</span></div>
-    <div class="trade-strip-item"><strong>Trade Span</strong><span>${totalTradeSpan.toFixed(1)}</span></div>
+    <div class="trade-strip-item"><strong>Billable Logged</strong><span>${totalLogged.toFixed(1)}</span></div>
+    <div class="trade-strip-item"><strong>Downtime Pressure</strong><span>${getTradeDowntimePressure(totalDowntime, totalLogged).label}</span></div>
   `;
 
-  const buildRows = (title, slotLabels, itemsMap, subtotal) => {
+  const buildRows = (title, slotLabels, itemsMap, subtotal, rowClass = "") => {
     const rows = [`<tr class="section-row"><td colspan="3">${escapeHtml(title)}</td></tr>`];
     let shown = 0;
     slotLabels.forEach(label => {
@@ -14861,7 +14935,8 @@ function renderTradeCoverageView(){
         ? escapeHtml(data.comments[0]) + (data.comments.length > 1 ? ` (+${data.comments.length - 1} more)` : "")
         : "—";
       shown += 1;
-      rows.push(`<tr><td><strong>${escapeHtml(label)}</strong></td><td class="col-hours">${data.hours.toFixed(1)}</td><td>${note}</td></tr>`);
+      const badge = rowClass === "rerun-row" ? `<span class="trade-rerun-badge">Billable rerun</span>` : "";
+      rows.push(`<tr class="${rowClass}"><td>${badge}<strong>${escapeHtml(label)}</strong></td><td class="col-hours">${data.hours.toFixed(1)}</td><td>${note}</td></tr>`);
     });
     if (!shown) {
       rows.push(`<tr><td colspan="3" class="trade-empty">No logged lines in this section.</td></tr>`);
@@ -14878,14 +14953,17 @@ function renderTradeCoverageView(){
     }).map(record => {
       const runningEntries = summarizeHoursRows(record.rows, "Running");
       const downtimeEntries = summarizeHoursRows(record.rows, "Downtime");
+      const rerunEntries = summarizeHoursRows(record.rows, "Rerun");
       const coverageGapEntries = summarizeCoverageGapRows(record.rows);
       const runningMap = new Map(runningEntries);
       const downtimeMap = new Map(downtimeEntries);
+      const rerunMap = new Map(rerunEntries);
       const coverageGapMap = new Map(coverageGapEntries);
       const runningSubtotal = runningEntries.reduce((sum, [, data]) => sum + data.hours, 0);
       const downtimeSubtotal = downtimeEntries.reduce((sum, [, data]) => sum + data.hours, 0);
+      const rerunSubtotal = rerunEntries.reduce((sum, [, data]) => sum + data.hours, 0);
       const coverageGapSubtotal = coverageGapEntries.reduce((sum, [, data]) => sum + data.hours, 0);
-      const total = runningSubtotal + downtimeSubtotal + coverageGapSubtotal;
+      const total = runningSubtotal + downtimeSubtotal + rerunSubtotal + coverageGapSubtotal;
 
       const shortDate = record.session.valid
         ? new Date(`${record.session.iso}T12:00:00`).toLocaleDateString([], {weekday:"short", month:"short", day:"numeric"})
@@ -14901,11 +14979,13 @@ function renderTradeCoverageView(){
 
       return `
         <div class="trade-session-chunk">
+          <div class="trade-source-label">${escapeHtml(getTradeSourceLabel(record))}</div>
           <div class="trade-session-stamp">${escapeHtml(stamp)}</div>
           <div class="trade-mini-strip">
             <span class="trade-mini-pill">Tech ${escapeHtml(record.coverage.techHours.toFixed(1))}h · ${escapeHtml(record.coverage.techWindow)}</span>
             <span class="trade-mini-pill">${escapeHtml(record.coverage.tradeRunLabel)} · ${escapeHtml(record.coverage.hours.toFixed(1))}h</span>
-            <span class="trade-mini-pill">Logged ${total.toFixed(1)} hrs</span>
+            <span class="trade-mini-pill">Billable ${total.toFixed(1)} hrs</span>
+            ${renderTradePressurePill(downtimeSubtotal, total)}
           </div>
           <table class="trade-table">
             <thead>
@@ -14918,8 +14998,9 @@ function renderTradeCoverageView(){
             <tbody>
               ${buildRows("Running Hours", runningHourDetails, runningMap, runningSubtotal)}
               ${buildRows("Downtime Hours", downtimeHourDetails, downtimeMap, downtimeSubtotal)}
+              ${buildRows("Rerun Hours", rerunHourDetails, rerunMap, rerunSubtotal, "rerun-row")}
               ${buildRows("Coverage Gap Hours", coverageGapHourDetails, coverageGapMap, coverageGapSubtotal)}
-              <tr class="grandtotal-row"><td>Total logged/accounted hours</td><td class="col-hours">${total.toFixed(1)}</td><td>${escapeHtml(record.banner.technician || "—")}</td></tr>
+              <tr class="grandtotal-row"><td>Total billable/accounted hours</td><td class="col-hours">${total.toFixed(1)}</td><td>${escapeHtml(record.banner.technician || "—")}</td></tr>
             </tbody>
           </table>
         </div>
@@ -14928,11 +15009,13 @@ function renderTradeCoverageView(){
 
     const cellLogged = cellRecords.reduce((sum, record) => sum + (record.rows || []).reduce((rowSum, row) => rowSum + Number(row.hours || 0), 0), 0);
     const cellTradeSpan = cellRecords.reduce((sum, record) => sum + Number(record.coverage?.hours || 0), 0);
+    const cellSourceLabels = cellRecords.map(getTradeSourceLabel).join(" · ");
     return `
       <section class="trade-cell-card">
         <div class="trade-cell-head">
           <div>
             <div class="trade-cell-title">Cell ${escapeHtml(cell)}</div>
+            <div class="trade-source-label">${escapeHtml(cellSourceLabels)}</div>
             <div class="trade-cell-stamp">Saved day/shift chunks stay grouped here so trade coverage can be reviewed without zero-hour clutter.</div>
             <div class="trade-cell-kpi-strip">
               <span class="trade-cell-kpi">${cellRecords.length} shift record${cellRecords.length === 1 ? "" : "s"}</span>
@@ -14947,8 +15030,10 @@ function renderTradeCoverageView(){
   }).join("");
 
   if (tradeReferenceNote) {
-    tradeReferenceNote.textContent = `${records.length} active saved shift record(s) shown across ${cellCount} cell(s). Zero-hour groups stay hidden so trade coverage stays focused on logged work.`;
+    tradeReferenceNote.textContent = `${records.length} active saved shift record(s) shown across ${cellCount} cell(s). Rerun rows are included in billable totals (${totalRerun.toFixed(1)}h) and downtime pressure is based on downtime ratio.`;
   }
+  markTempRenderTimestamp?.();
+  updateTempDevConsole?.();
 }
 
 
@@ -16776,16 +16861,51 @@ function renderTradeCoverageView(){
     }
 
 
+    let tempLastRenderTimestamp = "Not rendered yet";
     function setTempDevStatus(message, tone = ""){
       const el = document.getElementById("temp-dev-status"); if (!el) return;
       el.textContent = message; el.classList.remove("good","warn","bad"); if (tone) el.classList.add(tone);
     }
+    function getSavedHoursRowCount(){
+      try {
+        return Object.values(hoursCellSheets || {}).reduce((sum, record) => {
+          const rows = normalizeHoursRows(record?.hoursRows || []).filter(row =>
+            String(row.hours || "").trim() ||
+            String(row.comment || "").trim() ||
+            row.status !== "Running" ||
+            row.detail !== "Running Per Plan" ||
+            isCoverageGapLine(row)
+          );
+          return sum + rows.length;
+        }, 0);
+      } catch { return 0; }
+    }
+    function getRenderedTradeCardCount(){
+      try { return document.querySelectorAll("#trade-collection .trade-cell-card, #trade-collection .trade-direct-cell-card").length; } catch { return 0; }
+    }
+    function markTempRenderTimestamp(){
+      tempLastRenderTimestamp = new Date().toLocaleTimeString([], {hour:"numeric", minute:"2-digit", second:"2-digit"});
+    }
+    function syncTempConsoleOpenState(){
+      const consoleEl = document.getElementById("temp-dev-console");
+      const open = !!consoleEl && !consoleEl.classList.contains("is-hidden");
+      document.body.classList.toggle("temp-console-open", open);
+      if (consoleEl) consoleEl.setAttribute("aria-hidden", open ? "false" : "true");
+    }
     function updateTempDevConsole(){
-      setText(document.getElementById("temp-active-tab"), currentTab || "logbook");
+      const activeTab = currentTab || "logbook";
+      const savedRows = getSavedHoursRowCount();
+      const renderedCards = getRenderedTradeCardCount();
+      setText(document.getElementById("temp-active-tab"), activeTab);
+      setText(document.getElementById("temp-active-tab-line"), activeTab);
+      setText(document.getElementById("temp-saved-hours-line"), String(savedRows));
+      setText(document.getElementById("temp-rendered-trade-line"), String(renderedCards));
+      setText(document.getElementById("temp-last-render-line"), tempLastRenderTimestamp);
       setText(document.getElementById("temp-hours-count"), String(Object.keys(hoursCellSheets || {}).length));
       try { setText(document.getElementById("temp-trade-count"), String(getHoursTradeRecords().length)); } catch { setText(document.getElementById("temp-trade-count"), "0"); }
       try { setText(document.getElementById("temp-weekend-count"), String(getWeekendRowsForCurrentDate().filter(r => String(r.tcStatus || "").trim()).length)); } catch { setText(document.getElementById("temp-weekend-count"), "0"); }
       try { setText(document.getElementById("temp-log-count"), String(getVisibleLogRowCount())); } catch { setText(document.getElementById("temp-log-count"), "0"); }
+      syncTempConsoleOpenState();
     }
 
     function activeHoursLineCount(){
@@ -16833,7 +16953,7 @@ function renderTradeCoverageView(){
         return [
           { id: base + 1, status:"Running", detail:"Running Per Plan", comment:"", hours:String(running.toFixed(1)) },
           { id: base + 2, status:"Downtime", detail:"Emissions Cart", comment:"Emission cart communication was checked and the cell was held until the next valid run window.", hours:"1.5" },
-          { id: base + 3, status:"Downtime", detail:"Facility Down", comment:"Facility support issue documented for coverage review and shift visibility.", hours:"1.5" }
+          { id: base + 3, status:"Rerun", detail:"Equipment", comment:"Rerun completed after equipment response was reviewed and the next cycle was cleared.", hours:"1.5" }
         ];
       }
 
@@ -16940,6 +17060,37 @@ function renderTradeCoverageView(){
       const active = currentTab || document.body.dataset.activeTab || "logbook";
       if (active === "hours") fillCellHoursInputsAndStore(); else if (active === "weekend") fillWeekendBoardCompletely(); else if (active === "manager") fillManagerFromSources(); else if (active === "engineer") fillEngineerFromSources(); else if (active === "settings") { seedDemoSettingsState(); setTempDevStatus("Applied temp Settings sample.", "good"); } else fillLogbookInputsAndRows();
     }
+    function runTradeCoverageSmokeTest(){
+      const priorTab = currentTab || document.body.dataset.activeTab || "logbook";
+      if (tabViews?.hours) switchTab("hours");
+      hoursSheet.viewMode = "tech";
+      saveCurrentHoursSheet();
+      fillCellHoursInputsAndStore();
+      saveCurrentHoursSheet();
+      showTradeCoverageView();
+      const records = getHoursTradeRecords({saveFirst:false, applyFilters:true});
+      const stats = getTradeCoveragePipelineStats(records);
+      const html = String(tradeCollection?.innerHTML || "");
+      const cardCount = tradeCollection?.querySelectorAll
+        ? tradeCollection.querySelectorAll(".trade-cell-card,.trade-direct-cell-card").length
+        : ((html.match(/trade-(?:direct-)?cell-card/g) || []).length);
+      const result = {
+        ok: cardCount > 0 && stats.totalBillable > 0,
+        cardCount,
+        totalBillable: Number(stats.totalBillable.toFixed(1)),
+        savedRows: stats.savedRows,
+        billableRows: stats.billableRows,
+        tradeCellGroups: stats.tradeCellGroups,
+        activeViewMode: hoursSheet.viewMode,
+        domHasCards: /trade-(?:direct-)?cell-card/.test(html),
+        lastTradeRenderTimestamp: getLastTradeRenderTimestamp()
+      };
+      window.__lastTradeCoverageSmokeTest = result;
+      if (priorTab !== "hours" && tabViews?.[priorTab]) switchTab(priorTab);
+      return result;
+    }
+    window.runTradeCoverageSmokeTest = runTradeCoverageSmokeTest;
+
     function robustAutoLogEvent(){ if (currentTab !== "logbook") switchTab("logbook"); if (noteEditor) noteEditor.innerHTML = "Auto log event: temp test entry generated for demo validation."; submitEntry(); setTempDevStatus("Auto log event added.", "good"); updateTempDevConsole(); }
     function robustApplySuggestedSession(){ if (typeof applySuggestedSession === "function") applySuggestedSession(); else { bannerFields.date = getTodayISO(); bannerFields.startTime = "07:00 AM"; bannerFields.endTime = "07:00 PM"; renderHeaderFields(); } syncCtcPulseSnapshot(); setTempDevStatus("Suggested session applied.", "good"); }
     function initTempDevConsole(){
@@ -16947,15 +17098,17 @@ function renderTradeCoverageView(){
       if (!consoleEl) return;
       if (consoleEl.dataset.bound === "true") { if (showBtn) showBtn.hidden = !consoleEl.classList.contains("is-hidden"); updateTempDevConsole(); return; }
       consoleEl.dataset.bound = "true";
-      if (showBtn) showBtn.hidden = !consoleEl.classList.contains("is-hidden");
+      consoleEl.classList.add("is-hidden");
+      if (showBtn) showBtn.hidden = false;
+      syncTempConsoleOpenState();
       document.getElementById("temp-fill-current")?.addEventListener("click", robustFillCurrentTab);
       document.getElementById("temp-store-hours")?.addEventListener("click", storeHoursSnapshotForViews);
       document.getElementById("temp-open-pulse")?.addEventListener("click", () => { const panel = document.getElementById("ctc-pulse-panel"); const fab = document.getElementById("ctc-pulse-fab"); if (panel) panel.hidden = false; if (fab) { fab.classList.add("is-open"); fab.setAttribute("aria-expanded", "true"); } runCtcPulseScan({ reason:"temp-console" }); setTempDevStatus("CTC Pulse opened.", "good"); });
       document.getElementById("temp-use-session")?.addEventListener("click", robustApplySuggestedSession);
       document.getElementById("temp-auto-log")?.addEventListener("click", robustAutoLogEvent);
       document.getElementById("temp-reset")?.addEventListener("click", resetTempTestData);
-      document.getElementById("temp-dev-collapse")?.addEventListener("click", () => { consoleEl?.classList.add("is-hidden"); if (showBtn) showBtn.hidden = false; document.body.style.paddingRight = "0"; });
-      showBtn?.addEventListener("click", () => { consoleEl?.classList.remove("is-hidden"); showBtn.hidden = true; document.body.style.paddingRight = ""; });
+      document.getElementById("temp-dev-collapse")?.addEventListener("click", () => { consoleEl?.classList.add("is-hidden"); if (showBtn) showBtn.hidden = false; syncTempConsoleOpenState(); });
+      showBtn?.addEventListener("click", () => { consoleEl?.classList.remove("is-hidden"); showBtn.hidden = true; syncTempConsoleOpenState(); updateTempDevConsole(); });
       updateTempDevConsole();
     }
 
@@ -17737,6 +17890,7 @@ function renderTradeCoverageView(){
       const activeRows = activeHoursRows();
       const coverage = typeof getCoverageWindowInfo === "function" ? getCoverageWindowInfo() : null;
       const gapAccounting = typeof getCoverageGapAccounting === "function" ? getCoverageGapAccounting(summary, coverage) : null;
+      const tradeStats = typeof getTradeCoveragePipelineStats === "function" ? getTradeCoveragePipelineStats(getHoursTradeRecords({saveFirst:false, applyFilters:true})) : {savedRows:0,billableRows:0,tradeCellGroups:0,totalBillable:0};
       return {
         activeTab,
         visibleLogRows: getVisibleLogRowCount(),
@@ -17759,7 +17913,11 @@ function renderTradeCoverageView(){
         accountedTarget: roundPulseNumber(gapAccounting?.accountingTarget || summary.expected),
         accountedRemaining: roundPulseNumber(gapAccounting ? gapAccounting.accountedRemaining : summary.remaining),
         coverageGapPending: !!(gapAccounting?.gap && gapAccounting.effectiveStatus === "unaccounted"),
-        coverageGapCarryForward: !!(gapAccounting?.gap?.carryForward && !gapAccounting.gap.priorHandled)
+        coverageGapCarryForward: !!(gapAccounting?.gap?.carryForward && !gapAccounting.gap.priorHandled),
+        tradeSavedRows: tradeStats.savedRows,
+        tradeBillableRows: tradeStats.billableRows,
+        tradeCellGroups: tradeStats.tradeCellGroups,
+        lastTradeRenderTimestamp: typeof getLastTradeRenderTimestamp === "function" ? getLastTradeRenderTimestamp() : "Not rendered yet"
       };
     }
 
@@ -18222,6 +18380,7 @@ function renderTradeCoverageView(){
         `Active tab: ${activeTab}`,
         `Visible log rows: ${currentMetrics.visibleLogRows}`,
         `Hours lines: ${currentMetrics.activeHoursLines} active / ${currentMetrics.totalHoursLines} total`,
+        `Trade pipeline: ${currentMetrics.tradeSavedRows} saved hours rows / ${currentMetrics.tradeBillableRows} filtered billable rows / ${currentMetrics.tradeCellGroups} cell group(s) / last render ${currentMetrics.lastTradeRenderTimestamp}`,
         `Hours target: ${currentMetrics.expected.toFixed(1)} expected / ${currentMetrics.logged.toFixed(1)} logged`,
         `Remaining: ${currentMetrics.remaining.toFixed(1)}`,
         `Coverage gap: ${currentMetrics.coverageGapStatus} / ${currentMetrics.coverageGapHours.toFixed(1)} gap hour(s)`,
